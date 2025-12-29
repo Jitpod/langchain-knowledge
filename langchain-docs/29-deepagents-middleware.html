@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DeepAgents 中间件 - 模块化能力扩展系统">
+    <title>DeepAgents 中间件 | LangChain 1.0 Python 知识文档</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <button class="mobile-menu-button" aria-label="打开菜单">☰</button>
+
+    <div class="container">
+        <!-- 侧边栏导航 -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="sidebar-title">🦜 LangChain 1.0</h1>
+                <p class="sidebar-subtitle">Python 完整学习指南</p>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-section">
+                    <div class="nav-section-title">开始</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">
+                                <span class="nav-icon">🏠</span>
+                                主页
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">基础篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="01-introduction.html" class="nav-link">
+                                <span class="nav-icon">📖</span>
+                                LangChain 简介
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="02-architecture.html" class="nav-link">
+                                <span class="nav-icon">🏗️</span>
+                                核心架构
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="03-models.html" class="nav-link">
+                                <span class="nav-icon">🤖</span>
+                                模型接口
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="04-messages.html" class="nav-link">
+                                <span class="nav-icon">💬</span>
+                                消息系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="05-tools.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                工具系统
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">进阶篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="06-agents.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                Agent 基础
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="07-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="08-rag.html" class="nav-link">
+                                <span class="nav-icon">🔍</span>
+                                RAG 详解
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="09-lcel.html" class="nav-link">
+                                <span class="nav-icon">🔗</span>
+                                LCEL 表达式
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">高级应用</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="10-runtime.html" class="nav-link">
+                                <span class="nav-icon">🔌</span>
+                                Runtime 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="11-checkpointer.html" class="nav-link">
+                                <span class="nav-icon">💾</span>
+                                持久化系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="12-streaming.html" class="nav-link">
+                                <span class="nav-icon">🌊</span>
+                                流式输出
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="13-human-in-loop.html" class="nav-link">
+                                <span class="nav-icon">👤</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="14-long-term-memory.html" class="nav-link">
+                                <span class="nav-icon">🗄️</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="15-langgraph.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                LangGraph
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">实战篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="16-customer-service.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                客服机器人
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="17-best-practices.html" class="nav-link">
+                                <span class="nav-icon">✨</span>
+                                最佳实践
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">参考篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="18-api-reference.html" class="nav-link">
+                                <span class="nav-icon">📚</span>
+                                API 速查表
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="19-troubleshooting.html" class="nav-link">
+                                <span class="nav-icon">🐛</span>
+                                故障排除
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="20-migration.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                迁移指南
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">扩展篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="21-structured-output.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                结构化输出
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">DeepAgents 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="22-deepagents-quickstart.html" class="nav-link">
+                                <span class="nav-icon">🚀</span>
+                                快速开始
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="23-deepagents-customization.html" class="nav-link">
+                                <span class="nav-icon">🎨</span>
+                                定制化
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="24-deepagents-harness.html" class="nav-link">
+                                <span class="nav-icon">🎛️</span>
+                                Harness 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="25-deepagents-backends.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                后端配置
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="26-deepagents-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="27-deepagents-hitl.html" class="nav-link">
+                                <span class="nav-icon">🤝</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="28-deepagents-memory.html" class="nav-link">
+                                <span class="nav-icon">🧠</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item active">
+                            <a href="29-deepagents-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">Multi-Agent 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="30-multi-agent-index.html" class="nav-link">
+                                <span class="nav-icon">🌐</span>
+                                概述
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="31-multi-agent-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="32-multi-agent-handoffs.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                交接机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="33-multi-agent-skills.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                技能系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="34-multi-agent-router.html" class="nav-link">
+                                <span class="nav-icon">🧭</span>
+                                路由机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="35-multi-agent-workflow.html" class="nav-link">
+                                <span class="nav-icon">🔀</span>
+                                自定义工作流
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- 主内容区域 -->
+        <main class="main-content">
+            <div class="content-wrapper">
+                <!-- 面包屑导航 -->
+                <nav class="breadcrumb">
+                    <span class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link">主页</a>
+                    </span>
+                    <span class="breadcrumb-item">
+                        DeepAgents 篇
+                    </span>
+                    <span class="breadcrumb-item">
+                        中间件
+                    </span>
+                </nav>
+
+                <!-- 页面标题 -->
+                <header class="page-header">
+                    <h1 class="page-title">⚙️ DeepAgents 中间件</h1>
+                    <p class="page-subtitle">
+                        模块化中间件架构，通过可组合的组件为 Agent 提供规划、记忆管理、
+                        任务委派等核心能力，灵活扩展 Agent 功能。
+                    </p>
+                </header>
+
+                <!-- 什么是中间件 -->
+                <section class="content-section">
+                    <h2 class="section-title">📚 什么是中间件？</h2>
+                    <p>
+                        <strong>中间件（Middleware）</strong>是 DeepAgents 的<strong>模块化能力扩展系统</strong>。
+                        每个中间件组件提供特定的功能，通过可组合的方式为 Agent 添加所需能力。
+                    </p>
+
+                    <div class="info-box note">
+                        <div class="info-box-title">💡 三大核心中间件</div>
+                        <p>
+                            使用 <code>create_deep_agent()</code> 时，框架会<strong>自动附加</strong>三种核心中间件：
+                        </p>
+                        <table style="margin-top: 0.5rem;">
+                            <thead>
+                                <tr>
+                                    <th>中间件</th>
+                                    <th>主要功能</th>
+                                    <th>提供的工具</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>TodoListMiddleware</strong></td>
+                                    <td>结构化任务规划</td>
+                                    <td><code>write_todos</code></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>FilesystemMiddleware</strong></td>
+                                    <td>短期和长期记忆管理</td>
+                                    <td><code>ls, read_file, write_file, edit_file</code></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>SubAgentMiddleware</strong></td>
+                                    <td>任务委派和上下文隔离</td>
+                                    <td><code>task</code>（子代理）</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="mermaid-wrapper">
+                        <div class="mermaid">
+graph TB
+    User["用户请求"] --> Agent["DeepAgent"]
+
+    Agent --> M1["TodoListMiddleware<br/>任务规划"]
+    Agent --> M2["FilesystemMiddleware<br/>记忆管理"]
+    Agent --> M3["SubAgentMiddleware<br/>任务委派"]
+
+    M1 --> T1["write_todos<br/>工具"]
+    M2 --> T2["ls, read_file<br/>write_file, edit_file<br/>工具"]
+    M3 --> T3["task<br/>工具"]
+
+    T1 --> Cap1["规划能力<br/>多步骤任务分解"]
+    T2 --> Cap2["记忆能力<br/>临时/持久化存储"]
+    T3 --> Cap3["委派能力<br/>上下文隔离"]
+
+    Cap1 --> Result["增强的 Agent"]
+    Cap2 --> Result
+    Cap3 --> Result
+
+    style Agent fill:#3b82f6,color:#fff
+    style M1 fill:#10b981,color:#fff
+    style M2 fill:#f59e0b,color:#fff
+    style M3 fill:#8b5cf6,color:#fff
+    style Result fill:#ef4444,color:#fff
+                        </div>
+                    </div>
+
+                    <h3 class="subsection-title">中间件的核心特性</h3>
+                    <ul>
+                        <li><strong>可组合性</strong>：可以添加任意数量的中间件，根据需求自由组合</li>
+                        <li><strong>自动工具注入</strong>：中间件自动为 Agent 提供相应的工具</li>
+                        <li><strong>可选配置</strong>：可以选择性启用或禁用特定中间件</li>
+                        <li><strong>分层应用</strong>：主 Agent 和子代理可以有不同的中间件配置</li>
+                    </ul>
+                </section>
+
+                <!-- 三大核心中间件详解 -->
+                <section class="content-section">
+                    <h2 class="section-title">🔧 三大核心中间件详解</h2>
+
+                    <h3 class="subsection-title">1. TodoListMiddleware - 任务规划</h3>
+                    <p>
+                        <strong>TodoListMiddleware</strong> 提供 <code>write_todos</code> 工具，
+                        支持结构化的任务规划和自适应调整。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+TodoListMiddleware - 任务规划示例
+"""
+from deepagents import create_deep_agent
+from deepagents.middleware import TodoListMiddleware
+
+agent = create_deep_agent(
+    model="gpt-4o",
+    middleware=[
+        TodoListMiddleware(
+            system_prompt="""当遇到多步骤任务时，
+            使用 write_todos 工具分解任务、跟踪进度。"""
+        )
+    ]
+)
+
+# 使用 Agent
+result = agent.invoke({
+    "messages": [{
+        "role": "user",
+        "content": "帮我研究 AI Agent 技术栈并写一份报告"
+    }]
+})
+
+# Agent 会自动：
+# 1. 使用 write_todos 分解任务：
+#    - 研究 Agent 框架
+#    - 收集代码示例
+#    - 分析最佳实践
+#    - 撰写报告
+# 2. 逐步执行并更新待办事项状态
+# 3. 完成所有任务后生成报告</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">2. FilesystemMiddleware - 记忆管理</h3>
+                    <p>
+                        <strong>FilesystemMiddleware</strong> 提供 4 个文件系统工具，
+                        支持临时和持久化记忆管理。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+FilesystemMiddleware - 记忆管理示例
+"""
+from deepagents import create_deep_agent
+from deepagents.middleware import FilesystemMiddleware
+from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
+from langgraph.store.memory import InMemoryStore
+
+# 配置混合存储后端
+def make_backend(runtime):
+    return CompositeBackend(
+        default=StateBackend(runtime),  # 临时文件
+        routes={
+            "/memories/": StoreBackend(runtime)  # 长期记忆
+        }
+    )
+
+agent = create_deep_agent(
+    model="claude-sonnet-4-5-20250929",
+    store=InMemoryStore(),
+    middleware=[
+        FilesystemMiddleware(
+            backend=make_backend,
+            custom_tool_descriptions={
+                "write_file": "保存搜索结果、中间数据到文件系统",
+                "read_file": "读取已保存的文件内容",
+            }
+        )
+    ],
+    system_prompt="""你可以使用文件系统管理数据：
+
+- 临时数据：保存到 /tmp/ 下
+- 长期记忆：保存到 /memories/ 下（跨对话持久化）
+
+示例：
+- /tmp/search_results.txt（临时）
+- /memories/user_preferences.txt（持久化）
+"""
+)
+
+# Agent 可以自动管理记忆
+result = agent.invoke({
+    "messages": [{
+        "role": "user",
+        "content": "搜索 LangChain 最新功能并保存到长期记忆"
+    }]
+})
+
+# Agent 会：
+# 1. 搜索信息
+# 2. 使用 write_file 保存到 /memories/langchain_features.txt
+# 3. 下次对话可以用 read_file 读取</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">3. SubAgentMiddleware - 任务委派</h3>
+                    <p>
+                        <strong>SubAgentMiddleware</strong> 提供 <code>task</code> 工具，
+                        允许创建专门化的子代理并隔离上下文。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+SubAgentMiddleware - 任务委派示例
+"""
+from langchain.tools import tool
+from deepagents import create_deep_agent
+from deepagents.middleware import SubAgentMiddleware
+
+@tool
+def internet_search(query: str) -> dict:
+    """搜索网络信息"""
+    # 实际搜索逻辑
+    return {"results": [...]}
+
+agent = create_deep_agent(
+    model="claude-sonnet-4-5-20250929",
+    middleware=[
+        SubAgentMiddleware(
+            subagents=[
+                {
+                    "name": "research-agent",
+                    "description": "深入研究特定主题，综合多个来源",
+                    "system_prompt": "你是研究专家...",
+                    "tools": [internet_search],
+                    "model": "gpt-4o",  # 子代理可使用不同模型
+                }
+            ],
+            default_model="claude-sonnet-4-5-20250929"
+        )
+    ]
+)
+
+# 使用 Agent
+result = agent.invoke({
+    "messages": [{
+        "role": "user",
+        "content": "深入研究量子计算的最新进展"
+    }]
+})
+
+# Agent 会：
+# 1. 识别这是复杂研究任务
+# 2. 使用 task 工具委派给 research-agent
+# 3. 子代理执行详细研究（上下文隔离）
+# 4. 子代理返回简洁摘要给主 Agent
+# 5. 主 Agent 整合结果返回用户</code></pre>
+                    </div>
+                </section>
+
+                <!-- 自定义中间件配置 -->
+                <section class="content-section">
+                    <h2 class="section-title">🎛️ 自定义中间件配置</h2>
+                    <p>
+                        你可以<strong>选择性启用中间件</strong>，或者<strong>完全自定义</strong>中间件列表。
+                    </p>
+
+                    <h3 class="subsection-title">禁用特定中间件</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+禁用特定中间件
+"""
+from deepagents import create_deep_agent
+from deepagents.middleware import FilesystemMiddleware
+
+# 只启用 FilesystemMiddleware，禁用其他
+agent = create_deep_agent(
+    model="gpt-4o",
+    middleware=[
+        FilesystemMiddleware()  # 仅文件系统中间件
+    ]
+)
+
+# 此 Agent：
+# ✅ 有文件系统工具（ls, read_file, write_file, edit_file）
+# ❌ 无待办事项工具（write_todos）
+# ❌ 无子代理工具（task）</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">子代理独立中间件</h3>
+                    <p>
+                        子代理可以拥有<strong>与主 Agent 不同的中间件配置</strong>。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+子代理独立中间件配置
+"""
+from deepagents import create_deep_agent
+from deepagents.middleware import (
+    TodoListMiddleware,
+    FilesystemMiddleware,
+    SubAgentMiddleware
+)
+
+agent = create_deep_agent(
+    model="claude-sonnet-4-5-20250929",
+
+    # 主 Agent 的中间件
+    middleware=[
+        TodoListMiddleware(),
+        SubAgentMiddleware(
+            subagents=[{
+                "name": "data-processor",
+                "description": "处理大量数据文件",
+                "tools": [...],
+
+                # 子代理的独立中间件配置
+                "middleware": [
+                    FilesystemMiddleware()  # 仅文件系统
+                ]
+            }]
+        )
+    ]
+)
+
+# 配置结果：
+# 主 Agent：有 TodoList + SubAgent 能力
+# 子代理 data-processor：仅有 Filesystem 能力
+
+# 用途：
+# - 主 Agent 专注协调和规划
+# - 子代理专注数据处理，无需规划工具</code></pre>
+                    </div>
+                </section>
+
+                <!-- 中间件执行顺序 -->
+                <section class="content-section">
+                    <h2 class="section-title">🔄 中间件执行顺序</h2>
+                    <p>
+                        中间件的<strong>执行顺序</strong>由它们在列表中的顺序决定。
+                        框架按顺序处理中间件，依次注入工具和配置。
+                    </p>
+
+                    <div class="mermaid-wrapper">
+                        <div class="mermaid">
+graph LR
+    Start["create_deep_agent()"] --> M1["中间件 1<br/>初始化"]
+    M1 --> Tools1["注入工具 1"]
+    Tools1 --> M2["中间件 2<br/>初始化"]
+    M2 --> Tools2["注入工具 2"]
+    Tools2 --> M3["中间件 3<br/>初始化"]
+    M3 --> Tools3["注入工具 3"]
+    Tools3 --> Agent["完整的 Agent<br/>包含所有工具"]
+
+    style Start fill:#e0e0e0,color:#000
+    style M1 fill:#10b981,color:#fff
+    style M2 fill:#f59e0b,color:#fff
+    style M3 fill:#8b5cf6,color:#fff
+    style Agent fill:#3b82f6,color:#fff
+                        </div>
+                    </div>
+
+                    <div class="info-box tip">
+                        <div class="info-box-title">💡 顺序建议</div>
+                        <p>
+                            通常建议的顺序：
+                        </p>
+                        <ol>
+                            <li><strong>TodoListMiddleware</strong>：首先注入规划能力</li>
+                            <li><strong>FilesystemMiddleware</strong>：然后注入记忆管理</li>
+                            <li><strong>SubAgentMiddleware</strong>：最后注入任务委派能力</li>
+                        </ol>
+                        <p>
+                            这个顺序确保 Agent 能够：规划 → 保存数据 → 委派子任务。
+                        </p>
+                    </div>
+                </section>
+
+                <!-- 完整实战示例 -->
+                <section class="content-section">
+                    <h2 class="section-title">🎯 完整实战示例</h2>
+                    <p>
+                        构建一个<strong>研究助手 Agent</strong>，综合使用三种核心中间件，
+                        支持任务规划、数据管理、专门化子代理。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级 - 生产级示例</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+完整实战示例 - 研究助手（综合使用三种中间件）
+"""
+import os
+from typing import Literal
+from tavily import TavilyClient
+from deepagents import create_deep_agent
+from deepagents.middleware import (
+    TodoListMiddleware,
+    FilesystemMiddleware,
+    SubAgentMiddleware
+)
+from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
+from langgraph.store.memory import InMemoryStore
+
+# ========== 1. 定义工具 ==========
+
+tavily_client = TavilyClient(api_key=os.environ["TAVILY_API_KEY"])
+
+def internet_search(query: str, max_results: int = 5) -> dict:
+    """搜索网络信息"""
+    return tavily_client.search(query, max_results=max_results)
+
+def analyze_data(data: str) -> dict:
+    """分析数据并生成洞察"""
+    # 简化示例：实际会执行数据分析
+    return {
+        "insights": ["发现 1", "发现 2"],
+        "summary": "数据分析摘要..."
+    }
+
+# ========== 2. 配置存储后端 ==========
+
+store = InMemoryStore()
+
+def make_backend(runtime):
+    return CompositeBackend(
+        default=StateBackend(runtime),
+        routes={
+            "/memories/": StoreBackend(runtime),  # 长期记忆
+            "/tmp/": StateBackend(runtime),        # 临时数据
+        }
+    )
+
+# ========== 3. 配置中间件 ==========
+
+middleware = [
+    # 中间件 1: 任务规划
+    TodoListMiddleware(
+        system_prompt="""当处理复杂研究任务时：
+
+1. 使用 write_todos 分解任务为具体步骤
+2. 按顺序执行每个步骤
+3. 完成后更新待办事项状态
+"""
+    ),
+
+    # 中间件 2: 文件系统和记忆
+    FilesystemMiddleware(
+        backend=make_backend,
+        custom_tool_descriptions={
+            "write_file": "保存研究结果到文件（临时或长期）",
+            "read_file": "读取已保存的研究笔记",
+            "ls": "列出已保存的文件",
+            "edit_file": "更新既有的研究笔记",
+        }
+    ),
+
+    # 中间件 3: 子代理
+    SubAgentMiddleware(
+        subagents=[
+            {
+                "name": "web-researcher",
+                "description": "专门搜索和分析网络信息",
+                "system_prompt": """你是网络研究专家。
+
+任务：
+1. 使用 internet_search 搜索相关信息
+2. 分析搜索结果质量
+3. 综合信息并生成结构化摘要
+
+输出格式：
+- 核心发现（3-5 点）
+- 关键数据
+- 信息来源
+
+保持输出在 500 字以内。""",
+                "tools": [internet_search],
+                "model": "gpt-4o",
+            },
+            {
+                "name": "data-analyst",
+                "description": "分析数据并生成洞察报告",
+                "system_prompt": """你是数据分析专家。
+
+任务：
+1. 使用 analyze_data 分析数据
+2. 识别模式和趋势
+3. 生成可操作的建议
+
+输出格式：
+- 关键洞察
+- 数据支撑
+- 建议行动
+
+保持输出在 400 字以内。""",
+                "tools": [analyze_data],
+                "model": "claude-sonnet-4-5-20250929",
+            }
+        ],
+        default_model="claude-sonnet-4-5-20250929"
+    )
+]
+
+# ========== 4. 创建研究助手 ==========
+
+research_assistant_prompt = """你是一位高效的研究助手。你的核心能力包括：
+
+## 1. 任务规划能力
+- 使用 write_todos 分解复杂任务
+- 跟踪进度并适应性调整
+
+## 2. 记忆管理能力
+- 临时数据：保存到 /tmp/ 下（对话结束后清除）
+- 长期记忆：保存到 /memories/ 下（跨对话持久化）
+
+文件组织：
+- /memories/research/[主题]/notes.txt：研究笔记
+- /memories/research/[主题]/sources.txt：信息来源
+- /tmp/temp_data.txt：临时工作数据
+
+## 3. 任务委派能力
+- **web-researcher**：网络搜索和信息综合
+- **data-analyst**：数据分析和洞察生成
+
+委派策略：
+- 需要搜索多个来源 → 委派给 web-researcher
+- 需要分析数据 → 委派给 data-analyst
+- 复杂任务可以连续委派多个子代理
+
+## 工作流程
+
+1. **接收任务** → 使用 write_todos 分解
+2. **执行研究** → 委派给相应子代理
+3. **保存数据** → 使用 write_file 持久化
+4. **生成报告** → 整合所有信息
+5. **完成任务** → 更新待办事项状态
+
+始终保持主上下文清洁，将详细工作委派给子代理。
+"""
+
+agent = create_deep_agent(
+    model="claude-sonnet-4-5-20250929",
+    middleware=middleware,
+    store=store,
+    system_prompt=research_assistant_prompt
+)
+
+# ========== 5. 使用研究助手 ==========
+
+result = agent.invoke({
+    "messages": [{
+        "role": "user",
+        "content": """请研究 AI Agent 的主流技术栈：
+
+1. 搜索当前流行的 Agent 框架
+2. 分析它们的特点和优势
+3. 生成对比报告并保存到长期记忆
+"""
+    }]
+})
+
+print(result["messages"][-1].content)
+
+# Agent 执行流程：
+#
+# 1. 【TodoList】分解任务：
+#    - 搜索 Agent 框架
+#    - 分析框架特点
+#    - 生成对比报告
+#    - 保存到长期记忆
+#
+# 2. 【SubAgent】委派给 web-researcher：
+#    - 搜索 LangChain, AutoGPT, CrewAI 等框架
+#    - 返回简洁摘要（< 500 字）
+#
+# 3. 【SubAgent】委派给 data-analyst：
+#    - 分析框架对比数据
+#    - 返回洞察报告（< 400 字）
+#
+# 4. 【Filesystem】保存结果：
+#    - write_file("/memories/research/ai_agents/report.md")
+#    - write_file("/memories/research/ai_agents/sources.txt")
+#
+# 5. 【TodoList】更新状态：
+#    - 标记所有任务为已完成
+#
+# 6. 返回最终报告给用户
+
+# 优势：
+# - 主 Agent 上下文始终清洁（子代理隔离了详细工作）
+# - 任务进度透明（TodoList 跟踪）
+# - 数据持久化（下次对话可以继续）
+# - 专门化处理（不同子代理用最合适的模型）</code></pre>
+                    </div>
+                </section>
+
+                <!-- 最佳实践 -->
+                <section class="content-section">
+                    <h2 class="section-title">✨ 中间件最佳实践</h2>
+
+                    <h3 class="subsection-title">1. 中间件选择策略</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>场景</th>
+                                <th>推荐中间件</th>
+                                <th>原因</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>简单查询 Agent</td>
+                                <td>无需中间件</td>
+                                <td>直接工具调用即可</td>
+                            </tr>
+                            <tr>
+                                <td>多步骤任务</td>
+                                <td>TodoListMiddleware</td>
+                                <td>需要规划和跟踪</td>
+                            </tr>
+                            <tr>
+                                <td>需要保存数据</td>
+                                <td>FilesystemMiddleware</td>
+                                <td>管理中间结果</td>
+                            </tr>
+                            <tr>
+                                <td>复杂研究任务</td>
+                                <td>全部三种</td>
+                                <td>综合能力最大化</td>
+                            </tr>
+                            <tr>
+                                <td>专门化处理</td>
+                                <td>SubAgentMiddleware</td>
+                                <td>上下文隔离</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 class="subsection-title">2. 系统提示中的中间件引导</h3>
+                    <div class="info-box tip">
+                        <div class="info-box-title">📝 提示词模板</div>
+                        <p>在系统提示中<strong>明确说明何时使用中间件工具</strong>：</p>
+                        <ul>
+                            <li><strong>TodoList</strong>：多步骤任务 → 使用 write_todos 规划</li>
+                            <li><strong>Filesystem</strong>：大量数据 → 保存到文件而非上下文</li>
+                            <li><strong>SubAgent</strong>：复杂子任务 → 委派给专门代理</li>
+                        </ul>
+                    </div>
+
+                    <h3 class="subsection-title">3. 上下文管理原则</h3>
+                    <ul>
+                        <li><strong>及时保存</strong>：搜索结果等中间数据立即写入文件</li>
+                        <li><strong>精简摘要</strong>：子代理返回摘要而非完整数据</li>
+                        <li><strong>路径规范</strong>：使用清晰的文件路径结构</li>
+                        <li><strong>定期清理</strong>：删除不再需要的临时文件</li>
+                    </ul>
+
+                    <h3 class="subsection-title">4. 子代理中间件配置</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># ✅ 好的配置：子代理仅需文件系统
+subagent = {
+    "name": "data-processor",
+    "tools": [...],
+    "middleware": [FilesystemMiddleware()]  # 仅文件系统
+}
+
+# ❌ 不好的配置：子代理有不必要的中间件
+subagent = {
+    "name": "data-processor",
+    "tools": [...],
+    "middleware": [
+        TodoListMiddleware(),  # 不需要规划
+        SubAgentMiddleware()   # 不需要再委派
+    ]
+}</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">5. 性能优化</h3>
+                    <ul>
+                        <li><strong>最小化中间件</strong>：只添加必需的中间件，减少工具数量</li>
+                        <li><strong>合理委派</strong>：仅在确实需要隔离上下文时使用子代理</li>
+                        <li><strong>缓存文件</strong>：重复使用的数据保存到 /memories/ 避免重复获取</li>
+                        <li><strong>自定义描述</strong>：使用 custom_tool_descriptions 优化工具选择</li>
+                    </ul>
+                </section>
+
+                <!-- 常见问题 -->
+                <section class="content-section">
+                    <h2 class="section-title">❓ 常见问题</h2>
+
+                    <h3 class="subsection-subtitle">Q1: 可以完全禁用所有中间件吗？</h3>
+                    <p>
+                        <strong>可以</strong>，传递空列表即可：
+                    </p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">agent = create_deep_agent(
+    model="gpt-4o",
+    middleware=[]  # 禁用所有中间件
+)
+
+# 此 Agent 只有你显式提供的 tools，无内置工具</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">Q2: 子代理会自动继承父 Agent 的中间件吗？</h3>
+                    <p>
+                        <strong>不会</strong>。子代理需要<strong>显式配置</strong>自己的中间件：
+                    </p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">subagent = {
+    "name": "my-subagent",
+    "middleware": [FilesystemMiddleware()]  # 必须显式指定
+}</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">Q3: SubAgentMiddleware 的 default_model 有什么用？</h3>
+                    <p>
+                        <strong>default_model</strong> 为未显式指定模型的子代理提供默认模型：
+                    </p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">SubAgentMiddleware(
+    subagents=[
+        {"name": "agent1"},  # 使用 default_model
+        {"name": "agent2", "model": "gpt-4o"},  # 使用显式模型
+    ],
+    default_model="claude-sonnet-4-5-20250929"
+)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">Q4: 可以将预构建的 LangGraph 图作为子代理吗？</h3>
+                    <p>
+                        <strong>可以</strong>，使用 <code>CompiledSubAgent</code> 包装：
+                    </p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from deepagents import CompiledSubAgent
+from langgraph.graph import StateGraph, END
+
+# 构建 LangGraph 工作流
+workflow = StateGraph(...)
+# ... 添加节点和边 ...
+custom_graph = workflow.compile()
+
+# 包装为子代理
+custom_subagent = CompiledSubAgent(
+    name="custom-workflow",
+    description="执行复杂的多步骤工作流",
+    runnable=custom_graph
+)
+
+agent = create_deep_agent(
+    subagents=[custom_subagent]
+)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">Q5: 中间件会影响性能吗？</h3>
+                    <p>
+                        <strong>略有影响</strong>，但通常利大于弊：
+                    </p>
+                    <ul>
+                        <li><strong>工具数量</strong>：每个中间件增加几个工具，模型选择时间略增</li>
+                        <li><strong>上下文管理</strong>：FilesystemMiddleware 减少上下文污染，整体性能提升</li>
+                        <li><strong>任务委派</strong>：SubAgent 隔离上下文，减少主 Agent 负担</li>
+                        <li><strong>建议</strong>：仅添加必需的中间件，避免过度配置</li>
+                    </ul>
+
+                    <h3 class="subsection-subtitle">Q6: 如何调试中间件行为？</h3>
+                    <p>
+                        使用 <strong>LangSmith 追踪</strong>查看中间件工具调用：
+                    </p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">import os
+
+# 启用 LangSmith 追踪
+os.environ["LANGCHAIN_TRACING_V2"] = "true"
+os.environ["LANGCHAIN_API_KEY"] = "your-api-key"
+
+# 所有中间件工具调用会被记录
+result = agent.invoke({...})
+
+# 在 LangSmith UI 中查看：
+# - write_todos 调用
+# - write_file / read_file 调用
+# - task 子代理调用
+# - 每个工具的输入输出</code></pre>
+                    </div>
+                </section>
+
+                <!-- 参考资源 -->
+                <section class="content-section">
+                    <h2 class="section-title">📖 参考资源</h2>
+                    <ul>
+                        <li>
+                            <a href="https://docs.langchain.com/oss/python/deepagents/middleware" target="_blank">
+                                DeepAgents Middleware 官方文档
+                            </a>
+                        </li>
+                        <li>
+                            <a href="07-middleware.html">
+                                中间件系统 - LangChain 基础中间件
+                            </a>
+                        </li>
+                        <li>
+                            <a href="24-deepagents-harness.html">
+                                Harness 系统 - 工具详解
+                            </a>
+                        </li>
+                        <li>
+                            <a href="26-deepagents-subagents.html">
+                                子代理 - SubAgent 详解
+                            </a>
+                        </li>
+                        <li>
+                            <a href="28-deepagents-memory.html">
+                                长期记忆 - Store 系统
+                            </a>
+                        </li>
+                        <li>
+                            <a href="22-deepagents-quickstart.html">
+                                DeepAgents 快速开始
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- 页面导航 -->
+                <nav class="page-navigation">
+                    <a href="28-deepagents-memory.html" class="nav-button prev">
+                        ← 上一页：长期记忆
+                    </a>
+                    <a href="30-multi-agent-index.html" class="nav-button next">
+                        下一页：Multi-Agent 概述 →
+                    </a>
+                </nav>
+            </div>
+        </main>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" aria-label="返回顶部">↑</button>
+
+    <!-- JavaScript -->
+    <script src="assets/js/mermaid-init.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</body>
+</html>

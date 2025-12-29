@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LangChain 1.0 核心架构 - 深入理解 LangChain 的设计哲学和模块组织">
+    <title>核心架构 | LangChain 1.0 Python 知识文档</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <button class="mobile-menu-button" aria-label="打开菜单">☰</button>
+
+    <div class="container">
+        <!-- 侧边栏导航 -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="sidebar-title">🦜 LangChain 1.0</h1>
+                <p class="sidebar-subtitle">Python 完整学习指南</p>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-section">
+                    <div class="nav-section-title">开始</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">
+                                <span class="nav-icon">🏠</span>
+                                主页
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">基础篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="01-introduction.html" class="nav-link">
+                                <span class="nav-icon">📖</span>
+                                LangChain 简介
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="02-architecture.html" class="nav-link">
+                                <span class="nav-icon">🏗️</span>
+                                核心架构
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="03-models.html" class="nav-link">
+                                <span class="nav-icon">🤖</span>
+                                模型接口
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="04-messages.html" class="nav-link">
+                                <span class="nav-icon">💬</span>
+                                消息系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="05-tools.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                工具系统
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">进阶篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="06-agents.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                Agent 基础
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="07-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="08-rag.html" class="nav-link">
+                                <span class="nav-icon">🔍</span>
+                                RAG 详解
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="09-lcel.html" class="nav-link">
+                                <span class="nav-icon">🔗</span>
+                                LCEL 表达式
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">高级应用</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="10-runtime.html" class="nav-link">
+                                <span class="nav-icon">🔌</span>
+                                Runtime 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="11-checkpointer.html" class="nav-link">
+                                <span class="nav-icon">💾</span>
+                                持久化系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="12-streaming.html" class="nav-link">
+                                <span class="nav-icon">🌊</span>
+                                流式输出
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="13-human-in-loop.html" class="nav-link">
+                                <span class="nav-icon">👤</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="14-long-term-memory.html" class="nav-link">
+                                <span class="nav-icon">🗄️</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="15-langgraph.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                LangGraph
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">实战篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="16-customer-service.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                客服机器人
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="17-best-practices.html" class="nav-link">
+                                <span class="nav-icon">✨</span>
+                                最佳实践
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">参考篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="18-api-reference.html" class="nav-link">
+                                <span class="nav-icon">📚</span>
+                                API 速查表
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="19-troubleshooting.html" class="nav-link">
+                                <span class="nav-icon">🐛</span>
+                                故障排除
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="20-migration.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                迁移指南
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">扩展篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="21-structured-output.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                结构化输出
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">DeepAgents 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="22-deepagents-quickstart.html" class="nav-link">
+                                <span class="nav-icon">🚀</span>
+                                快速开始
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="23-deepagents-customization.html" class="nav-link">
+                                <span class="nav-icon">🎨</span>
+                                定制化
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="24-deepagents-harness.html" class="nav-link">
+                                <span class="nav-icon">🎛️</span>
+                                Harness 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="25-deepagents-backends.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                后端配置
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="26-deepagents-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="27-deepagents-hitl.html" class="nav-link">
+                                <span class="nav-icon">🤝</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="28-deepagents-memory.html" class="nav-link">
+                                <span class="nav-icon">🧠</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="29-deepagents-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">Multi-Agent 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="30-multi-agent-index.html" class="nav-link">
+                                <span class="nav-icon">🌐</span>
+                                概述
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="31-multi-agent-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="32-multi-agent-handoffs.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                交接机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="33-multi-agent-skills.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                技能系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="34-multi-agent-router.html" class="nav-link">
+                                <span class="nav-icon">🧭</span>
+                                路由机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="35-multi-agent-workflow.html" class="nav-link">
+                                <span class="nav-icon">🔀</span>
+                                自定义工作流
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- 主内容区域 -->
+        <!-- 主内容区域 -->
+        <main class="main-content">
+            <div class="content-wrapper">
+                <!-- 面包屑导航 -->
+                <nav class="breadcrumb">
+                    <span class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link">主页</a>
+                    </span>
+                    <span class="breadcrumb-item">
+                        基础篇
+                    </span>
+                    <span class="breadcrumb-item">
+                        消息系统
+                    </span>
+                </nav>
+
+                <!-- 页面标题 -->
+                <header class="page-header">
+                    <h1 class="page-title">💬 消息系统详解</h1>
+                    <p class="page-subtitle">
+                        掌握 LangChain 1.0 的消息类型和 content_blocks 统一属性，
+                        实现跨提供商的标准化内容处理和多模态输入。
+                    </p>
+                </header>
+
+                <!-- 什么是消息系统 -->
+                <section class="content-section">
+                    <h2 class="section-title">📚 什么是消息系统？</h2>
+                    <p>
+                        <strong>消息（Messages）</strong>是 LangChain 中模型与用户、工具之间交互的基本单位。
+                        LangChain 1.0 提供了标准化的消息系统，让你能够：
+                    </p>
+                    <ul>
+                        <li><strong>统一接口</strong>：使用一致的消息格式与所有模型交互</li>
+                        <li><strong>类型安全</strong>：清晰的消息类型区分（系统、用户、AI、工具）</li>
+                        <li><strong>多模态支持</strong>：文本、图像、音频、视频、文件等多种内容</li>
+                        <li><strong>跨提供商标准化</strong>：自动将提供商特定格式转换为统一格式</li>
+                    </ul>
+
+                    <div class="info-box note">
+                        <div class="info-box-title">💡 核心优势</div>
+                        <p>
+                            通过 <code>content_blocks</code> 属性，LangChain 1.0 将不同提供商的响应格式
+                            （如 OpenAI 的 reasoning、Anthropic 的 thinking）统一转换为标准化的内容块，
+                            让你的代码无需修改即可切换不同模型。
+                        </p>
+                    </div>
+                </section>
+
+                <!-- 四种核心消息类型 -->
+                <section class="content-section">
+                    <h2 class="section-title">🔤 四种核心消息类型</h2>
+
+                    <div class="mermaid-wrapper">
+                        <div class="mermaid">
+graph LR
+    A[对话流程] --> B[SystemMessage]
+    B --> C[HumanMessage]
+    C --> D[AIMessage]
+    D --> E{需要工具？}
+
+    E -->|是| F[ToolMessage]
+    F --> C
+
+    E -->|否| G[完成]
+
+    style B fill:#6366f1,color:#fff
+    style C fill:#10b981,color:#fff
+    style D fill:#f59e0b,color:#fff
+    style F fill:#8b5cf6,color:#fff
+    style G fill:#3b82f6,color:#fff
+                        </div>
+                    </div>
+
+                    <h3 class="subsection-title">1. SystemMessage - 系统消息</h3>
+                    <p>
+                        设置模型行为的初始指令，定义 Agent 角色、响应风格和工作方式。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+SystemMessage 示例
+功能：设置模型的基本行为和角色
+"""
+from langchain.messages import SystemMessage
+
+# 创建系统消息
+system_msg = SystemMessage("你是一个专业的 Python 编程助手。")
+
+# 或者使用字典格式
+system_msg = {"role": "system", "content": "你是一个专业的 Python 编程助手。"}</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">2. HumanMessage - 用户消息</h3>
+                    <p>
+                        代表用户输入，支持文本、图像、音频等多模态内容。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+HumanMessage 示例
+"""
+from langchain.messages import HumanMessage
+
+# 纯文本消息
+human_msg = HumanMessage("你好，请帮我解决一个问题。")
+
+# 带元数据的消息
+human_msg = HumanMessage(
+    content="你好！",
+    name="alice",      # 用户标识（可选）
+    id="msg_123",      # 追踪用的唯一 ID（可选）
+)
+
+# 或使用字典格式
+human_msg = {"role": "user", "content": "你好！"}</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">3. AIMessage - AI 消息</h3>
+                    <p>
+                        模型的输出对象，包含文本内容、工具调用和元数据。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+AIMessage 示例
+功能：理解 AI 响应的结构
+"""
+from langchain.chat_models import init_chat_model
+
+model = init_chat_model("gpt-4o")
+
+# 调用模型会返回 AIMessage 对象
+response = model.invoke("什么是 LangChain？")
+
+# AIMessage 的关键属性
+print(f"文本内容: {response.content}")
+print(f"纯文本: {response.text}")
+print(f"工具调用: {response.tool_calls}")
+print(f"Token 使用: {response.usage_metadata}")
+print(f"响应元数据: {response.response_metadata}")
+
+# 手动创建 AIMessage（用于模拟对话历史）
+from langchain.messages import AIMessage
+
+ai_msg = AIMessage("我很乐意帮助你！")
+messages = [
+    {"role": "user", "content": "你能帮我吗？"},
+    ai_msg,  # 插入为来自模型的消息
+    {"role": "user", "content": "太好了！2+2 等于多少？"}
+]
+
+response = model.invoke(messages)
+print(response.content)  # 输出：2+2 等于 4。</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">4. ToolMessage - 工具消息</h3>
+                    <p>
+                        工具执行结果的消息，用于将工具输出传回模型。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+ToolMessage 完整流程示例
+功能：展示工具调用 → 执行 → 返回结果的完整循环
+"""
+from langchain.chat_models import init_chat_model
+from langchain.messages import AIMessage, ToolMessage, HumanMessage
+from langchain.tools import tool
+
+@tool
+def get_weather(location: str) -> str:
+    """获取天气信息"""
+    return f"{location} 今天晴朗，22°C"
+
+model = init_chat_model("gpt-4o")
+model_with_tools = model.bind_tools([get_weather])
+
+# 第 1 步：用户提问
+messages = [HumanMessage("旧金山今天天气怎么样？")]
+
+# 第 2 步：模型生成工具调用
+ai_message = model_with_tools.invoke(messages)
+messages.append(ai_message)
+
+# 第 3 步：执行工具并创建 ToolMessage
+for tool_call in ai_message.tool_calls:
+    # 执行工具
+    result = get_weather.invoke(tool_call["args"])
+
+    # 创建 ToolMessage
+    tool_message = ToolMessage(
+        content=result,
+        tool_call_id=tool_call["id"],  # 必须与工具调用 ID 匹配
+        name="get_weather"
+    )
+    messages.append(tool_message)
+
+# 第 4 步：模型整合结果生成最终答案
+final_response = model_with_tools.invoke(messages)
+print(final_response.content)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">消息类型对比表</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>消息类型</th>
+                                <th>作用</th>
+                                <th>谁创建</th>
+                                <th>典型用途</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>SystemMessage</code></td>
+                                <td>设置模型行为</td>
+                                <td>开发者</td>
+                                <td>定义角色、风格、规则</td>
+                            </tr>
+                            <tr>
+                                <td><code>HumanMessage</code></td>
+                                <td>用户输入</td>
+                                <td>用户/开发者</td>
+                                <td>提问、指令、多模态输入</td>
+                            </tr>
+                            <tr>
+                                <td><code>AIMessage</code></td>
+                                <td>模型输出</td>
+                                <td>模型</td>
+                                <td>回答、工具调用</td>
+                            </tr>
+                            <tr>
+                                <td><code>ToolMessage</code></td>
+                                <td>工具执行结果</td>
+                                <td>开发者/系统</td>
+                                <td>返回工具调用结果</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- content_blocks 统一属性 -->
+                <section class="content-section">
+                    <h2 class="section-title">🧩 content_blocks 统一属性</h2>
+                    <p>
+                        <code>content_blocks</code> 是 LangChain 1.0 的核心创新，它将不同提供商的特定格式
+                        自动解析为标准化、类型安全的内容块。
+                    </p>
+
+                    <div class="info-box note">
+                        <div class="info-box-title">💡 为什么需要 content_blocks？</div>
+                        <p>
+                            不同 LLM 提供商使用不同的响应格式：
+                        </p>
+                        <ul>
+                            <li><strong>OpenAI</strong>：使用 <code>reasoning</code> 字段表示推理步骤</li>
+                            <li><strong>Anthropic</strong>：使用 <code>thinking</code> 字段</li>
+                            <li><strong>Google</strong>：可能使用其他格式</li>
+                        </ul>
+                        <p>
+                            <code>content_blocks</code> 将这些提供商特定的格式统一转换为 LangChain 的标准块类型，
+                            让你的代码无需修改即可切换模型。
+                        </p>
+                    </div>
+
+                    <h3 class="subsection-title">标准内容块类型</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>类别</th>
+                                <th>块类型</th>
+                                <th>说明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td rowspan="3"><strong>文本</strong></td>
+                                <td><code>TextContentBlock</code></td>
+                                <td>标准文本输出</td>
+                            </tr>
+                            <tr>
+                                <td><code>ReasoningContentBlock</code></td>
+                                <td>模型推理步骤（统一 OpenAI/Anthropic）</td>
+                            </tr>
+                            <tr>
+                                <td><code>PlainTextContentBlock</code></td>
+                                <td>文档文本（.txt、.md）</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="4"><strong>多模态</strong></td>
+                                <td><code>ImageContentBlock</code></td>
+                                <td>图像（URL、Base64、文件 ID）</td>
+                            </tr>
+                            <tr>
+                                <td><code>AudioContentBlock</code></td>
+                                <td>音频数据</td>
+                            </tr>
+                            <tr>
+                                <td><code>VideoContentBlock</code></td>
+                                <td>视频数据</td>
+                            </tr>
+                            <tr>
+                                <td><code>FileContentBlock</code></td>
+                                <td>通用文件（PDF 等）</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="3"><strong>工具</strong></td>
+                                <td><code>ToolCall</code></td>
+                                <td>函数调用</td>
+                            </tr>
+                            <tr>
+                                <td><code>ToolCallChunk</code></td>
+                                <td>流式工具调用片段</td>
+                            </tr>
+                            <tr>
+                                <td><code>InvalidToolCall</code></td>
+                                <td>格式错误的调用</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2"><strong>服务端</strong></td>
+                                <td><code>ServerToolCall</code></td>
+                                <td>服务端执行的工具调用</td>
+                            </tr>
+                            <tr>
+                                <td><code>ServerToolResult</code></td>
+                                <td>搜索结果</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 class="subsection-title">跨提供商标准化示例</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+content_blocks 跨提供商标准化示例
+功能：展示不同提供商的响应如何统一处理
+"""
+from langchain.messages import AIMessage
+
+# Anthropic 的响应格式
+anthropic_message = AIMessage(
+    content=[
+        {"type": "thinking", "thinking": "让我思考一下...", "signature": "xyz"},
+        {"type": "text", "text": "这是我的答案"},
+    ],
+    response_metadata={"model_provider": "anthropic"}
+)
+
+# OpenAI 的响应格式
+openai_message = AIMessage(
+    content=[
+        {
+            "type": "reasoning",
+            "id": "rs_123",
+            "summary": [{"type": "summary_text", "text": "推理过程..."}],
+        },
+        {"type": "text", "text": "这是我的答案"},
+    ],
+    response_metadata={"model_provider": "openai"}
+)
+
+# 统一访问内容块（自动解析为标准格式）
+for block in anthropic_message.content_blocks:
+    if block["type"] == "reasoning":  # 自动标准化为 "reasoning"
+        print(f"推理: {block['content']}")
+    elif block["type"] == "text":
+        print(f"文本: {block['text']}")
+
+# 两种提供商的处理代码完全相同！
+for block in openai_message.content_blocks:
+    if block["type"] == "reasoning":
+        print(f"推理: {block['content']}")
+    elif block["type"] == "text":
+        print(f"文本: {block['text']}")</code></pre>
+                    </div>
+                </section>
+
+                <!-- 多模态消息 -->
+                <section class="content-section">
+                    <h2 class="section-title">🖼️ 多模态消息</h2>
+                    <p>
+                        LangChain 支持在消息中包含图像、音频、视频等多种内容类型。
+                    </p>
+
+                    <h3 class="subsection-title">图像输入</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+多模态消息示例 - 图像输入
+功能：让模型处理图像内容
+"""
+from langchain.messages import HumanMessage
+from langchain.chat_models import init_chat_model
+
+model = init_chat_model("gpt-4o")  # 需要支持视觉的模型
+
+# 方式 1：使用图像 URL
+message = HumanMessage(content=[
+    {"type": "text", "text": "描述这张图片的内容。"},
+    {"type": "image", "url": "https://example.com/image.jpg"},
+])
+
+response = model.invoke([message])
+print(response.content)
+
+# 方式 2：使用 Base64 编码的图像
+import base64
+
+with open("local_image.jpg", "rb") as image_file:
+    base64_image = base64.b64encode(image_file.read()).decode('utf-8')
+
+message = HumanMessage(content=[
+    {"type": "text", "text": "这张图片里有什么？"},
+    {
+        "type": "image",
+        "base64": base64_image,
+        "mime_type": "image/jpeg",
+    },
+])
+
+response = model.invoke([message])
+print(response.content)</code></pre>
+                    </div>
+
+                    <div class="info-box warning">
+                        <div class="info-box-title">⚠️ 重要提示</div>
+                        <p>
+                            并非所有模型都支持所有文件类型。使用前请检查模型提供商的文档，
+                            了解支持的格式和大小限制。例如：
+                        </p>
+                        <ul>
+                            <li>GPT-4o、Claude 3.5 Sonnet：支持图像</li>
+                            <li>Gemini 2.0：支持图像、音频、视频</li>
+                            <li>GPT-4o-mini：仅支持文本</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- 消息流转流程 -->
+                <section class="content-section">
+                    <h2 class="section-title">🔄 消息流转流程</h2>
+
+                    <div class="mermaid-wrapper">
+                        <div class="mermaid">
+graph TB
+    A[开始对话] --> B[SystemMessage:<br/>设置角色和规则]
+    B --> C[HumanMessage:<br/>用户提问]
+    C --> D[模型处理]
+    D --> E[AIMessage:<br/>模型响应]
+
+    E --> F{包含工具调用？}
+
+    F -->|是| G[执行工具函数]
+    G --> H[ToolMessage:<br/>工具结果]
+    H --> I[继续对话]
+    I --> D
+
+    F -->|否| J{用户继续提问？}
+
+    J -->|是| K[HumanMessage:<br/>新问题]
+    K --> D
+
+    J -->|否| L[对话结束]
+
+    style B fill:#6366f1,color:#fff
+    style C fill:#10b981,color:#fff
+    style E fill:#f59e0b,color:#fff
+    style H fill:#8b5cf6,color:#fff
+    style L fill:#3b82f6,color:#fff
+                        </div>
+                    </div>
+
+                    <h3 class="subsection-title">完整对话示例</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+完整多轮对话示例
+功能：展示消息在完整对话中的流转
+"""
+from langchain.chat_models import init_chat_model
+from langchain.messages import SystemMessage, HumanMessage, AIMessage
+from langchain.tools import tool
+
+@tool
+def calculate(expression: str) -> str:
+    """计算数学表达式"""
+    try:
+        result = eval(expression)
+        return f"计算结果：{result}"
+    except Exception as e:
+        return f"计算错误：{str(e)}"
+
+# 初始化模型
+model = init_chat_model("gpt-4o")
+model_with_tools = model.bind_tools([calculate])
+
+# 构建对话历史
+messages = [
+    SystemMessage("你是一个有用的数学助手。"),
+    HumanMessage("你能帮我计算吗？"),
+]
+
+# 第 1 轮：模型确认
+response1 = model_with_tools.invoke(messages)
+messages.append(response1)
+print(f"助手: {response1.content}\n")
+
+# 第 2 轮：用户提出计算问题
+messages.append(HumanMessage("计算 (25 + 75) * 2"))
+response2 = model_with_tools.invoke(messages)
+messages.append(response2)
+
+# 如果有工具调用，执行工具
+if response2.tool_calls:
+    for tool_call in response2.tool_calls:
+        result = calculate.invoke(tool_call["args"])
+        messages.append(result)
+
+    # 第 3 轮：模型整合工具结果
+    response3 = model_with_tools.invoke(messages)
+    messages.append(response3)
+    print(f"助手: {response3.content}\n")
+
+# 第 4 轮：用户继续提问
+messages.append(HumanMessage("如果再除以 4 是多少？"))
+response4 = model_with_tools.invoke(messages)
+messages.append(response4)
+
+# 处理工具调用
+if response4.tool_calls:
+    for tool_call in response4.tool_calls:
+        result = calculate.invoke(tool_call["args"])
+        messages.append(result)
+
+    response5 = model_with_tools.invoke(messages)
+    print(f"助手: {response5.content}")
+
+# 查看完整对话历史
+print(f"\n总消息数: {len(messages)}")
+for i, msg in enumerate(messages):
+    print(f"{i+1}. {msg.__class__.__name__}: {msg.content[:50]}...")</code></pre>
+                    </div>
+                </section>
+
+                <!-- 流式消息处理 -->
+                <section class="content-section">
+                    <h2 class="section-title">🌊 流式消息处理</h2>
+                    <p>
+                        流式调用返回 <code>AIMessageChunk</code> 对象，可以逐块累积成完整消息。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+流式消息处理示例
+功能：实时接收和累积消息块
+"""
+from langchain.chat_models import init_chat_model
+
+model = init_chat_model("claude-sonnet-4-5-20250929")
+
+# 流式调用
+chunks = []
+full_message = None
+
+print("流式输出: ", end="")
+for chunk in model.stream("用三句话解释什么是量子计算"):
+    chunks.append(chunk)
+    print(chunk.content, end="", flush=True)
+
+    # 累积完整消息
+    if full_message is None:
+        full_message = chunk
+    else:
+        full_message = full_message + chunk  # AIMessageChunk 支持加法运算
+
+print("\n")
+
+# 查看完整消息属性
+print(f"总块数: {len(chunks)}")
+print(f"完整内容: {full_message.content}")
+print(f"Token 使用: {full_message.usage_metadata}")</code></pre>
+                    </div>
+                </section>
+
+                <!-- 带元数据的工具消息 -->
+                <section class="content-section">
+                    <h2 class="section-title">📎 带元数据的工具消息</h2>
+                    <p>
+                        在 RAG 等场景中，可以在 ToolMessage 中附加元数据（如文档 ID、页码），
+                        供应用逻辑访问，但不发送给模型。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+带元数据的 ToolMessage 示例
+功能：在工具结果中附加元数据
+"""
+from langchain.messages import ToolMessage
+
+# 发送给模型的内容
+message_content = "这是检索到的文档内容：LangChain 是一个..."
+
+# 应用可访问的元数据（不发送给模型）
+artifact = {
+    "document_id": "doc_12345",
+    "page": 3,
+    "relevance_score": 0.95,
+    "source_url": "https://docs.langchain.com/..."
+}
+
+# 创建带元数据的工具消息
+tool_message = ToolMessage(
+    content=message_content,        # 给模型看的内容
+    tool_call_id="call_123",
+    name="search_documents",
+    artifact=artifact               # 应用层元数据
+)
+
+# 应用可以访问元数据
+print(f"文档 ID: {tool_message.artifact['document_id']}")
+print(f"来源页码: {tool_message.artifact['page']}")
+print(f"相关度: {tool_message.artifact['relevance_score']}")
+
+# 但模型只看到 content 部分</code></pre>
+                    </div>
+
+                    <div class="info-box tip">
+                        <div class="info-box-title">✅ artifact 最佳实践</div>
+                        <ul>
+                            <li><strong>RAG 系统</strong>：存储文档来源、相关度评分</li>
+                            <li><strong>审计日志</strong>：记录工具调用的详细参数</li>
+                            <li><strong>调试信息</strong>：保存原始 API 响应</li>
+                            <li><strong>业务逻辑</strong>：附加订单 ID、用户 ID 等业务数据</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- 常见问题 -->
+                <section class="content-section">
+                    <h2 class="section-title">❓ 常见问题</h2>
+
+                    <h3 class="subsection-subtitle">Q1: content 和 content_blocks 有什么区别？</h3>
+                    <p>
+                        <strong>content</strong>：原始消息内容，格式因提供商而异。<br>
+                        <strong>content_blocks</strong>：标准化的内容块列表，LangChain 自动解析。
+                    </p>
+                    <p>
+                        content_blocks 不是 content 的替代品，而是一个新属性，
+                        用于以标准格式访问消息内容。两者都可以使用，但 content_blocks 提供更好的跨提供商兼容性。
+                    </p>
+
+                    <h3 class="subsection-subtitle">Q2: 什么时候使用字典格式，什么时候使用消息类？</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 字典格式 - 简单快捷，适合简单场景
+messages = [
+    {"role": "system", "content": "你是助手"},
+    {"role": "user", "content": "你好"}
+]
+
+# 消息类 - 更强大，适合复杂场景
+from langchain.messages import SystemMessage, HumanMessage
+
+messages = [
+    SystemMessage("你是助手"),
+    HumanMessage("你好", name="alice", id="msg_001")
+]
+
+# 建议：简单对话用字典，复杂应用用消息类</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">Q3: 如何处理消息历史过长的问题？</h3>
+                    <p>
+                        长对话会超出模型的上下文窗口限制。解决方案：
+                    </p>
+                    <ul>
+                        <li><strong>消息修剪</strong>：只保留最近 N 条消息</li>
+                        <li><strong>消息总结</strong>：定期总结历史，替换旧消息</li>
+                        <li><strong>短期记忆管理</strong>：使用 LangChain 的记忆管理功能</li>
+                    </ul>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 简单的消息修剪
+MAX_MESSAGES = 10
+
+if len(messages) > MAX_MESSAGES:
+    # 保留 SystemMessage 和最近的消息
+    system_msgs = [m for m in messages if isinstance(m, SystemMessage)]
+    recent_msgs = messages[-MAX_MESSAGES:]
+    messages = system_msgs + recent_msgs</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">Q4: AIMessage 的 text 和 content 有什么区别？</h3>
+                    <p>
+                        <code>text</code>：仅提取文本内容块的文本部分（推荐使用）<br>
+                        <code>content</code>：原始内容，可能是字符串或列表
+                    </p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">response = model.invoke("你好")
+
+# text：总是返回字符串（纯文本部分）
+print(response.text)  # "你好！很高兴见到你。"
+
+# content：可能是字符串或列表
+print(response.content)  # 可能是字符串，也可能是 [{"type": "text", ...}]
+
+# 建议：需要纯文本时使用 text 属性</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">Q5: 如何启用标准化输出格式？</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from langchain.chat_models import init_chat_model
+
+# 启用 v1 标准化输出
+model = init_chat_model("gpt-4o", output_version="v1")
+
+# 消息内容将以标准内容块格式存储
+response = model.invoke("解释 AI")
+print(response.content_blocks)  # 标准化的块列表</code></pre>
+                    </div>
+                </section>
+
+                <!-- 参考资源 -->
+                <section class="content-section">
+                    <h2 class="section-title">🔗 参考资源</h2>
+                    <ul>
+                        <li>
+                            <a href="https://docs.langchain.com/oss/python/langchain/messages" target="_blank">
+                                LangChain 官方 Messages 文档
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://python.langchain.com/docs/concepts/#messages" target="_blank">
+                                Messages 核心概念
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://reference.langchain.com/python/langchain/messages.html" target="_blank">
+                                Messages API 参考
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://docs.langchain.com/oss/python/langchain/short-term-memory" target="_blank">
+                                短期记忆管理
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- 页面导航 -->
+                <nav class="page-navigation">
+                    <a href="03-models.html" class="nav-button prev">
+                        ← 上一页：模型接口
+                    </a>
+                    <a href="05-tools.html" class="nav-button next">
+                        下一页：工具系统 →
+                    </a>
+                </nav>
+            </div>
+        </main>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" aria-label="返回顶部">↑</button>
+
+    <!-- JavaScript -->
+    <script src="assets/js/mermaid-init.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</body>
+</html>

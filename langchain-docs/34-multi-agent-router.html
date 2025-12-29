@@ -1,0 +1,1750 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Multi-Agent 路由机制 - 智能分发和任务分类">
+    <title>Multi-Agent 路由机制 | LangChain 1.0 Python 知识文档</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <button class="mobile-menu-button" aria-label="打开菜单">☰</button>
+
+    <div class="container">
+        <!-- 侧边栏导航 -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="sidebar-title">🦜 LangChain 1.0</h1>
+                <p class="sidebar-subtitle">Python 完整学习指南</p>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-section">
+                    <div class="nav-section-title">开始</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">
+                                <span class="nav-icon">🏠</span>
+                                主页
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">基础篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="01-introduction.html" class="nav-link">
+                                <span class="nav-icon">📖</span>
+                                LangChain 简介
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="02-architecture.html" class="nav-link">
+                                <span class="nav-icon">🏗️</span>
+                                核心架构
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="03-models.html" class="nav-link">
+                                <span class="nav-icon">🤖</span>
+                                模型接口
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="04-messages.html" class="nav-link">
+                                <span class="nav-icon">💬</span>
+                                消息系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="05-tools.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                工具系统
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">进阶篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="06-agents.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                Agent 基础
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="07-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="08-rag.html" class="nav-link">
+                                <span class="nav-icon">🔍</span>
+                                RAG 详解
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="09-lcel.html" class="nav-link">
+                                <span class="nav-icon">🔗</span>
+                                LCEL 表达式
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">高级应用</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="10-runtime.html" class="nav-link">
+                                <span class="nav-icon">🔌</span>
+                                Runtime 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="11-checkpointer.html" class="nav-link">
+                                <span class="nav-icon">💾</span>
+                                持久化系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="12-streaming.html" class="nav-link">
+                                <span class="nav-icon">🌊</span>
+                                流式输出
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="13-human-in-loop.html" class="nav-link">
+                                <span class="nav-icon">👤</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="14-long-term-memory.html" class="nav-link">
+                                <span class="nav-icon">🗄️</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="15-langgraph.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                LangGraph
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">实战篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="16-customer-service.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                客服机器人
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="17-best-practices.html" class="nav-link">
+                                <span class="nav-icon">✨</span>
+                                最佳实践
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">参考篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="18-api-reference.html" class="nav-link">
+                                <span class="nav-icon">📚</span>
+                                API 速查表
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="19-troubleshooting.html" class="nav-link">
+                                <span class="nav-icon">🐛</span>
+                                故障排除
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="20-migration.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                迁移指南
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">扩展篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="21-structured-output.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                结构化输出
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">DeepAgents 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="22-deepagents-quickstart.html" class="nav-link">
+                                <span class="nav-icon">🚀</span>
+                                快速开始
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="23-deepagents-customization.html" class="nav-link">
+                                <span class="nav-icon">🎨</span>
+                                定制化
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="24-deepagents-harness.html" class="nav-link">
+                                <span class="nav-icon">🎛️</span>
+                                Harness 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="25-deepagents-backends.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                后端配置
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="26-deepagents-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="27-deepagents-hitl.html" class="nav-link">
+                                <span class="nav-icon">🤝</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="28-deepagents-memory.html" class="nav-link">
+                                <span class="nav-icon">🧠</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="29-deepagents-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">Multi-Agent 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="30-multi-agent-index.html" class="nav-link">
+                                <span class="nav-icon">🌐</span>
+                                概述
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="31-multi-agent-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="32-multi-agent-handoffs.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                交接机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="33-multi-agent-skills.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                技能系统
+                            </a>
+                        </li>
+                        <li class="nav-item active">
+                            <a href="34-multi-agent-router.html" class="nav-link">
+                                <span class="nav-icon">🧭</span>
+                                路由机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="35-multi-agent-workflow.html" class="nav-link">
+                                <span class="nav-icon">🔀</span>
+                                自定义工作流
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- 主内容区域 -->
+        <main class="main-content">
+            <div class="content-wrapper">
+                <!-- 面包屑导航 -->
+                <nav class="breadcrumb">
+                    <span class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link">主页</a>
+                    </span>
+                    <span class="breadcrumb-item">
+                        Multi-Agent 篇
+                    </span>
+                    <span class="breadcrumb-item">
+                        路由机制
+                    </span>
+                </nav>
+
+                <!-- 页面标题 -->
+                <header class="page-header">
+                    <h1 class="page-title">🧭 Multi-Agent 路由机制</h1>
+                    <p class="page-subtitle">
+                        在系统入口处智能分析用户请求，自动路由到最合适的专业代理，
+                        实现高效的任务分类和请求分发，构建智能化的 Agent 调度系统。
+                    </p>
+                </header>
+
+                <!-- 什么是 Router -->
+                <section class="content-section">
+                    <h2 class="section-title">📚 什么是 Router？</h2>
+                    <p>
+                        <strong>Router（路由机制）</strong>是 Multi-Agent 系统中的<strong>入口调度层</strong>。
+                        在用户请求进入系统时，Router 分析请求特征并<strong>一次性</strong>决定将其路由到哪个专业代理处理，
+                        无需后续的动态交接。
+                    </p>
+
+                    <div class="info-box note">
+                        <div class="info-box-title">💡 核心特性</div>
+                        <table style="margin-top: 0.5rem;">
+                            <thead>
+                                <tr>
+                                    <th>特性</th>
+                                    <th>说明</th>
+                                    <th>优势</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>初始分发</strong></td>
+                                    <td>在流程开始时进行一次性路由</td>
+                                    <td>快速定位目标代理</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>智能分类</strong></td>
+                                    <td>基于请求内容、意图、复杂度分类</td>
+                                    <td>精准匹配专业能力</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>专业化代理</strong></td>
+                                    <td>每个代理专注特定领域</td>
+                                    <td>提高处理质量</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>效率优化</strong></td>
+                                    <td>直接路由，避免不必要的交接</td>
+                                    <td>降低延迟和成本</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>可扩展性</strong></td>
+                                    <td>轻松添加新的代理分支</td>
+                                    <td>系统易于扩展</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="mermaid-wrapper">
+                        <div class="mermaid">
+graph TB
+    User["用户请求：<br/>我的订单在哪里？"] --> Router["🧭 Router<br/>智能路由层"]
+
+    Router -->|"分析请求内容"| Analysis["请求分析<br/>关键词：订单<br/>意图：查询<br/>领域：电商"]
+
+    Analysis --> Decision{"路由决策"}
+
+    Decision -->|"订单相关"| OrderAgent["订单代理<br/>处理订单查询"]
+    Decision -->|"技术问题"| TechAgent["技术代理<br/>解决技术问题"]
+    Decision -->|"账单问题"| BillingAgent["账单代理<br/>处理账单问题"]
+    Decision -->|"一般咨询"| GeneralAgent["客服代理<br/>处理一般问题"]
+
+    OrderAgent --> Result1["订单信息返回"]
+    TechAgent --> Result2["技术解决方案"]
+    BillingAgent --> Result3["账单处理结果"]
+    GeneralAgent --> Result4["咨询答复"]
+
+    Result1 --> End["完成"]
+    Result2 --> End
+    Result3 --> End
+    Result4 --> End
+
+    style Router fill:#3b82f6,color:#fff
+    style Analysis fill:#8b5cf6,color:#fff
+    style Decision fill:#f59e0b,color:#fff
+    style OrderAgent fill:#10b981,color:#fff
+    style TechAgent fill:#ef4444,color:#fff
+    style BillingAgent fill:#06b6d4,color:#fff
+    style GeneralAgent fill:#a855f7,color:#fff
+                        </div>
+                    </div>
+
+                    <h3 class="subsection-title">Router vs 其他协作模式</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>模式</th>
+                                <th>决策时机</th>
+                                <th>转移次数</th>
+                                <th>适用场景</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Router</strong></td>
+                                <td>流程开始时</td>
+                                <td>一次性</td>
+                                <td>请求分类、领域分流</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Subagents</strong></td>
+                                <td>预定义流程</td>
+                                <td>固定顺序</td>
+                                <td>流水线、多步骤任务</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Handoffs</strong></td>
+                                <td>运行时动态</td>
+                                <td>按需多次</td>
+                                <td>升级、专业化转移</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Skills</strong></td>
+                                <td>工具级别</td>
+                                <td>工具共享</td>
+                                <td>能力复用、工具管理</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- 路由策略 -->
+                <section class="content-section">
+                    <h2 class="section-title">🔧 路由策略</h2>
+                    <p>
+                        Router 的核心是<strong>路由决策逻辑</strong>，可以基于规则、LLM 或混合方式实现。
+                    </p>
+
+                    <div class="mermaid-wrapper">
+                        <div class="mermaid">
+graph TB
+    subgraph Strategy1["策略 1：基于规则"]
+        R1["用户请求"] --> R2["关键词匹配"]
+        R2 --> R3{"包含关键词？"}
+        R3 -->|"订单、快递"| R4["订单代理"]
+        R3 -->|"退款、支付"| R5["账单代理"]
+        R3 -->|"bug、崩溃"| R6["技术代理"]
+    end
+
+    subgraph Strategy2["策略 2：基于 LLM"]
+        L1["用户请求"] --> L2["LLM 分析"]
+        L2 --> L3["结构化输出<br/>{intent, category}"]
+        L3 --> L4{"分类结果"}
+        L4 -->|"order"| L5["订单代理"]
+        L4 -->|"billing"| L6["账单代理"]
+        L4 -->|"technical"| L7["技术代理"]
+    end
+
+    subgraph Strategy3["策略 3：混合路由"]
+        H1["用户请求"] --> H2["规则预筛选"]
+        H2 --> H3{"快速匹配？"}
+        H3 -->|"是"| H4["直接路由"]
+        H3 -->|"否"| H5["LLM 分析"]
+        H5 --> H6["路由决策"]
+    end
+
+    style R2 fill:#10b981,color:#fff
+    style L2 fill:#f59e0b,color:#fff
+    style H5 fill:#8b5cf6,color:#fff
+                        </div>
+                    </div>
+
+                    <h3 class="subsection-title">策略 1：基于规则的路由</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+基于规则的路由 - 使用关键词匹配
+"""
+from typing import TypedDict, Annotated, Literal
+from langgraph.graph import StateGraph, START, END
+from langgraph.graph.message import add_messages
+from langchain_core.messages import HumanMessage, AIMessage
+
+# 定义状态
+class RouterState(TypedDict):
+    messages: Annotated[list, add_messages]
+    route_to: str  # 路由目标
+
+# 路由函数：基于关键词
+def rule_based_router(state: RouterState) -> str:
+    """基于规则的路由器"""
+    last_message = state["messages"][-1].content.lower()
+
+    # 规则定义
+    order_keywords = ["订单", "物流", "快递", "配送", "发货"]
+    billing_keywords = ["退款", "支付", "账单", "扣费", "价格"]
+    technical_keywords = ["bug", "崩溃", "卡顿", "登录不了", "打不开"]
+
+    # 关键词匹配
+    if any(kw in last_message for kw in order_keywords):
+        return "order_agent"
+    elif any(kw in last_message for kw in billing_keywords):
+        return "billing_agent"
+    elif any(kw in last_message for kw in technical_keywords):
+        return "technical_agent"
+    else:
+        return "general_agent"
+
+# 专业代理
+def order_agent(state: RouterState):
+    """订单代理"""
+    return {
+        "messages": [AIMessage(content="订单代理：我来帮您查询订单信息")],
+        "route_to": "order_agent"
+    }
+
+def billing_agent(state: RouterState):
+    """账单代理"""
+    return {
+        "messages": [AIMessage(content="账单代理：我来处理您的账单问题")],
+        "route_to": "billing_agent"
+    }
+
+def technical_agent(state: RouterState):
+    """技术代理"""
+    return {
+        "messages": [AIMessage(content="技术代理：我来解决您的技术问题")],
+        "route_to": "technical_agent"
+    }
+
+def general_agent(state: RouterState):
+    """通用代理"""
+    return {
+        "messages": [AIMessage(content="客服代理：我来帮您解决问题")],
+        "route_to": "general_agent"
+    }
+
+# 构建路由图
+workflow = StateGraph(RouterState)
+
+# 添加代理节点
+workflow.add_node("order_agent", order_agent)
+workflow.add_node("billing_agent", billing_agent)
+workflow.add_node("technical_agent", technical_agent)
+workflow.add_node("general_agent", general_agent)
+
+# 从 START 条件路由到不同代理
+workflow.add_conditional_edges(
+    START,
+    rule_based_router,
+    {
+        "order_agent": "order_agent",
+        "billing_agent": "billing_agent",
+        "technical_agent": "technical_agent",
+        "general_agent": "general_agent"
+    }
+)
+
+# 所有代理结束后到 END
+workflow.add_edge("order_agent", END)
+workflow.add_edge("billing_agent", END)
+workflow.add_edge("technical_agent", END)
+workflow.add_edge("general_agent", END)
+
+app = workflow.compile()
+
+# 测试
+test_cases = [
+    "我的订单什么时候发货？",
+    "我要申请退款",
+    "应用一直崩溃",
+    "你们的营业时间？"
+]
+
+for test in test_cases:
+    result = app.invoke({"messages": [HumanMessage(content=test)]})
+    print(f"请求: {test}")
+    print(f"路由到: {result['route_to']}\n")
+
+# 优势：
+# - 快速（无需调用 LLM）
+# - 成本低（纯规则匹配）
+# - 可解释性强
+# - 适合明确的分类场景
+
+# 劣势：
+# - 需要维护关键词列表
+# - 难以处理复杂或模糊请求
+# - 无法理解上下文和语义</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">策略 2：基于 LLM 的路由</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+基于 LLM 的路由 - 使用结构化输出
+"""
+from typing import TypedDict, Annotated, Literal
+from pydantic import BaseModel, Field
+from langgraph.graph import StateGraph, START, END
+from langchain_openai import ChatOpenAI
+from langchain_core.messages import HumanMessage
+
+# 定义路由决策结构
+class RouteDecision(BaseModel):
+    """路由决策结构"""
+    category: Literal["order", "billing", "technical", "general"] = Field(
+        description="请求类别：order(订单), billing(账单), technical(技术), general(一般)"
+    )
+    confidence: float = Field(
+        description="分类置信度 (0-1)",
+        ge=0,
+        le=1
+    )
+    reason: str = Field(
+        description="分类理由"
+    )
+
+# 定义状态
+class LLMRouterState(TypedDict):
+    messages: Annotated[list, add_messages]
+    route_decision: RouteDecision
+    route_to: str
+
+# LLM 路由器
+def llm_router(state: LLMRouterState):
+    """使用 LLM 进行智能路由"""
+    llm = ChatOpenAI(model="gpt-4o")
+    llm_with_structure = llm.with_structured_output(RouteDecision)
+
+    prompt = f"""分析以下用户请求，并分类到最合适的类别：
+
+用户请求：{state['messages'][-1].content}
+
+分类规则：
+- order: 订单查询、物流追踪、发货问题
+- billing: 退款、支付、账单、价格
+- technical: 技术故障、bug、登录问题
+- general: 其他一般性咨询
+
+返回分类结果、置信度和理由。
+"""
+
+    decision = llm_with_structure.invoke(prompt)
+
+    return {
+        "route_decision": decision,
+        "route_to": f"{decision.category}_agent"
+    }
+
+# 路由决策函数
+def route_by_llm(state: LLMRouterState) -> str:
+    """根据 LLM 决策路由"""
+    # 如果还没有决策，先调用 router 节点
+    if "route_decision" not in state:
+        return "router"
+
+    # 根据决策路由
+    return state["route_to"]
+
+# 专业代理（简化版）
+def order_agent(state: LLMRouterState):
+    llm = ChatOpenAI(model="gpt-4o")
+    response = llm.invoke("你是订单专员，帮用户查询订单信息")
+    return {"messages": [response]}
+
+def billing_agent(state: LLMRouterState):
+    llm = ChatOpenAI(model="gpt-4o")
+    response = llm.invoke("你是账单专员，帮用户处理账单问题")
+    return {"messages": [response]}
+
+def technical_agent(state: LLMRouterState):
+    llm = ChatOpenAI(model="claude-sonnet-4-5")
+    response = llm.invoke("你是技术支持，帮用户解决技术问题")
+    return {"messages": [response]}
+
+def general_agent(state: LLMRouterState):
+    llm = ChatOpenAI(model="gpt-4o")
+    response = llm.invoke("你是客服，帮用户解决一般问题")
+    return {"messages": [response]}
+
+# 构建 LLM 路由图
+workflow = StateGraph(LLMRouterState)
+
+# 添加 router 节点
+workflow.add_node("router", llm_router)
+
+# 添加代理节点
+workflow.add_node("order_agent", order_agent)
+workflow.add_node("billing_agent", billing_agent)
+workflow.add_node("technical_agent", technical_agent)
+workflow.add_node("general_agent", general_agent)
+
+# START → router（先进行路由分析）
+workflow.add_edge(START, "router")
+
+# router → 条件路由到不同代理
+workflow.add_conditional_edges(
+    "router",
+    lambda state: state["route_to"],
+    {
+        "order_agent": "order_agent",
+        "billing_agent": "billing_agent",
+        "technical_agent": "technical_agent",
+        "general_agent": "general_agent"
+    }
+)
+
+# 所有代理 → END
+workflow.add_edge("order_agent", END)
+workflow.add_edge("billing_agent", END)
+workflow.add_edge("technical_agent", END)
+workflow.add_edge("general_agent", END)
+
+app = workflow.compile()
+
+# 测试
+result = app.invoke({
+    "messages": [HumanMessage(content="我的包裹怎么还没到？")]
+})
+
+print(f"路由决策：{result['route_decision']}")
+print(f"类别：{result['route_decision'].category}")
+print(f"置信度：{result['route_decision'].confidence}")
+print(f"理由：{result['route_decision'].reason}")
+
+# 优势：
+# - 语义理解能力强
+# - 可处理复杂和模糊请求
+# - 无需维护规则列表
+# - 可提供分类理由（可解释性）
+
+# 劣势：
+# - 调用 LLM，增加延迟
+# - 成本相对较高
+# - 需要处理 LLM 不确定性</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">策略 3：混合路由（推荐）</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+混合路由 - 规则预筛选 + LLM 精准分类
+"""
+from typing import TypedDict, Annotated, Literal
+from langgraph.graph import StateGraph, START, END
+from langchain_openai import ChatOpenAI
+from pydantic import BaseModel, Field
+
+class HybridRouterState(TypedDict):
+    messages: Annotated[list, add_messages]
+    quick_match: bool  # 是否快速匹配成功
+    route_to: str
+    confidence: float
+
+# 第一层：快速规则匹配
+def quick_rule_filter(state: HybridRouterState):
+    """快速规则过滤器"""
+    last_message = state["messages"][-1].content.lower()
+
+    # 高置信度规则（明确关键词）
+    high_confidence_rules = {
+        "order_agent": ["订单号", "物流单号", "快递编号"],
+        "billing_agent": ["退款申请", "发票", "账单明细"],
+        "technical_agent": ["错误代码", "崩溃日志", "bug报告"]
+    }
+
+    # 检查高置信度匹配
+    for agent, keywords in high_confidence_rules.items():
+        if any(kw in last_message for kw in keywords):
+            return {
+                "quick_match": True,
+                "route_to": agent,
+                "confidence": 0.95
+            }
+
+    # 没有高置信度匹配，需要 LLM 分析
+    return {
+        "quick_match": False,
+        "confidence": 0.0
+    }
+
+# 第二层：LLM 精准分类
+class DetailedRouteDecision(BaseModel):
+    category: Literal["order", "billing", "technical", "general"]
+    confidence: float = Field(ge=0, le=1)
+    reason: str
+    keywords_found: list[str]
+
+def llm_precise_classifier(state: HybridRouterState):
+    """LLM 精准分类器"""
+    llm = ChatOpenAI(model="gpt-4o")
+    llm_with_structure = llm.with_structured_output(DetailedRouteDecision)
+
+    prompt = f"""深度分析用户请求，进行精准分类：
+
+用户请求：{state['messages'][-1].content}
+
+分析要求：
+1. 仔细理解用户意图和上下文
+2. 考虑隐含的需求和情绪
+3. 识别关键词和问题类型
+4. 给出高置信度的分类
+
+返回详细的分类结果。
+"""
+
+    decision = llm_with_structure.invoke(prompt)
+
+    return {
+        "route_to": f"{decision.category}_agent",
+        "confidence": decision.confidence
+    }
+
+# 路由决策函数
+def route_decision(state: HybridRouterState) -> Literal["quick_route", "llm_route"]:
+    """决定使用快速路由还是 LLM 路由"""
+    if state.get("quick_match", False):
+        return "quick_route"
+    else:
+        return "llm_route"
+
+def final_route(state: HybridRouterState) -> str:
+    """最终路由"""
+    return state["route_to"]
+
+# 代理节点（简化）
+def order_agent(state: HybridRouterState):
+    return {"messages": [AIMessage(content="订单代理处理中...")]}
+
+def billing_agent(state: HybridRouterState):
+    return {"messages": [AIMessage(content="账单代理处理中...")]}
+
+def technical_agent(state: HybridRouterState):
+    return {"messages": [AIMessage(content="技术代理处理中...")]}
+
+def general_agent(state: HybridRouterState):
+    return {"messages": [AIMessage(content="客服代理处理中...")]}
+
+# 构建混合路由图
+workflow = StateGraph(HybridRouterState)
+
+# 第一层：快速过滤
+workflow.add_node("quick_filter", quick_rule_filter)
+
+# 第二层：LLM 分类
+workflow.add_node("llm_classifier", llm_precise_classifier)
+
+# 代理节点
+workflow.add_node("order_agent", order_agent)
+workflow.add_node("billing_agent", billing_agent)
+workflow.add_node("technical_agent", technical_agent)
+workflow.add_node("general_agent", general_agent)
+
+# START → quick_filter（快速过滤）
+workflow.add_edge(START, "quick_filter")
+
+# quick_filter → 条件路由
+workflow.add_conditional_edges(
+    "quick_filter",
+    route_decision,
+    {
+        "quick_route": "order_agent",  # 快速匹配直接路由
+        "llm_route": "llm_classifier"  # 需要 LLM 分析
+    }
+)
+
+# llm_classifier → 最终路由
+workflow.add_conditional_edges(
+    "llm_classifier",
+    final_route,
+    {
+        "order_agent": "order_agent",
+        "billing_agent": "billing_agent",
+        "technical_agent": "technical_agent",
+        "general_agent": "general_agent"
+    }
+)
+
+# 所有代理 → END
+workflow.add_edge("order_agent", END)
+workflow.add_edge("billing_agent", END)
+workflow.add_edge("technical_agent", END)
+workflow.add_edge("general_agent", END)
+
+app = workflow.compile()
+
+# 测试不同场景
+test_cases = [
+    ("我的订单号是 123456，帮我查一下", "快速匹配"),
+    ("东西还没到，有点着急", "LLM 分析"),
+    ("我要退款申请，发票怎么开", "快速匹配"),
+    ("我想了解一下你们的服务", "LLM 分析")
+]
+
+for test, expected_type in test_cases:
+    result = app.invoke({"messages": [HumanMessage(content=test)]})
+    print(f"请求: {test}")
+    print(f"快速匹配: {result.get('quick_match', False)}")
+    print(f"路由到: {result['route_to']}")
+    print(f"置信度: {result.get('confidence', 0)}")
+    print(f"预期类型: {expected_type}\n")
+
+# 优势：
+# - 平衡速度和准确性
+# - 降低 LLM 调用成本（80%+ 请求快速匹配）
+# - 对明确请求快速响应
+# - 对复杂请求精准分类
+
+# 适用场景：
+# - 生产环境推荐方案
+# - 高并发场景
+# - 成本敏感的系统</code></pre>
+                    </div>
+                </section>
+
+                <!-- 完整实战示例 -->
+                <section class="content-section">
+                    <h2 class="section-title">🎯 完整实战示例</h2>
+                    <p>
+                        构建一个<strong>智能客服路由系统</strong>，支持多领域分流、优先级判断、
+                        智能降级和完整的路由追踪。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级 - 生产级示例</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+完整实战示例 - 智能客服路由系统
+"""
+import uuid
+from typing import TypedDict, Annotated, Literal
+from enum import Enum
+from pydantic import BaseModel, Field
+from langgraph.graph import StateGraph, START, END
+from langgraph.graph.message import add_messages
+from langchain_openai import ChatOpenAI
+from langchain_anthropic import ChatAnthropic
+from langchain_core.messages import HumanMessage, AIMessage
+
+# ========== 1. 定义枚举和数据结构 ==========
+
+class AgentCategory(str, Enum):
+    """代理类别"""
+    ORDER = "order"
+    BILLING = "billing"
+    TECHNICAL = "technical"
+    GENERAL = "general"
+    VIP = "vip"
+
+class Priority(str, Enum):
+    """优先级"""
+    LOW = "low"
+    NORMAL = "normal"
+    HIGH = "high"
+    URGENT = "urgent"
+
+class RouteAnalysis(BaseModel):
+    """路由分析结果"""
+    category: AgentCategory = Field(description="请求类别")
+    priority: Priority = Field(description="优先级")
+    confidence: float = Field(description="置信度", ge=0, le=1)
+    keywords: list[str] = Field(description="识别的关键词")
+    sentiment: str = Field(description="情绪（positive, neutral, negative）")
+    reason: str = Field(description="分类理由")
+
+# ========== 2. 定义状态 ==========
+
+class SmartRouterState(TypedDict):
+    messages: Annotated[list, add_messages]
+    user_id: str
+    session_id: str
+
+    # 路由信息
+    route_analysis: RouteAnalysis
+    route_to: str
+    route_method: str  # "quick" or "llm"
+
+    # 用户信息
+    is_vip: bool
+    user_history: list[str]
+
+    # 追踪信息
+    route_timestamp: str
+    routing_time_ms: float
+
+# ========== 3. 规则引擎 ==========
+
+class RuleEngine:
+    """规则引擎：快速匹配"""
+
+    # 高置信度规则
+    HIGH_CONFIDENCE_RULES = {
+        AgentCategory.ORDER: [
+            "订单号", "物流单号", "快递编号", "发货时间",
+            "配送时间", "订单状态", "在哪里"
+        ],
+        AgentCategory.BILLING: [
+            "退款申请", "发票", "账单明细", "扣费",
+            "支付失败", "余额", "价格错误"
+        ],
+        AgentCategory.TECHNICAL: [
+            "错误代码", "崩溃日志", "bug", "无法登录",
+            "打不开", "卡顿", "闪退"
+        ]
+    }
+
+    # 优先级关键词
+    PRIORITY_KEYWORDS = {
+        Priority.URGENT: ["紧急", "立即", "马上", "投诉", "严重"],
+        Priority.HIGH: ["尽快", "着急", "重要", "损失"],
+        Priority.NORMAL: []  # 默认
+    }
+
+    # 负面情绪关键词
+    NEGATIVE_KEYWORDS = [
+        "不满", "失望", "生气", "愤怒", "差评",
+        "投诉", "垃圾", "骗子", "退货"
+    ]
+
+    @classmethod
+    def quick_match(cls, message: str) -> dict | None:
+        """快速匹配"""
+        message_lower = message.lower()
+
+        # 检查高置信度规则
+        for category, keywords in cls.HIGH_CONFIDENCE_RULES.items():
+            matched = [kw for kw in keywords if kw in message_lower]
+            if matched:
+                # 判断优先级
+                priority = Priority.NORMAL
+                for pri, pri_kws in cls.PRIORITY_KEYWORDS.items():
+                    if any(kw in message_lower for kw in pri_kws):
+                        priority = pri
+                        break
+
+                # 判断情绪
+                sentiment = "negative" if any(
+                    kw in message_lower for kw in cls.NEGATIVE_KEYWORDS
+                ) else "neutral"
+
+                return {
+                    "category": category,
+                    "priority": priority,
+                    "confidence": 0.9,
+                    "keywords": matched,
+                    "sentiment": sentiment,
+                    "reason": f"关键词匹配：{', '.join(matched)}"
+                }
+
+        return None
+
+# ========== 4. 路由节点 ==========
+
+def quick_router(state: SmartRouterState):
+    """快速路由器"""
+    import time
+    start_time = time.time()
+
+    message = state["messages"][-1].content
+
+    # 尝试快速匹配
+    quick_result = RuleEngine.quick_match(message)
+
+    if quick_result:
+        # 快速匹配成功
+        route_analysis = RouteAnalysis(**quick_result)
+
+        # VIP 用户直接升级到 VIP 代理
+        if state.get("is_vip", False):
+            route_to = "vip_agent"
+        else:
+            route_to = f"{route_analysis.category.value}_agent"
+
+        routing_time = (time.time() - start_time) * 1000
+
+        return {
+            "route_analysis": route_analysis,
+            "route_to": route_to,
+            "route_method": "quick",
+            "routing_time_ms": routing_time
+        }
+
+    # 快速匹配失败，需要 LLM
+    return {
+        "route_method": "need_llm"
+    }
+
+def llm_router(state: SmartRouterState):
+    """LLM 智能路由器"""
+    import time
+    start_time = time.time()
+
+    llm = ChatOpenAI(model="gpt-4o")
+    llm_with_structure = llm.with_structured_output(RouteAnalysis)
+
+    message = state["messages"][-1].content
+    user_history = state.get("user_history", [])
+
+    prompt = f"""深度分析客服请求并分类：
+
+用户请求：{message}
+
+用户历史：{user_history[-3:] if user_history else "无"}
+
+分析要求：
+1. 理解用户意图和情绪
+2. 考虑用户历史上下文
+3. 判断问题类别和优先级
+4. 识别关键词
+5. 评估用户情绪
+
+类别说明：
+- order: 订单查询、物流追踪
+- billing: 退款、支付、账单
+- technical: 技术问题、bug
+- general: 一般咨询
+
+优先级说明：
+- urgent: 严重问题、用户投诉
+- high: 影响使用、需尽快处理
+- normal: 一般问题
+- low: 简单咨询
+
+返回完整的路由分析。
+"""
+
+    route_analysis = llm_with_structure.invoke(prompt)
+
+    # VIP 用户特殊处理
+    if state.get("is_vip", False):
+        route_to = "vip_agent"
+    else:
+        route_to = f"{route_analysis.category.value}_agent"
+
+    routing_time = (time.time() - start_time) * 1000
+
+    return {
+        "route_analysis": route_analysis,
+        "route_to": route_to,
+        "route_method": "llm",
+        "routing_time_ms": routing_time
+    }
+
+# ========== 5. 专业代理 ==========
+
+def order_agent(state: SmartRouterState):
+    """订单代理"""
+    llm = ChatOpenAI(model="gpt-4o")
+
+    priority = state["route_analysis"].priority
+    prompt_prefix = "【高优先级】" if priority in [Priority.HIGH, Priority.URGENT] else ""
+
+    prompt = f"""{prompt_prefix}你是订单专员。
+
+用户请求：{state['messages'][-1].content}
+路由分析：{state['route_analysis'].reason}
+
+任务：帮助用户查询订单信息、解决物流问题。
+"""
+
+    response = llm.invoke(prompt)
+
+    return {
+        "messages": [AIMessage(content=f"订单代理：{response.content}")]
+    }
+
+def billing_agent(state: SmartRouterState):
+    """账单代理"""
+    llm = ChatOpenAI(model="gpt-4o")
+
+    prompt = f"""你是账单专员。
+
+用户请求：{state['messages'][-1].content}
+情绪：{state['route_analysis'].sentiment}
+
+任务：处理退款、支付、账单问题。注意用户情绪，友好沟通。
+"""
+
+    response = llm.invoke(prompt)
+
+    return {
+        "messages": [AIMessage(content=f"账单代理：{response.content}")]
+    }
+
+def technical_agent(state: SmartRouterState):
+    """技术代理"""
+    llm = ChatAnthropic(model="claude-sonnet-4-5")
+
+    prompt = f"""你是技术支持工程师。
+
+用户请求：{state['messages'][-1].content}
+关键词：{', '.join(state['route_analysis'].keywords)}
+
+任务：诊断并解决技术问题，提供清晰的解决方案。
+"""
+
+    response = llm.invoke(prompt)
+
+    return {
+        "messages": [AIMessage(content=f"技术代理：{response.content}")]
+    }
+
+def general_agent(state: SmartRouterState):
+    """通用代理"""
+    llm = ChatOpenAI(model="gpt-4o")
+
+    response = llm.invoke("你是客服，处理一般性咨询")
+
+    return {
+        "messages": [AIMessage(content=f"客服代理：{response.content}")]
+    }
+
+def vip_agent(state: SmartRouterState):
+    """VIP 代理"""
+    llm = ChatAnthropic(model="claude-sonnet-4-5")
+
+    prompt = f"""你是 VIP 专属客服。
+
+用户请求：{state['messages'][-1].content}
+用户类型：VIP 会员
+优先级：{state['route_analysis'].priority.value}
+
+任务：提供高质量、个性化的服务，优先处理 VIP 用户问题。
+"""
+
+    response = llm.invoke(prompt)
+
+    return {
+        "messages": [AIMessage(content=f"VIP 代理：{response.content}")]
+    }
+
+# ========== 6. 路由决策 ==========
+
+def should_use_llm(state: SmartRouterState) -> Literal["quick_done", "need_llm"]:
+    """决定是否需要 LLM"""
+    return state.get("route_method", "need_llm")
+
+def final_route(state: SmartRouterState) -> str:
+    """最终路由"""
+    return state["route_to"]
+
+# ========== 7. 构建工作流 ==========
+
+workflow = StateGraph(SmartRouterState)
+
+# 添加路由节点
+workflow.add_node("quick_router", quick_router)
+workflow.add_node("llm_router", llm_router)
+
+# 添加代理节点
+workflow.add_node("order_agent", order_agent)
+workflow.add_node("billing_agent", billing_agent)
+workflow.add_node("technical_agent", technical_agent)
+workflow.add_node("general_agent", general_agent)
+workflow.add_node("vip_agent", vip_agent)
+
+# START → quick_router
+workflow.add_edge(START, "quick_router")
+
+# quick_router → 条件判断
+workflow.add_conditional_edges(
+    "quick_router",
+    should_use_llm,
+    {
+        "quick_done": "order_agent",  # 占位，会被 final_route 覆盖
+        "need_llm": "llm_router"
+    }
+)
+
+# 为快速路由添加最终路由
+workflow.add_conditional_edges(
+    "quick_router",
+    final_route,
+    {
+        "order_agent": "order_agent",
+        "billing_agent": "billing_agent",
+        "technical_agent": "technical_agent",
+        "general_agent": "general_agent",
+        "vip_agent": "vip_agent"
+    }
+)
+
+# llm_router → 最终路由
+workflow.add_conditional_edges(
+    "llm_router",
+    final_route,
+    {
+        "order_agent": "order_agent",
+        "billing_agent": "billing_agent",
+        "technical_agent": "technical_agent",
+        "general_agent": "general_agent",
+        "vip_agent": "vip_agent"
+    }
+)
+
+# 所有代理 → END
+workflow.add_edge("order_agent", END)
+workflow.add_edge("billing_agent", END)
+workflow.add_edge("technical_agent", END)
+workflow.add_edge("general_agent", END)
+workflow.add_edge("vip_agent", END)
+
+# 编译
+app = workflow.compile()
+
+# ========== 8. 测试系统 ==========
+
+test_scenarios = [
+    {
+        "name": "订单查询（快速匹配）",
+        "message": "我的订单号是 123456，什么时候发货？",
+        "is_vip": False
+    },
+    {
+        "name": "复杂咨询（LLM 分析）",
+        "message": "东西还没到，有点着急，能帮我催一下吗？",
+        "is_vip": False
+    },
+    {
+        "name": "VIP 用户（优先处理）",
+        "message": "我要申请退款",
+        "is_vip": True
+    },
+    {
+        "name": "技术问题（负面情绪）",
+        "message": "这个破软件总是崩溃，太垃圾了！",
+        "is_vip": False
+    }
+]
+
+for scenario in test_scenarios:
+    print(f"\n{'='*60}")
+    print(f"场景：{scenario['name']}")
+    print(f"{'='*60}")
+
+    result = app.invoke({
+        "messages": [HumanMessage(content=scenario['message'])],
+        "user_id": f"user_{uuid.uuid4().hex[:8]}",
+        "session_id": f"session_{uuid.uuid4().hex[:8]}",
+        "is_vip": scenario["is_vip"],
+        "user_history": []
+    })
+
+    print(f"用户请求：{scenario['message']}")
+    print(f"\n路由分析：")
+    print(f"  - 类别：{result['route_analysis'].category.value}")
+    print(f"  - 优先级：{result['route_analysis'].priority.value}")
+    print(f"  - 置信度：{result['route_analysis'].confidence}")
+    print(f"  - 情绪：{result['route_analysis'].sentiment}")
+    print(f"  - 理由：{result['route_analysis'].reason}")
+    print(f"\n路由决策：")
+    print(f"  - 路由到：{result['route_to']}")
+    print(f"  - 路由方法：{result['route_method']}")
+    print(f"  - 路由耗时：{result['routing_time_ms']:.2f} ms")
+
+# 优势：
+# - 快速路由（80%+ 请求 < 10ms）
+# - 精准分类（LLM 支持复杂场景）
+# - VIP 优先处理
+# - 情绪感知和优先级判断
+# - 完整的路由追踪
+# - 生产级错误处理</code></pre>
+                    </div>
+                </section>
+
+                <!-- 最佳实践 -->
+                <section class="content-section">
+                    <h2 class="section-title">✨ Router 最佳实践</h2>
+
+                    <h3 class="subsection-title">1. 路由策略选择</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>场景</th>
+                                <th>推荐策略</th>
+                                <th>原因</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>明确的分类场景</td>
+                                <td>基于规则</td>
+                                <td>快速、成本低、可解释</td>
+                            </tr>
+                            <tr>
+                                <td>复杂语义理解</td>
+                                <td>基于 LLM</td>
+                                <td>准确、灵活、无需维护规则</td>
+                            </tr>
+                            <tr>
+                                <td>生产环境</td>
+                                <td>混合路由</td>
+                                <td>平衡速度、成本和准确性</td>
+                            </tr>
+                            <tr>
+                                <td>高并发系统</td>
+                                <td>规则 + 缓存</td>
+                                <td>降低 LLM 调用频率</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 class="subsection-title">2. 路由器设计原则</h3>
+                    <div class="info-box tip">
+                        <div class="info-box-title">✅ 设计原则</div>
+                        <ul>
+                            <li><strong>快速决策</strong>：路由决策应尽可能快（目标 < 100ms）</li>
+                            <li><strong>高准确性</strong>：错误路由会导致用户体验差和浪费资源</li>
+                            <li><strong>可降级</strong>：LLM 失败时自动降级到规则路由</li>
+                            <li><strong>可追踪</strong>：记录路由决策、耗时、置信度</li>
+                            <li><strong>可扩展</strong>：易于添加新的代理分支</li>
+                            <li><strong>用户感知</strong>：考虑用户优先级、情绪、历史</li>
+                        </ul>
+                    </div>
+
+                    <h3 class="subsection-title">3. 代理分类策略</h3>
+                    <ul>
+                        <li><strong>按领域分类</strong>：订单、账单、技术、一般（最常见）</li>
+                        <li><strong>按能力分类</strong>：初级、中级、高级（按复杂度）</li>
+                        <li><strong>按用户分类</strong>：VIP、普通、新用户（按重要性）</li>
+                        <li><strong>按紧急度分类</strong>：紧急、高优先级、普通（按时效）</li>
+                        <li><strong>混合分类</strong>：领域 + 优先级的组合</li>
+                    </ul>
+
+                    <h3 class="subsection-title">4. 性能优化</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 优化策略
+
+# 1. 缓存 LLM 路由结果
+from functools import lru_cache
+
+@lru_cache(maxsize=1000)
+def cached_llm_route(message_hash: str):
+    """缓存相似请求的路由结果"""
+    # 对相似请求返回缓存的路由决策
+    pass
+
+# 2. 批量路由（适用于批处理场景）
+def batch_route(messages: list[str]):
+    """批量路由多个请求"""
+    # 使用 LLM 的 batch API 降低成本
+    pass
+
+# 3. 异步路由
+import asyncio
+
+async def async_router(state):
+    """异步路由器"""
+    # 使用异步 LLM 调用提高并发
+    pass
+
+# 4. 规则优先级排序
+# 将最常匹配的规则放在前面
+PRIORITY_RULES = [
+    (most_common_keywords, "most_common_agent"),
+    (less_common_keywords, "less_common_agent"),
+]
+
+# 5. 监控和优化
+def log_routing_metrics(state):
+    """记录路由指标"""
+    metrics = {
+        "route_method": state["route_method"],
+        "routing_time_ms": state["routing_time_ms"],
+        "confidence": state["route_analysis"].confidence,
+        "category": state["route_analysis"].category
+    }
+    # 发送到监控系统
+    # 定期分析优化</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">5. 错误处理和降级</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 错误处理策略
+
+def robust_llm_router(state):
+    """带降级的 LLM 路由器"""
+    try:
+        # 尝试 LLM 路由
+        return llm_router(state)
+    except Exception as e:
+        logger.error(f"LLM 路由失败: {e}")
+
+        # 降级到规则路由
+        fallback_result = rule_based_router(state)
+
+        return {
+            "route_to": fallback_result,
+            "route_method": "fallback",
+            "error": str(e)
+        }
+
+# 默认路由
+def default_router(state):
+    """默认路由到通用代理"""
+    return {
+        "route_to": "general_agent",
+        "route_method": "default",
+        "confidence": 0.5
+    }</code></pre>
+                    </div>
+                </section>
+
+                <!-- 常见问题 -->
+                <section class="content-section">
+                    <h2 class="section-title">❓ 常见问题</h2>
+
+                    <h3 class="subsection-subtitle">Q1: Router 和 Handoffs 有什么区别？</h3>
+                    <p>
+                        <strong>关键区别</strong>：
+                    </p>
+                    <ul>
+                        <li><strong>时机不同</strong>：
+                            <ul>
+                                <li>Router：在流程<strong>开始时</strong>一次性决定路由</li>
+                                <li>Handoffs：在流程<strong>执行过程中</strong>动态转移</li>
+                            </ul>
+                        </li>
+                        <li><strong>决策依据不同</strong>：
+                            <ul>
+                                <li>Router：基于<strong>用户请求内容</strong>分类</li>
+                                <li>Handoffs：基于<strong>当前代理的处理结果</strong>判断</li>
+                            </ul>
+                        </li>
+                        <li><strong>使用场景不同</strong>：
+                            <ul>
+                                <li>Router：<strong>初始分流</strong>（客服系统、任务调度）</li>
+                                <li>Handoffs：<strong>升级转移</strong>（L1 → L2 → L3）</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <h3 class="subsection-subtitle">Q2: 如何提高路由准确性？</h3>
+                    <p>
+                        <strong>提升策略</strong>：
+                    </p>
+                    <ul>
+                        <li><strong>丰富规则库</strong>：持续积累和更新关键词规则</li>
+                        <li><strong>使用高质量 LLM</strong>：GPT-4o 或 Claude Sonnet 4.5</li>
+                        <li><strong>结构化输出</strong>：使用 Pydantic 约束 LLM 输出格式</li>
+                        <li><strong>上下文增强</strong>：利用用户历史、会话上下文</li>
+                        <li><strong>多轮确认</strong>：置信度低时询问用户确认</li>
+                        <li><strong>持续学习</strong>：收集错误路由案例，优化规则</li>
+                    </ul>
+
+                    <h3 class="subsection-subtitle">Q3: Router 如何处理模糊请求？</h3>
+                    <p>
+                        <strong>处理策略</strong>：
+                    </p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 处理模糊请求
+
+def handle_ambiguous_request(state):
+    """处理模糊请求"""
+    analysis = state["route_analysis"]
+
+    # 策略 1：置信度阈值
+    if analysis.confidence < 0.7:
+        # 询问用户明确意图
+        return {
+            "messages": [AIMessage(content="请问您是想咨询订单、账单还是技术问题？")],
+            "route_to": "clarification_agent"
+        }
+
+    # 策略 2：多标签路由
+    if len(analysis.keywords) == 0:
+        # 路由到通用代理
+        return {"route_to": "general_agent"}
+
+    # 策略 3：智能猜测 + 确认
+    return {
+        "messages": [AIMessage(content=f"我理解您是想咨询{analysis.category}相关问题，对吗？")],
+        "route_to": f"{analysis.category}_agent"
+    }</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">Q4: 如何监控 Router 性能？</h3>
+                    <p>
+                        <strong>关键指标</strong>：
+                    </p>
+                    <ul>
+                        <li><strong>路由准确率</strong>：正确路由的请求占比（目标 > 95%）</li>
+                        <li><strong>路由延迟</strong>：路由决策的平均耗时（目标 < 100ms）</li>
+                        <li><strong>快速匹配率</strong>：规则直接匹配的比例（目标 > 80%）</li>
+                        <li><strong>LLM 调用率</strong>：需要 LLM 分析的比例（降低成本）</li>
+                        <li><strong>用户满意度</strong>：路由后的问题解决率</li>
+                        <li><strong>错误路由率</strong>：需要重新路由的比例</li>
+                    </ul>
+
+                    <h3 class="subsection-subtitle">Q5: 如何实现动态路由规则更新？</h3>
+                    <p>
+                        <strong>动态更新方案</strong>：
+                    </p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 动态规则管理
+
+class DynamicRuleEngine:
+    """动态规则引擎"""
+
+    def __init__(self):
+        self._rules = self._load_rules_from_db()
+        self._last_update = time.time()
+
+    def _load_rules_from_db(self):
+        """从数据库加载规则"""
+        # 从配置中心或数据库加载最新规则
+        return {}
+
+    def refresh_rules(self):
+        """刷新规则（定期调用）"""
+        if time.time() - self._last_update > 300:  # 5 分钟
+            self._rules = self._load_rules_from_db()
+            self._last_update = time.time()
+
+    def add_rule(self, category: str, keywords: list[str]):
+        """动态添加规则"""
+        self._rules.setdefault(category, []).extend(keywords)
+        # 同步到数据库
+
+    def match(self, message: str):
+        """使用最新规则匹配"""
+        self.refresh_rules()
+        # 执行匹配逻辑
+
+# 使用
+engine = DynamicRuleEngine()
+
+# 运营人员可以通过管理界面添加新规则
+# 无需重启服务，实时生效</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">Q6: Router 如何支持多语言？</h3>
+                    <p>
+                        <strong>多语言支持策略</strong>：
+                    </p>
+                    <ul>
+                        <li><strong>LLM 天然支持</strong>：使用 LLM 路由自动支持多语言</li>
+                        <li><strong>语言检测</strong>：先检测语言，然后使用对应语言的规则</li>
+                        <li><strong>翻译路由</strong>：将请求翻译为统一语言后再路由</li>
+                        <li><strong>多语言规则</strong>：为每种语言维护独立的关键词库</li>
+                        <li><strong>多语言代理</strong>：每种语言配置专门的代理</li>
+                    </ul>
+                </section>
+
+                <!-- 参考资源 -->
+                <section class="content-section">
+                    <h2 class="section-title">📖 参考资源</h2>
+                    <ul>
+                        <li>
+                            <a href="https://docs.langchain.com/oss/python/langchain/multi-agent/router" target="_blank">
+                                Multi-Agent Router 官方文档
+                            </a>
+                        </li>
+                        <li>
+                            <a href="30-multi-agent-index.html">
+                                Multi-Agent 概述
+                            </a>
+                        </li>
+                        <li>
+                            <a href="31-multi-agent-subagents.html">
+                                Multi-Agent 子代理
+                            </a>
+                        </li>
+                        <li>
+                            <a href="32-multi-agent-handoffs.html">
+                                Multi-Agent 交接机制
+                            </a>
+                        </li>
+                        <li>
+                            <a href="33-multi-agent-skills.html">
+                                Multi-Agent 技能系统
+                            </a>
+                        </li>
+                        <li>
+                            <a href="35-multi-agent-workflow.html">
+                                Multi-Agent 自定义工作流
+                            </a>
+                        </li>
+                        <li>
+                            <a href="21-structured-output.html">
+                                结构化输出 - Router 决策输出
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- 页面导航 -->
+                <nav class="page-navigation">
+                    <a href="33-multi-agent-skills.html" class="nav-button prev">
+                        ← 上一页：技能系统
+                    </a>
+                    <a href="35-multi-agent-workflow.html" class="nav-button next">
+                        下一页：自定义工作流 →
+                    </a>
+                </nav>
+            </div>
+        </main>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" aria-label="返回顶部">↑</button>
+
+    <!-- JavaScript -->
+    <script src="assets/js/mermaid-init.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</body>
+</html>

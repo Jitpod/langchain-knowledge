@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LangChain 1.0 核心架构 - 深入理解 LangChain 的设计哲学和模块组织">
+    <title>核心架构 | LangChain 1.0 Python 知识文档</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <button class="mobile-menu-button" aria-label="打开菜单">☰</button>
+
+    <div class="container">
+        <!-- 侧边栏导航 -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="sidebar-title">🦜 LangChain 1.0</h1>
+                <p class="sidebar-subtitle">Python 完整学习指南</p>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-section">
+                    <div class="nav-section-title">开始</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">
+                                <span class="nav-icon">🏠</span>
+                                主页
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">基础篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="01-introduction.html" class="nav-link">
+                                <span class="nav-icon">📖</span>
+                                LangChain 简介
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="02-architecture.html" class="nav-link">
+                                <span class="nav-icon">🏗️</span>
+                                核心架构
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="03-models.html" class="nav-link">
+                                <span class="nav-icon">🤖</span>
+                                模型接口
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="04-messages.html" class="nav-link">
+                                <span class="nav-icon">💬</span>
+                                消息系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="05-tools.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                工具系统
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">进阶篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="06-agents.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                Agent 基础
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="07-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="08-rag.html" class="nav-link">
+                                <span class="nav-icon">🔍</span>
+                                RAG 详解
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="09-lcel.html" class="nav-link">
+                                <span class="nav-icon">🔗</span>
+                                LCEL 表达式
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">高级应用</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="10-runtime.html" class="nav-link">
+                                <span class="nav-icon">🔌</span>
+                                Runtime 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="11-checkpointer.html" class="nav-link">
+                                <span class="nav-icon">💾</span>
+                                持久化系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="12-streaming.html" class="nav-link">
+                                <span class="nav-icon">🌊</span>
+                                流式输出
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="13-human-in-loop.html" class="nav-link">
+                                <span class="nav-icon">👤</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="14-long-term-memory.html" class="nav-link">
+                                <span class="nav-icon">🗄️</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="15-langgraph.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                LangGraph
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">实战篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="16-customer-service.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                客服机器人
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="17-best-practices.html" class="nav-link">
+                                <span class="nav-icon">✨</span>
+                                最佳实践
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">参考篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="18-api-reference.html" class="nav-link">
+                                <span class="nav-icon">📚</span>
+                                API 速查表
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="19-troubleshooting.html" class="nav-link">
+                                <span class="nav-icon">🐛</span>
+                                故障排除
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="20-migration.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                迁移指南
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">扩展篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="21-structured-output.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                结构化输出
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">DeepAgents 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="22-deepagents-quickstart.html" class="nav-link">
+                                <span class="nav-icon">🚀</span>
+                                快速开始
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="23-deepagents-customization.html" class="nav-link">
+                                <span class="nav-icon">🎨</span>
+                                定制化
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="24-deepagents-harness.html" class="nav-link">
+                                <span class="nav-icon">🎛️</span>
+                                Harness 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="25-deepagents-backends.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                后端配置
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="26-deepagents-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="27-deepagents-hitl.html" class="nav-link">
+                                <span class="nav-icon">🤝</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="28-deepagents-memory.html" class="nav-link">
+                                <span class="nav-icon">🧠</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="29-deepagents-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">Multi-Agent 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="30-multi-agent-index.html" class="nav-link">
+                                <span class="nav-icon">🌐</span>
+                                概述
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="31-multi-agent-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="32-multi-agent-handoffs.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                交接机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="33-multi-agent-skills.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                技能系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="34-multi-agent-router.html" class="nav-link">
+                                <span class="nav-icon">🧭</span>
+                                路由机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="35-multi-agent-workflow.html" class="nav-link">
+                                <span class="nav-icon">🔀</span>
+                                自定义工作流
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- 主内容区域 -->
+        <!-- 主内容区域 -->
+        <main class="main-content">
+            <div class="content-wrapper">
+                <!-- 面包屑导航 -->
+                <nav class="breadcrumb">
+                    <span class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link">主页</a>
+                    </span>
+                    <span class="breadcrumb-item">
+                        基础篇
+                    </span>
+                    <span class="breadcrumb-item">
+                        模型接口
+                    </span>
+                </nav>
+
+                <!-- 页面标题 -->
+                <header class="page-header">
+                    <h1 class="page-title">🤖 模型接口详解</h1>
+                    <p class="page-subtitle">
+                        掌握 LangChain 1.0 的统一模型接口，使用 init_chat_model() 轻松切换
+                        OpenAI、Anthropic、Google 等多家提供商的 LLM 模型。
+                    </p>
+                </header>
+
+                <!-- 什么是模型接口 -->
+                <section class="content-section">
+                    <h2 class="section-title">📚 什么是模型接口？</h2>
+                    <p>
+                        <strong>模型（Models）</strong>是 LangChain 应用的核心推理引擎。
+                        LangChain 1.0 提供了统一的模型接口，让你能够：
+                    </p>
+                    <ul>
+                        <li><strong>无缝切换</strong>：在不同 LLM 提供商之间轻松切换</li>
+                        <li><strong>标准化 API</strong>：使用统一的接口调用所有模型</li>
+                        <li><strong>丰富功能</strong>：支持工具调用、结构化输出、多模态等高级特性</li>
+                        <li><strong>灵活配置</strong>：动态调整模型参数和提供商</li>
+                    </ul>
+
+                    <div class="info-box note">
+                        <div class="info-box-title">💡 LangChain 1.0 的核心优势</div>
+                        <p>
+                            使用 <code>init_chat_model()</code> 函数，你可以用同一套代码调用
+                            GPT-4、Claude、Gemini 等不同模型，只需修改模型名称即可。
+                            这大大简化了多模型应用的开发和测试。
+                        </p>
+                    </div>
+                </section>
+
+                <!-- init_chat_model() 详解 -->
+                <section class="content-section">
+                    <h2 class="section-title">🔧 init_chat_model() 函数详解</h2>
+                    <p>
+                        <code>init_chat_model()</code> 是 LangChain 1.0 初始化聊天模型的统一入口。
+                    </p>
+
+                    <h3 class="subsection-title">基础用法</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+init_chat_model() 基础示例
+功能：快速初始化聊天模型
+"""
+from langchain.chat_models import init_chat_model
+
+# 方式 1：仅指定模型名称（最简单）
+model = init_chat_model("gpt-4")
+
+# 方式 2：使用 "提供商:模型名" 格式
+model = init_chat_model("google_genai:gemini-2.5-flash-lite")
+
+# 方式 3：显式指定提供商
+model = init_chat_model(
+    "claude-sonnet-4-5-20250929",
+    model_provider="anthropic"
+)
+
+# 调用模型
+response = model.invoke("为什么鹦鹉有彩色的羽毛？")
+print(response.content)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">支持的模型提供商</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>提供商</th>
+                                <th>安装命令</th>
+                                <th>示例模型</th>
+                                <th>API Key 环境变量</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>OpenAI</strong></td>
+                                <td><code>pip install -U "langchain[openai]"</code></td>
+                                <td><code>gpt-4o</code>, <code>gpt-4-turbo</code></td>
+                                <td><code>OPENAI_API_KEY</code></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Anthropic</strong></td>
+                                <td><code>pip install -U "langchain[anthropic]"</code></td>
+                                <td><code>claude-sonnet-4-5-20250929</code></td>
+                                <td><code>ANTHROPIC_API_KEY</code></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Google</strong></td>
+                                <td><code>pip install -U "langchain[google-genai]"</code></td>
+                                <td><code>gemini-2.5-flash-lite</code></td>
+                                <td><code>GOOGLE_API_KEY</code></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Azure OpenAI</strong></td>
+                                <td><code>pip install -U "langchain[openai]"</code></td>
+                                <td>自定义部署名称</td>
+                                <td><code>AZURE_OPENAI_API_KEY</code></td>
+                            </tr>
+                            <tr>
+                                <td><strong>AWS Bedrock</strong></td>
+                                <td><code>pip install -U "langchain[bedrock]"</code></td>
+                                <td><code>anthropic.claude-3-5-sonnet...</code></td>
+                                <td>AWS 凭证</td>
+                            </tr>
+                            <tr>
+                                <td><strong>HuggingFace</strong></td>
+                                <td><code>pip install -U "langchain[huggingface]"</code></td>
+                                <td><code>microsoft/Phi-3-mini-4k-instruct</code></td>
+                                <td><code>HUGGINGFACEHUB_API_TOKEN</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 class="subsection-title">核心参数说明</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>参数</th>
+                                <th>类型</th>
+                                <th>默认值</th>
+                                <th>说明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>model</code></td>
+                                <td>str</td>
+                                <td>必需</td>
+                                <td>模型标识符（支持 "提供商:模型" 格式）</td>
+                            </tr>
+                            <tr>
+                                <td><code>model_provider</code></td>
+                                <td>str</td>
+                                <td>自动检测</td>
+                                <td>指定提供商（openai/anthropic/google-genai 等）</td>
+                            </tr>
+                            <tr>
+                                <td><code>api_key</code></td>
+                                <td>str</td>
+                                <td>环境变量</td>
+                                <td>API 认证密钥</td>
+                            </tr>
+                            <tr>
+                                <td><code>temperature</code></td>
+                                <td>float</td>
+                                <td>0.7</td>
+                                <td>控制随机性（0=确定性，更高=创造性）</td>
+                            </tr>
+                            <tr>
+                                <td><code>max_tokens</code></td>
+                                <td>int</td>
+                                <td>None</td>
+                                <td>限制响应长度（令牌数）</td>
+                            </tr>
+                            <tr>
+                                <td><code>timeout</code></td>
+                                <td>int</td>
+                                <td>60</td>
+                                <td>请求超时时间（秒）</td>
+                            </tr>
+                            <tr>
+                                <td><code>max_retries</code></td>
+                                <td>int</td>
+                                <td>2</td>
+                                <td>失败请求的重试次数</td>
+                            </tr>
+                            <tr>
+                                <td><code>base_url</code></td>
+                                <td>str</td>
+                                <td>None</td>
+                                <td>自定义 API 端点（用于代理或兼容 API）</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 class="subsection-title">完整配置示例</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+模型精细配置示例
+功能：展示所有常用配置选项
+"""
+from langchain.chat_models import init_chat_model
+
+# 完整参数配置
+model = init_chat_model(
+    model="claude-sonnet-4-5-20250929",
+    model_provider="anthropic",
+
+    # 性能参数
+    temperature=0.3,        # 降低随机性，提高准确性
+    max_tokens=2000,        # 限制输出长度
+
+    # 网络参数
+    timeout=30,             # 30 秒超时
+    max_retries=3,          # 失败后重试 3 次
+
+    # 认证（可选，默认从环境变量读取）
+    # api_key="your-api-key-here"
+)
+
+# 测试调用
+response = model.invoke("用简洁的语言解释什么是量子计算")
+print(response.content)
+
+# 查看模型配置信息
+print(f"\n模型配置: {model.profile}")</code></pre>
+                    </div>
+                </section>
+
+                <!-- 模型调用方法 -->
+                <section class="content-section">
+                    <h2 class="section-title">🚀 模型调用方法</h2>
+                    <p>
+                        LangChain 模型提供三种主要调用方式，适用于不同场景：
+                    </p>
+
+                    <div class="mermaid-wrapper">
+                        <div class="mermaid">
+graph LR
+    A[输入消息] --> B{调用方式}
+
+    B -->|单次调用| C[invoke]
+    C --> D[完整响应]
+
+    B -->|实时输出| E[stream]
+    E --> F[逐块返回]
+    F --> G[累积完整结果]
+
+    B -->|批量处理| H[batch]
+    H --> I[并行执行]
+    I --> J[返回结果列表]
+
+    style C fill:#3b82f6,color:#fff
+    style E fill:#10b981,color:#fff
+    style H fill:#f59e0b,color:#fff
+    style D fill:#8b5cf6,color:#fff
+    style G fill:#8b5cf6,color:#fff
+    style J fill:#8b5cf6,color:#fff
+                        </div>
+                    </div>
+
+                    <h3 class="subsection-title">1. invoke() - 单次调用</h3>
+                    <p>适用于标准的一问一答场景，等待完整响应后返回。</p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+invoke() 单次调用示例
+"""
+from langchain.chat_models import init_chat_model
+
+model = init_chat_model("gpt-4o")
+
+# 方式 1：直接传入字符串
+response = model.invoke("为什么鹦鹉会说话？")
+print(response.content)
+
+# 方式 2：传入对话历史（字典格式）
+conversation = [
+    {"role": "system", "content": "你是一个翻译助手。"},
+    {"role": "user", "content": "翻译：I love programming."},
+    {"role": "assistant", "content": "我爱编程。"},
+    {"role": "user", "content": "翻译：I love building applications."}
+]
+
+response = model.invoke(conversation)
+print(response.content)  # 输出：我爱构建应用程序。</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">2. stream() - 流式输出</h3>
+                    <p>实时逐块返回响应，适合需要即时反馈的场景（如聊天界面）。</p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+stream() 流式输出示例
+功能：实时显示模型生成过程
+"""
+from langchain.chat_models import init_chat_model
+
+model = init_chat_model("claude-sonnet-4-5-20250929")
+
+# 方式 1：逐块打印
+print("流式输出: ", end="")
+for chunk in model.stream("为什么鹦鹉有彩色的羽毛？"):
+    print(chunk.content, end="", flush=True)
+print("\n")
+
+# 方式 2：累积完整消息
+full_response = None
+for chunk in model.stream("天空是什么颜色？"):
+    if full_response is None:
+        full_response = chunk
+    else:
+        full_response = full_response + chunk  # 累加块
+
+print("完整响应:", full_response.content)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">3. batch() - 批量调用</h3>
+                    <p>并行处理多个请求，提高效率，适合批量数据处理。</p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+batch() 批量调用示例
+功能：并行处理多个问题
+"""
+from langchain.chat_models import init_chat_model
+
+model = init_chat_model("gpt-4o-mini")
+
+# 批量问题列表
+questions = [
+    "为什么鹦鹉有彩色的羽毛？",
+    "飞机是如何飞行的？",
+    "什么是量子计算？"
+]
+
+# 批量调用（并行执行）
+responses = model.batch(questions)
+
+# 打印所有响应
+for i, response in enumerate(responses, 1):
+    print(f"\n问题 {i}: {questions[i-1]}")
+    print(f"回答: {response.content[:100]}...")
+
+# 控制并发数量
+responses = model.batch(
+    questions,
+    config={"max_concurrency": 2}  # 最多同时处理 2 个请求
+)</code></pre>
+                    </div>
+
+                    <div class="info-box tip">
+                        <div class="info-box-title">✅ 调用方式选择建议</div>
+                        <ul>
+                            <li><strong>invoke()</strong>：简单问答、脚本化处理</li>
+                            <li><strong>stream()</strong>：聊天界面、需要即时反馈的场景</li>
+                            <li><strong>batch()</strong>：批量翻译、数据标注、大规模处理</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- 工具调用 -->
+                <section class="content-section">
+                    <h2 class="section-title">🔧 工具调用（Tool Calling）</h2>
+                    <p>
+                        工具调用让模型能够调用外部函数获取信息或执行操作。
+                        使用 <code>bind_tools()</code> 方法将工具绑定到模型。
+                    </p>
+
+                    <div class="mermaid-wrapper">
+                        <div class="mermaid">
+graph LR
+    A[用户问题] --> B[模型 + 工具]
+    B --> C{需要工具？}
+
+    C -->|是| D[生成工具调用]
+    D --> E[执行工具函数]
+    E --> F[返回结果]
+    F --> G[模型整合结果]
+    G --> H[生成最终答案]
+
+    C -->|否| H
+
+    style B fill:#3b82f6,color:#fff
+    style D fill:#10b981,color:#fff
+    style E fill:#f59e0b,color:#fff
+    style H fill:#8b5cf6,color:#fff
+                        </div>
+                    </div>
+
+                    <h3 class="subsection-title">基础工具绑定</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+工具调用基础示例
+功能：让模型调用天气查询工具
+"""
+from langchain.chat_models import init_chat_model
+from langchain.tools import tool
+
+# 定义工具
+@tool
+def get_weather(location: str) -> str:
+    """获取指定地点的天气信息。
+
+    Args:
+        location: 地点名称
+
+    Returns:
+        天气描述
+    """
+    # 模拟天气查询
+    return f"{location} 今天天气晴朗，温度 22°C。"
+
+# 初始化模型
+model = init_chat_model("gpt-4o")
+
+# 绑定工具到模型
+model_with_tools = model.bind_tools([get_weather])
+
+# 调用模型（模型会决定是否需要使用工具）
+response = model_with_tools.invoke("波士顿今天天气怎么样？")
+
+# 检查是否有工具调用
+if response.tool_calls:
+    for tool_call in response.tool_calls:
+        print(f"工具: {tool_call['name']}")
+        print(f"参数: {tool_call['args']}")
+else:
+    print(f"直接回答: {response.content}")</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">完整工具执行循环</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+完整的工具调用循环
+功能：模型调用工具 → 执行工具 → 返回结果 → 生成最终答案
+"""
+from langchain.chat_models import init_chat_model
+from langchain.tools import tool
+from langchain.messages import ToolMessage
+
+@tool
+def get_weather(location: str) -> str:
+    """获取天气信息"""
+    weather_data = {
+        "波士顿": "晴朗，18°C",
+        "纽约": "多云，20°C",
+        "旧金山": "多雾，15°C"
+    }
+    return weather_data.get(location, f"{location} 天气晴朗")
+
+# 初始化模型并绑定工具
+model = init_chat_model("gpt-4o")
+model_with_tools = model.bind_tools([get_weather])
+
+# 第 1 步：用户提问
+messages = [{"role": "user", "content": "波士顿今天天气怎么样？"}]
+
+# 第 2 步：模型推理（可能生成工具调用）
+ai_message = model_with_tools.invoke(messages)
+messages.append(ai_message)
+
+# 第 3 步：执行工具调用
+for tool_call in ai_message.tool_calls:
+    # 获取工具函数
+    selected_tool = {"get_weather": get_weather}[tool_call["name"]]
+
+    # 执行工具
+    tool_result = selected_tool.invoke(tool_call)
+
+    # 将工具结果添加到消息历史
+    messages.append(tool_result)
+
+# 第 4 步：模型整合工具结果，生成最终答案
+final_response = model_with_tools.invoke(messages)
+
+print("最终答案:", final_response.content)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">工具调用选项</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 强制使用任一工具（不直接回答）
+model_with_tools = model.bind_tools([tool1, tool2], tool_choice="any")
+
+# 禁用并行工具调用（一次只调用一个工具）
+model_with_tools = model.bind_tools([get_weather], parallel_tool_calls=False)</code></pre>
+                    </div>
+                </section>
+
+                <!-- 结构化输出 -->
+                <section class="content-section">
+                    <h2 class="section-title">📋 结构化输出（Structured Output）</h2>
+                    <p>
+                        使用 <code>with_structured_output()</code> 方法确保模型返回符合指定格式的数据，
+                        非常适合需要解析和处理模型输出的场景。
+                    </p>
+
+                    <h3 class="subsection-title">使用 Pydantic 模型</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+结构化输出示例（Pydantic）
+功能：让模型返回符合 Pydantic 模型的结构化数据
+"""
+from langchain.chat_models import init_chat_model
+from pydantic import BaseModel, Field
+
+# 定义输出结构
+class Movie(BaseModel):
+    """电影信息"""
+    title: str = Field(..., description="电影标题")
+    year: int = Field(..., description="上映年份")
+    director: str = Field(..., description="导演姓名")
+    rating: float = Field(..., description="评分（1-10）")
+    summary: str = Field(..., description="简短摘要")
+
+# 初始化模型
+model = init_chat_model("gpt-4o")
+
+# 绑定结构化输出
+structured_model = model.with_structured_output(Movie)
+
+# 调用（模型会返回 Movie 对象）
+result = structured_model.invoke("给我《盗梦空间》的详细信息")
+
+# 结果是 Pydantic 对象
+print(f"标题: {result.title}")
+print(f"年份: {result.year}")
+print(f"导演: {result.director}")
+print(f"评分: {result.rating}")
+print(f"简介: {result.summary}")</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">使用 TypedDict</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+结构化输出示例（TypedDict）
+功能：使用 TypedDict 定义输出结构
+"""
+from typing_extensions import TypedDict, Annotated
+from langchain.chat_models import init_chat_model
+
+class MovieDict(TypedDict):
+    """电影信息字典"""
+    title: Annotated[str, "电影标题"]
+    year: Annotated[int, "上映年份"]
+    director: Annotated[str, "导演"]
+    rating: Annotated[float, "评分（1-10）"]
+
+model = init_chat_model("claude-sonnet-4-5-20250929")
+structured_model = model.with_structured_output(MovieDict)
+
+result = structured_model.invoke("《星际穿越》的信息")
+
+# 结果是字典
+print(result)  # {"title": "星际穿越", "year": 2014, ...}</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">包含原始响应</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 同时返回解析结果和原始响应
+structured_model = model.with_structured_output(Movie, include_raw=True)
+
+result = structured_model.invoke("《盗梦空间》信息")
+
+# 结果包含三个字段
+print(result["parsed"])         # Movie 对象
+print(result["raw"])            # AIMessage 原始响应
+print(result["parsing_error"])  # 解析错误（如有）</code></pre>
+                    </div>
+                </section>
+
+                <!-- 高级特性 -->
+                <section class="content-section">
+                    <h2 class="section-title">🚀 高级特性</h2>
+
+                    <h3 class="subsection-title">动态模型切换</h3>
+                    <p>在运行时动态选择不同的模型，无需修改代码。</p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+动态模型切换示例
+功能：根据配置动态选择不同模型
+"""
+from langchain.chat_models import init_chat_model
+
+# 创建可配置的模型
+configurable_model = init_chat_model(
+    model="gpt-4o-mini",  # 默认模型
+    temperature=0
+)
+
+# 场景 1：使用默认模型
+response1 = configurable_model.invoke("你的名字是什么？")
+print(f"默认模型响应: {response1.content}")
+
+# 场景 2：运行时切换到 GPT-4
+response2 = configurable_model.invoke(
+    "你的名字是什么？",
+    config={"configurable": {"model": "gpt-4o"}}
+)
+print(f"GPT-4 响应: {response2.content}")
+
+# 场景 3：运行时切换到 Claude
+response3 = configurable_model.invoke(
+    "你的名字是什么？",
+    config={"configurable": {"model": "claude-sonnet-4-5-20250929"}}
+)
+print(f"Claude 响应: {response3.content}")</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">模型配置文件（Profile）</h3>
+                    <p>查看模型支持的功能和限制。</p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from langchain.chat_models import init_chat_model
+
+model = init_chat_model("gpt-4o")
+
+# 查看模型配置
+print(model.profile)
+
+# 输出示例:
+# {
+#     "max_input_tokens": 128000,
+#     "image_inputs": True,
+#     "reasoning_output": True,
+#     "tool_calling": True,
+# }
+
+# 自定义配置文件
+custom_model = init_chat_model(
+    "custom-model",
+    profile={
+        "max_input_tokens": 100_000,
+        "tool_calling": True,
+        "image_inputs": False
+    }
+)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">速率限制</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+速率限制示例
+功能：控制 API 调用频率
+"""
+from langchain_core.rate_limiters import InMemoryRateLimiter
+from langchain.chat_models import init_chat_model
+
+# 创建速率限制器（每秒最多 0.1 个请求）
+rate_limiter = InMemoryRateLimiter(
+    requests_per_second=0.1,     # 每秒请求数
+    check_every_n_seconds=0.1,   # 检查间隔
+    max_bucket_size=10,          # 令牌桶大小
+)
+
+# 应用速率限制
+model = init_chat_model("gpt-4o", rate_limiter=rate_limiter)
+
+# 调用会自动遵守速率限制
+for i in range(5):
+    response = model.invoke(f"问题 {i+1}")
+    print(f"响应 {i+1}: {response.content[:50]}...")</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">自定义 API 端点和代理</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 使用自定义 API 端点（兼容 OpenAI 格式的 API）
+model = init_chat_model(
+    model="custom-model-name",
+    model_provider="openai",
+    base_url="https://api.custom-provider.com/v1",
+    api_key="your-custom-api-key"
+)
+
+# 使用 HTTP 代理
+from langchain_openai import ChatOpenAI
+
+model = ChatOpenAI(
+    model="gpt-4o",
+    openai_proxy="http://proxy.example.com:8080"
+)</code></pre>
+                    </div>
+                </section>
+
+                <!-- 使用量追踪 -->
+                <section class="content-section">
+                    <h2 class="section-title">📊 使用量追踪</h2>
+                    <p>监控 Token 使用情况，优化成本和性能。</p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+Token 使用量追踪示例
+功能：监控多次调用的 Token 消耗
+"""
+from langchain.chat_models import init_chat_model
+from langchain_core.callbacks import get_usage_metadata_callback
+
+model = init_chat_model("gpt-4o-mini")
+
+# 使用上下文管理器追踪使用量
+with get_usage_metadata_callback() as callback:
+    # 第一次调用
+    response1 = model.invoke("什么是 LangChain？")
+
+    # 第二次调用
+    response2 = model.invoke("什么是 Agent？")
+
+    # 第三次调用
+    response3 = model.invoke("什么是 RAG？")
+
+    # 查看总使用量
+    usage = callback.usage_metadata
+    print(f"\n总使用统计:")
+    print(f"  输入 Token: {usage['input_tokens']}")
+    print(f"  输出 Token: {usage['output_tokens']}")
+    print(f"  总 Token: {usage['total_tokens']}")</code></pre>
+                    </div>
+                </section>
+
+                <!-- 常见问题 -->
+                <section class="content-section">
+                    <h2 class="section-title">❓ 常见问题</h2>
+
+                    <h3 class="subsection-subtitle">Q1: 如何选择合适的模型？</h3>
+                    <p>根据以下因素选择：</p>
+                    <ul>
+                        <li><strong>任务复杂度</strong>：简单任务用 mini/lite 模型，复杂推理用旗舰模型</li>
+                        <li><strong>成本</strong>：较小模型成本更低，适合大量调用</li>
+                        <li><strong>速度</strong>：mini 模型响应更快</li>
+                        <li><strong>特殊功能</strong>：检查模型是否支持工具调用、视觉输入等</li>
+                    </ul>
+
+                    <h3 class="subsection-subtitle">Q2: temperature 参数如何设置？</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># temperature = 0：确定性输出，适合需要稳定结果的场景
+model_deterministic = init_chat_model("gpt-4o", temperature=0)
+
+# temperature = 0.7：平衡创造性和准确性（默认值）
+model_balanced = init_chat_model("gpt-4o", temperature=0.7)
+
+# temperature = 1.0+：高创造性，适合创意写作
+model_creative = init_chat_model("gpt-4o", temperature=1.2)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">Q3: 如何处理 API 错误和超时？</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from langchain.chat_models import init_chat_model
+
+# 配置重试和超时
+model = init_chat_model(
+    "gpt-4o",
+    timeout=60,        # 60 秒超时
+    max_retries=3      # 失败后重试 3 次
+)
+
+# 使用 try-except 捕获错误
+try:
+    response = model.invoke("你的问题")
+except Exception as e:
+    print(f"调用失败: {e}")
+    # 实现降级逻辑
+    fallback_model = init_chat_model("gpt-4o-mini")
+    response = fallback_model.invoke("你的问题")</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">Q4: invoke() 和 stream() 的性能差异？</h3>
+                    <p>
+                        <strong>invoke()</strong>：等待完整响应后返回，适合非交互场景。<br>
+                        <strong>stream()</strong>：逐块返回，用户感知延迟更低，但总体网络时间相近。
+                        对于聊天界面，stream() 能提供更好的用户体验。
+                    </p>
+
+                    <h3 class="subsection-subtitle">Q5: 如何在 Agent 中使用不同模型？</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from langchain.agents import create_agent
+from langchain.chat_models import init_chat_model
+
+# 为 Agent 指定模型
+model = init_chat_model("claude-sonnet-4-5-20250929", temperature=0.1)
+
+agent = create_agent(
+    model=model,  # 传入配置好的模型实例
+    tools=[...],
+    system_prompt="..."
+)</code></pre>
+                    </div>
+                </section>
+
+                <!-- 参考资源 -->
+                <section class="content-section">
+                    <h2 class="section-title">🔗 参考资源</h2>
+                    <ul>
+                        <li>
+                            <a href="https://docs.langchain.com/oss/python/langchain/models" target="_blank">
+                                LangChain 官方 Models 文档
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://python.langchain.com/docs/integrations/chat/" target="_blank">
+                                Chat Models 集成列表
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://python.langchain.com/docs/how_to/#chat-models" target="_blank">
+                                Chat Models 使用指南
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://reference.langchain.com/python/langchain/chat_models.html" target="_blank">
+                                API 参考文档
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- 页面导航 -->
+                <nav class="page-navigation">
+                    <a href="02-architecture.html" class="nav-button prev">
+                        ← 上一页：核心架构
+                    </a>
+                    <a href="04-messages.html" class="nav-button next">
+                        下一页：消息系统 →
+                    </a>
+                </nav>
+            </div>
+        </main>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" aria-label="返回顶部">↑</button>
+
+    <!-- JavaScript -->
+    <script src="assets/js/mermaid-init.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</body>
+</html>

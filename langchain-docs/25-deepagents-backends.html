@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DeepAgents 后端配置 - 存储策略和多后端支持">
+    <title>DeepAgents 后端配置 | LangChain 1.0 Python 知识文档</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <button class="mobile-menu-button" aria-label="打开菜单">☰</button>
+
+    <div class="container">
+        <!-- 侧边栏导航 -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="sidebar-title">🦜 LangChain 1.0</h1>
+                <p class="sidebar-subtitle">Python 完整学习指南</p>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-section">
+                    <div class="nav-section-title">开始</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">
+                                <span class="nav-icon">🏠</span>
+                                主页
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">基础篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="01-introduction.html" class="nav-link">
+                                <span class="nav-icon">📖</span>
+                                LangChain 简介
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="02-architecture.html" class="nav-link">
+                                <span class="nav-icon">🏗️</span>
+                                核心架构
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="03-models.html" class="nav-link">
+                                <span class="nav-icon">🤖</span>
+                                模型接口
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="04-messages.html" class="nav-link">
+                                <span class="nav-icon">💬</span>
+                                消息系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="05-tools.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                工具系统
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">进阶篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="06-agents.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                Agent 基础
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="07-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="08-rag.html" class="nav-link">
+                                <span class="nav-icon">🔍</span>
+                                RAG 详解
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="09-lcel.html" class="nav-link">
+                                <span class="nav-icon">🔗</span>
+                                LCEL 表达式
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">高级应用</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="10-runtime.html" class="nav-link">
+                                <span class="nav-icon">🔌</span>
+                                Runtime 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="11-checkpointer.html" class="nav-link">
+                                <span class="nav-icon">💾</span>
+                                持久化系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="12-streaming.html" class="nav-link">
+                                <span class="nav-icon">🌊</span>
+                                流式输出
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="13-human-in-loop.html" class="nav-link">
+                                <span class="nav-icon">👤</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="14-long-term-memory.html" class="nav-link">
+                                <span class="nav-icon">🗄️</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="15-langgraph.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                LangGraph
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">实战篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="16-customer-service.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                客服机器人
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="17-best-practices.html" class="nav-link">
+                                <span class="nav-icon">✨</span>
+                                最佳实践
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">参考篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="18-api-reference.html" class="nav-link">
+                                <span class="nav-icon">📚</span>
+                                API 速查表
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="19-troubleshooting.html" class="nav-link">
+                                <span class="nav-icon">🐛</span>
+                                故障排除
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="20-migration.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                迁移指南
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">扩展篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="21-structured-output.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                结构化输出
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">DeepAgents 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="22-deepagents-quickstart.html" class="nav-link">
+                                <span class="nav-icon">🚀</span>
+                                快速开始
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="23-deepagents-customization.html" class="nav-link">
+                                <span class="nav-icon">🎨</span>
+                                定制化
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="24-deepagents-harness.html" class="nav-link">
+                                <span class="nav-icon">🎛️</span>
+                                Harness 系统
+                            </a>
+                        </li>
+                        <li class="nav-item active">
+                            <a href="25-deepagents-backends.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                后端配置
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="26-deepagents-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="27-deepagents-hitl.html" class="nav-link">
+                                <span class="nav-icon">🤝</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="28-deepagents-memory.html" class="nav-link">
+                                <span class="nav-icon">🧠</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="29-deepagents-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">Multi-Agent 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="30-multi-agent-index.html" class="nav-link">
+                                <span class="nav-icon">🌐</span>
+                                概述
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="31-multi-agent-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="32-multi-agent-handoffs.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                交接机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="33-multi-agent-skills.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                技能系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="34-multi-agent-router.html" class="nav-link">
+                                <span class="nav-icon">🧭</span>
+                                路由机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="35-multi-agent-workflow.html" class="nav-link">
+                                <span class="nav-icon">🔀</span>
+                                自定义工作流
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- 主内容区域 -->
+        <main class="main-content">
+            <div class="content-wrapper">
+                <!-- 面包屑导航 -->
+                <nav class="breadcrumb">
+                    <span class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link">主页</a>
+                    </span>
+                    <span class="breadcrumb-item">
+                        DeepAgents 篇
+                    </span>
+                    <span class="breadcrumb-item">
+                        后端配置
+                    </span>
+                </nav>
+
+                <!-- 页面标题 -->
+                <header class="page-header">
+                    <h1 class="page-title">🔧 DeepAgents 后端配置</h1>
+                    <p class="page-subtitle">
+                        可插拔的存储后端系统，支持内存、磁盘、数据库等多种存储策略，
+                        灵活适配临时计算、本地开发和长期持久化等不同场景。
+                    </p>
+                </header>
+
+                <!-- 什么是 Backends -->
+                <section class="content-section">
+                    <h2 class="section-title">📚 什么是 Backends？</h2>
+                    <p>
+                        <strong>Backends</strong>（后端）是 DeepAgents 的<strong>可插拔文件系统层</strong>，
+                        为 Agent 提供统一的文件操作接口，底层可以灵活切换不同的存储实现。
+                    </p>
+
+                    <div class="info-box note">
+                        <div class="info-box-title">💡 Backends 核心特性</div>
+                        <table style="margin-top: 0.5rem;">
+                            <thead>
+                                <tr>
+                                    <th>特性</th>
+                                    <th>说明</th>
+                                    <th>优势</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>可插拔设计</strong></td>
+                                    <td>统一接口，多种实现</td>
+                                    <td>无需改代码即可切换存储</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>存储抽象</strong></td>
+                                    <td>Agent 无需关心底层存储</td>
+                                    <td>简化 Agent 开发</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>灵活路由</strong></td>
+                                    <td>不同路径使用不同后端</td>
+                                    <td>混合临时和持久化存储</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>安全控制</strong></td>
+                                    <td>策略钩子和权限管理</td>
+                                    <td>防止路径遍历、限制访问</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>自定义扩展</strong></td>
+                                    <td>实现 BackendProtocol 接口</td>
+                                    <td>支持 S3、PostgreSQL 等</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="info-box tip">
+                        <div class="info-box-title">✨ 工作原理</div>
+                        <p>
+                            Agent 通过<strong>6 个文件工具</strong>与后端交互：
+                        </p>
+                        <ul>
+                            <li><code>ls</code> → <code>backend.ls_info(path)</code></li>
+                            <li><code>read_file</code> → <code>backend.read(file_path, offset, limit)</code></li>
+                            <li><code>write_file</code> → <code>backend.write(file_path, content)</code></li>
+                            <li><code>edit_file</code> → <code>backend.edit(file_path, old, new, replace_all)</code></li>
+                            <li><code>glob</code> → <code>backend.glob_info(pattern, path)</code></li>
+                            <li><code>grep</code> → <code>backend.grep_raw(pattern, path, glob)</code></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- 4 种后端类型 -->
+                <section class="content-section">
+                    <h2 class="section-title">🗂️ 4 种后端类型</h2>
+                    <p>
+                        DeepAgents 提供<strong>4 种内置后端</strong>，满足不同的存储需求：
+                    </p>
+
+                    <div class="mermaid-wrapper">
+                        <div class="mermaid">
+graph TB
+    Agent["DeepAgent<br/>文件工具"] --> Backend["Backend 抽象层"]
+
+    Backend --> State["StateBackend<br/>内存存储"]
+    Backend --> FS["FilesystemBackend<br/>磁盘存储"]
+    Backend --> Store["StoreBackend<br/>持久化存储"]
+    Backend --> Composite["CompositeBackend<br/>路由混合"]
+
+    State --> Use1["临时计算<br/>单线程"]
+    FS --> Use2["本地开发<br/>真实文件"]
+    Store --> Use3["长期记忆<br/>跨线程"]
+    Composite --> Use4["混合场景<br/>最灵活"]
+
+    style Agent fill:#3b82f6,color:#fff
+    style Backend fill:#10b981,color:#fff
+    style State fill:#f59e0b,color:#fff
+    style FS fill:#8b5cf6,color:#fff
+    style Store fill:#ec4899,color:#fff
+    style Composite fill:#ef4444,color:#fff
+                        </div>
+                    </div>
+
+                    <h3 class="subsection-title">后端对比表</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>后端</th>
+                                <th>延迟</th>
+                                <th>持久化</th>
+                                <th>跨线程</th>
+                                <th>最佳用途</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>StateBackend</code></td>
+                                <td>⚡ 极低</td>
+                                <td>❌ 否</td>
+                                <td>❌ 否</td>
+                                <td>临时计算、单次对话</td>
+                            </tr>
+                            <tr>
+                                <td><code>FilesystemBackend</code></td>
+                                <td>🟡 低</td>
+                                <td>✅ 是</td>
+                                <td>✅ 是</td>
+                                <td>本地开发、CI 环境</td>
+                            </tr>
+                            <tr>
+                                <td><code>StoreBackend</code></td>
+                                <td>🟠 中</td>
+                                <td>✅ 是</td>
+                                <td>✅ 是</td>
+                                <td>长期记忆、知识库</td>
+                            </tr>
+                            <tr>
+                                <td><code>CompositeBackend</code></td>
+                                <td>🟠 中</td>
+                                <td>🔄 混合</td>
+                                <td>🔄 混合</td>
+                                <td>混合场景（推荐）</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- StateBackend -->
+                <section class="content-section">
+                    <h2 class="section-title">📝 StateBackend - 内存存储</h2>
+                    <p>
+                        <strong>StateBackend</strong> 是<strong>默认后端</strong>，
+                        将文件存储在 LangGraph Agent 状态中，仅在单个线程内有效。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+StateBackend - 默认内存存储
+"""
+from deepagents import create_deep_agent
+
+# 方式 1：默认使用（无需指定）
+agent = create_deep_agent(
+    model="gpt-4o"
+)
+
+# 方式 2：显式指定
+from deepagents.backends import StateBackend
+
+agent = create_deep_agent(
+    model="gpt-4o",
+    backend=lambda rt: StateBackend(rt)
+)
+
+# 使用 Agent
+result = agent.invoke({
+    "messages": [{
+        "role": "user",
+        "content": "创建一个临时文件保存搜索结果"
+    }]
+})
+
+# 特点：
+# - 文件存储在内存中（Agent 状态）
+# - 对话结束后数据消失
+# - 最快的性能（无 I/O 开销）
+# - 适用于临时工作空间
+
+# 限制：
+# - 不跨线程共享
+# - 不持久化到磁盘
+# - 占用内存空间</code></pre>
+                    </div>
+                </section>
+
+                <!-- FilesystemBackend -->
+                <section class="content-section">
+                    <h2 class="section-title">💾 FilesystemBackend - 磁盘存储</h2>
+                    <p>
+                        <strong>FilesystemBackend</strong> 读写<strong>真实的本地文件系统</strong>，
+                        支持虚拟模式沙箱和路径安全验证。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+FilesystemBackend - 本地磁盘存储
+"""
+from deepagents import create_deep_agent
+from deepagents.backends import FilesystemBackend
+
+# 配置磁盘后端
+agent = create_deep_agent(
+    model="gpt-4o",
+    backend=FilesystemBackend(
+        root_dir="/Users/myname/agent_workspace",  # 根目录
+        virtual_mode=True  # 启用虚拟模式（安全）
+    )
+)
+
+# 使用 Agent
+result = agent.invoke({
+    "messages": [{
+        "role": "user",
+        "content": "创建文件 /project/README.md，内容是项目说明"
+    }]
+})
+
+# 执行后：
+# - 文件实际写入：/Users/myname/agent_workspace/project/README.md
+# - Agent 看到的路径：/project/README.md（虚拟路径）
+
+# virtual_mode=True 的作用：
+# 1. 防止路径遍历攻击（Agent 无法访问 root_dir 之外的路径）
+# 2. 路径规范化（自动处理 ../ 和符号链接）
+# 3. 安全沙箱（限制 Agent 操作范围）
+
+# 特点：
+# - 真实磁盘 I/O
+# - 跨对话持久化
+# - 适用于本地开发、CI 环境
+# - 支持大文件（不受内存限制）</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">虚拟模式（virtual_mode）详解</h3>
+                    <div class="info-box warning">
+                        <div class="info-box-title">⚠️ 虚拟模式的重要性</div>
+                        <p>
+                            <strong>virtual_mode=True</strong> 是生产环境的必要安全措施：
+                        </p>
+                        <ul>
+                            <li><strong>防止路径遍历</strong>：Agent 无法访问 <code>../../../etc/passwd</code></li>
+                            <li><strong>限制访问范围</strong>：只能操作 <code>root_dir</code> 内的文件</li>
+                            <li><strong>符号链接保护</strong>：自动检测和阻止符号链接攻击</li>
+                        </ul>
+                    </div>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+虚拟模式示例
+"""
+# 场景：Agent 尝试路径遍历攻击
+agent = create_deep_agent(
+    backend=FilesystemBackend(
+        root_dir="/workspace",
+        virtual_mode=True
+    )
+)
+
+# Agent 尝试访问系统文件
+result = agent.invoke({
+    "messages": [{
+        "role": "user",
+        "content": "读取文件 /../../../etc/passwd"
+    }]
+})
+
+# 结果：
+# - virtual_mode=True：访问被拒绝（安全）
+# - virtual_mode=False：可能访问成功（危险）</code></pre>
+                    </div>
+                </section>
+
+                <!-- StoreBackend -->
+                <section class="content-section">
+                    <h2 class="section-title">🗄️ StoreBackend - 持久化存储</h2>
+                    <p>
+                        <strong>StoreBackend</strong> 使用 LangGraph 的 <code>BaseStore</code>，
+                        支持<strong>跨线程持久化</strong>，可连接 Redis、PostgreSQL 等数据库。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+StoreBackend - 持久化存储
+"""
+from deepagents import create_deep_agent
+from deepagents.backends import StoreBackend
+from langgraph.store.memory import InMemoryStore
+
+# 创建持久化 Store
+store = InMemoryStore()  # 可替换为 RedisStore、PostgresStore
+
+# 配置 StoreBackend
+agent = create_deep_agent(
+    model="gpt-4o",
+    backend=lambda rt: StoreBackend(rt),
+    store=store  # 传递 store 实例
+)
+
+# 使用 Agent
+result = agent.invoke({
+    "messages": [{
+        "role": "user",
+        "content": "保存用户偏好到 /memories/user_preferences.json"
+    }]
+})
+
+# 特点：
+# - 跨对话持久化
+# - 跨线程共享数据
+# - 支持数据库后端（Redis、PostgreSQL）
+# - 适用于长期记忆、知识库
+
+# 使用场景：
+# - 用户配置和偏好
+# - FAQ 知识库
+# - 历史对话记录
+# - 共享的参考数据</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">使用 PostgreSQL Store</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+StoreBackend - PostgreSQL 持久化
+"""
+from deepagents import create_deep_agent
+from deepagents.backends import StoreBackend
+from langgraph.store.postgres import PostgresStore
+
+# 连接 PostgreSQL
+store = PostgresStore(
+    connection_string="postgresql://user:pass@localhost:5432/deepagents"
+)
+
+agent = create_deep_agent(
+    model="gpt-4o",
+    backend=lambda rt: StoreBackend(rt),
+    store=store
+)
+
+# 优势：
+# - 真正的持久化（数据库级别）
+# - 跨实例共享（多个 Agent 实例访问同一数据）
+# - 支持大规模数据
+# - 生产环境推荐</code></pre>
+                    </div>
+                </section>
+
+                <!-- CompositeBackend -->
+                <section class="content-section">
+                    <h2 class="section-title">🔀 CompositeBackend - 路由混合</h2>
+                    <p>
+                        <strong>CompositeBackend</strong> 是<strong>最灵活的方案</strong>，
+                        根据<strong>路径前缀</strong>将请求路由到不同的后端。
+                    </p>
+
+                    <div class="mermaid-wrapper">
+                        <div class="mermaid">
+graph LR
+    Agent["Agent 文件操作"] --> Composite["CompositeBackend<br/>路由器"]
+
+    Composite -->|"/tmp/"| State["StateBackend<br/>临时数据"]
+    Composite -->|"/knowledge/"| Store["StoreBackend<br/>知识库"]
+    Composite -->|"/workspace/"| FS["FilesystemBackend<br/>工作区"]
+    Composite -->|"其他"| Default["StateBackend<br/>默认"]
+
+    State --> Result1["内存"]
+    Store --> Result2["数据库"]
+    FS --> Result3["磁盘"]
+    Default --> Result4["内存"]
+
+    style Composite fill:#f59e0b,color:#fff
+    style State fill:#3b82f6,color:#fff
+    style Store fill:#8b5cf6,color:#fff
+    style FS fill:#10b981,color:#fff
+                        </div>
+                    </div>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级 - 推荐</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+CompositeBackend - 混合路由策略
+"""
+from deepagents import create_deep_agent
+from deepagents.backends import (
+    CompositeBackend,
+    StateBackend,
+    StoreBackend,
+    FilesystemBackend
+)
+from langgraph.store.memory import InMemoryStore
+
+# 创建 Store
+store = InMemoryStore()
+
+# 定义路由规则
+composite_backend = lambda rt: CompositeBackend(
+    default=StateBackend(rt),  # 默认使用内存
+    routes={
+        "/tmp/": StateBackend(rt),              # 临时数据 → 内存
+        "/knowledge/": StoreBackend(rt),        # 知识库 → 持久化
+        "/workspace/": FilesystemBackend(       # 工作区 → 磁盘
+            root_dir="/Users/myname/workspace",
+            virtual_mode=True
+        ),
+    }
+)
+
+# 创建 Agent
+agent = create_deep_agent(
+    model="gpt-4o",
+    backend=composite_backend,
+    store=store
+)
+
+# 使用示例：
+
+# 1. 临时计算结果 → 内存
+agent.invoke({
+    "messages": [{
+        "role": "user",
+        "content": "保存搜索结果到 /tmp/search.txt"
+    }]
+})  # 使用 StateBackend（内存）
+
+# 2. 知识库数据 → 持久化
+agent.invoke({
+    "messages": [{
+        "role": "user",
+        "content": "保存 FAQ 到 /knowledge/faq.json"
+    }]
+})  # 使用 StoreBackend（数据库）
+
+# 3. 工作区文件 → 磁盘
+agent.invoke({
+    "messages": [{
+        "role": "user",
+        "content": "创建项目文件 /workspace/main.py"
+    }]
+})  # 使用 FilesystemBackend（磁盘）
+
+# 4. 其他路径 → 默认内存
+agent.invoke({
+    "messages": [{
+        "role": "user",
+        "content": "保存临时数据到 /data/temp.txt"
+    }]
+})  # 使用默认 StateBackend（内存）</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">路由规则</h3>
+                    <div class="info-box tip">
+                        <div class="info-box-title">✨ 路由匹配规则</div>
+                        <ul>
+                            <li><strong>最长前缀匹配</strong>：<code>/memories/projects/</code> 优先于 <code>/memories/</code></li>
+                            <li><strong>精确匹配</strong>：路径必须以 <code>/</code> 结尾</li>
+                            <li><strong>默认后端</strong>：未匹配的路径使用 <code>default</code></li>
+                        </ul>
+                    </div>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+复杂路由规则示例
+"""
+composite = lambda rt: CompositeBackend(
+    default=StateBackend(rt),
+    routes={
+        "/memories/": FilesystemBackend(
+            root_dir="/deepagents/myagent",
+            virtual_mode=True
+        ),
+        "/memories/projects/": StoreBackend(rt),  # 更具体的前缀
+    }
+)
+
+# 路由结果：
+# - /memories/projects/code.py → StoreBackend（更长前缀优先）
+# - /memories/notes.txt → FilesystemBackend
+# - /tmp/data.txt → StateBackend（默认）</code></pre>
+                    </div>
+                </section>
+
+                <!-- 自定义后端 -->
+                <section class="content-section">
+                    <h2 class="section-title">🔨 自定义后端实现</h2>
+                    <p>
+                        可以通过实现<strong>BackendProtocol 接口</strong>创建自定义后端，
+                        支持 S3、MongoDB、Redis 等任意存储系统。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级 - 完整示例</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+自定义后端 - S3Backend 示例
+"""
+from typing import Protocol
+from deepagents.backends import (
+    BackendProtocol,
+    LsResult,
+    ReadResult,
+    WriteResult,
+    EditResult,
+    GrepResult,
+    GlobResult
+)
+import boto3
+
+class S3Backend(BackendProtocol):
+    """S3 存储后端"""
+
+    def __init__(self, bucket_name: str, prefix: str = ""):
+        self.s3 = boto3.client("s3")
+        self.bucket = bucket_name
+        self.prefix = prefix
+
+    def ls_info(self, path: str) -> LsResult:
+        """列出 S3 对象"""
+        try:
+            response = self.s3.list_objects_v2(
+                Bucket=self.bucket,
+                Prefix=self._normalize_path(path),
+                Delimiter="/"
+            )
+
+            files = []
+            for obj in response.get("Contents", []):
+                files.append({
+                    "name": obj["Key"].split("/")[-1],
+                    "size": obj["Size"],
+                    "modified": obj["LastModified"].isoformat()
+                })
+
+            return LsResult(files=files, files_update=None)
+        except Exception as e:
+            return LsResult(error=f"S3 列表失败: {str(e)}")
+
+    def read(self, file_path: str, offset: int = 0,
+             limit: int | None = None) -> ReadResult:
+        """从 S3 读取文件"""
+        try:
+            key = self._normalize_path(file_path)
+            response = self.s3.get_object(Bucket=self.bucket, Key=key)
+            content = response["Body"].read().decode("utf-8")
+
+            # 应用 offset 和 limit
+            lines = content.splitlines()
+            if offset or limit:
+                lines = lines[offset:offset + limit if limit else None]
+
+            return ReadResult(
+                content="\n".join(lines),
+                files_update=None
+            )
+        except Exception as e:
+            return ReadResult(error=f"S3 读取失败: {str(e)}")
+
+    def write(self, file_path: str, content: str) -> WriteResult:
+        """写入 S3 对象"""
+        try:
+            key = self._normalize_path(file_path)
+            self.s3.put_object(
+                Bucket=self.bucket,
+                Key=key,
+                Body=content.encode("utf-8")
+            )
+            return WriteResult(
+                success=f"已写入 S3: s3://{self.bucket}/{key}",
+                files_update=None
+            )
+        except Exception as e:
+            return WriteResult(error=f"S3 写入失败: {str(e)}")
+
+    def edit(self, file_path: str, old_string: str,
+             new_string: str, replace_all: bool = False) -> EditResult:
+        """编辑 S3 对象"""
+        # 1. 读取内容
+        read_result = self.read(file_path)
+        if read_result.error:
+            return EditResult(error=read_result.error)
+
+        # 2. 执行替换
+        content = read_result.content
+        if replace_all:
+            new_content = content.replace(old_string, new_string)
+        else:
+            new_content = content.replace(old_string, new_string, 1)
+
+        # 3. 写回
+        write_result = self.write(file_path, new_content)
+        if write_result.error:
+            return EditResult(error=write_result.error)
+
+        return EditResult(
+            success=f"已编辑 {file_path}",
+            files_update=None
+        )
+
+    def grep_raw(self, pattern: str, path: str = "/",
+                 glob: str | None = None) -> GrepResult:
+        """S3 内容搜索（简化实现）"""
+        return GrepResult(error="S3Backend 暂不支持 grep")
+
+    def glob_info(self, pattern: str, path: str = "/") -> GlobResult:
+        """S3 模式匹配（简化实现）"""
+        return GlobResult(error="S3Backend 暂不支持 glob")
+
+    def _normalize_path(self, path: str) -> str:
+        """规范化路径"""
+        path = path.lstrip("/")
+        return f"{self.prefix}/{path}" if self.prefix else path
+
+
+# 使用自定义后端
+agent = create_deep_agent(
+    model="gpt-4o",
+    backend=S3Backend(
+        bucket_name="my-agent-storage",
+        prefix="agents/workspace"
+    )
+)
+
+# Agent 的文件操作会使用 S3
+result = agent.invoke({
+    "messages": [{
+        "role": "user",
+        "content": "保存报告到 /reports/summary.md"
+    }]
+})
+
+# 实际操作：
+# - 文件写入 S3: s3://my-agent-storage/agents/workspace/reports/summary.md</code></pre>
+                    </div>
+                </section>
+
+                <!-- 策略钩子 -->
+                <section class="content-section">
+                    <h2 class="section-title">🛡️ 策略钩子（安全控制）</h2>
+                    <p>
+                        通过<strong>子类化或包装器模式</strong>，可以添加安全策略和权限控制。
+                    </p>
+
+                    <h3 class="subsection-title">方式 1：子类化</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+策略钩子 - 子类化方式
+"""
+from deepagents.backends import FilesystemBackend, WriteResult
+
+class GuardedBackend(FilesystemBackend):
+    """带安全策略的文件系统后端"""
+
+    def __init__(self, *, deny_prefixes: list[str], **kwargs):
+        super().__init__(**kwargs)
+        # 规范化拒绝前缀
+        self.deny_prefixes = [
+            p if p.endswith("/") else p + "/"
+            for p in deny_prefixes
+        ]
+
+    def write(self, file_path: str, content: str) -> WriteResult:
+        """写入前检查权限"""
+        # 检查是否在拒绝列表中
+        if any(file_path.startswith(p) for p in self.deny_prefixes):
+            return WriteResult(
+                error=f"写入被拒绝：{file_path} (受保护路径)"
+            )
+
+        # 允许写入
+        return super().write(file_path, content)
+
+    def edit(self, file_path: str, old_string: str,
+             new_string: str, replace_all: bool = False):
+        """编辑前检查权限"""
+        if any(file_path.startswith(p) for p in self.deny_prefixes):
+            return EditResult(
+                error=f"编辑被拒绝：{file_path} (受保护路径)"
+            )
+        return super().edit(file_path, old_string, new_string, replace_all)
+
+
+# 使用受保护的后端
+agent = create_deep_agent(
+    model="gpt-4o",
+    backend=GuardedBackend(
+        root_dir="/workspace",
+        virtual_mode=True,
+        deny_prefixes=[
+            "/config/",      # 配置文件禁止写入
+            "/production/",  # 生产数据禁止修改
+        ]
+    )
+)
+
+# Agent 尝试写入受保护路径
+result = agent.invoke({
+    "messages": [{
+        "role": "user",
+        "content": "修改配置文件 /config/settings.json"
+    }]
+})
+
+# 结果：写入被拒绝（安全策略生效）</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">方式 2：包装器模式</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+策略钩子 - 包装器模式
+"""
+from deepagents.backends import BackendProtocol, WriteResult
+
+class PolicyWrapper(BackendProtocol):
+    """策略包装器"""
+
+    def __init__(self, inner: BackendProtocol,
+                 deny_prefixes: list[str] | None = None,
+                 max_file_size: int | None = None):
+        self.inner = inner
+        self.deny_prefixes = [
+            p if p.endswith("/") else p + "/"
+            for p in (deny_prefixes or [])
+        ]
+        self.max_file_size = max_file_size
+
+    def write(self, file_path: str, content: str) -> WriteResult:
+        """写入策略检查"""
+        # 1. 路径检查
+        if any(file_path.startswith(p) for p in self.deny_prefixes):
+            return WriteResult(error=f"拒绝访问: {file_path}")
+
+        # 2. 大小检查
+        if self.max_file_size and len(content) > self.max_file_size:
+            return WriteResult(
+                error=f"文件过大: {len(content)} 字节 "
+                      f"(最大 {self.max_file_size})"
+            )
+
+        # 3. 执行实际写入
+        return self.inner.write(file_path, content)
+
+    # 委托其他方法到内部后端
+    def ls_info(self, path: str):
+        return self.inner.ls_info(path)
+
+    def read(self, file_path: str, offset: int = 0, limit: int | None = None):
+        return self.inner.read(file_path, offset, limit)
+
+    # ... 其他方法类似
+
+
+# 使用包装器
+base_backend = FilesystemBackend(root_dir="/workspace", virtual_mode=True)
+
+protected_backend = PolicyWrapper(
+    inner=base_backend,
+    deny_prefixes=["/config/", "/secrets/"],
+    max_file_size=10 * 1024 * 1024  # 10MB 限制
+)
+
+agent = create_deep_agent(
+    model="gpt-4o",
+    backend=protected_backend
+)
+
+# 优势：
+# - 保持后端解耦
+# - 便于测试和组合
+# - 可以嵌套多个包装器（链式策略）</code></pre>
+                    </div>
+                </section>
+
+                <!-- 最佳实践 -->
+                <section class="content-section">
+                    <h2 class="section-title">✨ 最佳实践</h2>
+
+                    <h3 class="subsection-title">1. 后端选择策略</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>场景</th>
+                                <th>推荐后端</th>
+                                <th>原因</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>快速原型开发</td>
+                                <td>StateBackend（默认）</td>
+                                <td>无需配置，开箱即用</td>
+                            </tr>
+                            <tr>
+                                <td>本地开发调试</td>
+                                <td>FilesystemBackend</td>
+                                <td>可以直接查看文件内容</td>
+                            </tr>
+                            <tr>
+                                <td>生产环境</td>
+                                <td>CompositeBackend</td>
+                                <td>灵活路由，混合存储</td>
+                            </tr>
+                            <tr>
+                                <td>长期记忆/知识库</td>
+                                <td>StoreBackend + PostgreSQL</td>
+                                <td>跨实例共享，持久化</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 class="subsection-title">2. CompositeBackend 配置模式</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># ✅ 推荐配置
+composite = lambda rt: CompositeBackend(
+    default=StateBackend(rt),        # 默认临时存储
+    routes={
+        "/tmp/": StateBackend(rt),           # 显式临时
+        "/knowledge/": StoreBackend(rt),     # 知识库持久化
+        "/workspace/": FilesystemBackend(    # 工作区磁盘
+            root_dir="/data/workspace",
+            virtual_mode=True
+        ),
+    }
+)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">3. 安全配置清单</h3>
+                    <ul>
+                        <li>✅ <strong>FilesystemBackend</strong> 始终启用 <code>virtual_mode=True</code></li>
+                        <li>✅ 使用<strong>策略包装器</strong>限制访问路径</li>
+                        <li>✅ 设置<strong>文件大小限制</strong>防止滥用</li>
+                        <li>✅ 定期<strong>清理临时文件</strong></li>
+                        <li>✅ 生产环境使用<strong>只读权限</strong>挂载敏感数据</li>
+                    </ul>
+
+                    <h3 class="subsection-title">4. 错误处理原则</h3>
+                    <div class="info-box tip">
+                        <div class="info-box-title">💡 错误处理最佳实践</div>
+                        <ul>
+                            <li><strong>返回错误字符串</strong>，不抛出异常</li>
+                            <li><strong>错误消息用户友好</strong>，Agent 可以理解</li>
+                            <li><strong>包含足够的上下文</strong>，帮助 Agent 重试或调整策略</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- 常见问题 -->
+                <section class="content-section">
+                    <h2 class="section-title">❓ 常见问题</h2>
+
+                    <h3 class="subsection-subtitle">Q1: 如何在生产环境中选择后端？</h3>
+                    <p>
+                        <strong>推荐使用 CompositeBackend</strong>：
+                    </p>
+                    <ul>
+                        <li>临时数据 → StateBackend（内存，快速）</li>
+                        <li>知识库 → StoreBackend + PostgreSQL（持久化）</li>
+                        <li>工作区文件 → FilesystemBackend（磁盘，安全）</li>
+                    </ul>
+
+                    <h3 class="subsection-subtitle">Q2: StateBackend 的数据会丢失吗？</h3>
+                    <p>
+                        <strong>对话结束后会丢失</strong>。但如果使用 LangGraph checkpointer，
+                        StateBackend 的数据会随对话状态一起持久化。
+                    </p>
+
+                    <h3 class="subsection-subtitle">Q3: 如何实现跨 Agent 共享数据？</h3>
+                    <p>
+                        使用 <strong>StoreBackend</strong>：
+                    </p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 创建共享 Store
+shared_store = PostgresStore(connection_string="...")
+
+# Agent 1
+agent1 = create_deep_agent(
+    backend=lambda rt: StoreBackend(rt),
+    store=shared_store
+)
+
+# Agent 2（共享同一个 Store）
+agent2 = create_deep_agent(
+    backend=lambda rt: StoreBackend(rt),
+    store=shared_store
+)
+
+# Agent 1 写入的数据，Agent 2 可以读取</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">Q4: FilesystemBackend 的 virtual_mode 有性能影响吗？</h3>
+                    <p>
+                        <strong>几乎无影响</strong>。virtual_mode 只是路径规范化和验证，
+                        相比磁盘 I/O，开销可以忽略。<strong>强烈建议始终启用</strong>。
+                    </p>
+
+                    <h3 class="subsection-subtitle">Q5: 可以动态切换后端吗？</h3>
+                    <p>
+                        <strong>不能</strong>。后端在 Agent 创建时固定。
+                        如需切换，应创建新的 Agent 实例。
+                    </p>
+                </section>
+
+                <!-- 参考资源 -->
+                <section class="content-section">
+                    <h2 class="section-title">📖 参考资源</h2>
+                    <ul>
+                        <li>
+                            <a href="https://docs.langchain.com/oss/python/deepagents/backends" target="_blank">
+                                DeepAgents Backends 官方文档
+                            </a>
+                        </li>
+                        <li>
+                            <a href="24-deepagents-harness.html">
+                                Harness 系统 - 文件工具详解
+                            </a>
+                        </li>
+                        <li>
+                            <a href="22-deepagents-quickstart.html">
+                                DeepAgents 快速开始
+                            </a>
+                        </li>
+                        <li>
+                            <a href="11-checkpointer.html">
+                                持久化系统 - LangGraph Store
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- 页面导航 -->
+                <nav class="page-navigation">
+                    <a href="24-deepagents-harness.html" class="nav-button prev">
+                        ← 上一页：Harness 系统
+                    </a>
+                    <a href="26-deepagents-subagents.html" class="nav-button next">
+                        下一页：子代理 →
+                    </a>
+                </nav>
+            </div>
+        </main>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" aria-label="返回顶部">↑</button>
+
+    <!-- JavaScript -->
+    <script src="assets/js/mermaid-init.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</body>
+</html>

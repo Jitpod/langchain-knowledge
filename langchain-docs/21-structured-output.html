@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LangChain 结构化输出 - Pydantic 模型和 JSON Schema 验证">
+    <title>结构化输出 | LangChain 1.0 Python 知识文档</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <button class="mobile-menu-button" aria-label="打开菜单">☰</button>
+
+    <div class="container">
+        <!-- 侧边栏导航 -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="sidebar-title">🦜 LangChain 1.0</h1>
+                <p class="sidebar-subtitle">Python 完整学习指南</p>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-section">
+                    <div class="nav-section-title">开始</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">
+                                <span class="nav-icon">🏠</span>
+                                主页
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">基础篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="01-introduction.html" class="nav-link">
+                                <span class="nav-icon">📖</span>
+                                LangChain 简介
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="02-architecture.html" class="nav-link">
+                                <span class="nav-icon">🏗️</span>
+                                核心架构
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="03-models.html" class="nav-link">
+                                <span class="nav-icon">🤖</span>
+                                模型接口
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="04-messages.html" class="nav-link">
+                                <span class="nav-icon">💬</span>
+                                消息系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="05-tools.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                工具系统
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">进阶篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="06-agents.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                Agent 基础
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="07-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="08-rag.html" class="nav-link">
+                                <span class="nav-icon">🔍</span>
+                                RAG 详解
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="09-lcel.html" class="nav-link">
+                                <span class="nav-icon">🔗</span>
+                                LCEL 表达式
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">高级应用</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="10-runtime.html" class="nav-link">
+                                <span class="nav-icon">🔌</span>
+                                Runtime 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="11-checkpointer.html" class="nav-link">
+                                <span class="nav-icon">💾</span>
+                                持久化系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="12-streaming.html" class="nav-link">
+                                <span class="nav-icon">🌊</span>
+                                流式输出
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="13-human-in-loop.html" class="nav-link">
+                                <span class="nav-icon">👤</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="14-long-term-memory.html" class="nav-link">
+                                <span class="nav-icon">🗄️</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="15-langgraph.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                LangGraph
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">实战篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="16-customer-service.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                客服机器人
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="17-best-practices.html" class="nav-link">
+                                <span class="nav-icon">✨</span>
+                                最佳实践
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">参考篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="18-api-reference.html" class="nav-link">
+                                <span class="nav-icon">📚</span>
+                                API 速查表
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="19-troubleshooting.html" class="nav-link">
+                                <span class="nav-icon">🐛</span>
+                                故障排除
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="20-migration.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                迁移指南
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">扩展篇</div>
+                    <ul>
+                        <li class="nav-item active">
+                            <a href="21-structured-output.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                结构化输出
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">DeepAgents 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="22-deepagents-quickstart.html" class="nav-link">
+                                <span class="nav-icon">🚀</span>
+                                快速开始
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="23-deepagents-customization.html" class="nav-link">
+                                <span class="nav-icon">🎨</span>
+                                定制化
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="24-deepagents-harness.html" class="nav-link">
+                                <span class="nav-icon">🎛️</span>
+                                Harness 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="25-deepagents-backends.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                后端配置
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="26-deepagents-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="27-deepagents-hitl.html" class="nav-link">
+                                <span class="nav-icon">🤝</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="28-deepagents-memory.html" class="nav-link">
+                                <span class="nav-icon">🧠</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="29-deepagents-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">Multi-Agent 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="30-multi-agent-index.html" class="nav-link">
+                                <span class="nav-icon">🌐</span>
+                                概述
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="31-multi-agent-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="32-multi-agent-handoffs.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                交接机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="33-multi-agent-skills.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                技能系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="34-multi-agent-router.html" class="nav-link">
+                                <span class="nav-icon">🧭</span>
+                                路由机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="35-multi-agent-workflow.html" class="nav-link">
+                                <span class="nav-icon">🔀</span>
+                                自定义工作流
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- 主内容区域 -->
+        <main class="main-content">
+            <div class="content-wrapper">
+                <!-- 面包屑导航 -->
+                <nav class="breadcrumb">
+                    <span class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link">主页</a>
+                    </span>
+                    <span class="breadcrumb-item">
+                        扩展篇
+                    </span>
+                    <span class="breadcrumb-item">
+                        结构化输出
+                    </span>
+                </nav>
+
+                <!-- 页面标题 -->
+                <header class="page-header">
+                    <h1 class="page-title">📊 LangChain 结构化输出</h1>
+                    <p class="page-subtitle">
+                        使用 Pydantic 模型和 JSON Schema 从 LLM 获取可预测、类型安全的结构化数据，
+                        告别文本解析的不确定性。
+                    </p>
+                </header>
+
+                <!-- 什么是结构化输出 -->
+                <section class="content-section">
+                    <h2 class="section-title">📚 什么是结构化输出？</h2>
+                    <p>
+                        <strong>结构化输出</strong>使 Agent 能够返回<strong>可预测的、机器可读的数据格式</strong>，
+                        而不是需要解析的自然语言文本。你可以获得 JSON 对象、Pydantic 模型或数据类，
+                        应用程序可以直接使用。
+                    </p>
+
+                    <div class="info-box note">
+                        <div class="info-box-title">💡 核心优势</div>
+                        <table style="margin-top: 0.5rem;">
+                            <thead>
+                                <tr>
+                                    <th>优势</th>
+                                    <th>说明</th>
+                                    <th>示例场景</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>类型安全</strong></td>
+                                    <td>编译时类型检查，IDE 自动补全</td>
+                                    <td>数据库插入、API 调用</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>自动验证</strong></td>
+                                    <td>Pydantic 验证字段约束</td>
+                                    <td>年龄 18-120、邮箱格式</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>消除歧义</strong></td>
+                                    <td>无需复杂的文本解析逻辑</td>
+                                    <td>提取发票数据</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>跨提供商</strong></td>
+                                    <td>OpenAI、Anthropic、Google 统一接口</td>
+                                    <td>多模型兼容</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>错误处理</strong></td>
+                                    <td>自动重试验证失败</td>
+                                    <td>格式错误自动修正</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+结构化输出基础示例
+"""
+from pydantic import BaseModel
+from langchain.agents import create_agent
+
+# 定义输出结构
+class ContactInfo(BaseModel):
+    """联系人信息"""
+    name: str
+    email: str
+    phone: str
+
+# 创建 Agent（使用 response_format 指定输出格式）
+agent = create_agent(
+    model="gpt-4o",
+    response_format=ContactInfo  # 自动选择最佳策略
+)
+
+# 调用 Agent
+result = agent.invoke({
+    "messages": [{
+        "role": "user",
+        "content": "提取联系人信息：张三，邮箱 zhangsan@example.com，电话 13812345678"
+    }]
+})
+
+# 获取结构化数据
+contact = result["structured_response"]
+print(contact.name)   # 张三
+print(contact.email)  # zhangsan@example.com
+print(contact.phone)  # 13812345678</code></pre>
+                    </div>
+                </section>
+
+                <!-- 三种响应格式策略 -->
+                <section class="content-section">
+                    <h2 class="section-title">🎯 三种响应格式策略</h2>
+                    <p>
+                        LangChain 提供三种策略来实现结构化输出，自动适配不同的模型能力：
+                    </p>
+
+                    <div class="mermaid-wrapper">
+                        <div class="mermaid">
+graph TB
+    User["用户请求"] --> Agent["create_agent()"]
+    Agent --> Strategy{"response_format<br/>策略选择"}
+
+    Strategy -->|原生支持| Provider["ProviderStrategy<br/>使用模型原生 API"]
+    Strategy -->|工具调用| Tool["ToolStrategy<br/>基于工具调用"]
+    Strategy -->|自动| Auto["Auto-Selection<br/>自动选择最佳策略"]
+
+    Provider --> OpenAI["OpenAI<br/>Anthropic<br/>Grok"]
+    Tool --> Universal["通用方案<br/>适用所有模型"]
+    Auto --> Smart["智能选择<br/>推荐方式"]
+
+    OpenAI --> Output["结构化输出<br/>Pydantic 模型"]
+    Universal --> Output
+    Smart --> Output
+
+    style Provider fill:#10b981,color:#fff
+    style Tool fill:#f59e0b,color:#fff
+    style Auto fill:#3b82f6,color:#fff
+    style Output fill:#8b5cf6,color:#fff
+                        </div>
+                    </div>
+
+                    <h3 class="subsection-title">1. ProviderStrategy（原生策略）</h3>
+                    <p>
+                        使用模型提供商的<strong>原生 API</strong>（OpenAI、Anthropic、Grok），
+                        速度更快、更可靠。
+                    </p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+ProviderStrategy - 使用原生 API
+"""
+from langchain.agents.structured_output import ProviderStrategy
+from pydantic import BaseModel
+
+class ContactInfo(BaseModel):
+    name: str
+    email: str
+
+# 显式使用 ProviderStrategy
+response_format = ProviderStrategy(schema=ContactInfo)
+
+agent = create_agent(
+    model="gpt-4o",  # 支持原生结构化输出
+    response_format=response_format
+)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">2. ToolStrategy（工具策略）</h3>
+                    <p>
+                        利用<strong>工具调用</strong>机制实现结构化输出，
+                        适用于没有原生支持的模型。
+                    </p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+ToolStrategy - 基于工具调用
+"""
+from langchain.agents.structured_output import ToolStrategy
+
+# 使用 ToolStrategy
+response_format = ToolStrategy(schema=ContactInfo)
+
+agent = create_agent(
+    model="any-model",  # 任何支持工具调用的模型
+    response_format=response_format
+)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">3. Auto-Selection（自动选择，推荐）</h3>
+                    <p>
+                        直接传入 Schema，LangChain <strong>自动选择</strong>最佳策略。
+                    </p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础 - 推荐</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+Auto-Selection - 推荐方式
+"""
+# ✅ 最简单的方式：直接传入 Pydantic 模型
+agent = create_agent(
+    model="gpt-4o",
+    response_format=ContactInfo  # 自动选择最佳策略
+)
+
+# LangChain 自动判断：
+# - GPT-4o 支持原生 → 使用 ProviderStrategy
+# - 其他模型 → 使用 ToolStrategy</code></pre>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>策略</th>
+                                <th>适用场景</th>
+                                <th>性能</th>
+                                <th>兼容性</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>ProviderStrategy</code></td>
+                                <td>OpenAI, Anthropic, Grok</td>
+                                <td>⚡ 快速</td>
+                                <td>🟡 有限</td>
+                            </tr>
+                            <tr>
+                                <td><code>ToolStrategy</code></td>
+                                <td>所有支持工具调用的模型</td>
+                                <td>🟡 中等</td>
+                                <td>✅ 广泛</td>
+                            </tr>
+                            <tr>
+                                <td>Auto-Selection</td>
+                                <td>推荐方式</td>
+                                <td>⚡ 自适应</td>
+                                <td>✅ 最佳</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- Schema 定义方法 -->
+                <section class="content-section">
+                    <h2 class="section-title">📝 Schema 定义方法</h2>
+                    <p>
+                        LangChain 支持三种 Schema 定义方式，<strong>推荐使用 Pydantic</strong>：
+                    </p>
+
+                    <h3 class="subsection-title">1. Pydantic Models（推荐）</h3>
+                    <p>
+                        Pydantic 提供强大的验证、文档和 IDE 支持。
+                    </p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+Pydantic Models - 完整示例
+"""
+from pydantic import BaseModel, Field
+from typing import Literal
+
+class ProductReview(BaseModel):
+    """产品评论分析"""
+
+    # 带约束的字段
+    rating: int | None = Field(
+        description="评分 1-5 星",
+        ge=1,  # 大于等于 1
+        le=5   # 小于等于 5
+    )
+
+    # 使用 Literal 限制选项
+    sentiment: Literal["positive", "negative", "neutral"] = Field(
+        description="情感倾向"
+    )
+
+    # 列表类型
+    key_points: list[str] = Field(
+        description="关键要点列表"
+    )
+
+    # 可选字段
+    would_recommend: bool | None = Field(
+        default=None,
+        description="是否推荐购买"
+    )
+
+# 使用
+agent = create_agent(
+    model="gpt-4o",
+    response_format=ProductReview
+)
+
+result = agent.invoke({
+    "messages": [{
+        "role": "user",
+        "content": "分析评论：这个产品很棒，5星推荐！质量好，价格实惠。"
+    }]
+})
+
+review = result["structured_response"]
+print(f"评分：{review.rating}")
+print(f"情感：{review.sentiment}")
+print(f"要点：{review.key_points}")</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">2. Dataclasses</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+Dataclasses - 简单场景
+"""
+from dataclasses import dataclass
+
+@dataclass
+class EventDetails:
+    event_name: str
+    date: str
+    location: str
+
+agent = create_agent(
+    model="gpt-4o",
+    response_format=EventDetails
+)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">3. TypedDict</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+TypedDict - 字典类型
+"""
+from typing import TypedDict, Literal
+
+class MeetingAction(TypedDict):
+    task: str
+    assignee: str
+    priority: Literal["low", "medium", "high"]
+
+agent = create_agent(
+    model="gpt-4o",
+    response_format=MeetingAction
+)</code></pre>
+                    </div>
+                </section>
+
+                <!-- Union 类型和多输出 -->
+                <section class="content-section">
+                    <h2 class="section-title">🔀 Union 类型 - 多种输出格式</h2>
+                    <p>
+                        使用 <code>Union</code> 类型让 Agent 根据输入<strong>自动选择</strong>合适的输出格式：
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+Union 类型 - 智能路由
+"""
+from typing import Union
+from pydantic import BaseModel
+from langchain.agents.structured_output import ToolStrategy
+
+class SendEmailRequest(BaseModel):
+    """发送邮件请求"""
+    recipient: str
+    subject: str
+    body: str
+
+class ScheduleMeetingRequest(BaseModel):
+    """安排会议请求"""
+    attendees: list[str]
+    title: str
+    duration_minutes: int
+
+# 使用 Union 类型
+response_format = ToolStrategy(
+    schema=Union[SendEmailRequest, ScheduleMeetingRequest]
+)
+
+agent = create_agent(
+    model="gpt-4o",
+    response_format=response_format
+)
+
+# 示例 1：发送邮件
+result1 = agent.invoke({
+    "messages": [{
+        "role": "user",
+        "content": "发邮件给 bob@example.com，主题是'项目更新'"
+    }]
+})
+
+# Agent 自动选择 SendEmailRequest
+email_request = result1["structured_response"]
+print(type(email_request))  # SendEmailRequest
+
+# 示例 2：安排会议
+result2 = agent.invoke({
+    "messages": [{
+        "role": "user",
+        "content": "安排一个 30 分钟的会议，邀请 Alice 和 Bob"
+    }]
+})
+
+# Agent 自动选择 ScheduleMeetingRequest
+meeting_request = result2["structured_response"]
+print(type(meeting_request))  # ScheduleMeetingRequest</code></pre>
+                    </div>
+
+                    <div class="info-box warning">
+                        <div class="info-box-title">⚠️ 多输出自动修正</div>
+                        <p>
+                            当模型错误返回<strong>多个结构化输出</strong>时，Agent 会自动：
+                        </p>
+                        <ol>
+                            <li>检测到 <code>MultipleStructuredOutputsError</code></li>
+                            <li>提供错误反馈给模型</li>
+                            <li>自动重试，要求返回单一输出</li>
+                        </ol>
+                    </div>
+                </section>
+
+                <!-- 错误处理和验证 -->
+                <section class="content-section">
+                    <h2 class="section-title">🛡️ 错误处理和验证</h2>
+                    <p>
+                        LangChain 提供<strong>灵活的错误处理机制</strong>，
+                        确保结构化输出的可靠性：
+                    </p>
+
+                    <h3 class="subsection-title">1. 默认错误处理（推荐）</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+默认错误处理 - 捕获所有验证错误
+"""
+from langchain.agents.structured_output import ToolStrategy
+from pydantic import BaseModel, Field
+
+class ProductRating(BaseModel):
+    rating: int = Field(ge=1, le=5)  # 必须在 1-5 之间
+    comment: str
+
+response_format = ToolStrategy(
+    schema=ProductRating,
+    handle_errors=True  # 默认值，捕获所有错误并自动重试
+)
+
+agent = create_agent(
+    model="gpt-4o",
+    response_format=response_format
+)
+
+# 当模型返回 rating=6 时，自动重试
+result = agent.invoke({
+    "messages": [{"role": "user", "content": "评分这个产品"}]
+})</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">2. 自定义错误消息</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+自定义错误消息
+"""
+response_format = ToolStrategy(
+    schema=ProductRating,
+    handle_errors="评分必须在 1-5 之间，并且必须提供评论。请重新生成。"
+)
+
+# 验证失败时，模型会收到这条自定义消息</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">3. 特定异常处理</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+只处理特定异常
+"""
+response_format = ToolStrategy(
+    schema=ProductRating,
+    handle_errors=(ValueError, TypeError)  # 只重试这些异常
+)
+
+# 其他异常会传播到调用方</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">4. 自定义错误处理函数</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+自定义错误处理函数
+"""
+from langchain.agents.structured_output import (
+    StructuredOutputValidationError,
+    MultipleStructuredOutputsError
+)
+
+def custom_error_handler(error: Exception) -> str:
+    """自定义错误处理逻辑"""
+
+    if isinstance(error, StructuredOutputValidationError):
+        # 字段验证失败
+        return f"格式错误：{error}。请按照正确的格式重新生成。"
+
+    elif isinstance(error, MultipleStructuredOutputsError):
+        # 返回了多个输出
+        return "你返回了多个输出，但只需要一个。请选择最相关的输出。"
+
+    else:
+        # 其他错误
+        return f"发生错误：{str(error)}。请重试。"
+
+response_format = ToolStrategy(
+    schema=Union[SendEmailRequest, ScheduleMeetingRequest],
+    handle_errors=custom_error_handler
+)
+
+agent = create_agent(
+    model="gpt-4o",
+    response_format=response_format
+)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">5. 禁用错误处理（快速失败）</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+禁用错误处理 - 所有异常直接抛出
+"""
+response_format = ToolStrategy(
+    schema=ProductRating,
+    handle_errors=False  # 不自动重试
+)
+
+# 验证失败时立即抛出异常</code></pre>
+                    </div>
+                </section>
+
+                <!-- 实战用例 -->
+                <section class="content-section">
+                    <h2 class="section-title">🚀 实战用例</h2>
+
+                    <h3 class="subsection-title">用例 1：发票数据提取</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级 - 完整示例</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+实战用例 1：发票数据提取
+"""
+from pydantic import BaseModel, Field
+from langchain.agents import create_agent
+
+class InvoiceData(BaseModel):
+    """发票数据结构"""
+    invoice_id: str = Field(description="发票编号")
+    amount: float = Field(description="总金额", gt=0)
+    vendor: str = Field(description="供应商名称")
+    date: str = Field(description="日期，格式 YYYY-MM-DD")
+    items: list[str] = Field(description="商品列表")
+
+agent = create_agent(
+    model="gpt-4o",
+    response_format=InvoiceData
+)
+
+# 从文本中提取发票信息
+invoice_text = """
+发票编号：INV-2024-001
+日期：2024-01-15
+供应商：ABC 公司
+商品：笔记本电脑 x1、鼠标 x2、键盘 x1
+总金额：5,800 元
+"""
+
+result = agent.invoke({
+    "messages": [{
+        "role": "user",
+        "content": f"提取发票信息：\n{invoice_text}"
+    }]
+})
+
+invoice = result["structured_response"]
+print(f"发票号：{invoice.invoice_id}")
+print(f"金额：{invoice.amount}")
+print(f"供应商：{invoice.vendor}")
+print(f"商品：{invoice.items}")
+
+# 直接插入数据库
+# db.invoices.insert(invoice.model_dump())</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">用例 2：表单自动填充</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+实战用例 2：用户注册表单自动填充
+"""
+from pydantic import BaseModel, Field, EmailStr
+
+class UserProfile(BaseModel):
+    """用户资料"""
+    first_name: str = Field(description="名")
+    last_name: str = Field(description="姓")
+    email: EmailStr = Field(description="有效的邮箱地址")
+    age: int = Field(description="年龄", ge=18, le=120)
+    preferences: list[str] = Field(description="兴趣爱好")
+
+agent = create_agent(
+    model="gpt-4o",
+    response_format=UserProfile
+)
+
+# 从对话中提取用户信息
+result = agent.invoke({
+    "messages": [
+        {"role": "user", "content": "我叫李华"},
+        {"role": "assistant", "content": "你好李华！"},
+        {"role": "user", "content": "我 25 岁，邮箱是 lihua@example.com"},
+        {"role": "user", "content": "我喜欢编程、阅读和旅游"}
+    ]
+})
+
+profile = result["structured_response"]
+# 自动填充表单
+form_data = profile.model_dump()
+print(form_data)
+# {
+#     "first_name": "华",
+#     "last_name": "李",
+#     "email": "lihua@example.com",
+#     "age": 25,
+#     "preferences": ["编程", "阅读", "旅游"]
+# }</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">用例 3：智能 API 路由</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+实战用例 3：基于意图的 API 路由
+"""
+from typing import Union
+from pydantic import BaseModel
+
+class SearchQuery(BaseModel):
+    """搜索请求"""
+    query: str
+    filters: dict = {}
+
+class CreateOrder(BaseModel):
+    """创建订单"""
+    product_id: str
+    quantity: int
+
+class CustomerSupport(BaseModel):
+    """客服咨询"""
+    category: str
+    message: str
+
+# Union 类型自动路由
+agent = create_agent(
+    model="gpt-4o",
+    response_format=Union[SearchQuery, CreateOrder, CustomerSupport]
+)
+
+# 根据用户意图自动选择合适的 API
+def handle_user_request(user_input: str):
+    result = agent.invoke({
+        "messages": [{"role": "user", "content": user_input}]
+    })
+
+    request = result["structured_response"]
+
+    # 根据类型调用不同的 API
+    if isinstance(request, SearchQuery):
+        return search_api(request.query, request.filters)
+    elif isinstance(request, CreateOrder):
+        return order_api(request.product_id, request.quantity)
+    elif isinstance(request, CustomerSupport):
+        return support_api(request.category, request.message)
+
+# 示例
+handle_user_request("搜索蓝色的衬衫")  # → SearchQuery
+handle_user_request("购买 2 件 产品ID-123")  # → CreateOrder
+handle_user_request("我的订单还没到")  # → CustomerSupport</code></pre>
+                    </div>
+                </section>
+
+                <!-- 最佳实践 -->
+                <section class="content-section">
+                    <h2 class="section-title">✨ 最佳实践</h2>
+
+                    <h3 class="subsection-title">1. Schema 设计</h3>
+                    <ul>
+                        <li><strong>使用描述性的字段文档</strong>：通过 <code>Field(description="...")</code> 帮助模型理解字段含义</li>
+                        <li><strong>添加约束</strong>：使用 <code>ge</code>、<code>le</code>、<code>min_length</code> 等约束</li>
+                        <li><strong>使用 Literal 类型</strong>：限制枚举值，如 <code>Literal["low", "medium", "high"]</code></li>
+                        <li><strong>设置可选字段</strong>：使用 <code>| None</code> 和 <code>default=None</code> 提供灵活性</li>
+                    </ul>
+
+                    <h3 class="subsection-title">2. 错误处理</h3>
+                    <ul>
+                        <li><strong>默认 <code>handle_errors=True</code> 适用于大多数场景</strong></li>
+                        <li><strong>自定义错误消息</strong>用于领域特定的错误提示</li>
+                        <li><strong>禁用重试</strong>仅在需要快速失败时使用</li>
+                    </ul>
+
+                    <h3 class="subsection-title">3. 性能优化</h3>
+                    <ul>
+                        <li><strong>优先使用原生策略</strong>：ProviderStrategy 速度更快、更可靠</li>
+                        <li><strong>工具策略</strong>适用于通用场景，但需要重试逻辑</li>
+                        <li><strong>Union 类型</strong>用于复杂分类任务</li>
+                    </ul>
+
+                    <h3 class="subsection-title">4. OpenAI Strict Mode（langchain>=1.2）</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+OpenAI Strict Mode - 更严格的 Schema 约束
+"""
+response_format = ProviderStrategy(
+    schema=ProductReview,
+    strict=True  # 强制严格遵守 Schema
+)
+
+agent = create_agent(
+    model="gpt-4o",
+    response_format=response_format
+)</code></pre>
+                    </div>
+                </section>
+
+                <!-- 常见问题 -->
+                <section class="content-section">
+                    <h2 class="section-title">❓ 常见问题</h2>
+
+                    <h3 class="subsection-subtitle">Q1: 结构化输出支持哪些模型？</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>提供商</th>
+                                <th>原生支持（ProviderStrategy）</th>
+                                <th>工具支持（ToolStrategy）</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>OpenAI</td>
+                                <td>✅ GPT-4, GPT-3.5</td>
+                                <td>✅ 所有模型</td>
+                            </tr>
+                            <tr>
+                                <td>Anthropic</td>
+                                <td>✅ Claude 3+</td>
+                                <td>✅ 所有模型</td>
+                            </tr>
+                            <tr>
+                                <td>Google</td>
+                                <td>❌</td>
+                                <td>✅ Gemini</td>
+                            </tr>
+                            <tr>
+                                <td>Grok</td>
+                                <td>✅ Grok</td>
+                                <td>✅ 所有模型</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 class="subsection-subtitle">Q2: 如何调试结构化输出？</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 1. 查看完整的消息历史
+result = agent.invoke({...})
+for msg in result["messages"]:
+    print(msg)
+
+# 2. 启用 LangSmith 追踪
+import os
+os.environ["LANGCHAIN_TRACING_V2"] = "true"</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">Q3: Union 类型的最佳实践？</h3>
+                    <p>
+                        Union 类型适用于<strong>意图分类</strong>场景，但不要滥用：
+                    </p>
+                    <ul>
+                        <li>✅ 好：2-3 种明确区分的类型（如 Email vs Meeting）</li>
+                        <li>❌ 坏：5+ 种类型（容易混淆，建议拆分）</li>
+                    </ul>
+
+                    <h3 class="subsection-subtitle">Q4: 结构化输出会增加成本吗？</h3>
+                    <p>
+                        <strong>ProviderStrategy</strong>：几乎无额外成本<br/>
+                        <strong>ToolStrategy</strong>：需要额外的工具调用轮次，可能增加 10-20% 成本
+                    </p>
+
+                    <h3 class="subsection-subtitle">Q5: 如何处理嵌套的结构化输出？</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">class Address(BaseModel):
+    street: str
+    city: str
+    country: str
+
+class Person(BaseModel):
+    name: str
+    addresses: list[Address]  # 嵌套模型
+
+agent = create_agent(
+    model="gpt-4o",
+    response_format=Person
+)</code></pre>
+                    </div>
+                </section>
+
+                <!-- 参考资源 -->
+                <section class="content-section">
+                    <h2 class="section-title">📖 参考资源</h2>
+                    <ul>
+                        <li>
+                            <a href="https://docs.langchain.com/oss/python/langchain/structured-output" target="_blank">
+                                LangChain 结构化输出官方文档
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://docs.pydantic.dev/" target="_blank">
+                                Pydantic 官方文档
+                            </a>
+                        </li>
+                        <li>
+                            <a href="06-agents.html">
+                                Agent 基础 - create_agent() 详解
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://platform.openai.com/docs/guides/structured-outputs" target="_blank">
+                                OpenAI Structured Outputs 指南
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- 页面导航 -->
+                <nav class="page-navigation">
+                    <a href="20-migration.html" class="nav-button prev">
+                        ← 上一页：迁移指南
+                    </a>
+                    <a href="index.html" class="nav-button next">
+                        返回主页 →
+                    </a>
+                </nav>
+            </div>
+        </main>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" aria-label="返回顶部">↑</button>
+
+    <!-- JavaScript -->
+    <script src="assets/js/mermaid-init.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</body>
+</html>

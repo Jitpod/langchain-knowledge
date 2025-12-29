@@ -1,0 +1,1677 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LangChain 1.0 最佳实践 - 生产级 AI Agent 开发指南">
+    <title>最佳实践 | LangChain 1.0 Python 知识文档</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <button class="mobile-menu-button" aria-label="打开菜单">☰</button>
+
+    <div class="container">
+        <!-- 侧边栏导航 -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="sidebar-title">🦜 LangChain 1.0</h1>
+                <p class="sidebar-subtitle">Python 完整学习指南</p>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-section">
+                    <div class="nav-section-title">开始</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">
+                                <span class="nav-icon">🏠</span>
+                                主页
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">基础篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="01-introduction.html" class="nav-link">
+                                <span class="nav-icon">📖</span>
+                                LangChain 简介
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="02-architecture.html" class="nav-link">
+                                <span class="nav-icon">🏗️</span>
+                                核心架构
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="03-models.html" class="nav-link">
+                                <span class="nav-icon">🤖</span>
+                                模型接口
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="04-messages.html" class="nav-link">
+                                <span class="nav-icon">💬</span>
+                                消息系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="05-tools.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                工具系统
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">进阶篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="06-agents.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                Agent 基础
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="07-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="08-rag.html" class="nav-link">
+                                <span class="nav-icon">🔍</span>
+                                RAG 详解
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="09-lcel.html" class="nav-link">
+                                <span class="nav-icon">🔗</span>
+                                LCEL 表达式
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">高级应用</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="10-runtime.html" class="nav-link">
+                                <span class="nav-icon">🔌</span>
+                                Runtime 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="11-checkpointer.html" class="nav-link">
+                                <span class="nav-icon">💾</span>
+                                持久化系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="12-streaming.html" class="nav-link">
+                                <span class="nav-icon">🌊</span>
+                                流式输出
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="13-human-in-loop.html" class="nav-link">
+                                <span class="nav-icon">👤</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="14-long-term-memory.html" class="nav-link">
+                                <span class="nav-icon">🗄️</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="15-langgraph.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                LangGraph
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">实战篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="16-customer-service.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                客服机器人
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item active">\n                            <a href="17-best-practices.html" class="nav-link">
+                                <span class="nav-icon">✨</span>
+                                最佳实践
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">参考篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="18-api-reference.html" class="nav-link">
+                                <span class="nav-icon">📚</span>
+                                API 速查表
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="19-troubleshooting.html" class="nav-link">
+                                <span class="nav-icon">🐛</span>
+                                故障排除
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="20-migration.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                迁移指南
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">扩展篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="21-structured-output.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                结构化输出
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">DeepAgents 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="22-deepagents-quickstart.html" class="nav-link">
+                                <span class="nav-icon">🚀</span>
+                                快速开始
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="23-deepagents-customization.html" class="nav-link">
+                                <span class="nav-icon">🎨</span>
+                                定制化
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="24-deepagents-harness.html" class="nav-link">
+                                <span class="nav-icon">🎛️</span>
+                                Harness 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="25-deepagents-backends.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                后端配置
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="26-deepagents-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="27-deepagents-hitl.html" class="nav-link">
+                                <span class="nav-icon">🤝</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="28-deepagents-memory.html" class="nav-link">
+                                <span class="nav-icon">🧠</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="29-deepagents-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">Multi-Agent 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="30-multi-agent-index.html" class="nav-link">
+                                <span class="nav-icon">🌐</span>
+                                概述
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="31-multi-agent-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="32-multi-agent-handoffs.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                交接机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="33-multi-agent-skills.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                技能系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="34-multi-agent-router.html" class="nav-link">
+                                <span class="nav-icon">🧭</span>
+                                路由机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="35-multi-agent-workflow.html" class="nav-link">
+                                <span class="nav-icon">🔀</span>
+                                自定义工作流
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- 主内容区域 -->
+        <main class="main-content">
+            <div class="content-wrapper">
+                <!-- 面包屑导航 -->
+                <nav class="breadcrumb">
+                    <span class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link">主页</a>
+                    </span>
+                    <span class="breadcrumb-item">
+                        实战篇
+                    </span>
+                    <span class="breadcrumb-item">
+                        最佳实践
+                    </span>
+                </nav>
+
+                <!-- 页面标题 -->
+                <header class="page-header">
+                    <h1 class="page-title">✨ LangChain 1.0 最佳实践</h1>
+                    <p class="page-subtitle">
+                        从提示词优化到生产部署，全面掌握构建可靠、安全、高效的
+                        AI Agent 系统的最佳实践和关键技巧。
+                    </p>
+                </header>
+
+                <!-- 简介 -->
+                <section class="content-section">
+                    <h2 class="section-title">📚 为什么需要最佳实践？</h2>
+                    <p>
+                        构建 AI Agent 不仅仅是调用 API，更重要的是<strong>工程化</strong>。
+                        根据 LangChain 官方文档，"可靠的 Agent 来自于优秀的上下文工程，
+                        而非仅仅依赖模型能力"。
+                    </p>
+
+                    <div class="info-box note">
+                        <div class="info-box-title">💡 核心原则</div>
+                        <table style="margin-top: 0.5rem;">
+                            <thead>
+                                <tr>
+                                    <th>原则</th>
+                                    <th>说明</th>
+                                    <th>收益</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>上下文优先</strong></td>
+                                    <td>优化提示词和上下文，而非升级模型</td>
+                                    <td>更高的准确率，更低的成本</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>分层防护</strong></td>
+                                    <td>多层 Guardrails 确保安全性</td>
+                                    <td>防止 PII 泄露和恶意攻击</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>渐进式优化</strong></td>
+                                    <td>从简单开始，逐步增加复杂性</td>
+                                    <td>降低开发风险，便于调试</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>可观测性</strong></td>
+                                    <td>完善的日志、监控和追踪</td>
+                                    <td>快速定位问题，持续改进</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>成本意识</strong></td>
+                                    <td>合理选择模型，优化 Token 使用</td>
+                                    <td>降低运营成本 50%+</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- 上下文工程 -->
+                <section class="content-section">
+                    <h2 class="section-title">🎯 上下文工程（Context Engineering）</h2>
+                    <p>
+                        <strong>上下文工程是 AI 工程师的首要任务</strong>，
+                        指的是"以正确的格式提供正确的信息和工具，使 LLM 能够完成任务"。
+                    </p>
+
+                    <h3 class="subsection-title">核心技术</h3>
+
+                    <h4 class="subsection-subtitle">1. 动态系统提示词</h4>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+动态系统提示词示例
+根据用户状态和偏好调整提示词
+"""
+from langchain.agents import create_agent
+
+def generate_system_prompt(user_context: dict) -> str:
+    """根据用户上下文生成个性化提示词"""
+
+    base_prompt = "你是一个专业的 AI 助手。\n\n"
+
+    # 根据对话长度调整详细程度
+    conversation_length = user_context.get("message_count", 0)
+    if conversation_length < 3:
+        base_prompt += "请提供详细的解释和背景信息。\n"
+    else:
+        base_prompt += "用户已经了解基础知识，请简明扼要地回答。\n"
+
+    # 根据用户角色调整权限
+    user_role = user_context.get("role", "guest")
+    if user_role == "admin":
+        base_prompt += "你可以访问管理功能和敏感数据。\n"
+    elif user_role == "user":
+        base_prompt += "你只能访问用户级别的功能。\n"
+
+    # 根据用户偏好调整风格
+    preferences = user_context.get("preferences", {})
+    language = preferences.get("language", "zh-CN")
+    formality = preferences.get("formality", "professional")
+
+    if formality == "casual":
+        base_prompt += "使用轻松、友好的语气。\n"
+    else:
+        base_prompt += "保持专业、正式的语气。\n"
+
+    # 添加合规要求
+    if user_context.get("requires_compliance"):
+        base_prompt += "\n重要：遵守 GDPR 和数据隐私法规，不得泄露用户个人信息。\n"
+
+    return base_prompt
+
+# 使用示例
+user_context = {
+    "message_count": 5,
+    "role": "user",
+    "preferences": {"language": "zh-CN", "formality": "casual"},
+    "requires_compliance": True
+}
+
+agent = create_agent(
+    model="gpt-4o",
+    tools=[...],
+    system_prompt=generate_system_prompt(user_context)
+)</code></pre>
+                    </div>
+
+                    <h4 class="subsection-subtitle">2. 智能工具选择</h4>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+动态工具选择
+根据用户状态和权限过滤可用工具
+"""
+from langchain.tools import tool
+from typing import Literal
+
+# 定义所有工具
+@tool
+def public_search(query: str) -> str:
+    """公开搜索工具（所有用户可用）"""
+    return f"搜索结果：{query}"
+
+@tool
+def private_database_query(query: str) -> str:
+    """私有数据库查询（仅认证用户）"""
+    return f"数据库结果：{query}"
+
+@tool
+def admin_delete_user(user_id: str) -> str:
+    """删除用户（仅管理员）"""
+    return f"已删除用户：{user_id}"
+
+@tool
+def premium_analysis(data: str) -> str:
+    """高级分析（仅付费用户）"""
+    return f"分析结果：{data}"
+
+# 工具选择逻辑
+def select_tools_for_user(
+    user_role: Literal["guest", "user", "premium", "admin"],
+    is_authenticated: bool
+) -> list:
+    """根据用户角色和认证状态选择工具"""
+
+    # 基础工具（所有人可用）
+    available_tools = [public_search]
+
+    # 认证用户工具
+    if is_authenticated:
+        available_tools.append(private_database_query)
+
+    # 付费用户工具
+    if user_role in ["premium", "admin"]:
+        available_tools.append(premium_analysis)
+
+    # 管理员工具
+    if user_role == "admin":
+        available_tools.append(admin_delete_user)
+
+    return available_tools
+
+# 使用示例
+tools_for_guest = select_tools_for_user("guest", is_authenticated=False)
+print(f"访客可用工具：{[t.name for t in tools_for_guest]}")
+# 输出：['public_search']
+
+tools_for_admin = select_tools_for_user("admin", is_authenticated=True)
+print(f"管理员可用工具：{[t.name for t in tools_for_admin]}")
+# 输出：['public_search', 'private_database_query', 'premium_analysis', 'admin_delete_user']
+
+# 创建 Agent
+agent = create_agent(
+    model="gpt-4o",
+    tools=tools_for_admin,  # 动态选择的工具
+    system_prompt="..."
+)</code></pre>
+                    </div>
+
+                    <h4 class="subsection-subtitle">3. 上下文注入</h4>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+上下文注入示例
+在对话中动态注入相关信息
+"""
+def inject_context_messages(
+    user_messages: list,
+    uploaded_files: list = None,
+    user_preferences: dict = None
+) -> list:
+    """在用户消息中注入上下文信息"""
+
+    enriched_messages = []
+
+    # 添加用户偏好上下文
+    if user_preferences:
+        context_msg = {
+            "role": "system",
+            "content": f"用户偏好：{user_preferences}"
+        }
+        enriched_messages.append(context_msg)
+
+    # 添加文件上下文
+    if uploaded_files:
+        for file in uploaded_files:
+            file_context = {
+                "role": "system",
+                "content": f"用户上传了文件：{file['name']}\n内容摘要：{file['summary']}"
+            }
+            enriched_messages.append(file_context)
+
+    # 添加用户消息
+    enriched_messages.extend(user_messages)
+
+    return enriched_messages
+
+# 使用示例
+user_messages = [
+    {"role": "user", "content": "分析这个文件"}
+]
+
+uploaded_files = [
+    {"name": "sales_data.csv", "summary": "2024年销售数据，包含1000条记录"}
+]
+
+user_preferences = {
+    "analysis_depth": "detailed",
+    "chart_type": "bar"
+}
+
+final_messages = inject_context_messages(
+    user_messages,
+    uploaded_files=uploaded_files,
+    user_preferences=user_preferences
+)
+
+# final_messages 将包含系统消息 + 文件上下文 + 用户消息
+result = agent.invoke({"messages": final_messages})</code></pre>
+                    </div>
+
+                    <div class="info-box tip">
+                        <div class="info-box-title">✅ 上下文工程最佳实践</div>
+                        <ol>
+                            <li><strong>从简单开始</strong>：先用静态提示词和工具，再逐步引入动态性</li>
+                            <li><strong>迭代测试</strong>：每次添加一个上下文特性，测量影响</li>
+                            <li><strong>监控性能</strong>：追踪模型调用次数、Token 使用量、延迟</li>
+                            <li><strong>利用中间件</strong>：使用 SummarizationMiddleware、LLMToolSelectorMiddleware 等</li>
+                            <li><strong>理解持久性</strong>：模型上下文是临时的，状态变化是持久的</li>
+                        </ol>
+                    </div>
+                </section>
+
+                <!-- Guardrails 安全防护 -->
+                <section class="content-section">
+                    <h2 class="section-title">🛡️ Guardrails 安全防护</h2>
+                    <p>
+                        <strong>Guardrails（安全防护栏）</strong>是在 Agent 执行关键点验证和过滤内容的安全机制，
+                        帮助构建安全、合规的 AI 应用。
+                    </p>
+
+                    <h3 class="subsection-title">常见应用场景</h3>
+                    <ul>
+                        <li>防止 PII（个人身份信息）泄露</li>
+                        <li>检测和阻止提示词注入攻击</li>
+                        <li>过滤不当或有害内容</li>
+                        <li>执行业务规则和合规要求</li>
+                        <li>验证输出质量和准确性</li>
+                    </ul>
+
+                    <h3 class="subsection-title">两种实现方式</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>类型</th>
+                                <th>特点</th>
+                                <th>适用场景</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>确定性 Guardrails</strong></td>
+                                <td>基于规则（正则、关键词）<br/>快速、可预测、成本低</td>
+                                <td>PII 检测、格式验证、关键词过滤</td>
+                            </tr>
+                            <tr>
+                                <td><strong>模型化 Guardrails</strong></td>
+                                <td>使用 LLM 或分类器<br/>语义理解、成本较高</td>
+                                <td>内容安全性、情感分析、细微违规检测</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 class="subsection-title">内置 Guardrails</h3>
+
+                    <h4 class="subsection-subtitle">PII 检测和处理</h4>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+PII 检测中间件
+自动检测和处理个人身份信息
+"""
+from langchain.agents.middleware import PIIMiddleware
+from langchain.agents import create_agent
+
+# PII 处理策略
+pii_middleware = PIIMiddleware(
+    # 检测类型
+    pii_types=[
+        "email",           # 电子邮件
+        "credit_card",     # 信用卡号
+        "ip_address",      # IP 地址
+        "phone_number",    # 电话号码
+        "ssn",            # 社会保障号
+    ],
+
+    # 处理策略
+    strategy="redact",  # 选项：redact, mask, hash, block
+
+    # 自定义模式（正则表达式）
+    custom_patterns={
+        "chinese_id": r"\d{17}[\dXx]",  # 中国身份证号
+        "bank_card": r"\d{16,19}",      # 银行卡号
+    }
+)
+
+agent = create_agent(
+    model="gpt-4o",
+    tools=[...],
+    middleware=[pii_middleware],
+    system_prompt="你是客服助手。注意保护用户隐私信息。"
+)
+
+# 测试
+result = agent.invoke({
+    "messages": [{
+        "role": "user",
+        "content": "我的邮箱是 user@example.com，电话是 13812345678"
+    }]
+})
+
+# PII 会被自动处理：
+# "我的邮箱是 [REDACTED_EMAIL]，电话是 [REDACTED_PHONE_NUMBER]"</code></pre>
+                    </div>
+
+                    <h4 class="subsection-subtitle">内容安全检查</h4>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+自定义内容安全 Guardrail
+使用模型检查输出内容安全性
+"""
+from langchain.agents.middleware import CustomMiddleware
+from langchain_openai import ChatOpenAI
+
+class ContentSafetyGuardrail(CustomMiddleware):
+    """内容安全检查中间件"""
+
+    def __init__(self):
+        self.safety_checker = ChatOpenAI(model="gpt-4o-mini")
+
+    def after_agent(self, state, config):
+        """Agent 执行后检查输出安全性"""
+        last_message = state["messages"][-1]
+
+        # 跳过工具调用消息
+        if not hasattr(last_message, "content"):
+            return state
+
+        content = last_message.content
+
+        # 使用模型检查安全性
+        safety_prompt = f"""
+        请评估以下 AI 回答是否安全、合规：
+
+        {content}
+
+        评估标准：
+        1. 不包含有害、暴力、歧视性内容
+        2. 不泄露敏感信息
+        3. 符合道德和法律要求
+
+        请回答："安全" 或 "不安全：[原因]"
+        """
+
+        response = self.safety_checker.invoke(safety_prompt)
+        result = response.content.strip()
+
+        if not result.startswith("安全"):
+            # 不安全，替换为安全消息
+            state["messages"][-1].content = "抱歉，我无法提供该信息。请换一个问题。"
+
+        return state
+
+# 使用
+agent = create_agent(
+    model="gpt-4o",
+    tools=[...],
+    middleware=[ContentSafetyGuardrail()],
+)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">分层防护策略</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+多层 Guardrails 组合
+构建深度防御体系
+"""
+from langchain.agents import create_agent
+from langchain.agents.middleware import (
+    PIIMiddleware,
+    HumanInTheLoopMiddleware,
+    CustomMiddleware
+)
+
+# 第 1 层：输入验证（确定性）
+class InputValidationGuardrail(CustomMiddleware):
+    """验证输入格式和长度"""
+
+    def before_agent(self, state, config):
+        last_message = state["messages"][-1]
+        content = last_message.get("content", "")
+
+        # 检查长度
+        if len(content) > 5000:
+            raise ValueError("输入过长，请控制在 5000 字符以内")
+
+        # 检查禁用词
+        forbidden_words = ["hack", "exploit", "jailbreak"]
+        if any(word in content.lower() for word in forbidden_words):
+            raise ValueError("输入包含不允许的内容")
+
+        return state
+
+# 第 2 层：PII 保护
+pii_guardrail = PIIMiddleware(
+    pii_types=["email", "phone_number", "credit_card"],
+    strategy="redact"
+)
+
+# 第 3 层：敏感操作审核
+hitl_guardrail = HumanInTheLoopMiddleware(
+    interrupt_on={
+        "delete_data": True,
+        "send_email": True,
+        "make_payment": True,
+    }
+)
+
+# 第 4 层：输出安全检查（模型化）
+output_safety_guardrail = ContentSafetyGuardrail()
+
+# 组合所有 Guardrails
+agent = create_agent(
+    model="gpt-4o",
+    tools=[...],
+    middleware=[
+        InputValidationGuardrail(),   # 第 1 层
+        pii_guardrail,                # 第 2 层
+        hitl_guardrail,               # 第 3 层
+        output_safety_guardrail,      # 第 4 层
+    ],
+    checkpointer=checkpointer,  # HITL 需要
+    system_prompt="..."
+)
+
+# 这样构建了完整的安全防护体系</code></pre>
+                    </div>
+                </section>
+
+                <!-- 性能优化 -->
+                <section class="content-section">
+                    <h2 class="section-title">⚡ 性能优化策略</h2>
+
+                    <h3 class="subsection-title">优化清单</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>优化项</th>
+                                <th>方法</th>
+                                <th>预期提升</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>模型选择</strong></td>
+                                <td>简单任务用 GPT-3.5，复杂任务用 GPT-4</td>
+                                <td>成本降低 50%，速度提升 3x</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Token 优化</strong></td>
+                                <td>精简提示词，摘要历史对话</td>
+                                <td>成本降低 30%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>并行调用</strong></td>
+                                <td>使用 RunnableParallel 并发执行</td>
+                                <td>延迟降低 60%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>缓存</strong></td>
+                                <td>缓存 FAQ、Embeddings、工具结果</td>
+                                <td>响应时间减少 70%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>流式输出</strong></td>
+                                <td>启用 stream_mode="messages"</td>
+                                <td>首字延迟减少 80%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>向量索引</strong></td>
+                                <td>使用 HNSW 索引，优化检索</td>
+                                <td>检索速度提升 10x</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 class="subsection-title">智能模型路由</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+动态模型选择
+根据任务复杂度选择合适的模型
+"""
+from langchain_openai import ChatOpenAI
+from langchain.agents.middleware import CustomMiddleware
+
+class SmartModelRouter(CustomMiddleware):
+    """智能模型路由中间件"""
+
+    def __init__(self):
+        self.cheap_model = ChatOpenAI(model="gpt-3.5-turbo")
+        self.expensive_model = ChatOpenAI(model="gpt-4o")
+
+    def before_model(self, state, config):
+        """根据任务选择模型"""
+        last_message = state["messages"][-1]
+        content = last_message.get("content", "")
+
+        # 简单任务标识
+        simple_keywords = ["你好", "谢谢", "再见", "什么时候", "多少钱"]
+        is_simple = any(kw in content for kw in simple_keywords)
+
+        # 复杂任务标识
+        complex_keywords = ["分析", "解释", "设计", "规划", "对比"]
+        is_complex = any(kw in content for kw in complex_keywords)
+
+        # 选择模型
+        if is_simple:
+            config["model"] = self.cheap_model
+            print("🟢 使用 GPT-3.5-turbo（简单任务）")
+        elif is_complex:
+            config["model"] = self.expensive_model
+            print("🔴 使用 GPT-4o（复杂任务）")
+        else:
+            # 默认使用便宜模型
+            config["model"] = self.cheap_model
+            print("🟡 使用 GPT-3.5-turbo（默认）")
+
+        return state
+
+# 使用
+agent = create_agent(
+    model="gpt-4o",  # 默认模型
+    tools=[...],
+    middleware=[SmartModelRouter()],
+)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">Token 优化技巧</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+Token 优化示例
+减少不必要的 Token 消耗
+"""
+from langchain.agents.middleware import SummarizationMiddleware
+
+# 1. 使用摘要中间件
+summarization = SummarizationMiddleware(
+    max_messages=10,  # 保留最近 10 条消息
+    summarize_older=True  # 摘要旧消息
+)
+
+# 2. 精简系统提示词
+# ❌ 冗长的提示词
+bad_prompt = """
+你是一个非常专业且经验丰富的客服助手。
+你需要帮助用户解决各种各样的问题，包括但不限于...
+请始终保持礼貌、耐心、友好的态度...
+（省略 500 字）
+"""
+
+# ✅ 精简的提示词
+good_prompt = """
+你是专业客服助手。
+职责：解答问题、查询订单、处理售后。
+原则：礼貌、准确、及时。
+"""
+
+# 3. 限制对话历史长度
+def trim_conversation_history(messages: list, max_messages: int = 20) -> list:
+    """保留最近的 N 条消息"""
+    if len(messages) <= max_messages:
+        return messages
+
+    # 保留系统消息 + 最近的用户/AI 消息
+    system_messages = [m for m in messages if m["role"] == "system"]
+    recent_messages = messages[-max_messages:]
+
+    return system_messages + recent_messages
+
+# 4. 使用更小的 Embedding 模型
+from langchain_openai import OpenAIEmbeddings
+
+# text-embedding-3-small: 512 维，成本更低
+embeddings = OpenAIEmbeddings(model="text-embedding-3-small")</code></pre>
+                    </div>
+                </section>
+
+                <!-- 成本控制 -->
+                <section class="content-section">
+                    <h2 class="section-title">💰 成本控制建议</h2>
+
+                    <h3 class="subsection-title">成本分析</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>成本项</th>
+                                <th>占比</th>
+                                <th>优化策略</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>模型调用</strong></td>
+                                <td>60-70%</td>
+                                <td>选择合适模型、减少调用次数、缓存结果</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Embeddings</strong></td>
+                                <td>15-20%</td>
+                                <td>使用更小模型、批量处理、缓存向量</td>
+                            </tr>
+                            <tr>
+                                <td><strong>向量数据库</strong></td>
+                                <td>10-15%</td>
+                                <td>选择开源方案（Chroma）、优化索引大小</td>
+                            </tr>
+                            <tr>
+                                <td><strong>其他基础设施</strong></td>
+                                <td>5-10%</td>
+                                <td>使用 Serverless、按需扩缩容</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 class="subsection-title">成本优化实践</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+成本优化完整示例
+"""
+import functools
+from datetime import datetime, timedelta
+
+# 1. 结果缓存
+cache = {}
+
+def cache_result(ttl_seconds: int = 3600):
+    """缓存装饰器"""
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            cache_key = f"{func.__name__}:{args}:{kwargs}"
+
+            # 检查缓存
+            if cache_key in cache:
+                result, timestamp = cache[cache_key]
+                if datetime.now() - timestamp < timedelta(seconds=ttl_seconds):
+                    print(f"💰 使用缓存结果：{func.__name__}")
+                    return result
+
+            # 执行函数
+            result = func(*args, **kwargs)
+
+            # 保存缓存
+            cache[cache_key] = (result, datetime.now())
+            return result
+
+        return wrapper
+    return decorator
+
+# 2. FAQ 缓存
+@cache_result(ttl_seconds=3600)  # 缓存 1 小时
+def search_faq_cached(query: str) -> str:
+    """带缓存的 FAQ 搜索"""
+    return search_faq(query)
+
+# 3. 批量 Embedding
+def batch_embed_documents(texts: list[str], batch_size: int = 100):
+    """批量生成 Embeddings，降低成本"""
+    embeddings_model = OpenAIEmbeddings(model="text-embedding-3-small")
+
+    all_embeddings = []
+    for i in range(0, len(texts), batch_size):
+        batch = texts[i:i + batch_size]
+        batch_embeddings = embeddings_model.embed_documents(batch)
+        all_embeddings.extend(batch_embeddings)
+
+    return all_embeddings
+
+# 4. 限流保护
+import time
+from collections import deque
+
+class RateLimiter:
+    """简单的限流器"""
+
+    def __init__(self, max_requests: int, time_window: int):
+        self.max_requests = max_requests
+        self.time_window = time_window
+        self.requests = deque()
+
+    def allow_request(self) -> bool:
+        """检查是否允许请求"""
+        now = time.time()
+
+        # 清理过期请求
+        while self.requests and self.requests[0] < now - self.time_window:
+            self.requests.popleft()
+
+        # 检查限制
+        if len(self.requests) >= self.max_requests:
+            return False
+
+        # 记录请求
+        self.requests.append(now)
+        return True
+
+# 使用限流器
+rate_limiter = RateLimiter(max_requests=100, time_window=60)  # 每分钟 100 次
+
+def process_request(user_message: str):
+    if not rate_limiter.allow_request():
+        return "请求过于频繁，请稍后再试"
+
+    # 处理请求
+    return agent.invoke({"messages": [{"role": "user", "content": user_message}]})
+
+# 5. 成本监控
+def track_cost(num_input_tokens: int, num_output_tokens: int, model: str):
+    """追踪成本"""
+    # GPT-4o 定价（示例）
+    pricing = {
+        "gpt-4o": {"input": 0.00001, "output": 0.00003},  # 每 token 价格
+        "gpt-3.5-turbo": {"input": 0.000001, "output": 0.000002},
+    }
+
+    price = pricing.get(model, pricing["gpt-4o"])
+    cost = num_input_tokens * price["input"] + num_output_tokens * price["output"]
+
+    print(f"💸 本次调用成本：${cost:.6f}")
+    return cost</code></pre>
+                    </div>
+                </section>
+
+                <!-- 监控和可观测性 -->
+                <section class="content-section">
+                    <h2 class="section-title">📊 监控和可观测性</h2>
+                    <p>
+                        使用 <strong>LangSmith</strong> 进行全面的追踪、监控和调试。
+                    </p>
+
+                    <h3 class="subsection-title">LangSmith 集成</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+LangSmith 追踪配置
+"""
+import os
+
+# 配置 LangSmith
+os.environ["LANGCHAIN_TRACING_V2"] = "true"
+os.environ["LANGCHAIN_API_KEY"] = "your-api-key"
+os.environ["LANGCHAIN_PROJECT"] = "customer-service-bot"  # 项目名称
+
+# 所有 Agent 调用都会自动追踪
+result = agent.invoke({"messages": [...]})
+
+# 查看追踪：https://smith.langchain.com/</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">关键指标监控</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>指标类型</th>
+                                <th>具体指标</th>
+                                <th>目标值</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>性能指标</strong></td>
+                                <td>P50/P95/P99 延迟<br/>首字延迟（TTFT）</td>
+                                <td>P95 < 3s<br/>TTFT < 1s</td>
+                            </tr>
+                            <tr>
+                                <td><strong>质量指标</strong></td>
+                                <td>任务完成率<br/>用户满意度</td>
+                                <td>> 85%<br/>> 4.0/5.0</td>
+                            </tr>
+                            <tr>
+                                <td><strong>成本指标</strong></td>
+                                <td>每次对话成本<br/>Token 使用效率</td>
+                                <td>< $0.10<br/>Token/回答 < 1000</td>
+                            </tr>
+                            <tr>
+                                <td><strong>可靠性指标</strong></td>
+                                <td>错误率<br/>超时率</td>
+                                <td>< 1%<br/>< 2%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 class="subsection-title">自定义日志</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+结构化日志记录
+"""
+import logging
+import json
+from datetime import datetime
+
+# 配置日志
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger("customer-service")
+
+class LoggingMiddleware(CustomMiddleware):
+    """日志记录中间件"""
+
+    def before_agent(self, state, config):
+        """记录请求开始"""
+        user_message = state["messages"][-1].get("content", "")
+
+        log_data = {
+            "event": "agent_request",
+            "timestamp": datetime.now().isoformat(),
+            "user_id": config.get("context", {}).get("user_id"),
+            "message_preview": user_message[:100],
+        }
+
+        logger.info(json.dumps(log_data, ensure_ascii=False))
+        return state
+
+    def after_agent(self, state, config):
+        """记录响应完成"""
+        ai_message = state["messages"][-1]
+
+        log_data = {
+            "event": "agent_response",
+            "timestamp": datetime.now().isoformat(),
+            "user_id": config.get("context", {}).get("user_id"),
+            "has_tool_calls": hasattr(ai_message, "tool_calls") and bool(ai_message.tool_calls),
+            "response_length": len(ai_message.content) if hasattr(ai_message, "content") else 0,
+        }
+
+        logger.info(json.dumps(log_data, ensure_ascii=False))
+        return state
+
+# 使用
+agent = create_agent(
+    model="gpt-4o",
+    tools=[...],
+    middleware=[LoggingMiddleware()],
+)</code></pre>
+                    </div>
+                </section>
+
+                <!-- 测试策略 -->
+                <section class="content-section">
+                    <h2 class="section-title">🧪 测试策略</h2>
+
+                    <h3 class="subsection-title">测试金字塔</h3>
+                    <div class="mermaid-wrapper">
+                        <div class="mermaid">
+graph TB
+    A[E2E 测试<br/>10%] --> B[集成测试<br/>30%]
+    B --> C[单元测试<br/>60%]
+
+    A1[完整对话流程<br/>真实场景测试] -.-> A
+    B1[Agent + 工具<br/>模拟 LLM] -.-> B
+    C1[工具函数<br/>边界条件] -.-> C
+
+    style A fill:#ef4444,color:#fff
+    style B fill:#f59e0b,color:#fff
+    style C fill:#10b981,color:#fff
+                        </div>
+                    </div>
+
+                    <h3 class="subsection-title">单元测试示例</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+工具单元测试
+"""
+import pytest
+from unittest.mock import Mock
+
+def test_get_my_orders():
+    """测试订单查询工具"""
+    # 模拟 Runtime
+    mock_runtime = Mock()
+    mock_runtime.context = {"user_id": "user_123"}
+
+    # 调用工具
+    result = get_my_orders.invoke({"runtime": mock_runtime})
+
+    # 断言
+    assert "订单" in result
+    assert "user_123" in result or len(result) > 0
+
+def test_search_faq_with_valid_query():
+    """测试 FAQ 搜索（有效查询）"""
+    result = search_faq.invoke({"query": "配送时间"})
+
+    assert "配送" in result or "工作日" in result
+    assert len(result) > 0
+
+def test_search_faq_with_invalid_query():
+    """测试 FAQ 搜索（无效查询）"""
+    result = search_faq.invoke({"query": "askdjflkajsdf"})
+
+    assert "没有找到" in result or "抱歉" in result
+
+def test_cancel_order_without_permission():
+    """测试取消订单（无权限）"""
+    mock_runtime = Mock()
+    mock_runtime.context = {"user_id": "wrong_user"}
+
+    result = cancel_order.invoke({
+        "order_id": "ORDER-2024001",
+        "reason": "测试",
+        "runtime": mock_runtime
+    })
+
+    assert "未找到" in result or "无法取消" in result</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">集成测试示例</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+Agent 集成测试（模拟 LLM）
+"""
+import pytest
+from unittest.mock import patch
+
+@patch('langchain_openai.ChatOpenAI.invoke')
+def test_agent_faq_flow(mock_llm):
+    """测试 FAQ 查询流程"""
+    # 模拟 LLM 返回工具调用
+    mock_llm.return_value = Mock(
+        content="",
+        tool_calls=[{
+            "name": "search_faq",
+            "args": {"query": "配送时间"},
+            "id": "call_123"
+        }]
+    )
+
+    # 创建 Agent
+    agent = create_agent(
+        model="gpt-4o",
+        tools=[search_faq],
+    )
+
+    # 调用
+    result = agent.invoke({
+        "messages": [{"role": "user", "content": "多久能收到货？"}]
+    })
+
+    # 验证工具被调用
+    assert any("配送" in str(msg) for msg in result["messages"])
+
+def test_agent_with_checkpointer():
+    """测试多轮对话（真实 Agent）"""
+    from langgraph.checkpoint.memory import InMemorySaver
+
+    checkpointer = InMemorySaver()
+    agent = create_agent(
+        model="gpt-3.5-turbo",  # 使用便宜模型测试
+        tools=[get_my_orders],
+        checkpointer=checkpointer,
+    )
+
+    config = {"configurable": {"thread_id": "test_001"}}
+
+    # 第一轮对话
+    result1 = agent.invoke(
+        {"messages": [{"role": "user", "content": "你好"}]},
+        config=config
+    )
+
+    # 第二轮对话（应该记住上下文）
+    result2 = agent.invoke(
+        {"messages": [{"role": "user", "content": "我刚才说了什么？"}]},
+        config=config
+    )
+
+    # 验证对话历史
+    assert len(result2["messages"]) > 2  # 包含历史消息</code></pre>
+                    </div>
+                </section>
+
+                <!-- 生产环境配置 -->
+                <section class="content-section">
+                    <h2 class="section-title">🚀 生产环境配置</h2>
+
+                    <h3 class="subsection-title">完整配置示例</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级 - 生产级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+生产环境 Agent 配置
+包含所有最佳实践
+"""
+import os
+from langchain.agents import create_agent
+from langchain.agents.middleware import (
+    PIIMiddleware,
+    HumanInTheLoopMiddleware,
+    SummarizationMiddleware,
+)
+from langgraph.checkpoint.postgres import PostgresSaver
+from langgraph.store.postgres import PostgresStore
+
+# ==================== 环境配置 ====================
+
+# 数据库连接
+DB_URI = os.getenv("DATABASE_URL")
+assert DB_URI, "DATABASE_URL 环境变量未设置"
+
+# LangSmith 追踪
+os.environ["LANGCHAIN_TRACING_V2"] = "true"
+os.environ["LANGCHAIN_API_KEY"] = os.getenv("LANGSMITH_API_KEY")
+os.environ["LANGCHAIN_PROJECT"] = "production-customer-service"
+
+# ==================== 持久化配置 ====================
+
+with PostgresSaver.from_conn_string(DB_URI) as checkpointer:
+    checkpointer.setup()
+
+    with PostgresStore.from_conn_string(DB_URI) as store:
+        store.setup()
+
+        # ==================== 中间件配置 ====================
+
+        # PII 保护
+        pii_middleware = PIIMiddleware(
+            pii_types=["email", "phone_number", "credit_card", "ip_address"],
+            strategy="redact",
+            custom_patterns={
+                "chinese_id": r"\d{17}[\dXx]",
+                "bank_card": r"\d{16,19}",
+            }
+        )
+
+        # 对话摘要
+        summarization = SummarizationMiddleware(
+            max_messages=20,
+            summarize_older=True
+        )
+
+        # 敏感操作审核
+        hitl = HumanInTheLoopMiddleware(
+            interrupt_on={
+                "cancel_order": True,
+                "refund_order": True,
+                "delete_user_data": True,
+            }
+        )
+
+        # 自定义中间件
+        logging_middleware = LoggingMiddleware()
+        content_safety = ContentSafetyGuardrail()
+
+        # ==================== 创建 Agent ====================
+
+        production_agent = create_agent(
+            model="gpt-4o",
+            tools=all_production_tools,  # 所有工具
+            middleware=[
+                logging_middleware,      # 日志
+                pii_middleware,          # PII 保护
+                summarization,           # 摘要
+                hitl,                    # 人工介入
+                content_safety,          # 内容安全
+            ],
+            checkpointer=checkpointer,   # PostgreSQL 持久化
+            store=store,                 # PostgreSQL Store
+            context_schema=CustomerContext,
+            system_prompt=generate_production_prompt(),  # 动态提示词
+        )
+
+        # ==================== 监控和告警 ====================
+
+        def invoke_with_monitoring(user_message: str, user_id: str, thread_id: str):
+            """带监控的调用"""
+            import time
+
+            start_time = time.time()
+
+            try:
+                config = {
+                    "configurable": {"thread_id": thread_id},
+                    "context": {"user_id": user_id}
+                }
+
+                result = production_agent.invoke(
+                    {"messages": [{"role": "user", "content": user_message}]},
+                    config=config
+                )
+
+                # 记录成功
+                latency = time.time() - start_time
+                logger.info(json.dumps({
+                    "event": "agent_success",
+                    "user_id": user_id,
+                    "latency": latency,
+                }))
+
+                return result
+
+            except Exception as e:
+                # 记录错误
+                logger.error(json.dumps({
+                    "event": "agent_error",
+                    "user_id": user_id,
+                    "error": str(e),
+                }))
+
+                # 发送告警
+                # send_alert(f"Agent error: {e}")
+
+                # 返回友好错误消息
+                return {
+                    "messages": [{
+                        "role": "assistant",
+                        "content": "抱歉，系统遇到了一些问题。请稍后再试或联系客服。"
+                    }]
+                }
+
+        # ==================== 健康检查 ====================
+
+        def health_check():
+            """健康检查端点"""
+            checks = {
+                "database": check_database_connection(DB_URI),
+                "model": check_model_availability(),
+                "vector_store": check_vector_store(),
+            }
+
+            all_healthy = all(checks.values())
+
+            return {
+                "status": "healthy" if all_healthy else "unhealthy",
+                "checks": checks
+            }</code></pre>
+                    </div>
+                </section>
+
+                <!-- 常见问题 -->
+                <section class="content-section">
+                    <h2 class="section-title">❓ 常见问题</h2>
+
+                    <h3 class="subsection-subtitle">Q1: 如何平衡成本和质量？</h3>
+                    <p>
+                        <strong>分层策略</strong>：
+                    </p>
+                    <ul>
+                        <li>简单任务（FAQ、问候）→ GPT-3.5-turbo</li>
+                        <li>中等任务（订单查询、数据分析）→ GPT-4o-mini</li>
+                        <li>复杂任务（复杂推理、创作）→ GPT-4o</li>
+                        <li>使用缓存避免重复调用</li>
+                        <li>监控每个任务的实际成本</li>
+                    </ul>
+
+                    <h3 class="subsection-subtitle">Q2: Guardrails 会影响性能吗？</h3>
+                    <p>
+                        <strong>确定性 Guardrails</strong>（正则、关键词）几乎无影响（<5ms）<br/>
+                        <strong>模型化 Guardrails</strong>（使用 LLM）会增加延迟和成本
+                    </p>
+                    <p>
+                        <strong>建议</strong>：
+                    </p>
+                    <ul>
+                        <li>输入验证使用确定性方法</li>
+                        <li>输出验证使用快速的小模型（gpt-4o-mini）</li>
+                        <li>异步执行非关键检查</li>
+                    </ul>
+
+                    <h3 class="subsection-subtitle">Q3: 如何调试生产环境的问题？</h3>
+                    <ol>
+                        <li><strong>启用 LangSmith</strong>：查看完整的执行轨迹</li>
+                        <li><strong>结构化日志</strong>：记录关键事件和参数</li>
+                        <li><strong>保存失败案例</strong>：自动保存错误的输入和输出</li>
+                        <li><strong>本地复现</strong>：使用相同的 thread_id 和输入复现问题</li>
+                        <li><strong>A/B 测试</strong>：对比不同配置的效果</li>
+                    </ol>
+
+                    <h3 class="subsection-subtitle">Q4: 提示词工程的优先级？</h3>
+                    <p>
+                        <strong>优化顺序</strong>：
+                    </p>
+                    <ol>
+                        <li><strong>明确任务</strong>：清晰定义 Agent 的职责范围</li>
+                        <li><strong>提供示例</strong>：Few-shot examples 最有效</li>
+                        <li><strong>结构化输出</strong>：使用 JSON Schema 约束格式</li>
+                        <li><strong>动态上下文</strong>：注入相关信息</li>
+                        <li><strong>精简语言</strong>：去除冗余，节省 Token</li>
+                    </ol>
+
+                    <h3 class="subsection-subtitle">Q5: 什么时候应该重构？</h3>
+                    <p>
+                        出现以下信号时考虑重构：
+                    </p>
+                    <ul>
+                        <li>单次调用成本 > $0.50</li>
+                        <li>P95 延迟 > 10 秒</li>
+                        <li>错误率 > 5%</li>
+                        <li>用户满意度 < 3.5/5.0</li>
+                        <li>提示词超过 2000 tokens</li>
+                        <li>工具数量 > 20 个</li>
+                    </ul>
+                </section>
+
+                <!-- 参考资源 -->
+                <section class="content-section">
+                    <h2 class="section-title">📖 参考资源</h2>
+                    <ul>
+                        <li>
+                            <a href="https://docs.langchain.com/oss/python/langchain/guardrails" target="_blank">
+                                LangChain Guardrails 文档
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://docs.langchain.com/oss/python/langchain/context-engineering" target="_blank">
+                                Context Engineering 文档
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://docs.smith.langchain.com/" target="_blank">
+                                LangSmith 文档
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://platform.openai.com/docs/guides/production-best-practices" target="_blank">
+                                OpenAI 生产最佳实践
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- 页面导航 -->
+                <nav class="page-navigation">
+                    <a href="16-customer-service.html" class="nav-button prev">
+                        ← 上一页：客服机器人实战
+                    </a>
+                    <a href="18-api-reference.html" class="nav-button next">
+                        下一页：API 速查表 →
+                    </a>
+                </nav>
+            </div>
+        </main>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" aria-label="返回顶部">↑</button>
+
+    <!-- JavaScript -->
+    <script src="assets/js/mermaid-init.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</body>
+</html>

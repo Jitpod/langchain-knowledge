@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LangChain 1.0 核心架构 - 深入理解 LangChain 的设计哲学和模块组织">
+    <title>核心架构 | LangChain 1.0 Python 知识文档</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <button class="mobile-menu-button" aria-label="打开菜单">☰</button>
+
+    <div class="container">
+        <!-- 侧边栏导航 -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="sidebar-title">🦜 LangChain 1.0</h1>
+                <p class="sidebar-subtitle">Python 完整学习指南</p>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-section">
+                    <div class="nav-section-title">开始</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">
+                                <span class="nav-icon">🏠</span>
+                                主页
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">基础篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="01-introduction.html" class="nav-link">
+                                <span class="nav-icon">📖</span>
+                                LangChain 简介
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="02-architecture.html" class="nav-link">
+                                <span class="nav-icon">🏗️</span>
+                                核心架构
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="03-models.html" class="nav-link">
+                                <span class="nav-icon">🤖</span>
+                                模型接口
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="04-messages.html" class="nav-link">
+                                <span class="nav-icon">💬</span>
+                                消息系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="05-tools.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                工具系统
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">进阶篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="06-agents.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                Agent 基础
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="07-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="08-rag.html" class="nav-link">
+                                <span class="nav-icon">🔍</span>
+                                RAG 详解
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="09-lcel.html" class="nav-link">
+                                <span class="nav-icon">🔗</span>
+                                LCEL 表达式
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">高级应用</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="10-runtime.html" class="nav-link">
+                                <span class="nav-icon">🔌</span>
+                                Runtime 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="11-checkpointer.html" class="nav-link">
+                                <span class="nav-icon">💾</span>
+                                持久化系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="12-streaming.html" class="nav-link">
+                                <span class="nav-icon">🌊</span>
+                                流式输出
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="13-human-in-loop.html" class="nav-link">
+                                <span class="nav-icon">👤</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="14-long-term-memory.html" class="nav-link">
+                                <span class="nav-icon">🗄️</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="15-langgraph.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                LangGraph
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">实战篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="16-customer-service.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                客服机器人
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="17-best-practices.html" class="nav-link">
+                                <span class="nav-icon">✨</span>
+                                最佳实践
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">参考篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="18-api-reference.html" class="nav-link">
+                                <span class="nav-icon">📚</span>
+                                API 速查表
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="19-troubleshooting.html" class="nav-link">
+                                <span class="nav-icon">🐛</span>
+                                故障排除
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="20-migration.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                迁移指南
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">扩展篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="21-structured-output.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                结构化输出
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">DeepAgents 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="22-deepagents-quickstart.html" class="nav-link">
+                                <span class="nav-icon">🚀</span>
+                                快速开始
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="23-deepagents-customization.html" class="nav-link">
+                                <span class="nav-icon">🎨</span>
+                                定制化
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="24-deepagents-harness.html" class="nav-link">
+                                <span class="nav-icon">🎛️</span>
+                                Harness 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="25-deepagents-backends.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                后端配置
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="26-deepagents-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="27-deepagents-hitl.html" class="nav-link">
+                                <span class="nav-icon">🤝</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="28-deepagents-memory.html" class="nav-link">
+                                <span class="nav-icon">🧠</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="29-deepagents-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">Multi-Agent 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="30-multi-agent-index.html" class="nav-link">
+                                <span class="nav-icon">🌐</span>
+                                概述
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="31-multi-agent-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="32-multi-agent-handoffs.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                交接机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="33-multi-agent-skills.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                技能系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="34-multi-agent-router.html" class="nav-link">
+                                <span class="nav-icon">🧭</span>
+                                路由机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="35-multi-agent-workflow.html" class="nav-link">
+                                <span class="nav-icon">🔀</span>
+                                自定义工作流
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- 主内容区域 -->
+        <!-- 主内容区域 -->
+        <main class="main-content">
+            <div class="content-wrapper">
+                <!-- 面包屑导航 -->
+                <nav class="breadcrumb">
+                    <span class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link">主页</a>
+                    </span>
+                    <span class="breadcrumb-item">
+                        高级应用
+                    </span>
+                    <span class="breadcrumb-item">
+                        流式输出
+                    </span>
+                </nav>
+
+                <!-- 页面标题 -->
+                <header class="page-header">
+                    <h1 class="page-title">🌊 Streaming 流式输出</h1>
+                    <p class="page-subtitle">
+                        掌握 LangChain 1.0 的流式输出机制，实现实时反馈和进度更新，
+                        大幅提升 AI Agent 的用户体验。
+                    </p>
+                </header>
+
+                <!-- Streaming 简介 -->
+                <section class="content-section">
+                    <h2 class="section-title">📚 什么是 Streaming？</h2>
+                    <p>
+                        <strong>Streaming（流式输出）</strong>允许 Agent 在执行过程中<strong>实时发送更新</strong>，
+                        而不是等待整个任务完成后才返回结果。这显著改善了用户体验，特别是处理耗时任务时。
+                    </p>
+
+                    <div class="info-box note">
+                        <div class="info-box-title">💡 核心优势</div>
+                        <ul>
+                            <li><strong>实时反馈</strong>：用户立即看到 Agent 的思考过程和进度</li>
+                            <li><strong>降低感知延迟</strong>：即使总时间相同，流式输出让用户感觉更快</li>
+                            <li><strong>早期错误发现</strong>：可以在执行中途发现问题并中断</li>
+                            <li><strong>更好的交互性</strong>：支持进度条、日志显示等 UI 元素</li>
+                        </ul>
+                    </div>
+
+                    <h3 class="subsection-title">对比：阻塞式 vs 流式</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>特性</th>
+                                <th>阻塞式调用 (invoke)</th>
+                                <th>流式调用 (stream)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>返回时机</strong></td>
+                                <td>任务完成后</td>
+                                <td>逐步返回</td>
+                            </tr>
+                            <tr>
+                                <td><strong>用户体验</strong></td>
+                                <td>等待期间无反馈</td>
+                                <td>实时看到进度</td>
+                            </tr>
+                            <tr>
+                                <td><strong>适用场景</strong></td>
+                                <td>简单、快速任务</td>
+                                <td>复杂、耗时任务</td>
+                            </tr>
+                            <tr>
+                                <td><strong>实现难度</strong></td>
+                                <td>简单</td>
+                                <td>稍复杂</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- Streaming 架构 -->
+                <section class="content-section">
+                    <h2 class="section-title">🏗️ Streaming 架构</h2>
+
+                    <div class="mermaid-wrapper">
+                        <div class="mermaid">
+graph TB
+    A[用户请求] --> B[agent.stream 调用]
+    B --> C{选择 stream_mode}
+
+    C -->|updates| D[步骤更新流]
+    C -->|messages| E[Token 流]
+    C -->|custom| F[自定义信号流]
+    C -->|多模式| G[组合流]
+
+    D --> H[每步完成后发送状态]
+    E --> I[LLM 逐 Token 发送]
+    F --> J[工具自定义消息]
+    G --> K[同时发送多种事件]
+
+    H --> L[客户端接收]
+    I --> L
+    J --> L
+    K --> L
+
+    L --> M[实时显示]
+
+    style D fill:#3b82f6,color:#fff
+    style E fill:#10b981,color:#fff
+    style F fill:#f59e0b,color:#fff
+    style G fill:#8b5cf6,color:#fff
+                        </div>
+                    </div>
+
+                    <h3 class="subsection-title">三种主要 Stream Mode</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>模式</th>
+                                <th>用途</th>
+                                <th>返回内容</th>
+                                <th>典型场景</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>updates</code></td>
+                                <td>步骤进度</td>
+                                <td>每个 Agent 步骤后的状态变化</td>
+                                <td>显示 "正在思考..." "正在调用工具..."</td>
+                            </tr>
+                            <tr>
+                                <td><code>messages</code></td>
+                                <td>Token 流</td>
+                                <td>LLM 生成的每个 Token + 元数据</td>
+                                <td>逐字显示回答，打字机效果</td>
+                            </tr>
+                            <tr>
+                                <td><code>custom</code></td>
+                                <td>自定义信号</td>
+                                <td>通过 stream_writer 发送的任意数据</td>
+                                <td>进度条、日志、调试信息</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- updates 模式 -->
+                <section class="content-section">
+                    <h2 class="section-title">📊 Updates 模式 - 步骤进度</h2>
+                    <p>
+                        <code>stream_mode="updates"</code> 在每个 Agent 步骤完成后发送状态更新，
+                        让你了解 Agent 当前在做什么。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+Updates 模式示例
+功能：显示 Agent 的执行步骤
+"""
+from langchain.agents import create_agent
+from langchain.tools import tool
+
+@tool
+def get_weather(city: str) -> str:
+    """获取天气信息"""
+    return f"{city} 今天晴朗，22°C"
+
+agent = create_agent(
+    model="gpt-4o",
+    tools=[get_weather],
+    system_prompt="你是天气助手。"
+)
+
+# 使用 updates 模式流式调用
+for chunk in agent.stream(
+    {"messages": [{"role": "user", "content": "北京今天天气怎么样？"}]},
+    stream_mode="updates"  # 关键参数
+):
+    # chunk 是一个字典，key 是步骤名称
+    for step_name, step_data in chunk.items():
+        print(f"\n📍 步骤: {step_name}")
+        print(f"   数据: {step_data}")
+
+# 预期输出：
+# 📍 步骤: agent
+#    数据: {'messages': [...]}  # Agent 决定调用工具
+#
+# 📍 步骤: tools
+#    数据: {'messages': [...]}  # 工具执行结果
+#
+# 📍 步骤: agent
+#    数据: {'messages': [...]}  # Agent 生成最终答案</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">Updates 模式进阶：UI 集成</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+Updates 模式 UI 集成示例
+功能：实现进度条和状态显示
+"""
+from langchain.agents import create_agent
+from langchain.tools import tool
+import sys
+
+@tool
+def search_database(query: str) -> str:
+    """搜索数据库"""
+    import time
+    time.sleep(1)  # 模拟耗时操作
+    return f"找到与 '{query}' 相关的 5 条记录"
+
+@tool
+def analyze_data(data: str) -> str:
+    """分析数据"""
+    import time
+    time.sleep(1.5)
+    return "分析完成：趋势向上"
+
+agent = create_agent(
+    model="gpt-4o",
+    tools=[search_database, analyze_data],
+    system_prompt="你是数据分析助手。"
+)
+
+# 状态映射
+STATUS_EMOJIS = {
+    "agent": "🤖 Agent 思考中...",
+    "tools": "🔧 执行工具中...",
+}
+
+print("开始任务...\n")
+
+for chunk in agent.stream(
+    {"messages": [{"role": "user", "content": "搜索销售数据并分析趋势"}]},
+    stream_mode="updates"
+):
+    for step, data in chunk.items():
+        # 显示步骤状态
+        status = STATUS_EMOJIS.get(step, f"📍 {step}")
+        print(f"\r{status}", end="", flush=True)
+
+        # 如果是 tools 步骤，显示工具名称
+        if step == "tools":
+            messages = data.get("messages", [])
+            for msg in messages:
+                if hasattr(msg, "name"):
+                    print(f"\n   ✅ 执行了工具: {msg.name}")
+
+print("\n\n✅ 任务完成！")</code></pre>
+                    </div>
+                </section>
+
+                <!-- messages 模式 -->
+                <section class="content-section">
+                    <h2 class="section-title">✍️ Messages 模式 - Token 流</h2>
+                    <p>
+                        <code>stream_mode="messages"</code> 返回 LLM 生成的每个 Token，
+                        实现打字机效果，让用户实时看到 AI 的回答逐字显现。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+Messages 模式示例
+功能：实现打字机效果
+"""
+from langchain.agents import create_agent
+
+agent = create_agent(
+    model="gpt-4o",
+    tools=[],
+    system_prompt="你是一个友好的助手，用简洁的语言回答问题。"
+)
+
+print("🤖 助手: ", end="", flush=True)
+
+# 使用 messages 模式流式输出
+for token, metadata in agent.stream(
+    {"messages": [{"role": "user", "content": "介绍一下 LangChain"}]},
+    stream_mode="messages"  # Token 流模式
+):
+    # token 是字符串，metadata 包含节点信息
+    print(token, end="", flush=True)
+
+print("\n")
+
+# 预期输出：
+# 🤖 助手: LangChain 是一个用于构建 AI 应用的框架...
+#          （逐字显示，像打字机一样）</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">Messages 模式进阶：元数据处理</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+Messages 模式元数据示例
+功能：区分不同节点的 Token 输出
+"""
+from langchain.agents import create_agent
+from langchain.tools import tool
+
+@tool
+def get_fact() -> str:
+    """获取有趣的事实"""
+    return "蜂鸟是唯一能向后飞的鸟类。"
+
+agent = create_agent(
+    model="gpt-4o",
+    tools=[get_fact],
+)
+
+current_node = None
+
+for token, metadata in agent.stream(
+    {"messages": [{"role": "user", "content": "给我一个有趣的事实并解释"}]},
+    stream_mode="messages"
+):
+    # 获取当前节点名称
+    node = metadata.get("langgraph_node", "unknown")
+
+    # 节点切换时显示标签
+    if node != current_node:
+        if current_node is not None:
+            print()  # 换行
+        print(f"\n[{node.upper()}] ", end="", flush=True)
+        current_node = node
+
+    # 显示 Token
+    print(token, end="", flush=True)
+
+print("\n")
+
+# 预期输出：
+# [AGENT] 让我为你查找一个有趣的事实...
+#
+# [AGENT] 蜂鸟是唯一能向后飞的鸟类。这是因为它们独特的翅膀结构...</code></pre>
+                    </div>
+                </section>
+
+                <!-- custom 模式 -->
+                <section class="content-section">
+                    <h2 class="section-title">🎨 Custom 模式 - 自定义信号</h2>
+                    <p>
+                        <code>stream_mode="custom"</code> 允许你在工具或中间件中发送任意自定义信号，
+                        如进度百分比、日志消息、调试信息等。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+Custom 模式示例
+功能：在工具中发送自定义进度信号
+"""
+from langchain.agents import create_agent
+from langchain.tools import tool
+from langgraph.config import get_stream_writer
+import time
+
+@tool
+def process_large_file(filename: str) -> str:
+    """处理大文件（带进度反馈）"""
+    # 获取 stream writer
+    writer = get_stream_writer()
+
+    # 模拟处理过程
+    steps = [
+        "正在打开文件...",
+        "正在解析数据...",
+        "正在验证格式...",
+        "正在计算统计信息...",
+        "处理完成！"
+    ]
+
+    for i, step in enumerate(steps):
+        # 发送自定义信号
+        writer(f"[{i+1}/{len(steps)}] {step}")
+        time.sleep(0.5)  # 模拟耗时
+
+    return f"文件 '{filename}' 处理完成，共 1000 条记录"
+
+agent = create_agent(
+    model="gpt-4o",
+    tools=[process_large_file],
+    system_prompt="你是文件处理助手。"
+)
+
+# 使用 custom 模式接收自定义信号
+for event in agent.stream(
+    {"messages": [{"role": "user", "content": "处理 sales_data.csv 文件"}]},
+    stream_mode="custom"
+):
+    print(f"📢 {event}")
+
+# 预期输出：
+# 📢 [1/5] 正在打开文件...
+# 📢 [2/5] 正在解析数据...
+# 📢 [3/5] 正在验证格式...
+# 📢 [4/5] 正在计算统计信息...
+# 📢 [5/5] 处理完成！</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">Custom 模式进阶：进度条集成</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+Custom 模式进度条示例
+功能：实现真实的进度条显示
+"""
+from langchain.agents import create_agent
+from langchain.tools import tool
+from langgraph.config import get_stream_writer
+import time
+import sys
+
+@tool
+def download_dataset(dataset_name: str) -> str:
+    """下载数据集（带进度条）"""
+    writer = get_stream_writer()
+
+    total_size = 100  # 模拟总大小（MB）
+    downloaded = 0
+
+    while downloaded < total_size:
+        downloaded += 10
+        percentage = (downloaded / total_size) * 100
+
+        # 发送 JSON 格式的进度数据
+        writer({
+            "type": "progress",
+            "downloaded": downloaded,
+            "total": total_size,
+            "percentage": percentage
+        })
+
+        time.sleep(0.2)
+
+    writer({"type": "complete", "message": "下载完成！"})
+    return f"数据集 '{dataset_name}' 下载成功"
+
+agent = create_agent(
+    model="gpt-4o",
+    tools=[download_dataset],
+)
+
+def draw_progress_bar(percentage):
+    """绘制进度条"""
+    bar_length = 30
+    filled = int(bar_length * percentage / 100)
+    bar = "█" * filled + "░" * (bar_length - filled)
+    return f"[{bar}] {percentage:.0f}%"
+
+# 流式接收并显示进度
+for event in agent.stream(
+    {"messages": [{"role": "user", "content": "下载 ImageNet 数据集"}]},
+    stream_mode="custom"
+):
+    if isinstance(event, dict):
+        if event.get("type") == "progress":
+            progress_bar = draw_progress_bar(event["percentage"])
+            size_info = f"{event['downloaded']}/{event['total']} MB"
+            print(f"\r{progress_bar} {size_info}", end="", flush=True)
+        elif event.get("type") == "complete":
+            print(f"\n✅ {event['message']}")
+
+print("\n")</code></pre>
+                    </div>
+                </section>
+
+                <!-- 多模式组合 -->
+                <section class="content-section">
+                    <h2 class="section-title">🔀 多模式组合流式</h2>
+                    <p>
+                        可以同时使用多个 stream_mode，通过传递列表来组合不同的流式输出。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+多模式组合示例
+功能：同时接收步骤更新和自定义信号
+"""
+from langchain.agents import create_agent
+from langchain.tools import tool
+from langgraph.config import get_stream_writer
+
+@tool
+def analyze_sentiment(text: str) -> str:
+    """情感分析（带进度）"""
+    writer = get_stream_writer()
+
+    writer("开始分析...")
+    writer("提取特征向量...")
+    writer("模型推理中...")
+    writer("生成报告...")
+
+    return f"情感分析结果：积极 (置信度 85%)"
+
+agent = create_agent(
+    model="gpt-4o",
+    tools=[analyze_sentiment],
+)
+
+# 组合 updates 和 custom 模式
+for stream_mode, chunk in agent.stream(
+    {"messages": [{"role": "user", "content": "分析这段评论的情感：产品很棒！"}]},
+    stream_mode=["updates", "custom"]  # 列表形式
+):
+    if stream_mode == "updates":
+        # 处理步骤更新
+        for step, data in chunk.items():
+            print(f"[步骤] {step}")
+
+    elif stream_mode == "custom":
+        # 处理自定义信号
+        print(f"[进度] {chunk}")
+
+# 预期输出：
+# [步骤] agent
+# [步骤] tools
+# [进度] 开始分析...
+# [进度] 提取特征向量...
+# [进度] 模型推理中...
+# [进度] 生成报告...
+# [步骤] agent</code></pre>
+                    </div>
+
+                    <div class="info-box tip">
+                        <div class="info-box-title">✅ 多模式组合建议</div>
+                        <table style="margin-top: 0.5rem;">
+                            <thead>
+                                <tr>
+                                    <th>组合</th>
+                                    <th>适用场景</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>["updates", "custom"]</code></td>
+                                    <td>需要步骤状态 + 工具进度反馈</td>
+                                </tr>
+                                <tr>
+                                    <td><code>["messages", "custom"]</code></td>
+                                    <td>需要打字机效果 + 自定义日志</td>
+                                </tr>
+                                <tr>
+                                    <td><code>["updates", "messages"]</code></td>
+                                    <td>需要完整执行过程可视化</td>
+                                </tr>
+                                <tr>
+                                    <td><code>["updates", "messages", "custom"]</code></td>
+                                    <td>最全面的监控（调试用）</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- 流式工具调用 -->
+                <section class="content-section">
+                    <h2 class="section-title">🔧 流式工具调用</h2>
+                    <p>
+                        组合 <code>messages</code> 和 <code>updates</code> 模式，
+                        可以同时访问部分工具调用 JSON 和完整的解析结果。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+流式工具调用示例
+功能：实时显示工具调用的参数解析过程
+"""
+from langchain.agents import create_agent
+from langchain.tools import tool
+
+@tool
+def create_user(
+    username: str,
+    email: str,
+    age: int,
+    preferences: dict
+) -> str:
+    """创建用户（复杂参数）"""
+    return f"用户创建成功：{username} ({email})"
+
+agent = create_agent(
+    model="gpt-4o",
+    tools=[create_user],
+)
+
+print("实时显示工具调用参数解析...\n")
+
+for stream_mode, chunk in agent.stream(
+    {"messages": [{"role": "user", "content": "创建用户：张三，邮箱 zhang@example.com，25岁，偏好深色主题"}]},
+    stream_mode=["messages", "updates"]
+):
+    if stream_mode == "messages":
+        # Token 流（包含部分 JSON）
+        token, metadata = chunk
+        if token:
+            print(token, end="", flush=True)
+
+    elif stream_mode == "updates":
+        # 获取完整的工具调用
+        for step, data in chunk.items():
+            if step == "agent":
+                messages = data.get("messages", [])
+                for msg in messages:
+                    if hasattr(msg, "tool_calls") and msg.tool_calls:
+                        print("\n\n✅ 工具调用完整解析：")
+                        for tc in msg.tool_calls:
+                            print(f"   工具: {tc['name']}")
+                            print(f"   参数: {tc['args']}")
+
+print("\n")</code></pre>
+                    </div>
+                </section>
+
+                <!-- 禁用流式输出 -->
+                <section class="content-section">
+                    <h2 class="section-title">🚫 禁用流式输出</h2>
+                    <p>
+                        在某些场景下（如子 Agent、特定工具），你可能想要禁用流式输出。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+禁用流式输出示例
+功能：为特定模型禁用 Token 流
+"""
+from langchain_openai import ChatOpenAI
+from langchain.agents import create_agent
+
+# 方式 1：在模型初始化时禁用
+model_no_streaming = ChatOpenAI(
+    model="gpt-4o",
+    streaming=False  # 禁用流式输出
+)
+
+agent = create_agent(
+    model=model_no_streaming,
+    tools=[],
+)
+
+# 即使使用 stream_mode="messages"，也不会有 Token 流
+for chunk in agent.stream(
+    {"messages": [{"role": "user", "content": "你好"}]},
+    stream_mode="messages"
+):
+    print(chunk)  # 只会返回完整响应，不会逐 Token 返回
+
+# 方式 2：在特定调用时禁用
+model = ChatOpenAI(model="gpt-4o")
+
+# 对于某些调用，传递 config 禁用流式
+response = model.invoke(
+    "你好",
+    config={"metadata": {"streaming": False}}
+)</code></pre>
+                    </div>
+
+                    <div class="info-box note">
+                        <div class="info-box-title">💡 何时禁用流式输出</div>
+                        <ul>
+                            <li><strong>子 Agent</strong>：内部 Agent 不需要向用户暴露细节</li>
+                            <li><strong>批量处理</strong>：处理大量请求时，流式输出增加开销</li>
+                            <li><strong>API 调用</strong>：某些模型提供商不支持流式</li>
+                            <li><strong>测试环境</strong>：单元测试中简化输出验证</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- 完整示例 -->
+                <section class="content-section">
+                    <h2 class="section-title">🎯 完整示例：智能客服流式响应</h2>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级 - 完整项目</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+智能客服流式响应完整示例
+功能：演示实际客服场景中的流式输出应用
+"""
+from langchain.agents import create_agent
+from langchain.tools import tool
+from langgraph.config import get_stream_writer
+import time
+import sys
+
+# ==================== 工具定义 ====================
+
+@tool
+def search_orders(user_id: str) -> str:
+    """搜索用户订单（带进度）"""
+    writer = get_stream_writer()
+
+    writer("🔍 正在连接订单数据库...")
+    time.sleep(0.3)
+
+    writer("📊 正在查询订单记录...")
+    time.sleep(0.5)
+
+    writer("✅ 查询完成")
+
+    return f"用户 {user_id} 有 3 个订单：\n- 订单#001: iPhone 15 (已发货)\n- 订单#002: AirPods (配送中)\n- 订单#003: MacBook Pro (处理中)"
+
+@tool
+def check_inventory(product_id: str) -> str:
+    """检查库存（带进度）"""
+    writer = get_stream_writer()
+
+    writer("📦 正在查询库存系统...")
+    time.sleep(0.4)
+
+    writer("🔢 正在计算可用库存...")
+    time.sleep(0.3)
+
+    return f"产品 {product_id} 库存充足：剩余 156 件"
+
+# ==================== 创建 Agent ====================
+
+customer_service_agent = create_agent(
+    model="gpt-4o",
+    tools=[search_orders, check_inventory],
+    system_prompt="""你是专业的客服助手。
+
+职责：
+1. 查询用户订单状态
+2. 检查产品库存
+3. 提供友好、专业的服务
+
+工作流程：
+- 使用 search_orders 查询订单
+- 使用 check_inventory 检查库存
+- 始终保持礼貌和耐心"""
+)
+
+# ==================== 流式响应处理 ====================
+
+def streaming_customer_service(user_query: str):
+    """流式处理客服对话"""
+    print("\n" + "="*60)
+    print(f"用户: {user_query}")
+    print("="*60 + "\n")
+
+    current_section = None
+
+    for stream_mode, chunk in customer_service_agent.stream(
+        {"messages": [{"role": "user", "content": user_query}]},
+        stream_mode=["updates", "messages", "custom"]
+    ):
+        if stream_mode == "custom":
+            # 自定义进度信号
+            print(f"  💬 {chunk}")
+
+        elif stream_mode == "updates":
+            # 步骤更新
+            for step, data in chunk.items():
+                if step != current_section:
+                    if current_section == "agent" and step == "tools":
+                        print()  # 换行
+                    current_section = step
+
+        elif stream_mode == "messages":
+            # Token 流（打字机效果）
+            token, metadata = chunk
+            node = metadata.get("langgraph_node")
+
+            if node == "agent" and token:
+                if current_section != "agent_response":
+                    print("\n🤖 客服: ", end="", flush=True)
+                    current_section = "agent_response"
+                print(token, end="", flush=True)
+
+    print("\n" + "="*60 + "\n")
+
+# ==================== 测试场景 ====================
+
+if __name__ == "__main__":
+    # 场景 1：查询订单
+    streaming_customer_service("我想查看我的订单状态，我的用户ID是 USER_12345")
+
+    time.sleep(1)
+
+    # 场景 2：检查库存
+    streaming_customer_service("iPhone 15 Pro Max 还有货吗？产品ID是 PROD_67890")
+
+    time.sleep(1)
+
+    # 场景 3：组合查询
+    streaming_customer_service("查询我的订单，然后告诉我 MacBook Pro 的库存情况")
+
+# 预期输出：
+# ============================================================
+# 用户: 我想查看我的订单状态，我的用户ID是 USER_12345
+# ============================================================
+#
+#   💬 🔍 正在连接订单数据库...
+#   💬 📊 正在查询订单记录...
+#   💬 ✅查询完成
+#
+# 🤖 客服: 您好！我已为您查询到订单信息：
+# - 订单#001: iPhone 15 (已发货)
+# - 订单#002: AirPods (配送中)
+# - 订单#003: MacBook Pro (处理中)
+#
+# 有什么其他可以帮您的吗？
+# ============================================================</code></pre>
+                    </div>
+                </section>
+
+                <!-- 常见问题 -->
+                <section class="content-section">
+                    <h2 class="section-title">❓ 常见问题</h2>
+
+                    <h3 class="subsection-subtitle">Q1: 流式输出会增加延迟吗？</h3>
+                    <p>
+                        <strong>不会</strong>。流式输出不会增加总执行时间，反而降低了<strong>感知延迟</strong>。
+                        用户在等待期间能看到进度，体验更好。
+                    </p>
+
+                    <h3 class="subsection-subtitle">Q2: 所有模型都支持流式输出吗？</h3>
+                    <p>
+                        大多数主流 LLM 提供商支持流式输出，包括：
+                    </p>
+                    <ul>
+                        <li>✅ OpenAI (GPT-4, GPT-3.5)</li>
+                        <li>✅ Anthropic (Claude)</li>
+                        <li>✅ Google (Gemini)</li>
+                        <li>❌ 某些本地模型可能不支持</li>
+                    </ul>
+                    <p>
+                        如果模型不支持，使用 <code>stream_mode="messages"</code> 会降级为批量返回。
+                    </p>
+
+                    <h3 class="subsection-subtitle">Q3: 如何在 Web 应用中实现流式输出？</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># FastAPI + Server-Sent Events (SSE) 示例
+from fastapi import FastAPI
+from fastapi.responses import StreamingResponse
+
+app = FastAPI()
+
+@app.post("/chat/stream")
+async def chat_stream(message: str):
+    """流式聊天端点"""
+    async def event_generator():
+        for chunk in agent.stream(
+            {"messages": [{"role": "user", "content": message}]},
+            stream_mode="messages"
+        ):
+            token, metadata = chunk
+            # 发送 SSE 事件
+            yield f"data: {token}\n\n"
+
+    return StreamingResponse(
+        event_generator(),
+        media_type="text/event-stream"
+    )</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">Q4: 流式输出可以中断吗？</h3>
+                    <p>
+                        可以。在 Python 中，使用 <code>break</code> 退出循环即可中断流式输出：
+                    </p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">for chunk in agent.stream(...):
+    if some_condition:
+        break  # 中断流式输出
+    # 处理 chunk</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">Q5: 如何记录流式输出用于调试？</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 同时显示和记录
+import json
+
+log_file = open("stream_log.jsonl", "w")
+
+for stream_mode, chunk in agent.stream(..., stream_mode=["updates", "custom"]):
+    # 记录到文件
+    log_file.write(json.dumps({
+        "mode": stream_mode,
+        "chunk": str(chunk)
+    }) + "\n")
+    log_file.flush()
+
+    # 同时显示
+    print(chunk)
+
+log_file.close()</code></pre>
+                    </div>
+                </section>
+
+                <!-- 最佳实践 -->
+                <section class="content-section">
+                    <h2 class="section-title">✨ 最佳实践</h2>
+
+                    <h3 class="subsection-title">1. 选择合适的 Stream Mode</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>场景</th>
+                                <th>推荐模式</th>
+                                <th>理由</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>聊天应用</td>
+                                <td><code>messages</code></td>
+                                <td>打字机效果，用户体验好</td>
+                            </tr>
+                            <tr>
+                                <td>复杂任务</td>
+                                <td><code>updates</code> + <code>custom</code></td>
+                                <td>显示步骤和进度</td>
+                            </tr>
+                            <tr>
+                                <td>后台任务</td>
+                                <td><code>custom</code></td>
+                                <td>仅发送关键进度信号</td>
+                            </tr>
+                            <tr>
+                                <td>调试</td>
+                                <td>全部组合</td>
+                                <td>完整的执行可视化</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 class="subsection-title">2. 优化用户体验</h3>
+                    <ul>
+                        <li><strong>显示进度</strong>：对于耗时操作，始终提供进度反馈</li>
+                        <li><strong>明确状态</strong>：使用清晰的图标和文字说明当前步骤</li>
+                        <li><strong>允许中断</strong>：提供"停止"按钮让用户取消长时间任务</li>
+                        <li><strong>保存历史</strong>：流式输出结束后，保留完整响应供用户查看</li>
+                    </ul>
+
+                    <h3 class="subsection-title">3. 性能优化</h3>
+                    <ul>
+                        <li><strong>批量发送</strong>：避免每个 Token 都触发 UI 更新（缓冲 50-100ms）</li>
+                        <li><strong>限制频率</strong>：自定义信号不要发送太频繁（如每 100ms 一次进度更新）</li>
+                        <li><strong>按需启用</strong>：不是所有场景都需要流式，简单任务用 <code>invoke</code></li>
+                        <li><strong>资源清理</strong>：确保流式连接正确关闭，避免内存泄漏</li>
+                    </ul>
+
+                    <h3 class="subsection-title">4. 错误处理</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 流式调用的错误处理
+try:
+    for chunk in agent.stream(...):
+        process_chunk(chunk)
+except Exception as e:
+    print(f"流式输出错误：{e}")
+    # 清理资源、通知用户
+finally:
+    # 确保连接关闭
+    pass</code></pre>
+                    </div>
+                </section>
+
+                <!-- 参考资源 -->
+                <section class="content-section">
+                    <h2 class="section-title">📖 参考资源</h2>
+                    <ul>
+                        <li>
+                            <a href="https://docs.langchain.com/oss/python/langchain/streaming" target="_blank">
+                                LangChain 官方 Streaming 文档
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://langchain-ai.github.io/langgraph/how-tos/stream-updates/" target="_blank">
+                                LangGraph Streaming 教程
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://python.langchain.com/docs/concepts/#streaming" target="_blank">
+                                Streaming 核心概念
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://platform.openai.com/docs/api-reference/streaming" target="_blank">
+                                OpenAI Streaming API 文档
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- 页面导航 -->
+                <nav class="page-navigation">
+                    <a href="11-checkpointer.html" class="nav-button prev">
+                        ← 上一页：持久化系统
+                    </a>
+                    <a href="13-human-in-loop.html" class="nav-button next">
+                        下一页：人工介入 →
+                    </a>
+                </nav>
+            </div>
+        </main>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" aria-label="返回顶部">↑</button>
+
+    <!-- JavaScript -->
+    <script src="assets/js/mermaid-init.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</body>
+</html>

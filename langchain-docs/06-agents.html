@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LangChain 1.0 核心架构 - 深入理解 LangChain 的设计哲学和模块组织">
+    <title>核心架构 | LangChain 1.0 Python 知识文档</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <button class="mobile-menu-button" aria-label="打开菜单">☰</button>
+
+    <div class="container">
+        <!-- 侧边栏导航 -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="sidebar-title">🦜 LangChain 1.0</h1>
+                <p class="sidebar-subtitle">Python 完整学习指南</p>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-section">
+                    <div class="nav-section-title">开始</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">
+                                <span class="nav-icon">🏠</span>
+                                主页
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">基础篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="01-introduction.html" class="nav-link">
+                                <span class="nav-icon">📖</span>
+                                LangChain 简介
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="02-architecture.html" class="nav-link">
+                                <span class="nav-icon">🏗️</span>
+                                核心架构
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="03-models.html" class="nav-link">
+                                <span class="nav-icon">🤖</span>
+                                模型接口
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="04-messages.html" class="nav-link">
+                                <span class="nav-icon">💬</span>
+                                消息系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="05-tools.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                工具系统
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">进阶篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="06-agents.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                Agent 基础
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="07-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="08-rag.html" class="nav-link">
+                                <span class="nav-icon">🔍</span>
+                                RAG 详解
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="09-lcel.html" class="nav-link">
+                                <span class="nav-icon">🔗</span>
+                                LCEL 表达式
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">高级应用</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="10-runtime.html" class="nav-link">
+                                <span class="nav-icon">🔌</span>
+                                Runtime 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="11-checkpointer.html" class="nav-link">
+                                <span class="nav-icon">💾</span>
+                                持久化系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="12-streaming.html" class="nav-link">
+                                <span class="nav-icon">🌊</span>
+                                流式输出
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="13-human-in-loop.html" class="nav-link">
+                                <span class="nav-icon">👤</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="14-long-term-memory.html" class="nav-link">
+                                <span class="nav-icon">🗄️</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="15-langgraph.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                LangGraph
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">实战篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="16-customer-service.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                客服机器人
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="17-best-practices.html" class="nav-link">
+                                <span class="nav-icon">✨</span>
+                                最佳实践
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">参考篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="18-api-reference.html" class="nav-link">
+                                <span class="nav-icon">📚</span>
+                                API 速查表
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="19-troubleshooting.html" class="nav-link">
+                                <span class="nav-icon">🐛</span>
+                                故障排除
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="20-migration.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                迁移指南
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">扩展篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="21-structured-output.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                结构化输出
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">DeepAgents 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="22-deepagents-quickstart.html" class="nav-link">
+                                <span class="nav-icon">🚀</span>
+                                快速开始
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="23-deepagents-customization.html" class="nav-link">
+                                <span class="nav-icon">🎨</span>
+                                定制化
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="24-deepagents-harness.html" class="nav-link">
+                                <span class="nav-icon">🎛️</span>
+                                Harness 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="25-deepagents-backends.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                后端配置
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="26-deepagents-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="27-deepagents-hitl.html" class="nav-link">
+                                <span class="nav-icon">🤝</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="28-deepagents-memory.html" class="nav-link">
+                                <span class="nav-icon">🧠</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="29-deepagents-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">Multi-Agent 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="30-multi-agent-index.html" class="nav-link">
+                                <span class="nav-icon">🌐</span>
+                                概述
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="31-multi-agent-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="32-multi-agent-handoffs.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                交接机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="33-multi-agent-skills.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                技能系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="34-multi-agent-router.html" class="nav-link">
+                                <span class="nav-icon">🧭</span>
+                                路由机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="35-multi-agent-workflow.html" class="nav-link">
+                                <span class="nav-icon">🔀</span>
+                                自定义工作流
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- 主内容区域 -->
+        <!-- 主内容区域 -->
+        <main class="main-content">
+            <div class="content-wrapper">
+                <!-- 面包屑导航 -->
+                <nav class="breadcrumb">
+                    <span class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link">主页</a>
+                    </span>
+                    <span class="breadcrumb-item">
+                        进阶篇
+                    </span>
+                    <span class="breadcrumb-item">
+                        Agent 基础
+                    </span>
+                </nav>
+
+                <!-- 页面标题 -->
+                <header class="page-header">
+                    <h1 class="page-title">🎯 Agent 基础</h1>
+                    <p class="page-subtitle">
+                        深入理解 LangChain 1.0 的 Agent 系统，掌握 create_agent() 函数和 ReAct 模式，
+                        构建智能、自主的 AI Agent。
+                    </p>
+                </header>
+
+                <!-- 什么是 Agent -->
+                <section class="content-section">
+                    <h2 class="section-title">📚 什么是 Agent？</h2>
+                    <p>
+                        <strong>Agent</strong>（智能体）是一个能够自主推理并采取行动的 AI 系统。
+                        与简单的 LLM 调用不同，Agent 可以：
+                    </p>
+                    <ul>
+                        <li><strong>推理</strong>：分析任务，制定计划</li>
+                        <li><strong>行动</strong>：调用工具与外部系统交互</li>
+                        <li><strong>观察</strong>：获取工具执行结果</li>
+                        <li><strong>迭代</strong>：基于结果调整策略，直到完成任务</li>
+                    </ul>
+
+                    <div class="info-box note">
+                        <div class="info-box-title">💡 Agent vs 简单 LLM 调用</div>
+                        <table style="margin-top: 0.5rem;">
+                            <thead>
+                                <tr>
+                                    <th>特性</th>
+                                    <th>简单 LLM 调用</th>
+                                    <th>Agent</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>推理能力</strong></td>
+                                    <td>单次推理</td>
+                                    <td>多轮推理和规划</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>工具使用</strong></td>
+                                    <td>无</td>
+                                    <td>可调用多个工具</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>执行模式</strong></td>
+                                    <td>一次性输入输出</td>
+                                    <td>循环执行直到完成</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>复杂度</strong></td>
+                                    <td>简单任务</td>
+                                    <td>复杂、多步骤任务</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- ReAct 模式 -->
+                <section class="content-section">
+                    <h2 class="section-title">🔄 ReAct 模式（Reasoning + Acting）</h2>
+                    <p>
+                        LangChain Agent 采用 <strong>ReAct 模式</strong>，结合推理和行动：
+                    </p>
+
+                    <div class="mermaid-wrapper">
+                        <div class="mermaid">
+graph LR
+    A[用户问题] --> B[推理 Reasoning]
+    B --> C{需要工具？}
+    C -->|是| D[行动 Acting]
+    C -->|否| H[生成答案]
+    D --> E[调用工具]
+    E --> F[观察结果 Observing]
+    F --> B
+    H --> I[返回结果]
+
+    style B fill:#3b82f6,color:#fff
+    style D fill:#10b981,color:#fff
+    style F fill:#f59e0b,color:#fff
+    style I fill:#8b5cf6,color:#fff
+                        </div>
+                    </div>
+
+                    <h3 class="subsection-title">ReAct 流程示例</h3>
+                    <p>假设用户问："找到最受欢迎的无线耳机并检查库存"</p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Text</span>
+                        </div>
+                        <pre><code>步骤 1 - 推理：流行度是时效性的，需要搜索最新数据
+步骤 2 - 行动：调用 search_products("wireless headphones")
+步骤 3 - 观察：获得前 5 个结果，第一名是 WH-1000XM5
+
+步骤 4 - 推理：需要确认该产品的库存情况
+步骤 5 - 行动：调用 check_inventory("WH-1000XM5")
+步骤 6 - 观察：库存 10 件
+
+步骤 7 - 最终答案：
+"WH-1000XM5 是目前最受欢迎的无线耳机，库存 10 件。"</code></pre>
+                    </div>
+
+                    <div class="info-box tip">
+                        <div class="info-box-title">✅ ReAct 的优势</div>
+                        <ul>
+                            <li><strong>透明性</strong>：可以看到 Agent 的推理过程</li>
+                            <li><strong>可控性</strong>：每步都有明确的输入输出</li>
+                            <li><strong>可调试</strong>：容易定位问题环节</li>
+                            <li><strong>高效性</strong>：只在需要时调用工具</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- create_agent() 函数详解 -->
+                <section class="content-section">
+                    <h2 class="section-title">⚙️ create_agent() 函数详解</h2>
+                    <p>
+                        <code>create_agent()</code> 是 LangChain 1.0 创建 Agent 的核心函数。
+                        它构建了一个基于 LangGraph 的图形化运行时。
+                    </p>
+
+                    <h3 class="subsection-title">基础用法</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+create_agent() 基础示例
+功能：创建一个带搜索和天气工具的简单 Agent
+"""
+from langchain.agents import create_agent
+from langchain.tools import tool
+
+# 定义工具
+@tool
+def search(query: str) -> str:
+    """搜索信息"""
+    return f"搜索结果：{query}"
+
+@tool
+def get_weather(location: str) -> str:
+    """获取天气信息"""
+    return f"{location} 的天气：晴朗，22°C"
+
+# 创建 Agent
+agent = create_agent(
+    model="gpt-4",              # 模型标识符（字符串）
+    tools=[search, get_weather], # 工具列表
+    system_prompt="你是一个有用的助手。请简洁准确地回答问题。"
+)
+
+# 调用 Agent
+result = agent.invoke({
+    "messages": [{"role": "user", "content": "旧金山今天天气怎么样？"}]
+})
+
+print(result["messages"][-1].content)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">核心参数说明</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>参数</th>
+                                <th>类型</th>
+                                <th>说明</th>
+                                <th>示例</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>model</code></td>
+                                <td>str 或 ChatModel</td>
+                                <td>推理引擎</td>
+                                <td><code>"gpt-4"</code> 或 <code>ChatOpenAI()</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>tools</code></td>
+                                <td>list</td>
+                                <td>可用工具列表</td>
+                                <td><code>[tool1, tool2]</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>system_prompt</code></td>
+                                <td>str</td>
+                                <td>Agent 行为指南</td>
+                                <td><code>"你是专业的助手"</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>middleware</code></td>
+                                <td>list</td>
+                                <td>扩展钩子</td>
+                                <td><code>[custom_middleware]</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>state_schema</code></td>
+                                <td>TypedDict</td>
+                                <td>自定义状态结构</td>
+                                <td><code>CustomState</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>response_format</code></td>
+                                <td>Strategy</td>
+                                <td>结构化输出</td>
+                                <td><code>ToolStrategy(Model)</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 class="subsection-title">高级配置：完整控制</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+create_agent() 高级配置示例
+功能：使用 ChatModel 实例进行精细控制
+"""
+from langchain_openai import ChatOpenAI
+from langchain.agents import create_agent
+from langchain.tools import tool
+
+@tool
+def calculator(expression: str) -> str:
+    """计算数学表达式"""
+    try:
+        result = eval(expression)  # 仅用于演示，生产环境需安全处理
+        return f"计算结果：{result}"
+    except Exception as e:
+        return f"计算错误：{str(e)}"
+
+# 使用 ChatModel 实例进行精细配置
+model = ChatOpenAI(
+    model="gpt-4",
+    temperature=0.1,     # 降低随机性，提高准确性
+    max_tokens=1000,     # 限制输出长度
+    timeout=30,          # 设置超时时间（秒）
+    max_retries=2        # 失败重试次数
+)
+
+# 创建 Agent
+agent = create_agent(
+    model=model,
+    tools=[calculator],
+    system_prompt="""你是一个精确的数学助手。
+
+职责：
+1. 使用 calculator 工具计算数学表达式
+2. 解释计算步骤
+3. 确保结果准确无误
+
+注意：
+- 只处理数学相关的问题
+- 对于非数学问题，礼貌地拒绝"""
+)
+
+# 测试
+result = agent.invoke({
+    "messages": [{"role": "user", "content": "计算 (123 + 456) * 2 等于多少？"}]
+})
+
+print(result["messages"][-1].content)</code></pre>
+                    </div>
+                </section>
+
+                <!-- system_prompt 设计 -->
+                <section class="content-section">
+                    <h2 class="section-title">📝 system_prompt 设计技巧</h2>
+                    <p>
+                        <code>system_prompt</code> 定义了 Agent 的行为、角色和工作方式。
+                        好的提示词是成功 Agent 的关键。
+                    </p>
+
+                    <h3 class="subsection-title">提示词结构模板</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+优秀的 system_prompt 模板
+"""
+SYSTEM_PROMPT = """# 角色定义
+你是 [角色名称]，专门负责 [主要职责]。
+
+# 核心职责
+1. [职责1]
+2. [职责2]
+3. [职责3]
+
+# 工作流程
+当用户提出请求时：
+- 步骤1：[分析需求]
+- 步骤2：[调用工具]
+- 步骤3：[整合结果]
+- 步骤4：[生成回复]
+
+# 工具使用
+你有以下工具可用：
+- tool1：[用途和使用时机]
+- tool2：[用途和使用时机]
+
+# 回复风格
+- 简洁：直接回答问题
+- 准确：基于工具返回的实际数据
+- 友好：保持礼貌和专业
+
+# 限制和注意事项
+- 不要：[禁止行为]
+- 必须：[强制要求]
+- 如果遇到 [情况]，则 [处理方式]
+"""
+
+# 使用示例
+from langchain.agents import create_agent
+
+agent = create_agent(
+    model="gpt-4",
+    tools=[...],
+    system_prompt=SYSTEM_PROMPT
+)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">动态 system_prompt</h3>
+                    <p>根据用户角色或上下文动态生成提示词：</p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+动态 system_prompt 示例
+功能：根据用户角色生成不同的提示词
+"""
+from langchain.agents.middleware import dynamic_prompt, ModelRequest
+from langchain.agents import create_agent
+
+@dynamic_prompt
+def user_role_prompt(request: ModelRequest) -> str:
+    """根据用户角色生成系统提示词"""
+    # 从运行时上下文获取用户角色
+    user_role = request.runtime.context.get("user_role", "user")
+
+    base = "你是一个有用的技术助手。"
+
+    if user_role == "expert":
+        return f"""{base}
+
+用户是技术专家，你应该：
+- 提供深入的技术细节
+- 使用专业术语
+- 假设用户了解基础概念
+- 直接给出高级解决方案"""
+
+    elif user_role == "beginner":
+        return f"""{base}
+
+用户是初学者，你应该：
+- 用简单的语言解释概念
+- 避免复杂的术语
+- 提供步骤化的指导
+- 多给示例和类比"""
+
+    else:
+        return f"""{base}
+
+提供平衡的技术解释，适合一般开发者。"""
+
+# 创建 Agent
+agent = create_agent(
+    model="gpt-4",
+    tools=[...],
+    middleware=[user_role_prompt]
+)
+
+# 调用时提供用户角色
+result = agent.invoke(
+    {"messages": [{"role": "user", "content": "什么是 Agent？"}]},
+    context={"user_role": "beginner"}  # 指定用户角色
+)</code></pre>
+                    </div>
+
+                    <div class="info-box tip">
+                        <div class="info-box-title">✅ system_prompt 最佳实践</div>
+                        <ul>
+                            <li><strong>明确性</strong>：清楚定义 Agent 应该做什么</li>
+                            <li><strong>具体性</strong>：给出具体的指令和示例</li>
+                            <li><strong>结构化</strong>：使用标题、列表组织内容</li>
+                            <li><strong>限制性</strong>：说明 Agent 不应该做什么</li>
+                            <li><strong>可测试</strong>：提示词应该可以被验证和改进</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Agent 执行流程 -->
+                <section class="content-section">
+                    <h2 class="section-title">🔄 Agent 执行流程</h2>
+
+                    <div class="mermaid-wrapper">
+                        <div class="mermaid">
+graph TB
+    A[用户输入] --> B[Agent 启动]
+    B --> C[加载 system_prompt]
+    C --> D[LLM 推理]
+    D --> E{需要工具？}
+
+    E -->|是| F[选择工具]
+    F --> G[执行工具]
+    G --> H[获取结果]
+    H --> I[更新状态]
+    I --> D
+
+    E -->|否| J{达到停止条件？}
+    J -->|否| D
+    J -->|是| K[生成最终答案]
+    K --> L[返回结果]
+
+    style B fill:#3b82f6,color:#fff
+    style D fill:#10b981,color:#fff
+    style G fill:#f59e0b,color:#fff
+    style K fill:#8b5cf6,color:#fff
+                        </div>
+                    </div>
+
+                    <h3 class="subsection-title">停止条件</h3>
+                    <p>Agent 在以下情况下停止执行：</p>
+                    <ul>
+                        <li><strong>模型输出最终答案</strong>：LLM 决定不再需要工具</li>
+                        <li><strong>达到迭代上限</strong>：防止无限循环</li>
+                        <li><strong>工具执行失败</strong>：无法继续时优雅退出</li>
+                        <li><strong>用户中断</strong>：Human-in-the-loop 场景</li>
+                    </ul>
+                </section>
+
+                <!-- 流式输出 -->
+                <section class="content-section">
+                    <h2 class="section-title">📡 流式输出 Agent</h2>
+                    <p>
+                        对于多步骤任务，使用流式输出可以实时看到 Agent 的中间步骤：
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+Agent 流式输出示例
+功能：实时显示 Agent 的推理和工具调用过程
+"""
+from langchain.agents import create_agent
+from langchain.tools import tool
+
+@tool
+def search(query: str) -> str:
+    """搜索 AI 相关新闻"""
+    return f"找到关于 '{query}' 的最新新闻..."
+
+# 创建 Agent
+agent = create_agent(
+    model="gpt-4",
+    tools=[search],
+    system_prompt="你是新闻助手，帮助用户搜索最新资讯。"
+)
+
+# 流式调用 Agent
+print("=== Agent 执行过程 ===\n")
+
+for chunk in agent.stream(
+    {"messages": [{"role": "user", "content": "搜索最新的 AI 新闻"}]},
+    stream_mode="values"  # 流式模式
+):
+    # 获取最新消息
+    latest_message = chunk["messages"][-1]
+
+    # 如果是文本内容
+    if latest_message.content:
+        print(f"💬 Agent: {latest_message.content}")
+
+    # 如果是工具调用
+    elif hasattr(latest_message, 'tool_calls') and latest_message.tool_calls:
+        tool_names = [tc['name'] for tc in latest_message.tool_calls]
+        print(f"🔧 调用工具: {', '.join(tool_names)}")
+
+print("\n=== 执行完成 ===")</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">预期输出</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Text</span>
+                        </div>
+                        <pre><code>=== Agent 执行过程 ===
+
+💬 Agent: 让我帮你搜索最新的 AI 新闻
+🔧 调用工具: search
+💬 Agent: 找到关于 'AI' 的最新新闻...
+💬 Agent: 根据搜索结果，这里是最新的 AI 新闻摘要...
+
+=== 执行完成 ===</code></pre>
+                    </div>
+                </section>
+
+                <!-- 错误处理 -->
+                <section class="content-section">
+                    <h2 class="section-title">🛡️ 工具错误处理</h2>
+                    <p>
+                        使用中间件处理工具执行中的错误，提供更好的用户体验：
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+工具错误处理示例
+功能：优雅地处理工具执行错误
+"""
+from langchain.agents.middleware import wrap_tool_call
+from langchain.messages import ToolMessage
+from langchain.agents import create_agent
+from langchain.tools import tool
+
+@tool
+def divide(a: float, b: float) -> float:
+    """除法运算"""
+    return a / b  # 可能抛出 ZeroDivisionError
+
+# 定义错误处理中间件
+@wrap_tool_call
+def handle_tool_errors(request, handler):
+    """捕获并优雅地处理工具执行错误"""
+    try:
+        # 执行工具
+        return handler(request)
+    except ZeroDivisionError:
+        # 除零错误
+        return ToolMessage(
+            content="错误：除数不能为零。请检查输入参数。",
+            tool_call_id=request.tool_call["id"]
+        )
+    except Exception as e:
+        # 其他错误
+        return ToolMessage(
+            content=f"工具执行失败：{str(e)}。请检查输入并重试。",
+            tool_call_id=request.tool_call["id"]
+        )
+
+# 创建带错误处理的 Agent
+agent = create_agent(
+    model="gpt-4",
+    tools=[divide],
+    middleware=[handle_tool_errors],  # 应用错误处理中间件
+    system_prompt="你是数学助手。如果工具执行失败，请向用户解释问题并建议解决方案。"
+)
+
+# 测试：正常情况
+print("=== 正常情况 ===")
+result1 = agent.invoke({
+    "messages": [{"role": "user", "content": "10 除以 2 等于多少？"}]
+})
+print(result1["messages"][-1].content)
+
+# 测试：除零错误
+print("\n=== 除零错误 ===")
+result2 = agent.invoke({
+    "messages": [{"role": "user", "content": "10 除以 0 等于多少？"}]
+})
+print(result2["messages"][-1].content)</code></pre>
+                    </div>
+                </section>
+
+                <!-- 调试技巧 -->
+                <section class="content-section">
+                    <h2 class="section-title">🐛 Agent 调试技巧</h2>
+
+                    <h3 class="subsection-title">1. 启用详细日志</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">import logging
+
+# 启用 LangChain 日志
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger("langchain")
+logger.setLevel(logging.DEBUG)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">2. 使用 LangSmith 追踪</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">import os
+
+# 配置 LangSmith
+os.environ["LANGSMITH_API_KEY"] = "your-key"
+os.environ["LANGSMITH_TRACING"] = "true"
+os.environ["LANGSMITH_PROJECT"] = "agent-debugging"
+
+# 之后的 Agent 调用会自动追踪</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">3. 检查中间状态</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 使用流式输出查看每一步
+for chunk in agent.stream(input_data, stream_mode="values"):
+    print(f"步骤: {chunk}")
+    print(f"消息数: {len(chunk['messages'])}")
+    print(f"最新消息: {chunk['messages'][-1]}")
+    print("-" * 50)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">常见问题排查</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>问题</th>
+                                <th>可能原因</th>
+                                <th>解决方案</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Agent 一直调用同一个工具</td>
+                                <td>工具返回值不清晰</td>
+                                <td>改进工具描述和返回格式</td>
+                            </tr>
+                            <tr>
+                                <td>Agent 不调用工具</td>
+                                <td>system_prompt 不明确</td>
+                                <td>明确指示何时使用工具</td>
+                            </tr>
+                            <tr>
+                                <td>输出格式不一致</td>
+                                <td>缺少结构化输出</td>
+                                <td>使用 response_format 参数</td>
+                            </tr>
+                            <tr>
+                                <td>执行超时</td>
+                                <td>无限循环或工具慢</td>
+                                <td>设置迭代上限和超时</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- 常见问题 -->
+                <section class="content-section">
+                    <h2 class="section-title">❓ 常见问题</h2>
+
+                    <h3 class="subsection-subtitle">Q1: Agent 可以不使用工具吗？</h3>
+                    <p>
+                        可以。传递空的工具列表 <code>tools=[]</code> 会创建一个纯 LLM 节点，
+                        只进行推理不执行行动。
+                    </p>
+
+                    <h3 class="subsection-subtitle">Q2: 如何限制 Agent 的迭代次数？</h3>
+                    <p>
+                        目前 LangChain 1.0 有默认的迭代限制。如需自定义，可以通过中间件实现：
+                    </p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from langchain.agents.middleware import before_agent
+
+@before_agent
+def limit_iterations(state, runtime):
+    """限制 Agent 迭代次数"""
+    max_iterations = 10
+    current = len([m for m in state["messages"] if m.type == "ai"])
+
+    if current >= max_iterations:
+        raise ValueError(f"达到最大迭代次数 {max_iterations}")
+
+    return state</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">Q3: 如何在运行时动态选择模型？</h3>
+                    <p>
+                        使用 <code>@wrap_model_call</code> 中间件根据对话状态选择模型。
+                        详见 <a href="07-middleware.html">中间件系统</a> 章节。
+                    </p>
+
+                    <h3 class="subsection-subtitle">Q4: Agent 状态如何持久化？</h3>
+                    <p>
+                        使用 <code>checkpointer</code> 参数。详见 <a href="10-langgraph.html">LangGraph 集成</a> 章节。
+                    </p>
+                </section>
+
+                <!-- 参考资源 -->
+                <section class="content-section">
+                    <h2 class="section-title">🔗 参考资源</h2>
+                    <ul>
+                        <li>
+                            <a href="https://docs.langchain.com/oss/python/langchain/agents" target="_blank">
+                                LangChain 官方 Agents 文档
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://python.langchain.com/docs/modules/agents/" target="_blank">
+                                Agents 模块完整文档
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://arxiv.org/abs/2210.03629" target="_blank">
+                                ReAct 论文（Reasoning + Acting）
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://smith.langchain.com/" target="_blank">
+                                LangSmith - Agent 追踪和调试
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- 页面导航 -->
+                <nav class="page-navigation">
+                    <a href="01-introduction.html" class="nav-button prev">
+                        ← 上一页：LangChain 简介
+                    </a>
+                    <a href="03-models.html" class="nav-button next">
+                        下一页：模型接口 →
+                    </a>
+                </nav>
+            </div>
+        </main>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" aria-label="返回顶部">↑</button>
+
+    <!-- JavaScript -->
+    <script src="assets/js/mermaid-init.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</body>
+</html>

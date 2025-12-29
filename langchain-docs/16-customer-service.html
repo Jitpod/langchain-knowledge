@@ -1,0 +1,1656 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LangChain 1.0 核心架构 - 深入理解 LangChain 的设计哲学和模块组织">
+    <title>核心架构 | LangChain 1.0 Python 知识文档</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <button class="mobile-menu-button" aria-label="打开菜单">☰</button>
+
+    <div class="container">
+        <!-- 侧边栏导航 -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="sidebar-title">🦜 LangChain 1.0</h1>
+                <p class="sidebar-subtitle">Python 完整学习指南</p>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-section">
+                    <div class="nav-section-title">开始</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">
+                                <span class="nav-icon">🏠</span>
+                                主页
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">基础篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="01-introduction.html" class="nav-link">
+                                <span class="nav-icon">📖</span>
+                                LangChain 简介
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="02-architecture.html" class="nav-link">
+                                <span class="nav-icon">🏗️</span>
+                                核心架构
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="03-models.html" class="nav-link">
+                                <span class="nav-icon">🤖</span>
+                                模型接口
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="04-messages.html" class="nav-link">
+                                <span class="nav-icon">💬</span>
+                                消息系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="05-tools.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                工具系统
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">进阶篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="06-agents.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                Agent 基础
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="07-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="08-rag.html" class="nav-link">
+                                <span class="nav-icon">🔍</span>
+                                RAG 详解
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="09-lcel.html" class="nav-link">
+                                <span class="nav-icon">🔗</span>
+                                LCEL 表达式
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">高级应用</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="10-runtime.html" class="nav-link">
+                                <span class="nav-icon">🔌</span>
+                                Runtime 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="11-checkpointer.html" class="nav-link">
+                                <span class="nav-icon">💾</span>
+                                持久化系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="12-streaming.html" class="nav-link">
+                                <span class="nav-icon">🌊</span>
+                                流式输出
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="13-human-in-loop.html" class="nav-link">
+                                <span class="nav-icon">👤</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="14-long-term-memory.html" class="nav-link">
+                                <span class="nav-icon">🗄️</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="15-langgraph.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                LangGraph
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">实战篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="16-customer-service.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                客服机器人
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="17-best-practices.html" class="nav-link">
+                                <span class="nav-icon">✨</span>
+                                最佳实践
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">参考篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="18-api-reference.html" class="nav-link">
+                                <span class="nav-icon">📚</span>
+                                API 速查表
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="19-troubleshooting.html" class="nav-link">
+                                <span class="nav-icon">🐛</span>
+                                故障排除
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="20-migration.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                迁移指南
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">扩展篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="21-structured-output.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                结构化输出
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">DeepAgents 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="22-deepagents-quickstart.html" class="nav-link">
+                                <span class="nav-icon">🚀</span>
+                                快速开始
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="23-deepagents-customization.html" class="nav-link">
+                                <span class="nav-icon">🎨</span>
+                                定制化
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="24-deepagents-harness.html" class="nav-link">
+                                <span class="nav-icon">🎛️</span>
+                                Harness 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="25-deepagents-backends.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                后端配置
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="26-deepagents-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="27-deepagents-hitl.html" class="nav-link">
+                                <span class="nav-icon">🤝</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="28-deepagents-memory.html" class="nav-link">
+                                <span class="nav-icon">🧠</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="29-deepagents-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">Multi-Agent 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="30-multi-agent-index.html" class="nav-link">
+                                <span class="nav-icon">🌐</span>
+                                概述
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="31-multi-agent-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="32-multi-agent-handoffs.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                交接机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="33-multi-agent-skills.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                技能系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="34-multi-agent-router.html" class="nav-link">
+                                <span class="nav-icon">🧭</span>
+                                路由机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="35-multi-agent-workflow.html" class="nav-link">
+                                <span class="nav-icon">🔀</span>
+                                自定义工作流
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- 主内容区域 -->
+        <!-- 主内容区域 -->
+        <main class="main-content">
+            <div class="content-wrapper">
+                <!-- 面包屑导航 -->
+                <nav class="breadcrumb">
+                    <span class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link">主页</a>
+                    </span>
+                    <span class="breadcrumb-item">
+                        实战篇
+                    </span>
+                    <span class="breadcrumb-item">
+                        客服机器人实战
+                    </span>
+                </nav>
+
+                <!-- 页面标题 -->
+                <header class="page-header">
+                    <h1 class="page-title">👥 客服机器人实战项目</h1>
+                    <p class="page-subtitle">
+                        通过完整的电商客服系统，综合运用 RAG、工具调用、对话管理、
+                        流式输出、人工介入和长期记忆等技术，构建生产级 AI 客服机器人。
+                    </p>
+                </header>
+
+                <!-- 项目简介 -->
+                <section class="content-section">
+                    <h2 class="section-title">📚 项目概述</h2>
+                    <p>
+                        本项目将构建一个功能完整的<strong>电商智能客服系统</strong>，
+                        整合前面所有章节学到的技术，实现一个可以直接部署到生产环境的客服机器人。
+                    </p>
+
+                    <div class="info-box note">
+                        <div class="info-box-title">💡 核心功能</div>
+                        <table style="margin-top: 0.5rem;">
+                            <thead>
+                                <tr>
+                                    <th>功能模块</th>
+                                    <th>技术方案</th>
+                                    <th>应用章节</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>FAQ 智能问答</strong></td>
+                                    <td>基于 RAG 的语义检索</td>
+                                    <td>08-rag.html</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>订单查询和管理</strong></td>
+                                    <td>自定义工具集成</td>
+                                    <td>05-tools.html</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>多轮对话</strong></td>
+                                    <td>Checkpointer 状态管理</td>
+                                    <td>11-checkpointer.html</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>用户偏好记忆</strong></td>
+                                    <td>Store 长期存储</td>
+                                    <td>14-long-term-memory.html</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>实时响应</strong></td>
+                                    <td>流式输出</td>
+                                    <td>12-streaming.html</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>敏感操作审核</strong></td>
+                                    <td>Human-in-the-Loop</td>
+                                    <td>13-human-in-loop.html</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3 class="subsection-title">业务场景</h3>
+                    <p>
+                        <strong>场景背景</strong>：某电商平台每天接收大量客户咨询，包括：
+                    </p>
+                    <ul>
+                        <li><strong>常见问题</strong>：配送时间、退换货政策、支付方式等（占 60%）</li>
+                        <li><strong>订单查询</strong>：订单状态、物流信息、退款进度等（占 30%）</li>
+                        <li><strong>售后服务</strong>：退货申请、换货处理、投诉建议等（占 10%）</li>
+                    </ul>
+
+                    <p>
+                        <strong>目标</strong>：使用 AI 客服机器人自动处理 80% 以上的咨询，
+                        复杂问题转人工处理，提升效率并保持服务质量。
+                    </p>
+                </section>
+
+                <!-- 系统架构 -->
+                <section class="content-section">
+                    <h2 class="section-title">🏗️ 系统架构设计</h2>
+
+                    <div class="mermaid-wrapper">
+                        <div class="mermaid">
+graph TB
+    User[用户咨询] --> Agent[智能客服 Agent]
+
+    Agent --> FAQ{FAQ 问题？}
+    Agent --> Order{订单查询？}
+    Agent --> Service{售后服务？}
+
+    FAQ -->|是| RAG[RAG 检索工具]
+    RAG --> VectorDB[(向量数据库<br/>FAQ 知识库)]
+    RAG --> Answer1[生成答案]
+
+    Order -->|是| OrderTools[订单工具集]
+    OrderTools --> OrderDB[(订单数据库)]
+    OrderTools --> Answer2[返回订单信息]
+
+    Service -->|是| ServiceTools[售后工具集]
+    ServiceTools --> HITL{需要审核？}
+    HITL -->|是| Human[人工审核]
+    HITL -->|否| Execute[执行操作]
+    Human --> Execute
+    Execute --> Answer3[返回处理结果]
+
+    Answer1 --> Stream[流式输出]
+    Answer2 --> Stream
+    Answer3 --> Stream
+
+    Stream --> Memory[对话记忆]
+    Memory --> Checkpointer[(Checkpointer<br/>短期记忆)]
+    Memory --> Store[(Store<br/>长期记忆)]
+
+    Stream --> Response[实时响应用户]
+
+    style Agent fill:#3b82f6,color:#fff
+    style RAG fill:#10b981,color:#fff
+    style OrderTools fill:#f59e0b,color:#fff
+    style ServiceTools fill:#ef4444,color:#fff
+    style HITL fill:#8b5cf6,color:#fff
+    style Stream fill:#06b6d4,color:#fff
+                        </div>
+                    </div>
+
+                    <h3 class="subsection-title">架构说明</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>组件</th>
+                                <th>职责</th>
+                                <th>技术实现</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>智能客服 Agent</strong></td>
+                                <td>理解用户意图，调用合适的工具</td>
+                                <td>create_agent() + GPT-4</td>
+                            </tr>
+                            <tr>
+                                <td><strong>RAG 检索工具</strong></td>
+                                <td>从 FAQ 知识库检索相关信息</td>
+                                <td>Chroma + OpenAI Embeddings</td>
+                            </tr>
+                            <tr>
+                                <td><strong>订单工具集</strong></td>
+                                <td>查询订单、物流、退款信息</td>
+                                <td>@tool 装饰器 + SQLite</td>
+                            </tr>
+                            <tr>
+                                <td><strong>售后工具集</strong></td>
+                                <td>处理退货、换货、投诉</td>
+                                <td>@tool + HITL Middleware</td>
+                            </tr>
+                            <tr>
+                                <td><strong>流式输出</strong></td>
+                                <td>实时显示响应过程</td>
+                                <td>stream_mode="messages"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>对话记忆</strong></td>
+                                <td>短期对话历史 + 长期用户偏好</td>
+                                <td>Checkpointer + Store</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- 第一步：FAQ 智能问答 -->
+                <section class="content-section">
+                    <h2 class="section-title">📖 第一步：FAQ 智能问答（RAG）</h2>
+                    <p>
+                        首先实现基于 RAG 的 FAQ 问答功能，让机器人能够回答常见问题。
+                    </p>
+
+                    <h3 class="subsection-title">FAQ 数据准备</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">JSON</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-json">// projects/customer-service-bot/data/faq.json
+[
+  {
+    "question": "配送时间是多久？",
+    "answer": "一般情况下，订单在提交后 1-2 个工作日内发货。国内配送通常需要 3-5 个工作日，偏远地区可能需要 5-7 个工作日。您可以在订单详情页查看实时物流信息。",
+    "category": "配送"
+  },
+  {
+    "question": "如何申请退货？",
+    "answer": "您可以在订单详情页点击'申请售后'按钮，选择退货原因并提交。我们会在 1-2 个工作日内审核您的申请。退货商品需保持原包装完好，未使用，收到退货后 3-5 个工作日退款。",
+    "category": "售后"
+  },
+  {
+    "question": "支持哪些支付方式？",
+    "answer": "我们支持多种支付方式：1）支付宝、微信支付 2）银行卡（借记卡/信用卡）3）货到付款（部分地区支持）。所有支付渠道均采用加密技术，保障您的资金安全。",
+    "category": "支付"
+  },
+  {
+    "question": "会员等级有什么权益？",
+    "answer": "我们的会员体系分为普通、银卡、金卡、钻石四个等级。等级越高，享受的折扣越多（最高可达 9.5 折），并可获得专属客服、优先配送、生日礼品等特权。会员等级根据年度消费金额自动升级。",
+    "category": "会员"
+  },
+  {
+    "question": "如何修改收货地址？",
+    "answer": "订单未发货前，您可以在订单详情页点击'修改地址'进行更改。如果订单已发货，请联系客服协助修改（可能产生额外运费）。建议在个人中心预先设置常用地址，下单时可快速选择。",
+    "category": "订单管理"
+  }
+]</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">构建 FAQ 检索工具</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+FAQ 检索工具实现
+功能：基于 RAG 的语义搜索
+"""
+from langchain_chroma import Chroma
+from langchain_openai import OpenAIEmbeddings
+from langchain_core.documents import Document
+from langchain.tools import tool
+import json
+
+# 加载 FAQ 数据
+def load_faq_data(file_path: str) -> list[Document]:
+    """加载 FAQ 数据并转换为 Document 对象"""
+    with open(file_path, 'r', encoding='utf-8') as f:
+        faq_list = json.load(f)
+
+    documents = []
+    for item in faq_list:
+        # 将问题和答案组合成文档
+        content = f"问题：{item['question']}\n答案：{item['answer']}"
+        doc = Document(
+            page_content=content,
+            metadata={
+                "category": item["category"],
+                "question": item["question"]
+            }
+        )
+        documents.append(doc)
+
+    return documents
+
+# 初始化向量存储
+embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
+documents = load_faq_data("data/faq.json")
+
+vectorstore = Chroma.from_documents(
+    documents=documents,
+    embedding=embeddings,
+    collection_name="faq_knowledge"
+)
+
+retriever = vectorstore.as_retriever(search_kwargs={"k": 2})
+
+# 定义 FAQ 检索工具
+@tool
+def search_faq(query: str) -> str:
+    """
+    搜索常见问题（FAQ）知识库。
+
+    适用于：
+    - 配送时间、退换货政策、支付方式等常见问题
+    - 会员权益、优惠活动等通用信息
+
+    参数：
+        query: 用户的问题描述
+
+    返回：
+        相关的 FAQ 答案
+    """
+    # 检索相关文档
+    docs = retriever.invoke(query)
+
+    if not docs:
+        return "抱歉，我没有找到相关的常见问题解答。您可以详细描述您的问题，或者转接人工客服。"
+
+    # 组合检索结果
+    result = "根据常见问题库，我找到以下相关信息：\n\n"
+    for i, doc in enumerate(docs, 1):
+        result += f"{i}. {doc.metadata['question']}\n"
+        result += f"   {doc.page_content.split('答案：')[1]}\n\n"
+
+    return result.strip()</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">测试 FAQ 工具</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+测试 FAQ 检索工具
+"""
+# 直接调用工具
+result = search_faq.invoke({"query": "我想知道多久能收到货"})
+print(result)
+
+# 预期输出：
+# 根据常见问题库，我找到以下相关信息：
+#
+# 1. 配送时间是多久？
+#    一般情况下，订单在提交后 1-2 个工作日内发货...
+#
+# 2. 如何修改收货地址？
+#    订单未发货前，您可以在订单详情页点击'修改地址'...</code></pre>
+                    </div>
+                </section>
+
+                <!-- 第二步：订单查询工具 -->
+                <section class="content-section">
+                    <h2 class="section-title">📦 第二步：订单查询和管理工具</h2>
+                    <p>
+                        实现订单相关的工具集，包括查询订单状态、物流信息和退款进度。
+                    </p>
+
+                    <h3 class="subsection-title">模拟订单数据库</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+订单数据模拟（生产环境应连接真实数据库）
+"""
+import sqlite3
+from datetime import datetime, timedelta
+
+# 初始化数据库
+def init_order_database():
+    """创建订单数据库并插入测试数据"""
+    conn = sqlite3.connect("data/orders.db")
+    cursor = conn.cursor()
+
+    # 创建订单表
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS orders (
+            order_id TEXT PRIMARY KEY,
+            user_id TEXT NOT NULL,
+            product_name TEXT NOT NULL,
+            quantity INTEGER NOT NULL,
+            total_price REAL NOT NULL,
+            status TEXT NOT NULL,
+            shipping_address TEXT,
+            tracking_number TEXT,
+            created_at TEXT NOT NULL,
+            updated_at TEXT NOT NULL
+        )
+    """)
+
+    # 插入测试数据
+    test_orders = [
+        ("ORDER-2024001", "user_123", "iPhone 15 Pro", 1, 7999.0,
+         "已发货", "北京市朝阳区xxx小区", "SF1234567890",
+         (datetime.now() - timedelta(days=3)).isoformat(),
+         (datetime.now() - timedelta(days=1)).isoformat()),
+
+        ("ORDER-2024002", "user_123", "AirPods Pro 2", 1, 1899.0,
+         "配送中", "北京市朝阳区xxx小区", "SF0987654321",
+         (datetime.now() - timedelta(days=2)).isoformat(),
+         datetime.now().isoformat()),
+
+        ("ORDER-2024003", "user_123", "MacBook Pro 14", 1, 14999.0,
+         "处理中", "北京市朝阳区xxx小区", None,
+         (datetime.now() - timedelta(hours=6)).isoformat(),
+         (datetime.now() - timedelta(hours=6)).isoformat()),
+    ]
+
+    cursor.executemany("""
+        INSERT OR REPLACE INTO orders VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    """, test_orders)
+
+    conn.commit()
+    conn.close()
+    print("订单数据库初始化完成")
+
+# 执行初始化
+init_order_database()</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">订单查询工具集</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+订单查询工具集
+功能：查询订单状态、物流信息
+"""
+from langchain.tools import tool
+from langchain.tools import ToolRuntime
+from typing_extensions import TypedDict
+import sqlite3
+
+# 定义上下文 Schema
+class CustomerContext(TypedDict):
+    user_id: str
+    session_id: str
+
+@tool
+def get_my_orders(runtime: ToolRuntime[CustomerContext]) -> str:
+    """
+    查询当前用户的所有订单。
+
+    返回：
+        订单列表，包括订单号、商品名称、状态等信息
+    """
+    user_id = runtime.context["user_id"]
+
+    conn = sqlite3.connect("data/orders.db")
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT order_id, product_name, quantity, total_price, status, created_at
+        FROM orders
+        WHERE user_id = ?
+        ORDER BY created_at DESC
+    """, (user_id,))
+
+    orders = cursor.fetchall()
+    conn.close()
+
+    if not orders:
+        return "您目前没有任何订单记录。"
+
+    result = f"您共有 {len(orders)} 个订单：\n\n"
+    for order in orders:
+        order_id, product, qty, price, status, created = order
+        result += f"📦 订单号：{order_id}\n"
+        result += f"   商品：{product} x{qty}\n"
+        result += f"   金额：¥{price:.2f}\n"
+        result += f"   状态：{status}\n"
+        result += f"   下单时间：{created[:10]}\n\n"
+
+    return result.strip()
+
+@tool
+def get_order_details(order_id: str, runtime: ToolRuntime[CustomerContext]) -> str:
+    """
+    查询特定订单的详细信息，包括物流信息。
+
+    参数：
+        order_id: 订单号（例如：ORDER-2024001）
+
+    返回：
+        订单详细信息和物流状态
+    """
+    user_id = runtime.context["user_id"]
+
+    conn = sqlite3.connect("data/orders.db")
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT * FROM orders
+        WHERE order_id = ? AND user_id = ?
+    """, (order_id, user_id))
+
+    order = cursor.fetchone()
+    conn.close()
+
+    if not order:
+        return f"未找到订单 {order_id}，请检查订单号是否正确。"
+
+    _, _, product, qty, price, status, address, tracking, created, updated = order
+
+    result = f"📦 订单详情\n\n"
+    result += f"订单号：{order_id}\n"
+    result += f"商品：{product} x{qty}\n"
+    result += f"金额：¥{price:.2f}\n"
+    result += f"状态：{status}\n"
+    result += f"收货地址：{address}\n"
+    result += f"下单时间：{created[:16]}\n"
+    result += f"更新时间：{updated[:16]}\n"
+
+    if tracking:
+        result += f"\n🚚 物流信息\n"
+        result += f"快递单号：{tracking}\n"
+        result += f"物流状态：{status}\n"
+
+        # 模拟物流轨迹
+        if status == "已发货":
+            result += "最新轨迹：您的包裹已从仓库发出，正在运输途中\n"
+        elif status == "配送中":
+            result += "最新轨迹：您的包裹已到达北京分拨中心，即将派送\n"
+
+    return result
+
+@tool
+def cancel_order(order_id: str, reason: str, runtime: ToolRuntime[CustomerContext]) -> str:
+    """
+    取消订单（仅限未发货的订单）。
+
+    参数：
+        order_id: 订单号
+        reason: 取消原因
+
+    返回：
+        取消结果
+    """
+    user_id = runtime.context["user_id"]
+
+    conn = sqlite3.connect("data/orders.db")
+    cursor = conn.cursor()
+
+    # 检查订单状态
+    cursor.execute("""
+        SELECT status FROM orders
+        WHERE order_id = ? AND user_id = ?
+    """, (order_id, user_id))
+
+    result = cursor.fetchone()
+
+    if not result:
+        conn.close()
+        return f"未找到订单 {order_id}"
+
+    status = result[0]
+
+    if status != "处理中":
+        conn.close()
+        return f"订单 {order_id} 当前状态为 '{status}'，无法取消。已发货的订单请申请退货。"
+
+    # 更新订单状态
+    cursor.execute("""
+        UPDATE orders
+        SET status = '已取消', updated_at = ?
+        WHERE order_id = ? AND user_id = ?
+    """, (datetime.now().isoformat(), order_id, user_id))
+
+    conn.commit()
+    conn.close()
+
+    return f"订单 {order_id} 已成功取消。取消原因：{reason}\n退款将在 3-5 个工作日内原路退回。"</code></pre>
+                    </div>
+                </section>
+
+                <!-- 第三步：多轮对话和记忆 -->
+                <section class="content-section">
+                    <h2 class="section-title">💬 第三步：多轮对话和记忆管理</h2>
+                    <p>
+                        整合 Checkpointer（短期对话历史）和 Store（长期用户偏好）实现智能对话。
+                    </p>
+
+                    <h3 class="subsection-title">用户偏好管理工具</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+用户偏好管理（长期记忆）
+功能：记住用户的语言偏好、常用地址等信息
+"""
+from langchain.tools import tool, ToolRuntime
+from langgraph.store.memory import InMemoryStore
+
+# 初始化 Store
+store = InMemoryStore()
+
+@tool
+def save_user_preference(
+    preference_type: str,
+    preference_value: str,
+    runtime: ToolRuntime[CustomerContext]
+) -> str:
+    """
+    保存用户偏好设置。
+
+    参数：
+        preference_type: 偏好类型（language, default_address, notification 等）
+        preference_value: 偏好值
+
+    返回：
+        保存结果
+    """
+    user_id = runtime.context["user_id"]
+    store_obj = runtime.store
+
+    # 获取现有偏好
+    current_prefs = store_obj.get(("users", user_id), "preferences")
+
+    if current_prefs:
+        prefs = current_prefs.value
+    else:
+        prefs = {}
+
+    # 更新偏好
+    prefs[preference_type] = preference_value
+
+    # 保存到 Store
+    store_obj.put(("users", user_id), "preferences", prefs)
+
+    return f"已保存您的偏好：{preference_type} = {preference_value}"
+
+@tool
+def get_user_preference(
+    preference_type: str,
+    runtime: ToolRuntime[CustomerContext]
+) -> str:
+    """
+    获取用户偏好设置。
+
+    参数：
+        preference_type: 偏好类型
+
+    返回：
+        偏好值
+    """
+    user_id = runtime.context["user_id"]
+    store_obj = runtime.store
+
+    prefs = store_obj.get(("users", user_id), "preferences")
+
+    if not prefs:
+        return f"未设置 {preference_type} 偏好"
+
+    value = prefs.value.get(preference_type)
+
+    if not value:
+        return f"未设置 {preference_type} 偏好"
+
+    return f"您的 {preference_type} 偏好为：{value}"
+
+@tool
+def record_interaction_history(
+    interaction_summary: str,
+    runtime: ToolRuntime[CustomerContext]
+) -> str:
+    """
+    记录重要的交互历史（用于后续分析和改进服务）。
+
+    参数：
+        interaction_summary: 交互摘要
+
+    返回：
+        记录结果
+    """
+    user_id = runtime.context["user_id"]
+    store_obj = runtime.store
+
+    # 获取历史记录
+    history = store_obj.get(("users", user_id, "history"), "interactions")
+
+    if history:
+        interactions = history.value
+    else:
+        interactions = []
+
+    # 添加新记录
+    interactions.append({
+        "timestamp": datetime.now().isoformat(),
+        "summary": interaction_summary
+    })
+
+    # 保留最近 50 条
+    interactions = interactions[-50:]
+
+    # 保存
+    store_obj.put(("users", user_id, "history"), "interactions", interactions)
+
+    return "交互历史已记录"</code></pre>
+                    </div>
+                </section>
+
+                <!-- 第四步：系统整合 -->
+                <section class="content-section">
+                    <h2 class="section-title">🎯 第四步：完整系统整合</h2>
+                    <p>
+                        将所有组件整合成一个完整的客服机器人系统，包含流式输出和人工介入。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级 - 完整系统</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+完整的电商客服机器人系统
+整合：RAG + 工具 + 对话管理 + 流式输出 + 人工介入 + 长期记忆
+"""
+from langchain.agents import create_agent
+from langchain.agents.middleware import HumanInTheLoopMiddleware
+from langgraph.checkpoint.memory import InMemorySaver
+from langgraph.store.memory import InMemoryStore
+from typing_extensions import TypedDict
+import uuid
+
+# ==================== 上下文定义 ====================
+
+class CustomerContext(TypedDict):
+    user_id: str
+    session_id: str
+
+# ==================== 工具集合 ====================
+
+# 前面定义的所有工具
+all_tools = [
+    # FAQ 工具
+    search_faq,
+
+    # 订单工具
+    get_my_orders,
+    get_order_details,
+    cancel_order,
+
+    # 用户偏好工具
+    save_user_preference,
+    get_user_preference,
+    record_interaction_history,
+]
+
+# ==================== 敏感操作审核配置 ====================
+
+# 退款和取消订单需要人工审核
+hitl_middleware = HumanInTheLoopMiddleware(
+    interrupt_on={
+        "cancel_order": True,  # 取消订单需要审核
+        "search_faq": False,
+        "get_my_orders": False,
+        "get_order_details": False,
+        "save_user_preference": False,
+        "get_user_preference": False,
+        "record_interaction_history": False,
+    },
+    description=lambda req: f"用户请求：{req['name']}({req['args']})"
+)
+
+# ==================== 创建客服 Agent ====================
+
+# 初始化 Checkpointer 和 Store
+checkpointer = InMemorySaver()
+store = InMemoryStore()
+
+customer_service_agent = create_agent(
+    model="gpt-4o",
+    tools=all_tools,
+    middleware=[hitl_middleware],
+    checkpointer=checkpointer,
+    store=store,
+    context_schema=CustomerContext,
+    system_prompt="""你是一个专业的电商客服助手。
+
+职责：
+1. 解答客户关于配送、退换货、支付等常见问题（使用 search_faq 工具）
+2. 查询和管理订单信息（使用订单相关工具）
+3. 记住用户的偏好，提供个性化服务
+4. 对于复杂或敏感的问题，及时转接人工客服
+
+工作原则：
+- 始终保持礼貌、专业、耐心
+- 优先使用工具查询准确信息，不要猜测
+- 对于订单取消、退款等敏感操作，需要人工审核
+- 记录重要的交互历史，帮助改进服务
+- 如果无法解决问题，主动建议转接人工
+
+回答风格：
+- 简洁明了，重点突出
+- 使用列表和段落增强可读性
+- 提供具体的操作步骤
+"""
+)
+
+# ==================== 流式对话处理 ====================
+
+def chat_with_customer_service(
+    user_message: str,
+    user_id: str = "user_123",
+    thread_id: str = None
+):
+    """
+    与客服机器人进行流式对话
+
+    参数：
+        user_message: 用户消息
+        user_id: 用户 ID
+        thread_id: 会话 ID（用于多轮对话）
+    """
+    if thread_id is None:
+        thread_id = str(uuid.uuid4())
+
+    config = {
+        "configurable": {
+            "thread_id": thread_id,
+        },
+        "context": {
+            "user_id": user_id,
+            "session_id": thread_id
+        }
+    }
+
+    print(f"\n{'='*60}")
+    print(f"用户: {user_message}")
+    print('='*60)
+
+    # 流式调用
+    print("\n🤖 客服: ", end="", flush=True)
+
+    full_response = ""
+    interrupted = False
+
+    for stream_mode, chunk in customer_service_agent.stream(
+        {"messages": [{"role": "user", "content": user_message}]},
+        config=config,
+        stream_mode=["messages", "updates"]
+    ):
+        if stream_mode == "messages":
+            token, metadata = chunk
+            if token:
+                print(token, end="", flush=True)
+                full_response += token
+
+        elif stream_mode == "updates":
+            for step, data in chunk.items():
+                if "__interrupt__" in data:
+                    interrupted = True
+                    print("\n\n⏸️ 需要人工审核，请稍候...")
+
+    print("\n" + "="*60)
+
+    return {
+        "thread_id": thread_id,
+        "response": full_response,
+        "interrupted": interrupted
+    }
+
+# ==================== 测试场景 ====================
+
+def run_test_scenarios():
+    """运行多个测试场景"""
+
+    print("\n" + "🧪 开始测试电商客服机器人".center(60, "="))
+
+    # 场景 1：FAQ 问答
+    print("\n\n📌 场景 1：查询配送时间")
+    result1 = chat_with_customer_service(
+        "我想知道订单一般多久能送到？",
+        user_id="user_123"
+    )
+    thread_id = result1["thread_id"]
+
+    input("\n按回车继续下一个场景...")
+
+    # 场景 2：查询订单（多轮对话，使用相同 thread_id）
+    print("\n\n📌 场景 2：查询我的订单")
+    result2 = chat_with_customer_service(
+        "帮我查一下我的订单",
+        user_id="user_123",
+        thread_id=thread_id  # 继续之前的对话
+    )
+
+    input("\n按回车继续下一个场景...")
+
+    # 场景 3：查询特定订单详情
+    print("\n\n📌 场景 3：查询订单详情")
+    result3 = chat_with_customer_service(
+        "帮我查一下 ORDER-2024002 的物流信息",
+        user_id="user_123",
+        thread_id=thread_id
+    )
+
+    input("\n按回车继续下一个场景...")
+
+    # 场景 4：取消订单（会触发人工审核）
+    print("\n\n📌 场景 4：取消订单（触发审核）")
+    result4 = chat_with_customer_service(
+        "我想取消订单 ORDER-2024003，因为买错了",
+        user_id="user_123",
+        thread_id=thread_id
+    )
+
+    if result4["interrupted"]:
+        print("\n💡 提示：此操作需要人工审核")
+        print("   在生产环境中，客服人员会在后台审核此请求")
+
+        # 模拟审核通过
+        from langgraph.types import Command
+        print("\n✅ 模拟审核通过，继续执行...")
+
+        approval_result = customer_service_agent.invoke(
+            Command(resume={"decisions": [{"type": "approve"}]}),
+            config={
+                "configurable": {"thread_id": thread_id},
+                "context": {"user_id": "user_123", "session_id": thread_id}
+            }
+        )
+
+        print(f"\n最终结果: {approval_result['messages'][-1].content}")
+
+    input("\n按回车继续下一个场景...")
+
+    # 场景 5：保存用户偏好
+    print("\n\n📌 场景 5：保存常用地址")
+    result5 = chat_with_customer_service(
+        "帮我把常用地址设为：北京市朝阳区xxx小区",
+        user_id="user_123",
+        thread_id=thread_id
+    )
+
+    print("\n\n" + "✅ 测试完成！".center(60, "="))
+    print("\n系统演示了以下功能：")
+    print("  1. ✅ FAQ 智能问答（RAG）")
+    print("  2. ✅ 订单查询和管理")
+    print("  3. ✅ 多轮对话（Checkpointer）")
+    print("  4. ✅ 人工审核（HITL）")
+    print("  5. ✅ 用户偏好（Store）")
+    print("  6. ✅ 流式输出")
+
+# ==================== 主程序 ====================
+
+if __name__ == "__main__":
+    # 初始化数据
+    print("正在初始化系统...")
+    init_order_database()
+    print("系统初始化完成！\n")
+
+    # 运行测试场景
+    run_test_scenarios()</code></pre>
+                    </div>
+                </section>
+
+                <!-- 对话流程图 -->
+                <section class="content-section">
+                    <h2 class="section-title">🔄 完整对话流程</h2>
+
+                    <div class="mermaid-wrapper">
+                        <div class="mermaid">
+sequenceDiagram
+    participant U as 用户
+    participant A as Agent
+    participant FAQ as FAQ工具
+    participant Order as 订单工具
+    participant HITL as 人工审核
+    participant CP as Checkpointer
+    participant ST as Store
+
+    U->>A: 配送时间是多久？
+    A->>FAQ: search_faq("配送时间")
+    FAQ->>A: 返回FAQ答案
+    A->>CP: 保存对话历史
+    A->>U: 流式返回答案
+
+    U->>A: 查询我的订单
+    A->>CP: 加载对话上下文
+    A->>Order: get_my_orders()
+    Order->>A: 返回订单列表
+    A->>CP: 更新对话历史
+    A->>U: 流式返回订单信息
+
+    U->>A: 取消订单 ORDER-2024003
+    A->>Order: cancel_order(ORDER-2024003)
+    Order->>HITL: 触发审核
+    HITL-->>U: 等待人工审核
+
+    Note over HITL: 客服审核中...
+
+    HITL->>Order: 审核通过，执行取消
+    Order->>A: 返回取消结果
+    A->>CP: 记录操作
+    A->>ST: 记录交互历史
+    A->>U: 返回取消确认
+
+    U->>A: 保存常用地址
+    A->>ST: save_user_preference()
+    ST->>A: 保存成功
+    A->>U: 确认保存
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 部署和优化 -->
+                <section class="content-section">
+                    <h2 class="section-title">🚀 部署和优化建议</h2>
+
+                    <h3 class="subsection-title">生产环境配置</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+生产环境配置示例
+"""
+from langgraph.checkpoint.postgres import PostgresSaver
+from langgraph.store.postgres import PostgresStore
+import os
+
+# 数据库连接
+DB_URI = os.getenv("DATABASE_URL", "postgresql://user:pass@localhost:5432/customer_service")
+
+# 使用 PostgreSQL 持久化
+with PostgresSaver.from_conn_string(DB_URI) as checkpointer:
+    checkpointer.setup()
+
+    with PostgresStore.from_conn_string(DB_URI) as store:
+        store.setup()
+
+        # 创建生产级 Agent
+        production_agent = create_agent(
+            model="gpt-4o",
+            tools=all_tools,
+            middleware=[
+                hitl_middleware,
+                # 可添加更多中间件：日志、监控、限流等
+            ],
+            checkpointer=checkpointer,
+            store=store,
+            context_schema=CustomerContext,
+            system_prompt="""..."""  # 生产级提示词
+        )</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">性能优化清单</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>优化项</th>
+                                <th>方案</th>
+                                <th>预期提升</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>FAQ 检索速度</strong></td>
+                                <td>使用 Redis 缓存热门问题</td>
+                                <td>响应时间减少 70%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>数据库查询</strong></td>
+                                <td>添加索引、使用连接池</td>
+                                <td>查询速度提升 3-5 倍</td>
+                            </tr>
+                            <tr>
+                                <td><strong>并发处理</strong></td>
+                                <td>使用异步 Agent（async/await）</td>
+                                <td>支持 10x 并发用户</td>
+                            </tr>
+                            <tr>
+                                <td><strong>成本控制</strong></td>
+                                <td>使用更小的模型（GPT-3.5）处理简单问题</td>
+                                <td>成本降低 50%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>响应速度</strong></td>
+                                <td>启用流式输出</td>
+                                <td>首字延迟减少 80%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 class="subsection-title">监控指标</h3>
+                    <ul>
+                        <li><strong>响应时间</strong>：P50 < 2s, P95 < 5s</li>
+                        <li><strong>FAQ 命中率</strong>：> 60%</li>
+                        <li><strong>问题解决率</strong>：> 80%（无需转人工）</li>
+                        <li><strong>用户满意度</strong>：> 4.0/5.0</li>
+                        <li><strong>每日成本</strong>：< $50（1000 次对话）</li>
+                    </ul>
+                </section>
+
+                <!-- 常见问题 -->
+                <section class="content-section">
+                    <h2 class="section-title">❓ 常见问题</h2>
+
+                    <h3 class="subsection-subtitle">Q1: 如何处理多个用户同时对话？</h3>
+                    <p>
+                        使用不同的 <code>thread_id</code> 区分不同用户的会话。
+                        每个用户的对话历史独立存储在 Checkpointer 中。
+                    </p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 用户 A 的会话
+config_a = {
+    "configurable": {"thread_id": "user_a_session_001"},
+    "context": {"user_id": "user_a"}
+}
+
+# 用户 B 的会话
+config_b = {
+    "configurable": {"thread_id": "user_b_session_002"},
+    "context": {"user_id": "user_b"}
+}
+
+# 两个用户可以并发对话，互不影响
+agent.invoke({...}, config=config_a)
+agent.invoke({...}, config=config_b)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">Q2: FAQ 知识库如何更新？</h3>
+                    <p>
+                        <strong>方案 1：定期重建</strong>
+                    </p>
+                    <ul>
+                        <li>每天凌晨自动从 CMS 或数据库拉取最新 FAQ</li>
+                        <li>重新生成 embeddings 并更新向量数据库</li>
+                        <li>适合变化不频繁的场景</li>
+                    </ul>
+
+                    <p>
+                        <strong>方案 2：增量更新</strong>
+                    </p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 添加新的 FAQ
+new_faq = Document(
+    page_content="问题：xxx\n答案：xxx",
+    metadata={"category": "新增"}
+)
+
+vectorstore.add_documents([new_faq])
+
+# 删除过时的 FAQ
+vectorstore.delete(ids=["outdated_faq_id"])</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">Q3: 如何防止 Agent 给出错误答案？</h3>
+                    <p>
+                        <strong>多层防护策略</strong>：
+                    </p>
+                    <ol>
+                        <li><strong>明确工具边界</strong>：在工具的 docstring 中说明适用场景</li>
+                        <li><strong>验证工具输入</strong>：在工具内部验证参数合法性</li>
+                        <li><strong>提示词引导</strong>：在 system_prompt 中强调"优先使用工具，不要猜测"</li>
+                        <li><strong>输出验证</strong>：添加中间件检查答案的合理性</li>
+                        <li><strong>人工监督</strong>：定期审查对话记录，发现问题及时调整</li>
+                    </ol>
+
+                    <h3 class="subsection-subtitle">Q4: 对话历史会无限增长吗？</h3>
+                    <p>
+                        不会。可以通过以下方式控制：
+                    </p>
+                    <ul>
+                        <li><strong>限制历史长度</strong>：只保留最近 N 轮对话</li>
+                        <li><strong>摘要历史</strong>：使用 LLM 定期总结对话，替换详细历史</li>
+                        <li><strong>定期清理</strong>：超过一定时间的会话自动归档</li>
+                    </ul>
+
+                    <h3 class="subsection-subtitle">Q5: 如何评估客服机器人的效果？</h3>
+                    <p>
+                        建立多维度评估体系：
+                    </p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>指标</th>
+                                <th>计算方法</th>
+                                <th>目标值</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>问题解决率</strong></td>
+                                <td>无需转人工的对话数 / 总对话数</td>
+                                <td>> 80%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>首次响应时间</strong></td>
+                                <td>用户发送消息到收到首个 Token 的时间</td>
+                                <td>< 1s</td>
+                            </tr>
+                            <tr>
+                                <td><strong>平均对话轮次</strong></td>
+                                <td>解决问题平均需要的对话轮数</td>
+                                <td>< 5 轮</td>
+                            </tr>
+                            <tr>
+                                <td><strong>用户满意度</strong></td>
+                                <td>对话结束后的用户评分</td>
+                                <td>> 4.0/5.0</td>
+                            </tr>
+                            <tr>
+                                <td><strong>答案准确率</strong></td>
+                                <td>人工抽查答案的正确率</td>
+                                <td>> 95%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- 最佳实践 -->
+                <section class="content-section">
+                    <h2 class="section-title">✨ 最佳实践</h2>
+
+                    <h3 class="subsection-title">1. 提示词设计</h3>
+                    <ul>
+                        <li><strong>明确角色定位</strong>："你是专业的电商客服"</li>
+                        <li><strong>列举职责范围</strong>：解答 FAQ、查询订单、处理售后</li>
+                        <li><strong>强调工具优先</strong>：不要猜测，优先使用工具</li>
+                        <li><strong>设定行为准则</strong>：礼貌、专业、及时转人工</li>
+                        <li><strong>提供示例</strong>：展示期望的回答风格</li>
+                    </ul>
+
+                    <h3 class="subsection-title">2. 工具设计</h3>
+                    <ul>
+                        <li><strong>单一职责</strong>：每个工具只做一件事</li>
+                        <li><strong>清晰的 docstring</strong>：说明功能、参数、适用场景</li>
+                        <li><strong>错误处理</strong>：返回友好的错误消息</li>
+                        <li><strong>性能优化</strong>：添加缓存、批量查询</li>
+                        <li><strong>安全验证</strong>：验证用户权限和参数合法性</li>
+                    </ul>
+
+                    <h3 class="subsection-title">3. 对话管理</h3>
+                    <ul>
+                        <li><strong>合理的 thread_id 策略</strong>：每个独立咨询一个 thread</li>
+                        <li><strong>主动结束会话</strong>：问题解决后询问是否还需帮助</li>
+                        <li><strong>上下文引用</strong>："您刚才提到的订单"而非"订单"</li>
+                        <li><strong>记录关键信息</strong>：用户偏好、常见问题保存到 Store</li>
+                    </ul>
+
+                    <h3 class="subsection-title">4. 生产环境注意事项</h3>
+                    <ul>
+                        <li><strong>使用 PostgreSQL</strong>：替代 InMemorySaver 和 InMemoryStore</li>
+                        <li><strong>启用监控</strong>：集成 LangSmith 追踪执行过程</li>
+                        <li><strong>设置限流</strong>：防止恶意调用</li>
+                        <li><strong>异常告警</strong>：工具失败、响应超时等及时通知</li>
+                        <li><strong>定期备份</strong>：对话历史和用户数据</li>
+                    </ul>
+                </section>
+
+                <!-- 扩展方向 -->
+                <section class="content-section">
+                    <h2 class="section-title">🔮 扩展方向</h2>
+
+                    <h3 class="subsection-title">功能扩展</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>功能</th>
+                                <th>实现思路</th>
+                                <th>难度</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>多语言支持</strong></td>
+                                <td>检测用户语言 + 翻译工具</td>
+                                <td>🟡 中级</td>
+                            </tr>
+                            <tr>
+                                <td><strong>语音输入</strong></td>
+                                <td>集成 Whisper ASR</td>
+                                <td>🟡 中级</td>
+                            </tr>
+                            <tr>
+                                <td><strong>图片识别</strong></td>
+                                <td>使用 GPT-4V 处理产品图片</td>
+                                <td>🔴 高级</td>
+                            </tr>
+                            <tr>
+                                <td><strong>情感分析</strong></td>
+                                <td>检测用户情绪，调整回答风格</td>
+                                <td>🟡 中级</td>
+                            </tr>
+                            <tr>
+                                <td><strong>智能推荐</strong></td>
+                                <td>基于用户历史推荐商品</td>
+                                <td>🔴 高级</td>
+                            </tr>
+                            <tr>
+                                <td><strong>主动问候</strong></td>
+                                <td>识别老客户，个性化问候</td>
+                                <td>🟢 基础</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 class="subsection-title">技术升级</h3>
+                    <ul>
+                        <li><strong>LangGraph 编排</strong>：用状态图实现更复杂的对话流程</li>
+                        <li><strong>多 Agent 协作</strong>：订单 Agent + FAQ Agent + 售后 Agent 分工协作</li>
+                        <li><strong>强化学习</strong>：根据用户反馈持续优化回答</li>
+                        <li><strong>知识图谱</strong>：构建商品和问题的关系图谱</li>
+                    </ul>
+                </section>
+
+                <!-- 参考资源 -->
+                <section class="content-section">
+                    <h2 class="section-title">📖 参考资源</h2>
+                    <ul>
+                        <li>
+                            <a href="https://langchain-ai.github.io/langgraph/tutorials/customer-support/customer-support/" target="_blank">
+                                LangGraph 客服机器人教程
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://docs.langchain.com/oss/python/langchain/retrieval" target="_blank">
+                                LangChain Retrieval 文档
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://docs.langchain.com/oss/python/langchain/agents" target="_blank">
+                                LangChain Agents 文档
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://blog.langchain.com/agent-middleware/" target="_blank">
+                                Agent Middleware 博客
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- 页面导航 -->
+                <nav class="page-navigation">
+                    <a href="15-langgraph.html" class="nav-button prev">
+                        ← 上一页：LangGraph
+                    </a>
+                    <a href="17-best-practices.html" class="nav-button next">
+                        下一页：最佳实践 →
+                    </a>
+                </nav>
+            </div>
+        </main>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" aria-label="返回顶部">↑</button>
+
+    <!-- JavaScript -->
+    <script src="assets/js/mermaid-init.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</body>
+</html>

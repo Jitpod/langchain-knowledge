@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LangChain 1.0 核心架构 - 深入理解 LangChain 的设计哲学和模块组织">
+    <title>核心架构 | LangChain 1.0 Python 知识文档</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <button class="mobile-menu-button" aria-label="打开菜单">☰</button>
+
+    <div class="container">
+        <!-- 侧边栏导航 -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="sidebar-title">🦜 LangChain 1.0</h1>
+                <p class="sidebar-subtitle">Python 完整学习指南</p>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-section">
+                    <div class="nav-section-title">开始</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">
+                                <span class="nav-icon">🏠</span>
+                                主页
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">基础篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="01-introduction.html" class="nav-link">
+                                <span class="nav-icon">📖</span>
+                                LangChain 简介
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="02-architecture.html" class="nav-link">
+                                <span class="nav-icon">🏗️</span>
+                                核心架构
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="03-models.html" class="nav-link">
+                                <span class="nav-icon">🤖</span>
+                                模型接口
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="04-messages.html" class="nav-link">
+                                <span class="nav-icon">💬</span>
+                                消息系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="05-tools.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                工具系统
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">进阶篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="06-agents.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                Agent 基础
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="07-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="08-rag.html" class="nav-link">
+                                <span class="nav-icon">🔍</span>
+                                RAG 详解
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="09-lcel.html" class="nav-link">
+                                <span class="nav-icon">🔗</span>
+                                LCEL 表达式
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">高级应用</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="10-runtime.html" class="nav-link">
+                                <span class="nav-icon">🔌</span>
+                                Runtime 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="11-checkpointer.html" class="nav-link">
+                                <span class="nav-icon">💾</span>
+                                持久化系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="12-streaming.html" class="nav-link">
+                                <span class="nav-icon">🌊</span>
+                                流式输出
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="13-human-in-loop.html" class="nav-link">
+                                <span class="nav-icon">👤</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="14-long-term-memory.html" class="nav-link">
+                                <span class="nav-icon">🗄️</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="15-langgraph.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                LangGraph
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">实战篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="16-customer-service.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                客服机器人
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="17-best-practices.html" class="nav-link">
+                                <span class="nav-icon">✨</span>
+                                最佳实践
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">参考篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="18-api-reference.html" class="nav-link">
+                                <span class="nav-icon">📚</span>
+                                API 速查表
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="19-troubleshooting.html" class="nav-link">
+                                <span class="nav-icon">🐛</span>
+                                故障排除
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="20-migration.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                迁移指南
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">扩展篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="21-structured-output.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                结构化输出
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">DeepAgents 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="22-deepagents-quickstart.html" class="nav-link">
+                                <span class="nav-icon">🚀</span>
+                                快速开始
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="23-deepagents-customization.html" class="nav-link">
+                                <span class="nav-icon">🎨</span>
+                                定制化
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="24-deepagents-harness.html" class="nav-link">
+                                <span class="nav-icon">🎛️</span>
+                                Harness 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="25-deepagents-backends.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                后端配置
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="26-deepagents-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="27-deepagents-hitl.html" class="nav-link">
+                                <span class="nav-icon">🤝</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="28-deepagents-memory.html" class="nav-link">
+                                <span class="nav-icon">🧠</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="29-deepagents-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">Multi-Agent 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="30-multi-agent-index.html" class="nav-link">
+                                <span class="nav-icon">🌐</span>
+                                概述
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="31-multi-agent-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="32-multi-agent-handoffs.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                交接机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="33-multi-agent-skills.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                技能系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="34-multi-agent-router.html" class="nav-link">
+                                <span class="nav-icon">🧭</span>
+                                路由机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="35-multi-agent-workflow.html" class="nav-link">
+                                <span class="nav-icon">🔀</span>
+                                自定义工作流
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- 主内容区域 -->
+        <!-- 主内容区域 -->
+        <main class="main-content">
+            <div class="content-wrapper">
+                <!-- 面包屑导航 -->
+                <nav class="breadcrumb">
+                    <span class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link">主页</a>
+                    </span>
+                    <span class="breadcrumb-item">
+                        参考篇
+                    </span>
+                    <span class="breadcrumb-item">
+                        API 速查表
+                    </span>
+                </nav>
+
+                <!-- 页面标题 -->
+                <header class="page-header">
+                    <h1 class="page-title">📚 LangChain 1.0 API 速查表</h1>
+                    <p class="page-subtitle">
+                        快速查询常用 API 签名、导入语句和代码片段，提升开发效率。
+                    </p>
+                </header>
+
+                <!-- 快速索引 -->
+                <section class="content-section">
+                    <h2 class="section-title">🔍 快速索引</h2>
+                    <div class="info-box note">
+                        <div class="info-box-title">💡 使用方法</div>
+                        <p>
+                            点击下方类别快速跳转到对应的 API 参考部分：
+                        </p>
+                        <ul style="margin-top: 0.5rem;">
+                            <li><a href="#models">模型接口</a> - init_chat_model(), init_embeddings()</li>
+                            <li><a href="#messages">消息系统</a> - 消息类型、content_blocks</li>
+                            <li><a href="#tools">工具系统</a> - @tool 装饰器、自定义工具</li>
+                            <li><a href="#agents">Agent 创建</a> - create_agent()、配置参数</li>
+                            <li><a href="#middleware">中间件系统</a> - 自定义中间件、预置中间件</li>
+                            <li><a href="#runtime">Runtime 系统</a> - ToolRuntime、上下文注入</li>
+                            <li><a href="#checkpointer">持久化系统</a> - Checkpointer、配置</li>
+                            <li><a href="#store">长期记忆</a> - Store、命名空间</li>
+                            <li><a href="#streaming">流式输出</a> - stream()、stream_mode</li>
+                            <li><a href="#langgraph">LangGraph</a> - StateGraph、节点和边</li>
+                            <li><a href="#rag">RAG 系统</a> - 文档加载、分割、检索</li>
+                            <li><a href="#imports">核心导入</a> - 常用导入语句清单</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- 核心导入 -->
+                <section class="content-section" id="imports">
+                    <h2 class="section-title">📦 核心导入语句</h2>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 模型接口
+from langchain import init_chat_model, init_embeddings
+from langchain_openai import ChatOpenAI, OpenAIEmbeddings
+from langchain_anthropic import ChatAnthropic
+from langchain_google_genai import ChatGoogleGenerativeAI
+
+# 消息系统
+from langchain_core.messages import (
+    SystemMessage,
+    HumanMessage,
+    AIMessage,
+    ToolMessage
+)
+
+# 工具系统
+from langchain.tools import tool, ToolRuntime
+
+# Agent 创建
+from langchain.agents import create_agent
+
+# 中间件
+from langchain.agents.middleware import (
+    CustomMiddleware,
+    PIIMiddleware,
+    SummarizationMiddleware,
+    HumanInTheLoopMiddleware
+)
+
+# Runtime 和上下文
+from typing_extensions import TypedDict
+
+# Checkpointer
+from langgraph.checkpoint.memory import InMemorySaver
+from langgraph.checkpoint.postgres import PostgresSaver
+
+# Store
+from langgraph.store.memory import InMemoryStore
+from langgraph.store.postgres import PostgresStore
+
+# 流式输出
+# 使用 agent.stream() 方法
+
+# LangGraph
+from langgraph.graph import StateGraph, MessagesState, START, END
+from langgraph.types import Command
+
+# RAG 系统
+from langchain_chroma import Chroma
+from langchain_community.document_loaders import (
+    PyPDFLoader,
+    TextLoader,
+    WebBaseLoader
+)
+from langchain_text_splitters import RecursiveCharacterTextSplitter</code></pre>
+                    </div>
+                </section>
+
+                <!-- 模型接口 -->
+                <section class="content-section" id="models">
+                    <h2 class="section-title">🤖 模型接口</h2>
+
+                    <h3 class="subsection-title">init_chat_model()</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>参数</th>
+                                <th>类型</th>
+                                <th>说明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>model</code></td>
+                                <td>str</td>
+                                <td>模型名称，如 "gpt-4o"、"claude-3-5-sonnet"</td>
+                            </tr>
+                            <tr>
+                                <td><code>model_provider</code></td>
+                                <td>str</td>
+                                <td>提供商，如 "openai"、"anthropic"、"google"</td>
+                            </tr>
+                            <tr>
+                                <td><code>temperature</code></td>
+                                <td>float</td>
+                                <td>温度参数，0.0-2.0，默认 0.7</td>
+                            </tr>
+                            <tr>
+                                <td><code>streaming</code></td>
+                                <td>bool</td>
+                                <td>是否启用流式输出，默认 False</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 基础用法
+from langchain import init_chat_model
+
+model = init_chat_model("gpt-4o", model_provider="openai", temperature=0.7)
+
+# 带配置的用法
+model = init_chat_model(
+    "claude-3-5-sonnet-20241022",
+    model_provider="anthropic",
+    temperature=0.5,
+    max_tokens=4096
+)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">init_embeddings()</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>参数</th>
+                                <th>类型</th>
+                                <th>说明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>model</code></td>
+                                <td>str</td>
+                                <td>嵌入模型名称，如 "text-embedding-3-small"</td>
+                            </tr>
+                            <tr>
+                                <td><code>model_provider</code></td>
+                                <td>str</td>
+                                <td>提供商，如 "openai"</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from langchain import init_embeddings
+
+# 基础用法
+embeddings = init_embeddings("text-embedding-3-small", model_provider="openai")
+
+# 生成嵌入
+vector = embeddings.embed_query("示例文本")
+vectors = embeddings.embed_documents(["文本1", "文本2"])</code></pre>
+                    </div>
+                </section>
+
+                <!-- 消息系统 -->
+                <section class="content-section" id="messages">
+                    <h2 class="section-title">💬 消息系统</h2>
+
+                    <h3 class="subsection-title">消息类型</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>类型</th>
+                                <th>用途</th>
+                                <th>示例</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>SystemMessage</code></td>
+                                <td>系统提示词</td>
+                                <td>SystemMessage(content="你是AI助手")</td>
+                            </tr>
+                            <tr>
+                                <td><code>HumanMessage</code></td>
+                                <td>用户消息</td>
+                                <td>HumanMessage(content="你好")</td>
+                            </tr>
+                            <tr>
+                                <td><code>AIMessage</code></td>
+                                <td>AI 回复</td>
+                                <td>AIMessage(content="你好！")</td>
+                            </tr>
+                            <tr>
+                                <td><code>ToolMessage</code></td>
+                                <td>工具调用结果</td>
+                                <td>ToolMessage(content="结果", tool_call_id="123")</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
+
+# 创建消息
+messages = [
+    SystemMessage(content="你是专业的AI助手"),
+    HumanMessage(content="什么是LangChain？"),
+    AIMessage(content="LangChain是一个用于构建AI应用的框架")
+]
+
+# 访问 content_blocks（统一跨提供商）
+for message in messages:
+    for block in message.content_blocks:
+        print(block.text)</code></pre>
+                    </div>
+                </section>
+
+                <!-- 工具系统 -->
+                <section class="content-section" id="tools">
+                    <h2 class="section-title">🔧 工具系统</h2>
+
+                    <h3 class="subsection-title">@tool 装饰器</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from langchain.tools import tool
+
+# 基础工具
+@tool
+def search_database(query: str) -> str:
+    """搜索数据库。
+
+    Args:
+        query: 搜索关键词
+
+    Returns:
+        搜索结果
+    """
+    return f"搜索结果：{query}"
+
+# 带运行时上下文的工具
+from langchain.tools import ToolRuntime
+from typing_extensions import TypedDict
+
+class MyContext(TypedDict):
+    user_id: str
+
+@tool
+def get_user_data(runtime: ToolRuntime[MyContext]) -> str:
+    """获取用户数据"""
+    user_id = runtime.context["user_id"]
+    return f"用户 {user_id} 的数据"
+
+# 返回内容和元数据
+from langchain.tools import content_and_artifact
+
+@tool
+def analyze_data(data: str) -> tuple[str, dict]:
+    """分析数据"""
+    result = "分析结果"
+    metadata = {"score": 0.95, "confidence": 0.88}
+    return content_and_artifact(result, metadata)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">工具调用</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 直接调用工具
+result = search_database.invoke({"query": "LangChain"})
+
+# 带运行时上下文调用
+result = get_user_data.invoke({
+    "runtime": ToolRuntime(context={"user_id": "user_123"})
+})</code></pre>
+                    </div>
+                </section>
+
+                <!-- Agent 创建 -->
+                <section class="content-section" id="agents">
+                    <h2 class="section-title">🎯 Agent 创建</h2>
+
+                    <h3 class="subsection-title">create_agent() 参数</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>参数</th>
+                                <th>类型</th>
+                                <th>说明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>model</code></td>
+                                <td>str | ChatModel</td>
+                                <td>模型名称或实例</td>
+                            </tr>
+                            <tr>
+                                <td><code>tools</code></td>
+                                <td>list</td>
+                                <td>工具列表</td>
+                            </tr>
+                            <tr>
+                                <td><code>system_prompt</code></td>
+                                <td>str</td>
+                                <td>系统提示词</td>
+                            </tr>
+                            <tr>
+                                <td><code>middleware</code></td>
+                                <td>list</td>
+                                <td>中间件列表</td>
+                            </tr>
+                            <tr>
+                                <td><code>checkpointer</code></td>
+                                <td>Checkpointer</td>
+                                <td>状态持久化器</td>
+                            </tr>
+                            <tr>
+                                <td><code>store</code></td>
+                                <td>Store</td>
+                                <td>长期存储</td>
+                            </tr>
+                            <tr>
+                                <td><code>context_schema</code></td>
+                                <td>TypedDict</td>
+                                <td>运行时上下文 Schema</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from langchain.agents import create_agent
+from langgraph.checkpoint.memory import InMemorySaver
+from langgraph.store.memory import InMemoryStore
+
+# 基础 Agent
+agent = create_agent(
+    model="gpt-4o",
+    tools=[search_database, get_user_data],
+    system_prompt="你是专业的AI助手"
+)
+
+# 完整配置的 Agent
+checkpointer = InMemorySaver()
+store = InMemoryStore()
+
+agent = create_agent(
+    model="gpt-4o",
+    tools=[search_database],
+    middleware=[PIIMiddleware()],
+    checkpointer=checkpointer,
+    store=store,
+    context_schema=MyContext,
+    system_prompt="你是专业的AI助手"
+)
+
+# 调用 Agent
+result = agent.invoke({
+    "messages": [{"role": "user", "content": "你好"}]
+})
+
+# 带配置调用
+config = {
+    "configurable": {"thread_id": "thread_001"},
+    "context": {"user_id": "user_123"}
+}
+result = agent.invoke({"messages": [...]}, config=config)</code></pre>
+                    </div>
+                </section>
+
+                <!-- 中间件系统 -->
+                <section class="content-section" id="middleware">
+                    <h2 class="section-title">⚙️ 中间件系统</h2>
+
+                    <h3 class="subsection-title">自定义中间件钩子</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>钩子</th>
+                                <th>触发时机</th>
+                                <th>参数</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>before_agent</code></td>
+                                <td>Agent 执行前</td>
+                                <td>(state, config)</td>
+                            </tr>
+                            <tr>
+                                <td><code>after_agent</code></td>
+                                <td>Agent 执行后</td>
+                                <td>(state, config)</td>
+                            </tr>
+                            <tr>
+                                <td><code>before_model</code></td>
+                                <td>模型调用前</td>
+                                <td>(state, config)</td>
+                            </tr>
+                            <tr>
+                                <td><code>after_model</code></td>
+                                <td>模型调用后</td>
+                                <td>(state, config)</td>
+                            </tr>
+                            <tr>
+                                <td><code>wrap_model_call</code></td>
+                                <td>包装模型调用</td>
+                                <td>(call_model, state, config)</td>
+                            </tr>
+                            <tr>
+                                <td><code>wrap_tool_call</code></td>
+                                <td>包装工具调用</td>
+                                <td>(call_tool, tool_req, config)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from langchain.agents.middleware import CustomMiddleware
+
+class LoggingMiddleware(CustomMiddleware):
+    """日志中间件"""
+
+    def before_agent(self, state, config):
+        print("Agent 开始执行")
+        return state
+
+    def after_agent(self, state, config):
+        print("Agent 执行完成")
+        return state
+
+    def wrap_model_call(self, call_model, state, config):
+        print("调用模型前")
+        result = call_model(state, config)
+        print("调用模型后")
+        return result</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">预置中间件</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from langchain.agents.middleware import (
+    PIIMiddleware,
+    SummarizationMiddleware,
+    HumanInTheLoopMiddleware
+)
+
+# PII 保护中间件
+pii_middleware = PIIMiddleware(
+    pii_types=["email", "phone_number", "credit_card"],
+    strategy="redact"  # 选项：redact, mask, hash, block
+)
+
+# 摘要中间件
+summarization = SummarizationMiddleware(
+    max_messages=10,
+    summarize_older=True
+)
+
+# 人工介入中间件
+hitl = HumanInTheLoopMiddleware(
+    interrupt_on={
+        "sensitive_tool": True,
+        "normal_tool": False
+    }
+)</code></pre>
+                    </div>
+                </section>
+
+                <!-- Runtime 系统 -->
+                <section class="content-section" id="runtime">
+                    <h2 class="section-title">🔌 Runtime 系统</h2>
+
+                    <h3 class="subsection-title">定义上下文 Schema</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from typing_extensions import TypedDict
+
+class UserContext(TypedDict):
+    user_id: str
+    session_id: str
+    permissions: list[str]</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">使用 ToolRuntime</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from langchain.tools import tool, ToolRuntime
+
+@tool
+def get_user_profile(runtime: ToolRuntime[UserContext]) -> str:
+    """获取用户资料"""
+    user_id = runtime.context["user_id"]
+
+    # 访问 Store
+    profile = runtime.store.get(("users", user_id), "profile")
+
+    return f"用户 {user_id} 的资料"</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">传递上下文</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">config = {
+    "configurable": {"thread_id": "thread_001"},
+    "context": {
+        "user_id": "user_123",
+        "session_id": "session_456",
+        "permissions": ["read", "write"]
+    }
+}
+
+result = agent.invoke({"messages": [...]}, config=config)</code></pre>
+                    </div>
+                </section>
+
+                <!-- Checkpointer -->
+                <section class="content-section" id="checkpointer">
+                    <h2 class="section-title">💾 持久化系统</h2>
+
+                    <h3 class="subsection-title">Checkpointer 类型</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>类型</th>
+                                <th>用途</th>
+                                <th>导入</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>InMemorySaver</code></td>
+                                <td>内存持久化（开发）</td>
+                                <td>langgraph.checkpoint.memory</td>
+                            </tr>
+                            <tr>
+                                <td><code>PostgresSaver</code></td>
+                                <td>PostgreSQL 持久化（生产）</td>
+                                <td>langgraph.checkpoint.postgres</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 开发环境：内存 Checkpointer
+from langgraph.checkpoint.memory import InMemorySaver
+
+checkpointer = InMemorySaver()
+
+# 生产环境：PostgreSQL Checkpointer
+from langgraph.checkpoint.postgres import PostgresSaver
+
+DB_URI = "postgresql://user:pass@localhost:5432/langchain"
+
+with PostgresSaver.from_conn_string(DB_URI) as checkpointer:
+    checkpointer.setup()
+
+    agent = create_agent(
+        model="gpt-4o",
+        tools=[...],
+        checkpointer=checkpointer
+    )</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">获取状态历史</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">config = {"configurable": {"thread_id": "thread_001"}}
+
+# 获取所有历史状态
+history = agent.get_state_history(config)
+
+for state in history:
+    print(f"时间：{state.metadata['timestamp']}")
+    print(f"消息数：{len(state.values['messages'])}")</code></pre>
+                    </div>
+                </section>
+
+                <!-- Store -->
+                <section class="content-section" id="store">
+                    <h2 class="section-title">🗄️ 长期记忆（Store）</h2>
+
+                    <h3 class="subsection-title">Store 类型</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>类型</th>
+                                <th>用途</th>
+                                <th>导入</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>InMemoryStore</code></td>
+                                <td>内存存储（开发）</td>
+                                <td>langgraph.store.memory</td>
+                            </tr>
+                            <tr>
+                                <td><code>PostgresStore</code></td>
+                                <td>PostgreSQL 存储（生产）</td>
+                                <td>langgraph.store.postgres</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 开发环境
+from langgraph.store.memory import InMemoryStore
+
+store = InMemoryStore()
+
+# 生产环境
+from langgraph.store.postgres import PostgresStore
+
+DB_URI = "postgresql://user:pass@localhost:5432/langchain"
+
+with PostgresStore.from_conn_string(DB_URI) as store:
+    store.setup()
+
+    agent = create_agent(
+        model="gpt-4o",
+        tools=[...],
+        store=store
+    )</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">Store 操作</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 在工具中使用 Store
+@tool
+def save_preference(
+    key: str,
+    value: str,
+    runtime: ToolRuntime[UserContext]
+) -> str:
+    user_id = runtime.context["user_id"]
+    store_obj = runtime.store
+
+    # 保存数据
+    store_obj.put(("users", user_id), key, value)
+
+    return f"已保存 {key} = {value}"
+
+@tool
+def get_preference(
+    key: str,
+    runtime: ToolRuntime[UserContext]
+) -> str:
+    user_id = runtime.context["user_id"]
+    store_obj = runtime.store
+
+    # 获取数据
+    item = store_obj.get(("users", user_id), key)
+
+    if item:
+        return f"{key} = {item.value}"
+    else:
+        return f"未设置 {key}"</code></pre>
+                    </div>
+                </section>
+
+                <!-- 流式输出 -->
+                <section class="content-section" id="streaming">
+                    <h2 class="section-title">🌊 流式输出</h2>
+
+                    <h3 class="subsection-title">stream_mode 选项</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>模式</th>
+                                <th>说明</th>
+                                <th>返回格式</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>"messages"</code></td>
+                                <td>流式返回消息 token</td>
+                                <td>(token, metadata)</td>
+                            </tr>
+                            <tr>
+                                <td><code>"updates"</code></td>
+                                <td>节点执行更新</td>
+                                <td>{node_name: data}</td>
+                            </tr>
+                            <tr>
+                                <td><code>"values"</code></td>
+                                <td>完整状态值</td>
+                                <td>{"messages": [...], ...}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 基础流式输出（只输出消息）
+for chunk in agent.stream({"messages": [...]}, stream_mode="messages"):
+    token, metadata = chunk
+    if token:
+        print(token, end="", flush=True)
+
+# 多模式流式输出
+for stream_mode, chunk in agent.stream(
+    {"messages": [...]},
+    stream_mode=["messages", "updates"]
+):
+    if stream_mode == "messages":
+        token, metadata = chunk
+        if token:
+            print(token, end="", flush=True)
+
+    elif stream_mode == "updates":
+        for node, data in chunk.items():
+            print(f"\n节点 {node} 执行完成")</code></pre>
+                    </div>
+                </section>
+
+                <!-- LangGraph -->
+                <section class="content-section" id="langgraph">
+                    <h2 class="section-title">📊 LangGraph</h2>
+
+                    <h3 class="subsection-title">创建 StateGraph</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from langgraph.graph import StateGraph, MessagesState, START, END
+
+# 使用预构建状态
+graph = StateGraph(MessagesState)
+
+# 自定义状态
+from typing_extensions import TypedDict
+from typing import Annotated
+from operator import add
+
+class CustomState(TypedDict):
+    messages: Annotated[list, add]
+    current_step: str
+    count: int
+
+graph = StateGraph(CustomState)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">添加节点和边</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 定义节点函数
+def process_input(state):
+    return {"current_step": "processed"}
+
+def call_llm(state):
+    return {"messages": [{"role": "ai", "content": "响应"}]}
+
+# 添加节点
+graph.add_node("process", process_input)
+graph.add_node("llm", call_llm)
+
+# 添加普通边
+graph.add_edge(START, "process")
+graph.add_edge("process", "llm")
+graph.add_edge("llm", END)
+
+# 添加条件边
+def should_continue(state):
+    if state.get("count", 0) < 5:
+        return "continue"
+    else:
+        return "end"
+
+graph.add_conditional_edges(
+    "llm",
+    should_continue,
+    {"continue": "process", "end": END}
+)
+
+# 编译图
+compiled = graph.compile()</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">Command 控制流</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from langgraph.types import Command
+from typing import Literal
+
+def process_node(state) -> Command[Literal["success", "retry", "fail"]]:
+    """节点返回状态更新和路由指令"""
+
+    if success:
+        return Command(
+            update={"result": "成功"},
+            goto="success"
+        )
+    elif can_retry:
+        return Command(
+            update={"retry_count": state["retry_count"] + 1},
+            goto="retry"
+        )
+    else:
+        return Command(
+            update={"error": "失败"},
+            goto="fail"
+        )</code></pre>
+                    </div>
+                </section>
+
+                <!-- RAG 系统 -->
+                <section class="content-section" id="rag">
+                    <h2 class="section-title">🔍 RAG 系统</h2>
+
+                    <h3 class="subsection-title">文档加载</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from langchain_community.document_loaders import (
+    PyPDFLoader,
+    TextLoader,
+    WebBaseLoader
+)
+
+# PDF 文档
+pdf_loader = PyPDFLoader("document.pdf")
+pdf_docs = pdf_loader.load()
+
+# 文本文件
+text_loader = TextLoader("document.txt")
+text_docs = text_loader.load()
+
+# 网页
+web_loader = WebBaseLoader("https://example.com")
+web_docs = web_loader.load()</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">文档分割</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from langchain_text_splitters import RecursiveCharacterTextSplitter
+
+splitter = RecursiveCharacterTextSplitter(
+    chunk_size=1000,
+    chunk_overlap=200,
+    separators=["\n\n", "\n", " ", ""]
+)
+
+chunks = splitter.split_documents(documents)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">向量存储和检索</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from langchain_chroma import Chroma
+from langchain_openai import OpenAIEmbeddings
+
+# 创建 Embeddings
+embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
+
+# 创建向量存储
+vectorstore = Chroma.from_documents(
+    documents=chunks,
+    embedding=embeddings,
+    collection_name="my_collection"
+)
+
+# 创建检索器
+retriever = vectorstore.as_retriever(
+    search_type="similarity",
+    search_kwargs={"k": 3}
+)
+
+# 检索
+results = retriever.invoke("查询文本")</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">RAG 检索工具</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from langchain.tools import tool
+
+@tool
+def search_knowledge_base(query: str) -> str:
+    """搜索知识库"""
+    docs = retriever.invoke(query)
+
+    if not docs:
+        return "未找到相关信息"
+
+    context = "\n\n".join([doc.page_content for doc in docs])
+    return f"相关信息：\n{context}"</code></pre>
+                    </div>
+                </section>
+
+                <!-- 常用代码片段 -->
+                <section class="content-section">
+                    <h2 class="section-title">💡 常用代码片段</h2>
+
+                    <h3 class="subsection-title">完整的 Agent 配置</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from langchain.agents import create_agent
+from langchain.agents.middleware import PIIMiddleware
+from langgraph.checkpoint.memory import InMemorySaver
+from langgraph.store.memory import InMemoryStore
+from typing_extensions import TypedDict
+
+# 定义上下文
+class AppContext(TypedDict):
+    user_id: str
+    session_id: str
+
+# 定义工具
+@tool
+def my_tool(param: str, runtime: ToolRuntime[AppContext]) -> str:
+    """工具描述"""
+    user_id = runtime.context["user_id"]
+    return f"结果：{param}"
+
+# 初始化组件
+checkpointer = InMemorySaver()
+store = InMemoryStore()
+pii_middleware = PIIMiddleware(pii_types=["email"], strategy="redact")
+
+# 创建 Agent
+agent = create_agent(
+    model="gpt-4o",
+    tools=[my_tool],
+    middleware=[pii_middleware],
+    checkpointer=checkpointer,
+    store=store,
+    context_schema=AppContext,
+    system_prompt="你是专业的AI助手"
+)
+
+# 调用 Agent
+config = {
+    "configurable": {"thread_id": "thread_001"},
+    "context": {"user_id": "user_123", "session_id": "session_456"}
+}
+
+result = agent.invoke(
+    {"messages": [{"role": "user", "content": "你好"}]},
+    config=config
+)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">流式对话处理</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">def chat_stream(user_message: str, thread_id: str, user_id: str):
+    """流式对话处理函数"""
+
+    config = {
+        "configurable": {"thread_id": thread_id},
+        "context": {"user_id": user_id, "session_id": thread_id}
+    }
+
+    print(f"用户: {user_message}")
+    print("AI: ", end="", flush=True)
+
+    full_response = ""
+
+    for stream_mode, chunk in agent.stream(
+        {"messages": [{"role": "user", "content": user_message}]},
+        config=config,
+        stream_mode=["messages", "updates"]
+    ):
+        if stream_mode == "messages":
+            token, metadata = chunk
+            if token:
+                print(token, end="", flush=True)
+                full_response += token
+
+        elif stream_mode == "updates":
+            for node, data in chunk.items():
+                if "__interrupt__" in data:
+                    print("\n[需要人工审核]")
+
+    print("\n")
+    return full_response</code></pre>
+                    </div>
+                </section>
+
+                <!-- 参考资源 -->
+                <section class="content-section">
+                    <h2 class="section-title">📖 参考资源</h2>
+                    <ul>
+                        <li>
+                            <a href="https://reference.langchain.com/python/langchain/" target="_blank">
+                                LangChain Python API 完整参考
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://docs.langchain.com/oss/python/langchain/overview" target="_blank">
+                                LangChain 官方文档
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://langchain-ai.github.io/langgraph/" target="_blank">
+                                LangGraph 官方网站
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://docs.smith.langchain.com/" target="_blank">
+                                LangSmith 调试工具
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- 页面导航 -->
+                <nav class="page-navigation">
+                    <a href="17-best-practices.html" class="nav-button prev">
+                        ← 上一页：最佳实践
+                    </a>
+                    <a href="19-troubleshooting.html" class="nav-button next">
+                        下一页：故障排除 →
+                    </a>
+                </nav>
+            </div>
+        </main>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" aria-label="返回顶部">↑</button>
+
+    <!-- JavaScript -->
+    <script src="assets/js/mermaid-init.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</body>
+</html>

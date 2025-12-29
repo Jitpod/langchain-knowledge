@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LangChain 1.0 核心架构 - 深入理解 LangChain 的设计哲学和模块组织">
+    <title>核心架构 | LangChain 1.0 Python 知识文档</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <button class="mobile-menu-button" aria-label="打开菜单">☰</button>
+
+    <div class="container">
+        <!-- 侧边栏导航 -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="sidebar-title">🦜 LangChain 1.0</h1>
+                <p class="sidebar-subtitle">Python 完整学习指南</p>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-section">
+                    <div class="nav-section-title">开始</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">
+                                <span class="nav-icon">🏠</span>
+                                主页
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">基础篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="01-introduction.html" class="nav-link">
+                                <span class="nav-icon">📖</span>
+                                LangChain 简介
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="02-architecture.html" class="nav-link">
+                                <span class="nav-icon">🏗️</span>
+                                核心架构
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="03-models.html" class="nav-link">
+                                <span class="nav-icon">🤖</span>
+                                模型接口
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="04-messages.html" class="nav-link">
+                                <span class="nav-icon">💬</span>
+                                消息系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="05-tools.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                工具系统
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">进阶篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="06-agents.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                Agent 基础
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="07-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="08-rag.html" class="nav-link">
+                                <span class="nav-icon">🔍</span>
+                                RAG 详解
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="09-lcel.html" class="nav-link">
+                                <span class="nav-icon">🔗</span>
+                                LCEL 表达式
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">高级应用</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="10-runtime.html" class="nav-link">
+                                <span class="nav-icon">🔌</span>
+                                Runtime 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="11-checkpointer.html" class="nav-link">
+                                <span class="nav-icon">💾</span>
+                                持久化系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="12-streaming.html" class="nav-link">
+                                <span class="nav-icon">🌊</span>
+                                流式输出
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="13-human-in-loop.html" class="nav-link">
+                                <span class="nav-icon">👤</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="14-long-term-memory.html" class="nav-link">
+                                <span class="nav-icon">🗄️</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="15-langgraph.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                LangGraph
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">实战篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="16-customer-service.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                客服机器人
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="17-best-practices.html" class="nav-link">
+                                <span class="nav-icon">✨</span>
+                                最佳实践
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">参考篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="18-api-reference.html" class="nav-link">
+                                <span class="nav-icon">📚</span>
+                                API 速查表
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="19-troubleshooting.html" class="nav-link">
+                                <span class="nav-icon">🐛</span>
+                                故障排除
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="20-migration.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                迁移指南
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">扩展篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="21-structured-output.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                结构化输出
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">DeepAgents 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="22-deepagents-quickstart.html" class="nav-link">
+                                <span class="nav-icon">🚀</span>
+                                快速开始
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="23-deepagents-customization.html" class="nav-link">
+                                <span class="nav-icon">🎨</span>
+                                定制化
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="24-deepagents-harness.html" class="nav-link">
+                                <span class="nav-icon">🎛️</span>
+                                Harness 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="25-deepagents-backends.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                后端配置
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="26-deepagents-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="27-deepagents-hitl.html" class="nav-link">
+                                <span class="nav-icon">🤝</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="28-deepagents-memory.html" class="nav-link">
+                                <span class="nav-icon">🧠</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="29-deepagents-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">Multi-Agent 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="30-multi-agent-index.html" class="nav-link">
+                                <span class="nav-icon">🌐</span>
+                                概述
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="31-multi-agent-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="32-multi-agent-handoffs.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                交接机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="33-multi-agent-skills.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                技能系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="34-multi-agent-router.html" class="nav-link">
+                                <span class="nav-icon">🧭</span>
+                                路由机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="35-multi-agent-workflow.html" class="nav-link">
+                                <span class="nav-icon">🔀</span>
+                                自定义工作流
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- 主内容区域 -->
+        <!-- 主内容区域 -->
+        <main class="main-content">
+            <div class="content-wrapper">
+                <!-- 面包屑导航 -->
+                <nav class="breadcrumb">
+                    <span class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link">主页</a>
+                    </span>
+                    <span class="breadcrumb-item">
+                        高级应用
+                    </span>
+                    <span class="breadcrumb-item">
+                        Runtime 系统
+                    </span>
+                </nav>
+
+                <!-- 页面标题 -->
+                <header class="page-header">
+                    <h1 class="page-title">🔌 Runtime 依赖注入系统</h1>
+                    <p class="page-subtitle">
+                        掌握 LangChain 1.0 的 Runtime 依赖注入机制，
+                        通过 Context、Store 和 Stream Writer 实现灵活的上下文管理、
+                        数据持久化和实时反馈。
+                    </p>
+                </header>
+
+                <!-- 什么是 Runtime -->
+                <section class="content-section">
+                    <h2 class="section-title">📚 什么是 Runtime？</h2>
+                    <p>
+                        <strong>Runtime</strong> 是 LangChain 的依赖注入系统，
+                        运行在 LangGraph 底层之上。它为工具和中间件提供了访问
+                        执行上下文的能力，让你能够：
+                    </p>
+                    <ul>
+                        <li><strong>注入用户信息</strong>：每次调用时传入用户 ID、权限、配置等</li>
+                        <li><strong>访问持久化存储</strong>：跨会话读写用户数据、偏好设置</li>
+                        <li><strong>实时反馈进度</strong>：在工具执行过程中向用户发送更新</li>
+                        <li><strong>隔离请求数据</strong>：确保多用户环境下的数据安全</li>
+                    </ul>
+
+                    <div class="mermaid-wrapper">
+                        <div class="mermaid">
+graph TB
+    A[Agent 调用] --> B[Runtime 注入]
+
+    B --> C[Context<br/>静态上下文]
+    B --> D[Store<br/>持久化存储]
+    B --> E[Stream Writer<br/>实时反馈]
+
+    C --> F[工具函数]
+    D --> F
+    E --> F
+
+    C --> G[中间件]
+    D --> G
+    E --> G
+
+    F --> H[执行结果]
+    G --> H
+
+    style A fill:#6366f1,color:#fff
+    style B fill:#10b981,color:#fff
+    style C fill:#f59e0b,color:#fff
+    style D fill:#8b5cf6,color:#fff
+    style E fill:#ec4899,color:#fff
+    style F fill:#3b82f6,color:#fff
+                        </div>
+                    </div>
+
+                    <div class="info-box note">
+                        <div class="info-box-title">💡 核心优势</div>
+                        <ul>
+                            <li><strong>可测试性</strong>：轻松注入 mock 依赖进行单元测试</li>
+                            <li><strong>可复用性</strong>：工具保持通用，配置外部化</li>
+                            <li><strong>灵活性</strong>：每次调用可定制行为，无需全局状态</li>
+                            <li><strong>安全性</strong>：隔离用户数据和凭证，避免泄露</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Runtime 三大组件 -->
+                <section class="content-section">
+                    <h2 class="section-title">🧩 Runtime 三大组件</h2>
+
+                    <div class="mermaid-wrapper">
+                        <div class="mermaid">
+graph LR
+    A[Runtime] --> B[Context<br/>上下文]
+    A --> C[Store<br/>存储]
+    A --> D[Stream Writer<br/>流写入器]
+
+    B --> E[用户 ID<br/>权限<br/>配置]
+    C --> F[用户偏好<br/>历史数据<br/>知识库]
+    D --> G[进度更新<br/>中间结果<br/>自定义事件]
+
+    style A fill:#6366f1,color:#fff
+    style B fill:#10b981,color:#fff
+    style C fill:#f59e0b,color:#fff
+    style D fill:#8b5cf6,color:#fff
+                        </div>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>组件</th>
+                                <th>类型</th>
+                                <th>作用</th>
+                                <th>典型用途</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>runtime.context</code></td>
+                                <td>自定义 dataclass</td>
+                                <td>静态上下文信息</td>
+                                <td>用户 ID、数据库连接、配置参数</td>
+                            </tr>
+                            <tr>
+                                <td><code>runtime.store</code></td>
+                                <td>BaseStore 实例</td>
+                                <td>持久化存储</td>
+                                <td>用户偏好、历史记录、长期数据</td>
+                            </tr>
+                            <tr>
+                                <td><code>runtime.stream_writer</code></td>
+                                <td>可调用对象</td>
+                                <td>实时流式输出</td>
+                                <td>进度通知、中间结果、自定义事件</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- Context 上下文注入 -->
+                <section class="content-section">
+                    <h2 class="section-title">🎯 Context 上下文注入</h2>
+                    <p>
+                        <strong>Context</strong> 用于传递每次调用的静态信息，
+                        如用户 ID、权限级别、语言偏好等。
+                    </p>
+
+                    <h3 class="subsection-title">定义和使用 Context</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+Context 基础示例
+功能：通过 Context 注入用户信息
+"""
+from dataclasses import dataclass
+from langchain.agents import create_agent
+from langchain.chat_models import init_chat_model
+from langchain.tools import tool, ToolRuntime
+
+# 步骤 1：定义 Context Schema
+@dataclass
+class UserContext:
+    """用户上下文信息"""
+    user_id: str
+    user_name: str
+    role: str  # 'user', 'admin', 'vip'
+
+# 步骤 2：创建使用 Context 的工具
+@tool
+def greet_user(runtime: ToolRuntime[UserContext]) -> str:
+    """向用户问候。
+
+    Returns:
+        个性化问候语
+    """
+    # 从 runtime.context 获取用户信息
+    user_name = runtime.context.user_name
+    role = runtime.context.role
+
+    if role == "vip":
+        return f"尊敬的 VIP 用户 {user_name}，欢迎回来！"
+    elif role == "admin":
+        return f"管理员 {user_name}，您好！"
+    else:
+        return f"你好，{user_name}！"
+
+# 步骤 3：创建 Agent（指定 context_schema）
+model = init_chat_model("gpt-4o")
+agent = create_agent(
+    model,
+    tools=[greet_user],
+    context_schema=UserContext,  # 声明 Context 类型
+    system_prompt="你是友好的助手。"
+)
+
+# 步骤 4：调用时注入 Context
+result = agent.invoke(
+    {"messages": [{"role": "user", "content": "向我问候"}]},
+    context=UserContext(
+        user_id="user_123",
+        user_name="张三",
+        role="vip"
+    )
+)
+
+print(result["messages"][-1].content)
+# 输出：尊敬的 VIP 用户 张三，欢迎回来！</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">Context 访问权限控制</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+基于 Context 的权限控制示例
+功能：根据用户角色限制工具访问
+"""
+from dataclasses import dataclass
+from langchain.tools import tool, ToolRuntime
+from langchain.agents import create_agent
+from langchain.chat_models import init_chat_model
+
+@dataclass
+class UserContext:
+    user_id: str
+    role: str  # 'user', 'moderator', 'admin'
+
+@tool
+def delete_user(user_id_to_delete: str, runtime: ToolRuntime[UserContext]) -> str:
+    """删除用户（需要管理员权限）。
+
+    Args:
+        user_id_to_delete: 要删除的用户 ID
+
+    Returns:
+        操作结果
+    """
+    # 权限检查
+    current_role = runtime.context.role
+
+    if current_role != "admin":
+        return "❌ 权限不足：此操作仅限管理员执行。"
+
+    # 执行删除（模拟）
+    return f"✅ 用户 {user_id_to_delete} 已被删除。"
+
+@tool
+def view_user_info(user_id: str, runtime: ToolRuntime[UserContext]) -> str:
+    """查看用户信息（需要 moderator 或 admin 权限）。
+
+    Args:
+        user_id: 用户 ID
+
+    Returns:
+        用户信息
+    """
+    current_role = runtime.context.role
+
+    if current_role not in ["moderator", "admin"]:
+        return "❌ 权限不足：此操作需要 moderator 或更高权限。"
+
+    # 返回用户信息（模拟）
+    return f"用户 {user_id}：姓名 张三，邮箱 [email protected]"
+
+@tool
+def get_my_info(runtime: ToolRuntime[UserContext]) -> str:
+    """查看自己的信息（所有用户可用）。
+
+    Returns:
+        当前用户信息
+    """
+    user_id = runtime.context.user_id
+    return f"您的用户 ID: {user_id}"
+
+# 创建 Agent
+model = init_chat_model("gpt-4o")
+agent = create_agent(
+    model,
+    tools=[delete_user, view_user_info, get_my_info],
+    context_schema=UserContext,
+    system_prompt="你是系统管理助手。"
+)
+
+# 场景 1：普通用户尝试删除
+print("=== 普通用户尝试删除 ===")
+result1 = agent.invoke(
+    {"messages": [{"role": "user", "content": "删除用户 user_456"}]},
+    context=UserContext(user_id="user_123", role="user")
+)
+print(result1["messages"][-1].content)
+
+# 场景 2：管理员删除用户
+print("\n=== 管理员删除用户 ===")
+result2 = agent.invoke(
+    {"messages": [{"role": "user", "content": "删除用户 user_456"}]},
+    context=UserContext(user_id="admin_001", role="admin")
+)
+print(result2["messages"][-1].content)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">动态配置示例</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+Context 动态配置示例
+功能：根据 Context 动态调整工具行为
+"""
+from dataclasses import dataclass
+from langchain.tools import tool, ToolRuntime
+
+@dataclass
+class UserContext:
+    language: str  # 'zh-CN', 'en-US', 'ja-JP'
+    timezone: str  # 'Asia/Shanghai', 'America/New_York'
+
+@tool
+def get_current_time(runtime: ToolRuntime[UserContext]) -> str:
+    """获取当前时间（根据用户时区）。
+
+    Returns:
+        当前时间
+    """
+    from datetime import datetime
+    import pytz
+
+    # 从 Context 获取时区
+    timezone = runtime.context.timezone
+    language = runtime.context.language
+
+    # 计算当前时间
+    tz = pytz.timezone(timezone)
+    now = datetime.now(tz)
+
+    # 根据语言返回格式
+    if language == "zh-CN":
+        return f"当前时间：{now.strftime('%Y年%m月%d日 %H:%M:%S')}"
+    elif language == "en-US":
+        return f"Current time: {now.strftime('%Y-%m-%d %H:%M:%S')}"
+    elif language == "ja-JP":
+        return f"現在の時刻：{now.strftime('%Y年%m月%d日 %H:%M:%S')}"
+    else:
+        return now.strftime('%Y-%m-%d %H:%M:%S')</code></pre>
+                    </div>
+                </section>
+
+                <!-- Store 持久化存储 -->
+                <section class="content-section">
+                    <h2 class="section-title">💾 Store 持久化存储</h2>
+                    <p>
+                        <strong>Store</strong> 提供跨调用的持久化存储能力，
+                        用于保存和检索长期数据。
+                    </p>
+
+                    <h3 class="subsection-title">Store 基础用法</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+Store 基础示例
+功能：在 Store 中保存和检索用户偏好
+"""
+from dataclasses import dataclass
+from langchain.tools import tool, ToolRuntime
+from langchain.agents import create_agent
+from langchain.chat_models import init_chat_model
+from langgraph.store.memory import InMemoryStore
+
+@dataclass
+class UserContext:
+    user_id: str
+
+@tool
+def save_preference(
+    preference_key: str,
+    preference_value: str,
+    runtime: ToolRuntime[UserContext]
+) -> str:
+    """保存用户偏好设置。
+
+    Args:
+        preference_key: 偏好名称（如 'theme', 'language'）
+        preference_value: 偏好值
+
+    Returns:
+        保存结果
+    """
+    # 检查 store 是否可用
+    if not runtime.store:
+        return "错误：Store 未配置"
+
+    user_id = runtime.context.user_id
+
+    # 保存到 Store
+    # namespace: ("user_preferences", user_id)
+    # key: preference_key
+    # value: 实际数据
+    runtime.store.put(
+        namespace=("user_preferences", user_id),
+        key=preference_key,
+        value={"value": preference_value}
+    )
+
+    return f"✅ 已保存偏好：{preference_key} = {preference_value}"
+
+@tool
+def get_preference(
+    preference_key: str,
+    runtime: ToolRuntime[UserContext]
+) -> str:
+    """获取用户偏好设置。
+
+    Args:
+        preference_key: 偏好名称
+
+    Returns:
+        偏好值
+    """
+    if not runtime.store:
+        return "错误：Store 未配置"
+
+    user_id = runtime.context.user_id
+
+    # 从 Store 检索
+    item = runtime.store.get(
+        namespace=("user_preferences", user_id),
+        key=preference_key
+    )
+
+    if item:
+        return f"{preference_key}: {item.value['value']}"
+    else:
+        return f"未设置 {preference_key}"
+
+# 创建 Store 和 Agent
+store = InMemoryStore()
+model = init_chat_model("gpt-4o")
+
+agent = create_agent(
+    model,
+    tools=[save_preference, get_preference],
+    store=store,  # 注入 Store
+    context_schema=UserContext,
+    system_prompt="你是偏好设置助手。"
+)
+
+# 测试：保存偏好
+result1 = agent.invoke(
+    {"messages": [{"role": "user", "content": "设置我的主题为深色模式"}]},
+    context=UserContext(user_id="user_123")
+)
+print(result1["messages"][-1].content)
+
+# 测试：检索偏好
+result2 = agent.invoke(
+    {"messages": [{"role": "user", "content": "我的主题设置是什么？"}]},
+    context=UserContext(user_id="user_123")
+)
+print(result2["messages"][-1].content)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">Store 搜索和批量操作</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+Store 高级操作示例
+功能：搜索、批量读取用户数据
+"""
+from langchain.tools import tool, ToolRuntime
+from dataclasses import dataclass
+
+@dataclass
+class UserContext:
+    user_id: str
+
+@tool
+def list_all_preferences(runtime: ToolRuntime[UserContext]) -> str:
+    """列出用户的所有偏好设置。
+
+    Returns:
+        所有偏好的列表
+    """
+    if not runtime.store:
+        return "错误：Store 未配置"
+
+    user_id = runtime.context.user_id
+
+    # 搜索命名空间下的所有项
+    items = runtime.store.search(
+        namespace_prefix=("user_preferences", user_id)
+    )
+
+    if not items:
+        return "您还没有任何偏好设置。"
+
+    result = "您的偏好设置：\n"
+    for item in items:
+        key = item.key
+        value = item.value["value"]
+        result += f"- {key}: {value}\n"
+
+    return result
+
+@tool
+def delete_preference(
+    preference_key: str,
+    runtime: ToolRuntime[UserContext]
+) -> str:
+    """删除偏好设置。
+
+    Args:
+        preference_key: 要删除的偏好名称
+
+    Returns:
+        删除结果
+    """
+    if not runtime.store:
+        return "错误：Store 未配置"
+
+    user_id = runtime.context.user_id
+
+    # 删除指定项
+    runtime.store.delete(
+        namespace=("user_preferences", user_id),
+        key=preference_key
+    )
+
+    return f"✅ 已删除偏好：{preference_key}"
+
+@tool
+def save_user_profile(
+    name: str,
+    email: str,
+    runtime: ToolRuntime[UserContext]
+) -> str:
+    """保存用户资料。
+
+    Args:
+        name: 用户姓名
+        email: 用户邮箱
+
+    Returns:
+        保存结果
+    """
+    if not runtime.store:
+        return "错误：Store 未配置"
+
+    user_id = runtime.context.user_id
+
+    # 保存完整的用户资料
+    runtime.store.put(
+        namespace=("user_profiles",),
+        key=user_id,
+        value={
+            "name": name,
+            "email": email,
+            "user_id": user_id
+        }
+    )
+
+    return f"✅ 已保存用户资料：{name} ({email})"</code></pre>
+                    </div>
+                </section>
+
+                <!-- Stream Writer 实时反馈 -->
+                <section class="content-section">
+                    <h2 class="section-title">📡 Stream Writer 实时反馈</h2>
+                    <p>
+                        <strong>Stream Writer</strong> 允许工具在执行过程中
+                        向用户发送实时进度更新和中间结果。
+                    </p>
+
+                    <h3 class="subsection-title">基础进度反馈</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+Stream Writer 基础示例
+功能：在工具执行过程中发送进度更新
+"""
+from langchain.tools import tool, ToolRuntime
+from langchain.agents import create_agent
+from langchain.chat_models import init_chat_model
+import time
+
+@tool
+def analyze_document(document_id: str, runtime: ToolRuntime) -> str:
+    """分析文档（耗时操作，带进度反馈）。
+
+    Args:
+        document_id: 文档 ID
+
+    Returns:
+        分析结果
+    """
+    # 获取 stream writer
+    writer = runtime.stream_writer
+
+    # 步骤 1：加载文档
+    writer(f"正在加载文档 {document_id}...")
+    time.sleep(1)  # 模拟耗时操作
+
+    # 步骤 2：分析内容
+    writer(f"正在分析文档内容...")
+    time.sleep(1.5)
+
+    # 步骤 3：生成摘要
+    writer(f"正在生成摘要...")
+    time.sleep(1)
+
+    # 步骤 4：完成
+    writer(f"分析完成！")
+
+    return f"文档 {document_id} 分析结果：这是一份关于 AI 的技术文档。"
+
+# 创建 Agent
+model = init_chat_model("gpt-4o")
+agent = create_agent(
+    model,
+    tools=[analyze_document],
+    system_prompt="你是文档分析助手。"
+)
+
+# 使用 stream_mode="custom" 接收进度更新
+print("开始分析...\n")
+
+for event in agent.stream(
+    {"messages": [{"role": "user", "content": "分析文档 DOC-123"}]},
+    stream_mode="custom"
+):
+    # event 是 stream writer 发送的字符串
+    print(f"📢 {event}")
+
+print("\n分析完成！")</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">组合多种流式模式</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+组合流式模式示例
+功能：同时接收消息和自定义进度
+"""
+from langchain.tools import tool, ToolRuntime
+from langchain.agents import create_agent
+from langchain.chat_models import init_chat_model
+import time
+
+@tool
+def process_data(data_size: int, runtime: ToolRuntime) -> str:
+    """处理数据（带详细进度）。
+
+    Args:
+        data_size: 数据大小（MB）
+
+    Returns:
+        处理结果
+    """
+    writer = runtime.stream_writer
+
+    total_steps = 5
+    for step in range(1, total_steps + 1):
+        progress = (step / total_steps) * 100
+        writer(f"处理进度：{progress:.0f}% ({step}/{total_steps})")
+        time.sleep(0.5)
+
+    return f"成功处理 {data_size}MB 数据"
+
+model = init_chat_model("gpt-4o")
+agent = create_agent(
+    model,
+    tools=[process_data],
+)
+
+# 同时接收消息和自定义事件
+for event in agent.stream(
+    {"messages": [{"role": "user", "content": "处理 100MB 数据"}]},
+    stream_mode=["messages", "custom"]
+):
+    event_type, event_data = event
+
+    if event_type == "custom":
+        print(f"🔧 进度: {event_data}")
+    elif event_type == "messages":
+        if "messages" in event_data:
+            for msg in event_data["messages"]:
+                if hasattr(msg, "content") and msg.content:
+                    print(f"💬 消息: {msg.content}")</code></pre>
+                    </div>
+                </section>
+
+                <!-- 中间件中使用 Runtime -->
+                <section class="content-section">
+                    <h2 class="section-title">⚙️ 中间件中使用 Runtime</h2>
+                    <p>
+                        中间件也可以访问 Runtime，实现基于上下文的动态行为。
+                    </p>
+
+                    <h3 class="subsection-title">动态系统提示词</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+动态系统提示词示例
+功能：根据用户信息动态生成系统提示
+"""
+from dataclasses import dataclass
+from langchain.agents import create_agent
+from langchain.chat_models import init_chat_model
+from langchain.agents.middleware import dynamic_prompt, ModelRequest
+
+@dataclass
+class UserContext:
+    user_name: str
+    role: str
+
+@dynamic_prompt
+def personalized_system_prompt(request: ModelRequest) -> str:
+    """根据用户信息生成个性化提示词。"""
+    # 从 request.runtime.context 获取用户信息
+    user_name = request.runtime.context.user_name
+    role = request.runtime.context.role
+
+    base_prompt = f"你是助手 Claude。当前用户是 {user_name}。"
+
+    if role == "admin":
+        return base_prompt + "\n用户是管理员，可以提供系统管理建议。"
+    elif role == "vip":
+        return base_prompt + "\n用户是 VIP，提供优质服务。"
+    else:
+        return base_prompt + "\n提供标准服务。"
+
+# 创建 Agent
+model = init_chat_model("gpt-4o")
+agent = create_agent(
+    model,
+    tools=[],
+    middleware=[personalized_system_prompt],
+    context_schema=UserContext
+)
+
+# 测试不同用户
+result1 = agent.invoke(
+    {"messages": [{"role": "user", "content": "你好"}]},
+    context=UserContext(user_name="张三", role="vip")
+)
+print(result1["messages"][-1].content)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">before_model 和 after_model 中访问 Runtime</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+中间件 Runtime 访问示例
+功能：在中间件中记录用户操作日志
+"""
+from dataclasses import dataclass
+from langchain.agents import create_agent, AgentState
+from langchain.chat_models import init_chat_model
+from langchain.agents.middleware import before_model, after_model
+from langchain.agents.runtime import Runtime
+
+@dataclass
+class UserContext:
+    user_id: str
+    user_name: str
+
+@before_model
+def log_before_model(state: AgentState, runtime: Runtime[UserContext]) -> dict | None:
+    """模型调用前记录日志。"""
+    user_id = runtime.context.user_id
+    user_name = runtime.context.user_name
+
+    message_count = len(state["messages"])
+
+    print(f"📝 [日志] 用户 {user_name} ({user_id}) 发起请求，消息数: {message_count}")
+
+    return None  # 不修改状态
+
+@after_model
+def log_after_model(state: AgentState, runtime: Runtime[UserContext]) -> dict | None:
+    """模型响应后记录日志。"""
+    user_id = runtime.context.user_id
+
+    last_msg = state["messages"][-1]
+    usage = getattr(last_msg, "usage_metadata", None)
+
+    if usage:
+        print(f"📊 [日志] 用户 {user_id} 的请求消耗 {usage.get('total_tokens', 0)} tokens")
+
+    return None
+
+# 创建 Agent
+model = init_chat_model("gpt-4o")
+agent = create_agent(
+    model,
+    tools=[],
+    middleware=[log_before_model, log_after_model],
+    context_schema=UserContext,
+    system_prompt="你是助手。"
+)
+
+# 测试
+result = agent.invoke(
+    {"messages": [{"role": "user", "content": "你好"}]},
+    context=UserContext(user_id="user_123", user_name="张三")
+)</code></pre>
+                    </div>
+                </section>
+
+                <!-- 完整示例 -->
+                <section class="content-section">
+                    <h2 class="section-title">🎯 完整示例：用户管理系统</h2>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+完整的 Runtime 使用示例
+功能：整合 Context、Store、Stream Writer 的用户管理系统
+"""
+from dataclasses import dataclass
+from langchain.agents import create_agent
+from langchain.chat_models import init_chat_model
+from langchain.tools import tool, ToolRuntime
+from langgraph.store.memory import InMemoryStore
+import time
+
+# ==================== 定义 Context ====================
+
+@dataclass
+class UserContext:
+    """用户上下文"""
+    user_id: str
+    user_name: str
+    role: str  # 'user', 'admin'
+
+# ==================== 定义工具 ====================
+
+@tool
+def get_my_info(runtime: ToolRuntime[UserContext]) -> str:
+    """获取当前用户信息。"""
+    ctx = runtime.context
+    return f"用户 ID: {ctx.user_id}\n姓名: {ctx.user_name}\n角色: {ctx.role}"
+
+@tool
+def save_note(note: str, runtime: ToolRuntime[UserContext]) -> str:
+    """保存笔记到用户的长期存储。
+
+    Args:
+        note: 笔记内容
+    """
+    if not runtime.store:
+        return "错误：Store 未配置"
+
+    writer = runtime.stream_writer
+    user_id = runtime.context.user_id
+
+    # 进度反馈
+    writer("正在保存笔记...")
+    time.sleep(0.5)
+
+    # 生成笔记 ID
+    import uuid
+    note_id = str(uuid.uuid4())
+
+    # 保存到 Store
+    runtime.store.put(
+        namespace=("user_notes", user_id),
+        key=note_id,
+        value={"content": note, "note_id": note_id}
+    )
+
+    writer("保存完成！")
+
+    return f"✅ 笔记已保存（ID: {note_id[:8]}...）"
+
+@tool
+def list_my_notes(runtime: ToolRuntime[UserContext]) -> str:
+    """列出当前用户的所有笔记。"""
+    if not runtime.store:
+        return "错误：Store 未配置"
+
+    writer = runtime.stream_writer
+    user_id = runtime.context.user_id
+
+    writer("正在检索笔记...")
+    time.sleep(0.3)
+
+    # 搜索用户的笔记
+    notes = runtime.store.search(
+        namespace_prefix=("user_notes", user_id)
+    )
+
+    if not notes:
+        return "您还没有保存任何笔记。"
+
+    result = f"您的笔记列表（共 {len(notes)} 条）：\n\n"
+    for i, item in enumerate(notes, 1):
+        content = item.value["content"]
+        result += f"{i}. {content[:50]}...\n"
+
+    return result
+
+@tool
+def admin_view_all_users(runtime: ToolRuntime[UserContext]) -> str:
+    """查看所有用户（仅管理员）。"""
+    if runtime.context.role != "admin":
+        return "❌ 权限不足：此功能仅限管理员使用。"
+
+    writer = runtime.stream_writer
+    writer("正在查询所有用户...")
+    time.sleep(0.5)
+
+    # 模拟查询
+    users = [
+        {"id": "user_001", "name": "张三"},
+        {"id": "user_002", "name": "李四"},
+    ]
+
+    result = "系统用户列表：\n"
+    for user in users:
+        result += f"- {user['name']} (ID: {user['id']})\n"
+
+    return result
+
+# ==================== 创建 Agent ====================
+
+store = InMemoryStore()
+model = init_chat_model("gpt-4o")
+
+agent = create_agent(
+    model,
+    tools=[get_my_info, save_note, list_my_notes, admin_view_all_users],
+    store=store,
+    context_schema=UserContext,
+    system_prompt="""你是用户管理助手。
+
+你的职责：
+1. 帮助用户管理笔记
+2. 提供用户信息查询
+3. 为管理员提供系统管理功能
+
+使用工具：
+- get_my_info: 查看当前用户信息
+- save_note: 保存笔记
+- list_my_notes: 列出用户的笔记
+- admin_view_all_users: 查看所有用户（仅管理员）
+"""
+)
+
+# ==================== 测试场景 ====================
+
+if __name__ == "__main__":
+    # 场景 1：普通用户保存笔记
+    print("=" * 60)
+    print("场景 1：普通用户操作")
+    print("=" * 60)
+
+    result1 = agent.invoke(
+        {"messages": [{"role": "user", "content": "保存一条笔记：明天开会"}]},
+        context=UserContext(user_id="user_001", user_name="张三", role="user")
+    )
+    print(result1["messages"][-1].content)
+
+    # 场景 2：普通用户尝试查看所有用户
+    print("\n" + "=" * 60)
+    print("场景 2：普通用户尝试管理员操作")
+    print("=" * 60)
+
+    result2 = agent.invoke(
+        {"messages": [{"role": "user", "content": "查看所有用户"}]},
+        context=UserContext(user_id="user_001", user_name="张三", role="user")
+    )
+    print(result2["messages"][-1].content)
+
+    # 场景 3：管理员查看所有用户
+    print("\n" + "=" * 60)
+    print("场景 3：管理员操作")
+    print("=" * 60)
+
+    result3 = agent.invoke(
+        {"messages": [{"role": "user", "content": "查看所有用户"}]},
+        context=UserContext(user_id="admin_001", user_name="管理员", role="admin")
+    )
+    print(result3["messages"][-1].content)</code></pre>
+                    </div>
+                </section>
+
+                <!-- 最佳实践 -->
+                <section class="content-section">
+                    <h2 class="section-title">✨ 最佳实践</h2>
+
+                    <h3 class="subsection-title">1. Context Schema 使用 dataclass</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># ✅ 推荐：使用 dataclass
+from dataclasses import dataclass
+
+@dataclass
+class UserContext:
+    user_id: str
+    user_name: str
+
+# ❌ 避免：使用普通字典
+context = {"user_id": "123", "user_name": "张三"}</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">2. 检查 Store 是否可用</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># ✅ 好的做法
+@tool
+def my_tool(runtime: ToolRuntime) -> str:
+    if not runtime.store:
+        return "Store 未配置"
+
+    # 使用 store
+    runtime.store.put(...)
+
+# ❌ 不检查会导致 AttributeError
+@tool
+def bad_tool(runtime: ToolRuntime) -> str:
+    runtime.store.put(...)  # 可能报错</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">3. 类型注解提升开发体验</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># ✅ 使用类型注解，IDE 可以自动补全
+from langchain.tools import tool, ToolRuntime
+
+@dataclass
+class UserContext:
+    user_id: str
+
+@tool
+def my_tool(runtime: ToolRuntime[UserContext]) -> str:
+    # IDE 会提示 user_id 属性
+    user_id = runtime.context.user_id
+    return user_id</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">4. Context 用于只读数据，Store 用于可变状态</h3>
+                    <ul>
+                        <li><strong>Context</strong>：用户 ID、权限、配置（静态、只读）</li>
+                        <li><strong>Store</strong>：用户偏好、历史数据（可变、持久化）</li>
+                    </ul>
+
+                    <h3 class="subsection-title">5. Stream Writer 用于长时间操作</h3>
+                    <p>
+                        仅在工具执行时间超过 2 秒时使用 Stream Writer，
+                        避免过度使用造成信息噪音。
+                    </p>
+                </section>
+
+                <!-- 常见问题 -->
+                <section class="content-section">
+                    <h2 class="section-title">❓ 常见问题</h2>
+
+                    <h3 class="subsection-subtitle">Q1: Runtime 在哪里可用？</h3>
+                    <p>
+                        Runtime 仅在以下场景可用：
+                    </p>
+                    <ul>
+                        <li>工具函数（通过 <code>ToolRuntime</code> 参数）</li>
+                        <li>中间件（通过 <code>runtime</code> 参数或 <code>request.runtime</code>）</li>
+                    </ul>
+
+                    <h3 class="subsection-subtitle">Q2: Context 和 Store 有什么区别？</h3>
+                    <p>
+                        <strong>Context</strong>：每次调用时注入的静态信息，不会自动持久化<br>
+                        <strong>Store</strong>：持久化存储，数据会跨调用保留
+                    </p>
+
+                    <h3 class="subsection-subtitle">Q3: Stream Writer 何时发送事件？</h3>
+                    <p>
+                        需要使用 <code>stream_mode="custom"</code> 或组合模式才能接收
+                        Stream Writer 发送的事件。
+                    </p>
+
+                    <h3 class="subsection-subtitle">Q4: 如何在单元测试中 mock Runtime？</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from unittest.mock import Mock
+from langchain.tools import ToolRuntime
+
+# 创建 mock runtime
+mock_runtime = Mock(spec=ToolRuntime)
+mock_runtime.context = UserContext(user_id="test_user", user_name="测试")
+mock_runtime.store = None
+mock_runtime.stream_writer = Mock()
+
+# 测试工具
+result = my_tool.invoke({"runtime": mock_runtime})</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">Q5: Store 支持哪些后端？</h3>
+                    <p>
+                        目前支持：
+                    </p>
+                    <ul>
+                        <li><code>InMemoryStore</code>：内存存储（开发测试）</li>
+                        <li>后续版本将支持 PostgreSQL、Redis 等持久化后端</li>
+                    </ul>
+                </section>
+
+                <!-- 参考资源 -->
+                <section class="content-section">
+                    <h2 class="section-title">🔗 参考资源</h2>
+                    <ul>
+                        <li>
+                            <a href="https://docs.langchain.com/oss/python/langchain/runtime" target="_blank">
+                                LangChain Runtime 官方文档
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://docs.langchain.com/oss/python/langchain/tools" target="_blank">
+                                Tools 工具系统文档
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://docs.langchain.com/oss/python/langchain/middleware/overview" target="_blank">
+                                Middleware 中间件文档
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- 页面导航 -->
+                <nav class="page-navigation">
+                    <a href="09-lcel.html" class="nav-button prev">
+                        ← 上一页：LCEL 表达式
+                    </a>
+                    <a href="11-checkpointer.html" class="nav-button next">
+                        下一页：持久化系统 →
+                    </a>
+                </nav>
+            </div>
+        </main>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" aria-label="返回顶部">↑</button>
+
+    <!-- JavaScript -->
+    <script src="assets/js/mermaid-init.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</body>
+</html>

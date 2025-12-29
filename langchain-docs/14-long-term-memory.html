@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LangChain 1.0 核心架构 - 深入理解 LangChain 的设计哲学和模块组织">
+    <title>核心架构 | LangChain 1.0 Python 知识文档</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <button class="mobile-menu-button" aria-label="打开菜单">☰</button>
+
+    <div class="container">
+        <!-- 侧边栏导航 -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="sidebar-title">🦜 LangChain 1.0</h1>
+                <p class="sidebar-subtitle">Python 完整学习指南</p>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-section">
+                    <div class="nav-section-title">开始</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">
+                                <span class="nav-icon">🏠</span>
+                                主页
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">基础篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="01-introduction.html" class="nav-link">
+                                <span class="nav-icon">📖</span>
+                                LangChain 简介
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="02-architecture.html" class="nav-link">
+                                <span class="nav-icon">🏗️</span>
+                                核心架构
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="03-models.html" class="nav-link">
+                                <span class="nav-icon">🤖</span>
+                                模型接口
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="04-messages.html" class="nav-link">
+                                <span class="nav-icon">💬</span>
+                                消息系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="05-tools.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                工具系统
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">进阶篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="06-agents.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                Agent 基础
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="07-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="08-rag.html" class="nav-link">
+                                <span class="nav-icon">🔍</span>
+                                RAG 详解
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="09-lcel.html" class="nav-link">
+                                <span class="nav-icon">🔗</span>
+                                LCEL 表达式
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">高级应用</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="10-runtime.html" class="nav-link">
+                                <span class="nav-icon">🔌</span>
+                                Runtime 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="11-checkpointer.html" class="nav-link">
+                                <span class="nav-icon">💾</span>
+                                持久化系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="12-streaming.html" class="nav-link">
+                                <span class="nav-icon">🌊</span>
+                                流式输出
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="13-human-in-loop.html" class="nav-link">
+                                <span class="nav-icon">👤</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="14-long-term-memory.html" class="nav-link">
+                                <span class="nav-icon">🗄️</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="15-langgraph.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                LangGraph
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">实战篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="16-customer-service.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                客服机器人
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="17-best-practices.html" class="nav-link">
+                                <span class="nav-icon">✨</span>
+                                最佳实践
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">参考篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="18-api-reference.html" class="nav-link">
+                                <span class="nav-icon">📚</span>
+                                API 速查表
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="19-troubleshooting.html" class="nav-link">
+                                <span class="nav-icon">🐛</span>
+                                故障排除
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="20-migration.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                迁移指南
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">扩展篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="21-structured-output.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                结构化输出
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">DeepAgents 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="22-deepagents-quickstart.html" class="nav-link">
+                                <span class="nav-icon">🚀</span>
+                                快速开始
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="23-deepagents-customization.html" class="nav-link">
+                                <span class="nav-icon">🎨</span>
+                                定制化
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="24-deepagents-harness.html" class="nav-link">
+                                <span class="nav-icon">🎛️</span>
+                                Harness 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="25-deepagents-backends.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                后端配置
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="26-deepagents-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="27-deepagents-hitl.html" class="nav-link">
+                                <span class="nav-icon">🤝</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="28-deepagents-memory.html" class="nav-link">
+                                <span class="nav-icon">🧠</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="29-deepagents-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">Multi-Agent 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="30-multi-agent-index.html" class="nav-link">
+                                <span class="nav-icon">🌐</span>
+                                概述
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="31-multi-agent-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="32-multi-agent-handoffs.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                交接机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="33-multi-agent-skills.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                技能系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="34-multi-agent-router.html" class="nav-link">
+                                <span class="nav-icon">🧭</span>
+                                路由机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="35-multi-agent-workflow.html" class="nav-link">
+                                <span class="nav-icon">🔀</span>
+                                自定义工作流
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- 主内容区域 -->
+        <!-- 主内容区域 -->
+        <main class="main-content">
+            <div class="content-wrapper">
+                <!-- 面包屑导航 -->
+                <nav class="breadcrumb">
+                    <span class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link">主页</a>
+                    </span>
+                    <span class="breadcrumb-item">
+                        高级应用
+                    </span>
+                    <span class="breadcrumb-item">
+                        长期记忆
+                    </span>
+                </nav>
+
+                <!-- 页面标题 -->
+                <header class="page-header">
+                    <h1 class="page-title">🗄️ Long-term Memory（长期记忆）</h1>
+                    <p class="page-subtitle">
+                        掌握 LangChain 1.0 的 Store 存储系统，实现跨会话的持久化记忆，
+                        构建能够记住用户偏好、历史交互和个性化信息的智能 AI Agent。
+                    </p>
+                </header>
+
+                <!-- 长期记忆简介 -->
+                <section class="content-section">
+                    <h2 class="section-title">📚 什么是长期记忆？</h2>
+                    <p>
+                        <strong>Long-term Memory（长期记忆）</strong>是 AI Agent 跨会话保存和检索信息的能力。
+                        与短期记忆（Checkpointer）不同，长期记忆专注于存储<strong>结构化的持久数据</strong>，
+                        如用户偏好、历史行为、知识库等。
+                    </p>
+
+                    <div class="info-box note">
+                        <div class="info-box-title">💡 长期记忆 vs 短期记忆</div>
+                        <table style="margin-top: 0.5rem;">
+                            <thead>
+                                <tr>
+                                    <th>特性</th>
+                                    <th>短期记忆（Checkpointer）</th>
+                                    <th>长期记忆（Store）</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>用途</strong></td>
+                                    <td>对话历史、会话状态</td>
+                                    <td>用户偏好、知识库、持久数据</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>数据结构</strong></td>
+                                    <td>消息列表、状态字典</td>
+                                    <td>JSON 文档</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>生命周期</strong></td>
+                                    <td>单次会话或相关会话</td>
+                                    <td>跨会话、长期保存</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>检索方式</strong></td>
+                                    <td>按 thread_id 加载</td>
+                                    <td>按 namespace + key 或搜索</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>适用场景</strong></td>
+                                    <td>多轮对话、上下文理解</td>
+                                    <td>个性化、用户画像、动态知识</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3 class="subsection-title">典型应用场景</h3>
+                    <ul>
+                        <li><strong>用户偏好</strong>：语言、主题、通知设置</li>
+                        <li><strong>用户画像</strong>：兴趣、行为历史、订阅信息</li>
+                        <li><strong>动态知识库</strong>：不断更新的业务知识、FAQ</li>
+                        <li><strong>跨会话上下文</strong>：用户之前的问题、未完成的任务</li>
+                        <li><strong>个性化推荐</strong>：基于历史交互的智能建议</li>
+                    </ul>
+                </section>
+
+                <!-- Store 架构 -->
+                <section class="content-section">
+                    <h2 class="section-title">🏗️ Store 存储架构</h2>
+
+                    <div class="mermaid-wrapper">
+                        <div class="mermaid">
+graph TB
+    A[Agent 调用] --> B{需要访问长期记忆？}
+    B -->|是| C[工具通过 ToolRuntime 访问]
+
+    C --> D[Store.get/put/search]
+
+    D --> E{操作类型}
+
+    E -->|get| F[按 Namespace + Key 读取]
+    E -->|put| G[按 Namespace + Key 写入]
+    E -->|search| H[跨 Namespace 搜索]
+    E -->|delete| I[删除特定记忆]
+
+    F --> J[返回 StoreValue 对象]
+    G --> K[更新存储]
+    H --> L[返回匹配结果列表]
+    I --> K
+
+    J --> M[工具返回结果]
+    K --> M
+    L --> M
+
+    M --> N[Agent 继续执行]
+
+    subgraph "Store 存储层"
+        O[InMemoryStore]
+        P[PostgresStore]
+        Q[自定义 Store]
+    end
+
+    D -.使用.-> O
+    D -.使用.-> P
+    D -.使用.-> Q
+
+    style D fill:#3b82f6,color:#fff
+    style J fill:#10b981,color:#fff
+    style K fill:#f59e0b,color:#fff
+    style L fill:#8b5cf6,color:#fff
+                        </div>
+                    </div>
+
+                    <h3 class="subsection-title">核心概念</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>概念</th>
+                                <th>说明</th>
+                                <th>示例</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Namespace</strong></td>
+                                <td>层级化命名空间（元组）</td>
+                                <td><code>("users",)</code>, <code>("users", "preferences")</code></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Key</strong></td>
+                                <td>唯一标识符（字符串）</td>
+                                <td><code>"user_123"</code>, <code>"en-us"</code></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Value</strong></td>
+                                <td>JSON 可序列化的数据</td>
+                                <td><code>{"name": "张三", "language": "zh-CN"}</code></td>
+                            </tr>
+                            <tr>
+                                <td><strong>StoreValue</strong></td>
+                                <td>存储对象，包含 value 和 metadata</td>
+                                <td><code>StoreValue(value={...}, metadata={...})</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- InMemoryStore 基础 -->
+                <section class="content-section">
+                    <h2 class="section-title">🧪 InMemoryStore - 开发测试</h2>
+                    <p>
+                        <code>InMemoryStore</code> 是内存存储实现，适合开发和测试环境。
+                        生产环境应使用数据库支持的 Store（如 PostgresStore）。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+InMemoryStore 基础使用
+功能：创建内存存储并执行基本操作
+"""
+from langgraph.store.memory import InMemoryStore
+
+# 定义嵌入函数（用于向量搜索）
+def embed(texts: list[str]) -> list[list[float]]:
+    """简单的嵌入函数（生产环境使用真实模型）"""
+    return [[1.0, 2.0, 3.0] for _ in texts]
+
+# 创建 Store
+store = InMemoryStore(
+    index={
+        "embed": embed,  # 嵌入函数
+        "dims": 3        # 向量维度
+    }
+)
+
+# 存储用户信息
+store.put(
+    ("users",),           # Namespace（元组）
+    "user_123",          # Key
+    {                    # Value（JSON 可序列化）
+        "name": "张三",
+        "language": "zh-CN",
+        "preferences": {
+            "theme": "dark",
+            "notifications": True
+        }
+    }
+)
+
+# 读取用户信息
+user_info = store.get(("users",), "user_123")
+
+if user_info:
+    print(f"用户名: {user_info.value['name']}")
+    print(f"语言: {user_info.value['language']}")
+    print(f"主题: {user_info.value['preferences']['theme']}")
+else:
+    print("用户不存在")</code></pre>
+                    </div>
+
+                    <div class="info-box warning">
+                        <div class="info-box-title">⚠️ InMemoryStore 限制</div>
+                        <p>
+                            InMemoryStore 仅将数据存储在内存中，应用重启后所有数据丢失。
+                            <strong>仅用于开发和测试环境，生产环境必须使用持久化存储。</strong>
+                        </p>
+                    </div>
+                </section>
+
+                <!-- 核心 API -->
+                <section class="content-section">
+                    <h2 class="section-title">🔧 核心 API 详解</h2>
+
+                    <h3 class="subsection-title">1. put() - 写入数据</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+put() 方法：写入或更新数据
+"""
+from langgraph.store.memory import InMemoryStore
+
+store = InMemoryStore()
+
+# 写入用户偏好
+store.put(
+    ("users", "preferences"),  # Namespace（可以是多层）
+    "user_123",               # Key
+    {
+        "language": "zh-CN",
+        "timezone": "Asia/Shanghai",
+        "email_notifications": True
+    }
+)
+
+# 写入订单历史
+store.put(
+    ("users", "orders"),
+    "user_123",
+    {
+        "orders": [
+            {"id": "ORDER-001", "product": "iPhone 15"},
+            {"id": "ORDER-002", "product": "AirPods"}
+        ],
+        "total_spent": 15000.0
+    }
+)
+
+print("✅ 数据写入成功")</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">2. get() - 读取数据</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+get() 方法：读取特定 Key 的数据
+"""
+# 读取用户偏好
+preferences = store.get(("users", "preferences"), "user_123")
+
+if preferences:
+    print(f"语言: {preferences.value['language']}")
+    print(f"时区: {preferences.value['timezone']}")
+    print(f"邮件通知: {preferences.value['email_notifications']}")
+
+    # 访问元数据
+    print(f"创建时间: {preferences.created_at}")
+    print(f"更新时间: {preferences.updated_at}")
+else:
+    print("未找到用户偏好")</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">3. search() - 搜索数据</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+search() 方法：跨 Namespace 搜索数据
+功能：支持过滤和向量相似度搜索
+"""
+# 示例 1：使用过滤条件搜索
+results = store.search(
+    ("users", "preferences"),
+    filter={"language": "zh-CN"}  # 过滤条件
+)
+
+print(f"找到 {len(results)} 个中文用户")
+for item in results:
+    print(f"- 用户 {item.key}: {item.value}")
+
+# 示例 2：向量相似度搜索
+results = store.search(
+    ("knowledge_base",),
+    query="如何重置密码？",  # 查询字符串
+    limit=5                  # 返回最相关的 5 个结果
+)
+
+for i, item in enumerate(results):
+    print(f"\n结果 {i+1}:")
+    print(f"  Key: {item.key}")
+    print(f"  内容: {item.value}")
+    # print(f"  相似度: {item.score}")</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">4. delete() - 删除数据</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+delete() 方法：删除特定数据
+"""
+# 删除用户的订单历史
+store.delete(("users", "orders"), "user_123")
+
+# 验证删除
+orders = store.get(("users", "orders"), "user_123")
+if orders is None:
+    print("✅ 订单历史已删除")</code></pre>
+                    </div>
+                </section>
+
+                <!-- 与 Agent 集成 -->
+                <section class="content-section">
+                    <h2 class="section-title">🔗 与 Agent Runtime 集成</h2>
+                    <p>
+                        通过 <code>ToolRuntime</code>，工具可以访问 Store 来读写长期记忆。
+                    </p>
+
+                    <h3 class="subsection-title">读取长期记忆</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+工具中读取长期记忆示例
+功能：根据用户 ID 查询用户偏好
+"""
+from langchain.tools import tool, ToolRuntime
+from langchain.agents import create_agent, AgentState
+from langgraph.store.memory import InMemoryStore
+from typing_extensions import TypedDict
+
+# 定义上下文 Schema
+class Context(TypedDict):
+    user_id: str
+
+@tool
+def get_user_language(runtime: ToolRuntime[Context]) -> str:
+    """获取用户的语言偏好"""
+    # 从 Runtime 获取 Store
+    store = runtime.store
+
+    # 从 Context 获取 user_id
+    user_id = runtime.context["user_id"]
+
+    # 读取用户偏好
+    preferences = store.get(("users", "preferences"), user_id)
+
+    if preferences:
+        language = preferences.value.get("language", "en-US")
+        return f"用户 {user_id} 的语言偏好是: {language}"
+    else:
+        return f"用户 {user_id} 没有设置语言偏好"
+
+# 创建 Store
+store = InMemoryStore()
+
+# 预先存储一些数据
+store.put(
+    ("users", "preferences"),
+    "user_123",
+    {"language": "zh-CN", "theme": "dark"}
+)
+
+# 创建 Agent
+agent = create_agent(
+    model="gpt-4o",
+    tools=[get_user_language],
+    store=store,               # 传递 Store
+    context_schema=Context     # 传递 Context Schema
+)
+
+# 调用 Agent（提供 context）
+result = agent.invoke(
+    {
+        "messages": [{"role": "user", "content": "查询我的语言设置"}]
+    },
+    {
+        "context": {"user_id": "user_123"}
+    }
+)
+
+print(result["messages"][-1].content)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">写入长期记忆</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+工具中写入长期记忆示例
+功能：保存用户偏好设置
+"""
+from langchain.tools import tool, ToolRuntime
+from typing_extensions import TypedDict
+
+class UserPreferences(TypedDict):
+    language: str
+    theme: str
+    notifications: bool
+
+@tool
+def save_user_preferences(
+    preferences: UserPreferences,
+    runtime: ToolRuntime[Context]
+) -> str:
+    """保存用户偏好设置"""
+    store = runtime.store
+    user_id = runtime.context["user_id"]
+
+    # 写入 Store
+    store.put(
+        ("users", "preferences"),
+        user_id,
+        preferences
+    )
+
+    return f"成功保存用户 {user_id} 的偏好设置"
+
+@tool
+def get_user_preferences(runtime: ToolRuntime[Context]) -> str:
+    """获取用户偏好设置"""
+    store = runtime.store
+    user_id = runtime.context["user_id"]
+
+    preferences = store.get(("users", "preferences"), user_id)
+
+    if preferences:
+        prefs = preferences.value
+        return f"""
+        语言: {prefs.get('language', '未设置')}
+        主题: {prefs.get('theme', '未设置')}
+        通知: {'开启' if prefs.get('notifications') else '关闭'}
+        """
+    else:
+        return "未找到用户偏好设置"
+
+# 创建支持读写的 Agent
+agent = create_agent(
+    model="gpt-4o",
+    tools=[save_user_preferences, get_user_preferences],
+    store=store,
+    context_schema=Context
+)
+
+# 保存偏好
+result1 = agent.invoke(
+    {
+        "messages": [{
+            "role": "user",
+            "content": "帮我设置：语言中文、深色主题、开启通知"
+        }]
+    },
+    {"context": {"user_id": "user_456"}}
+)
+
+# 查询偏好
+result2 = agent.invoke(
+    {
+        "messages": [{"role": "user", "content": "查询我的偏好设置"}]
+    },
+    {"context": {"user_id": "user_456"}}
+)
+
+print(result2["messages"][-1].content)</code></pre>
+                    </div>
+                </section>
+
+                <!-- Namespace 设计模式 -->
+                <section class="content-section">
+                    <h2 class="section-title">🗂️ Namespace 设计模式</h2>
+                    <p>
+                        合理的 Namespace 设计能够实现高效的数据组织和检索。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+Namespace 设计模式示例
+功能：演示不同的命名空间组织方式
+"""
+from langgraph.store.memory import InMemoryStore
+
+store = InMemoryStore()
+
+# 模式 1：按用户组织
+store.put(
+    ("users", "user_123", "profile"),
+    "basic_info",
+    {"name": "张三", "email": "zhang@example.com"}
+)
+
+store.put(
+    ("users", "user_123", "preferences"),
+    "settings",
+    {"language": "zh-CN", "theme": "dark"}
+)
+
+# 模式 2：按功能模块组织
+store.put(
+    ("orders", "user_123"),
+    "ORDER-001",
+    {"product": "iPhone 15", "status": "shipped"}
+)
+
+store.put(
+    ("orders", "user_123"),
+    "ORDER-002",
+    {"product": "MacBook Pro", "status": "processing"}
+)
+
+# 模式 3：按时间组织
+from datetime import datetime
+today = datetime.now().strftime("%Y-%m-%d")
+
+store.put(
+    ("analytics", "daily", today),
+    "user_123",
+    {"visits": 5, "actions": 12}
+)
+
+# 模式 4：多租户组织
+store.put(
+    ("tenants", "company_A", "users"),
+    "user_001",
+    {"name": "员工A", "role": "admin"}
+)
+
+store.put(
+    ("tenants", "company_B", "users"),
+    "user_001",
+    {"name": "员工B", "role": "viewer"}
+)
+
+# 查询示例：获取用户的所有订单
+orders = store.search(("orders", "user_123"))
+print(f"用户有 {len(orders)} 个订单")
+for order in orders:
+    print(f"- {order.key}: {order.value['product']}")</code></pre>
+                    </div>
+
+                    <div class="info-box tip">
+                        <div class="info-box-title">✅ Namespace 设计建议</div>
+                        <ul>
+                            <li><strong>层级清晰</strong>：使用元组表示层级关系，如 <code>("users", user_id, "preferences")</code></li>
+                            <li><strong>一致性</strong>：保持相同类型数据的 Namespace 结构一致</li>
+                            <li><strong>可扩展</strong>：预留扩展空间，避免频繁重构</li>
+                            <li><strong>隔离性</strong>：不同租户或业务使用不同的顶层 Namespace</li>
+                            <li><strong>语义化</strong>：使用有意义的名称，方便理解和维护</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- 完整示例 -->
+                <section class="content-section">
+                    <h2 class="section-title">🎯 完整示例：个性化推荐系统</h2>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级 - 完整项目</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+个性化推荐系统完整示例
+功能：基于用户历史行为和偏好，提供智能推荐
+"""
+from langchain.agents import create_agent
+from langchain.tools import tool, ToolRuntime
+from langgraph.store.memory import InMemoryStore
+from typing_extensions import TypedDict
+from datetime import datetime
+import json
+
+# ==================== 上下文定义 ====================
+
+class Context(TypedDict):
+    user_id: str
+    session_id: str
+
+# ==================== 初始化 Store ====================
+
+store = InMemoryStore()
+
+# 预置一些用户数据
+store.put(
+    ("users", "user_001", "profile"),
+    "basic",
+    {
+        "name": "张三",
+        "email": "zhang@example.com",
+        "joined_date": "2024-01-15"
+    }
+)
+
+store.put(
+    ("users", "user_001", "preferences"),
+    "settings",
+    {
+        "language": "zh-CN",
+        "categories": ["电子产品", "图书", "运动"],
+        "price_range": {"min": 100, "max": 5000}
+    }
+)
+
+store.put(
+    ("users", "user_001", "history"),
+    "browsed_products",
+    {
+        "products": [
+            {"id": "P001", "name": "iPhone 15", "category": "电子产品", "viewed_at": "2024-12-20"},
+            {"id": "P002", "name": "Python 编程", "category": "图书", "viewed_at": "2024-12-21"},
+            {"id": "P003", "name": "跑步鞋", "category": "运动", "viewed_at": "2024-12-22"}
+        ]
+    }
+)
+
+store.put(
+    ("users", "user_001", "history"),
+    "purchased_products",
+    {
+        "products": [
+            {"id": "P002", "name": "Python 编程", "price": 89, "purchased_at": "2024-12-21"}
+        ],
+        "total_spent": 89
+    }
+)
+
+# ==================== 工具定义 ====================
+
+@tool
+def get_user_profile(runtime: ToolRuntime[Context]) -> str:
+    """获取用户基本信息"""
+    store = runtime.store
+    user_id = runtime.context["user_id"]
+
+    profile = store.get(("users", user_id, "profile"), "basic")
+
+    if profile:
+        info = profile.value
+        return f"""
+        用户姓名：{info['name']}
+        邮箱：{info['email']}
+        注册时间：{info['joined_date']}
+        """
+    else:
+        return "未找到用户信息"
+
+@tool
+def get_user_preferences(runtime: ToolRuntime[Context]) -> str:
+    """获取用户偏好设置"""
+    store = runtime.store
+    user_id = runtime.context["user_id"]
+
+    prefs = store.get(("users", user_id, "preferences"), "settings")
+
+    if prefs:
+        data = prefs.value
+        return f"""
+        偏好语言：{data['language']}
+        感兴趣的类别：{', '.join(data['categories'])}
+        价格范围：{data['price_range']['min']} - {data['price_range']['max']} 元
+        """
+    else:
+        return "未找到用户偏好"
+
+@tool
+def get_browsing_history(runtime: ToolRuntime[Context]) -> str:
+    """查询用户浏览历史"""
+    store = runtime.store
+    user_id = runtime.context["user_id"]
+
+    history = store.get(("users", user_id, "history"), "browsed_products")
+
+    if history:
+        products = history.value["products"]
+        result = "最近浏览的商品：\n"
+        for p in products[-5:]:  # 最近5个
+            result += f"- {p['name']} ({p['category']}) - {p['viewed_at']}\n"
+        return result
+    else:
+        return "暂无浏览历史"
+
+@tool
+def get_purchase_history(runtime: ToolRuntime[Context]) -> str:
+    """查询用户购买历史"""
+    store = runtime.store
+    user_id = runtime.context["user_id"]
+
+    purchases = store.get(("users", user_id, "history"), "purchased_products")
+
+    if purchases:
+        data = purchases.value
+        products = data["products"]
+        result = f"购买记录（总消费：¥{data['total_spent']}）：\n"
+        for p in products:
+            result += f"- {p['name']} - ¥{p['price']} - {p['purchased_at']}\n"
+        return result
+    else:
+        return "暂无购买记录"
+
+@tool
+def record_product_view(
+    product_id: str,
+    product_name: str,
+    category: str,
+    runtime: ToolRuntime[Context]
+) -> str:
+    """记录用户浏览商品"""
+    store = runtime.store
+    user_id = runtime.context["user_id"]
+
+    # 获取现有历史
+    history = store.get(("users", user_id, "history"), "browsed_products")
+
+    if history:
+        products = history.value["products"]
+    else:
+        products = []
+
+    # 添加新记录
+    products.append({
+        "id": product_id,
+        "name": product_name,
+        "category": category,
+        "viewed_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    })
+
+    # 保留最近 50 条
+    products = products[-50:]
+
+    # 更新存储
+    store.put(
+        ("users", user_id, "history"),
+        "browsed_products",
+        {"products": products}
+    )
+
+    return f"已记录浏览：{product_name}"
+
+@tool
+def update_user_preferences(
+    categories: list[str],
+    runtime: ToolRuntime[Context]
+) -> str:
+    """更新用户偏好类别"""
+    store = runtime.store
+    user_id = runtime.context["user_id"]
+
+    # 获取现有偏好
+    prefs = store.get(("users", user_id, "preferences"), "settings")
+
+    if prefs:
+        current = prefs.value
+        current["categories"] = categories
+    else:
+        current = {
+            "language": "zh-CN",
+            "categories": categories,
+            "price_range": {"min": 0, "max": 10000}
+        }
+
+    # 更新存储
+    store.put(
+        ("users", user_id, "preferences"),
+        "settings",
+        current
+    )
+
+    return f"已更新偏好类别为：{', '.join(categories)}"
+
+@tool
+def get_personalized_recommendations(runtime: ToolRuntime[Context]) -> str:
+    """基于用户历史生成个性化推荐"""
+    store = runtime.store
+    user_id = runtime.context["user_id"]
+
+    # 获取用户偏好
+    prefs = store.get(("users", user_id, "preferences"), "settings")
+
+    # 获取浏览历史
+    history = store.get(("users", user_id, "history"), "browsed_products")
+
+    if not prefs:
+        return "无法生成推荐：未找到用户偏好"
+
+    categories = prefs.value.get("categories", [])
+
+    # 简化的推荐逻辑（实际应用会更复杂）
+    recommendations = {
+        "电子产品": ["MacBook Pro", "AirPods Pro", "iPad Air"],
+        "图书": ["深度学习", "算法导论", "设计模式"],
+        "运动": ["网球拍", "健身手环", "瑜伽垫"]
+    }
+
+    result = "🎯 为您推荐：\n\n"
+    for category in categories:
+        if category in recommendations:
+            result += f"【{category}】\n"
+            for item in recommendations[category][:2]:  # 每个类别推荐2个
+                result += f"  • {item}\n"
+            result += "\n"
+
+    return result
+
+# ==================== 创建 Agent ====================
+
+recommendation_agent = create_agent(
+    model="gpt-4o",
+    tools=[
+        get_user_profile,
+        get_user_preferences,
+        get_browsing_history,
+        get_purchase_history,
+        record_product_view,
+        update_user_preferences,
+        get_personalized_recommendations
+    ],
+    store=store,
+    context_schema=Context,
+    system_prompt="""你是个性化推荐助手。
+
+职责：
+1. 了解用户的偏好和历史行为
+2. 记录用户的浏览行为
+3. 基于用户数据生成个性化推荐
+4. 帮助用户更新偏好设置
+
+工作流程：
+- 查询用户信息时，使用相应的查询工具
+- 用户浏览商品时，记录到历史中
+- 生成推荐时，综合考虑偏好和历史
+- 始终保持友好和有帮助"""
+)
+
+# ==================== 测试场景 ====================
+
+def simulate_user_interaction(user_id: str, query: str):
+    """模拟用户交互"""
+    print(f"\n{'='*60}")
+    print(f"用户: {query}")
+    print('='*60)
+
+    result = recommendation_agent.invoke(
+        {"messages": [{"role": "user", "content": query}]},
+        {"context": {"user_id": user_id, "session_id": "session_001"}}
+    )
+
+    answer = result["messages"][-1].content
+    print(f"\n🤖 助手:\n{answer}\n")
+    return answer
+
+# ==================== 执行测试 ====================
+
+if __name__ == "__main__":
+    user_id = "user_001"
+
+    # 场景 1：查询用户信息
+    simulate_user_interaction(
+        user_id,
+        "我的个人信息是什么？"
+    )
+
+    # 场景 2：查看偏好和历史
+    simulate_user_interaction(
+        user_id,
+        "我之前浏览过哪些商品？我的偏好是什么？"
+    )
+
+    # 场景 3：记录新的浏览
+    simulate_user_interaction(
+        user_id,
+        "我正在查看 MacBook Pro（电子产品类别），帮我记录一下"
+    )
+
+    # 场景 4：获取个性化推荐
+    simulate_user_interaction(
+        user_id,
+        "根据我的偏好和历史，给我一些推荐吧"
+    )
+
+    # 场景 5：更新偏好
+    simulate_user_interaction(
+        user_id,
+        "我想把偏好类别改成：电子产品、健康、旅游"
+    )
+
+    # 场景 6：再次获取推荐（基于新偏好）
+    simulate_user_interaction(
+        user_id,
+        "现在给我推荐一些商品"
+    )
+
+    print("\n" + "="*60)
+    print("个性化推荐系统测试完成！")
+    print("="*60)</code></pre>
+                    </div>
+                </section>
+
+                <!-- 常见问题 -->
+                <section class="content-section">
+                    <h2 class="section-title">❓ 常见问题</h2>
+
+                    <h3 class="subsection-subtitle">Q1: 长期记忆和短期记忆可以同时使用吗？</h3>
+                    <p>
+                        <strong>可以，而且推荐这样做。</strong> Checkpointer 管理对话历史（短期），
+                        Store 管理用户数据和偏好（长期）。两者互补，共同实现完整的记忆系统。
+                    </p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 同时使用 Checkpointer 和 Store
+from langgraph.checkpoint.memory import InMemorySaver
+from langgraph.store.memory import InMemoryStore
+
+agent = create_agent(
+    model="gpt-4o",
+    tools=[...],
+    checkpointer=InMemorySaver(),  # 短期记忆
+    store=InMemoryStore(),         # 长期记忆
+    context_schema=Context
+)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">Q2: 如何在生产环境使用 Store？</h3>
+                    <p>
+                        使用数据库支持的 Store 实现，如 PostgresStore（需要额外安装包）：
+                    </p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Bash</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-bash"># 安装 PostgreSQL Store（示例，实际包名可能不同）
+pip install langgraph-store-postgres</code></pre>
+                    </div>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 使用 PostgreSQL Store
+from langgraph.store.postgres import PostgresStore
+
+DB_URI = "postgresql://user:pass@localhost:5432/langchain"
+
+with PostgresStore.from_conn_string(DB_URI) as store:
+    store.setup()  # 创建表结构
+
+    agent = create_agent(
+        model="gpt-4o",
+        tools=[...],
+        store=store
+    )</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">Q3: Store 中的数据什么时候会过期？</h3>
+                    <p>
+                        Store 默认<strong>不会自动删除数据</strong>。你需要实现自己的过期策略：
+                    </p>
+                    <ul>
+                        <li>在写入时添加 <code>expires_at</code> 元数据</li>
+                        <li>定期运行清理任务删除过期数据</li>
+                        <li>基于业务逻辑手动删除不再需要的数据</li>
+                    </ul>
+
+                    <h3 class="subsection-subtitle">Q4: 如何实现跨用户的知识共享？</h3>
+                    <p>
+                        使用共享的 Namespace 存储公共知识：
+                    </p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 个人知识
+store.put(("users", "user_123", "notes"), "note_001", {...})
+
+# 团队共享知识
+store.put(("teams", "team_A", "knowledge"), "doc_001", {...})
+
+# 全局知识库
+store.put(("global", "faq"), "how_to_reset_password", {...})</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">Q5: Store 支持事务吗？</h3>
+                    <p>
+                        InMemoryStore 不支持事务。生产级 Store（如 PostgresStore）
+                        可能支持事务，具体取决于实现。如果需要原子操作，
+                        考虑在应用层实现补偿逻辑或使用支持事务的数据库。
+                    </p>
+                </section>
+
+                <!-- 最佳实践 -->
+                <section class="content-section">
+                    <h2 class="section-title">✨ 最佳实践</h2>
+
+                    <h3 class="subsection-title">1. 选择合适的存储方案</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>环境</th>
+                                <th>推荐 Store</th>
+                                <th>理由</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>本地开发</td>
+                                <td>InMemoryStore</td>
+                                <td>快速迭代，无需配置</td>
+                            </tr>
+                            <tr>
+                                <td>测试环境</td>
+                                <td>InMemoryStore 或 SQLite</td>
+                                <td>轻量级，易于重置</td>
+                            </tr>
+                            <tr>
+                                <td>生产环境</td>
+                                <td>PostgresStore</td>
+                                <td>可靠、可扩展、支持备份</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 class="subsection-title">2. Namespace 命名规范</h3>
+                    <ul>
+                        <li><strong>使用有意义的名称</strong>：<code>("users", "preferences")</code> 而非 <code>("u", "p")</code></li>
+                        <li><strong>保持一致性</strong>：相同类型数据使用相同结构</li>
+                        <li><strong>避免过深层级</strong>：通常 2-4 层足够</li>
+                        <li><strong>考虑查询需求</strong>：设计时考虑如何检索数据</li>
+                    </ul>
+
+                    <h3 class="subsection-title">3. 数据设计原则</h3>
+                    <ul>
+                        <li><strong>最小化</strong>：只存储必要的信息</li>
+                        <li><strong>结构化</strong>：使用清晰的 JSON 结构</li>
+                        <li><strong>可扩展</strong>：预留扩展字段</li>
+                        <li><strong>版本控制</strong>：考虑数据 Schema 演进</li>
+                        <li><strong>隐私保护</strong>：不存储敏感信息的明文</li>
+                    </ul>
+
+                    <h3 class="subsection-title">4. 性能优化</h3>
+                    <ul>
+                        <li><strong>批量操作</strong>：尽可能批量读写，减少 I/O</li>
+                        <li><strong>缓存策略</strong>：对热数据使用应用层缓存</li>
+                        <li><strong>索引优化</strong>：为常用查询创建索引</li>
+                        <li><strong>数据清理</strong>：定期清理过期或无用数据</li>
+                    </ul>
+
+                    <h3 class="subsection-title">5. 错误处理</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 健壮的数据读取
+@tool
+def get_user_setting(runtime: ToolRuntime[Context]) -> str:
+    """获取用户设置（带错误处理）"""
+    try:
+        store = runtime.store
+        user_id = runtime.context["user_id"]
+
+        settings = store.get(("users", user_id, "settings"), "config")
+
+        if settings:
+            return f"设置：{settings.value}"
+        else:
+            # 返回默认值
+            return "使用默认设置"
+    except Exception as e:
+        # 记录错误并返回友好消息
+        print(f"Error reading settings: {e}")
+        return "无法读取设置，请稍后重试"</code></pre>
+                    </div>
+                </section>
+
+                <!-- 参考资源 -->
+                <section class="content-section">
+                    <h2 class="section-title">📖 参考资源</h2>
+                    <ul>
+                        <li>
+                            <a href="https://docs.langchain.com/oss/python/langchain/long-term-memory" target="_blank">
+                                LangChain 官方 Long-term Memory 文档
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://langchain-ai.github.io/langgraph/concepts/persistence/" target="_blank">
+                                LangGraph Persistence 概念
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://docs.langchain.com/oss/python/langchain/runtime" target="_blank">
+                                Runtime 和 Context 文档
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://docs.langchain.com/oss/python/langchain/short-term-memory" target="_blank">
+                                Short-term Memory（Checkpointer）对比
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- 页面导航 -->
+                <nav class="page-navigation">
+                    <a href="13-human-in-loop.html" class="nav-button prev">
+                        ← 上一页：人工介入
+                    </a>
+                    <a href="15-langgraph.html" class="nav-button next">
+                        下一页：LangGraph →
+                    </a>
+                </nav>
+            </div>
+        </main>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" aria-label="返回顶部">↑</button>
+
+    <!-- JavaScript -->
+    <script src="assets/js/mermaid-init.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</body>
+</html>

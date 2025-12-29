@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DeepAgents Harness 系统 - Agent 运行时框架和生产级特性">
+    <title>DeepAgents Harness 系统 | LangChain 1.0 Python 知识文档</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <button class="mobile-menu-button" aria-label="打开菜单">☰</button>
+
+    <div class="container">
+        <!-- 侧边栏导航 -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="sidebar-title">🦜 LangChain 1.0</h1>
+                <p class="sidebar-subtitle">Python 完整学习指南</p>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-section">
+                    <div class="nav-section-title">开始</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">
+                                <span class="nav-icon">🏠</span>
+                                主页
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">基础篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="01-introduction.html" class="nav-link">
+                                <span class="nav-icon">📖</span>
+                                LangChain 简介
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="02-architecture.html" class="nav-link">
+                                <span class="nav-icon">🏗️</span>
+                                核心架构
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="03-models.html" class="nav-link">
+                                <span class="nav-icon">🤖</span>
+                                模型接口
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="04-messages.html" class="nav-link">
+                                <span class="nav-icon">💬</span>
+                                消息系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="05-tools.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                工具系统
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">进阶篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="06-agents.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                Agent 基础
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="07-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="08-rag.html" class="nav-link">
+                                <span class="nav-icon">🔍</span>
+                                RAG 详解
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="09-lcel.html" class="nav-link">
+                                <span class="nav-icon">🔗</span>
+                                LCEL 表达式
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">高级应用</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="10-runtime.html" class="nav-link">
+                                <span class="nav-icon">🔌</span>
+                                Runtime 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="11-checkpointer.html" class="nav-link">
+                                <span class="nav-icon">💾</span>
+                                持久化系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="12-streaming.html" class="nav-link">
+                                <span class="nav-icon">🌊</span>
+                                流式输出
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="13-human-in-loop.html" class="nav-link">
+                                <span class="nav-icon">👤</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="14-long-term-memory.html" class="nav-link">
+                                <span class="nav-icon">🗄️</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="15-langgraph.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                LangGraph
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">实战篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="16-customer-service.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                客服机器人
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="17-best-practices.html" class="nav-link">
+                                <span class="nav-icon">✨</span>
+                                最佳实践
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">参考篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="18-api-reference.html" class="nav-link">
+                                <span class="nav-icon">📚</span>
+                                API 速查表
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="19-troubleshooting.html" class="nav-link">
+                                <span class="nav-icon">🐛</span>
+                                故障排除
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="20-migration.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                迁移指南
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">扩展篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="21-structured-output.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                结构化输出
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">DeepAgents 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="22-deepagents-quickstart.html" class="nav-link">
+                                <span class="nav-icon">🚀</span>
+                                快速开始
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="23-deepagents-customization.html" class="nav-link">
+                                <span class="nav-icon">🎨</span>
+                                定制化
+                            </a>
+                        </li>
+                        <li class="nav-item active">
+                            <a href="24-deepagents-harness.html" class="nav-link">
+                                <span class="nav-icon">🎛️</span>
+                                Harness 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="25-deepagents-backends.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                后端配置
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="26-deepagents-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="27-deepagents-hitl.html" class="nav-link">
+                                <span class="nav-icon">🤝</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="28-deepagents-memory.html" class="nav-link">
+                                <span class="nav-icon">🧠</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="29-deepagents-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">Multi-Agent 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="30-multi-agent-index.html" class="nav-link">
+                                <span class="nav-icon">🌐</span>
+                                概述
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="31-multi-agent-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="32-multi-agent-handoffs.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                交接机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="33-multi-agent-skills.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                技能系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="34-multi-agent-router.html" class="nav-link">
+                                <span class="nav-icon">🧭</span>
+                                路由机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="35-multi-agent-workflow.html" class="nav-link">
+                                <span class="nav-icon">🔀</span>
+                                自定义工作流
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- 主内容区域 -->
+        <main class="main-content">
+            <div class="content-wrapper">
+                <!-- 面包屑导航 -->
+                <nav class="breadcrumb">
+                    <span class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link">主页</a>
+                    </span>
+                    <span class="breadcrumb-item">
+                        DeepAgents 篇
+                    </span>
+                    <span class="breadcrumb-item">
+                        Harness 系统
+                    </span>
+                </nav>
+
+                <!-- 页面标题 -->
+                <header class="page-header">
+                    <h1 class="page-title">🎛️ DeepAgents Harness 系统</h1>
+                    <p class="page-subtitle">
+                        生产级 Agent 运行时框架，提供文件系统管理、上下文优化、
+                        子代理委派、人工介入等企业级特性，让 Agent 可靠、高效地运行。
+                    </p>
+                </header>
+
+                <!-- 什么是 Harness --><section class="content-section">
+                    <h2 class="section-title">📚 什么是 Harness？</h2>
+                    <p>
+                        <strong>Harness</strong>（代理框架）是 DeepAgents 的<strong>运行时环境</strong>，
+                        它不是一个简单的框架，而是一个完整的<strong>生产级 Agent 执行引擎</strong>。
+                    </p>
+
+                    <div class="info-box note">
+                        <div class="info-box-title">💡 Harness 核心特性</div>
+                        <table style="margin-top: 0.5rem;">
+                            <thead>
+                                <tr>
+                                    <th>特性</th>
+                                    <th>说明</th>
+                                    <th>应用场景</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>文件系统工具</strong></td>
+                                    <td>6 个内置文件操作工具</td>
+                                    <td>文档处理、代码工作</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>大结果驱逐</strong></td>
+                                    <td>自动管理超大工具输出（20,000 Token）</td>
+                                    <td>避免上下文溢出</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>存储抽象</strong></td>
+                                    <td>4 种可插拔存储后端</td>
+                                    <td>临时数据 + 持久化</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>子代理委派</strong></td>
+                                    <td>通过 task 工具创建专门化 Agent</td>
+                                    <td>任务分解、并行执行</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>历史摘要</strong></td>
+                                    <td>170,000 Token 自动压缩对话历史</td>
+                                    <td>长期运行 Agent</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>工具调用修复</strong></td>
+                                    <td>检测并修复悬空工具调用</td>
+                                    <td>保证对话连贯性</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>待办列表</strong></td>
+                                    <td>write_todos 工具追踪任务进度</td>
+                                    <td>复杂工作流管理</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>人工介入</strong></td>
+                                    <td>特定工具调用前暂停等待审批</td>
+                                    <td>安全门控、成本控制</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>提示词缓存</strong></td>
+                                    <td>Anthropic 模型缓存系统提示词</td>
+                                    <td>10 倍加速和成本降低</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="info-box tip">
+                        <div class="info-box-title">✨ Harness 核心理念</div>
+                        <p>
+                            Harness 实现了<strong>"标准工具调用循环 + 生产级增强"</strong>的理念：
+                        </p>
+                        <ul>
+                            <li><strong>核心循环</strong>：标准的请求 → 工具调用 → 结果处理</li>
+                            <li><strong>增强层</strong>：自动结果监控、Token 管理、上下文优化、错误恢复</li>
+                            <li><strong>存储抽象</strong>：可插拔的后端策略，无需改代码即可切换</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Harness 架构 -->
+                <section class="content-section">
+                    <h2 class="section-title">🏗️ Harness 架构</h2>
+                    <p>
+                        Harness 采用<strong>分层架构</strong>，在标准 Agent 执行循环之上
+                        添加了多个增强层：
+                    </p>
+
+                    <div class="mermaid-wrapper">
+                        <div class="mermaid">
+graph TB
+    User["用户请求"] --> Core["核心工具调用循环<br/>Agent 执行引擎"]
+
+    Core --> Enhance["增强层"]
+
+    Enhance --> FileTools["文件系统工具<br/>ls, read, write, edit, glob, grep"]
+    Enhance --> ResultEviction["大结果驱逐<br/>>20K Token 自动写入存储"]
+    Enhance --> History["历史摘要<br/>170K Token 自动压缩"]
+    Enhance --> Repair["工具调用修复<br/>悬空调用处理"]
+
+    FileTools --> Storage["存储抽象层"]
+    ResultEviction --> Storage
+
+    Storage --> State["StateBackend<br/>内存存储"]
+    Storage --> FS["FilesystemBackend<br/>磁盘存储"]
+    Storage --> Store["StoreBackend<br/>持久化存储"]
+    Storage --> Composite["CompositeBackend<br/>混合路由"]
+
+    Core --> Advanced["高级特性"]
+    Advanced --> Subagents["子代理委派<br/>task 工具"]
+    Advanced --> HITL["人工介入<br/>审批门控"]
+    Advanced --> Caching["提示词缓存<br/>Anthropic 加速"]
+    Advanced --> Todos["待办列表<br/>write_todos"]
+
+    style Core fill:#3b82f6,color:#fff
+    style Enhance fill:#10b981,color:#fff
+    style Storage fill:#f59e0b,color:#fff
+    style Advanced fill:#8b5cf6,color:#fff
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 文件系统工具 -->
+                <section class="content-section">
+                    <h2 class="section-title">📁 文件系统工具</h2>
+                    <p>
+                        Harness 提供<strong>6 个内置文件操作工具</strong>，让 Agent 可以
+                        像操作本地文件系统一样管理数据：
+                    </p>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>工具</th>
+                                <th>功能</th>
+                                <th>典型用途</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>ls</code></td>
+                                <td>列出目录内容（带元数据）</td>
+                                <td>浏览文件结构、查看大小和修改时间</td>
+                            </tr>
+                            <tr>
+                                <td><code>read_file</code></td>
+                                <td>读取文件内容（带行号和偏移）</td>
+                                <td>加载已保存的搜索结果、读取中间数据</td>
+                            </tr>
+                            <tr>
+                                <td><code>write_file</code></td>
+                                <td>创建新文件</td>
+                                <td>保存大量工具输出、临时数据</td>
+                            </tr>
+                            <tr>
+                                <td><code>edit_file</code></td>
+                                <td>精确字符串替换（支持全局替换）</td>
+                                <td>修改配置、更新已保存数据</td>
+                            </tr>
+                            <tr>
+                                <td><code>glob</code></td>
+                                <td>基于模式的文件发现</td>
+                                <td>查找特定类型的文件（*.txt, **/*.json）</td>
+                            </tr>
+                            <tr>
+                                <td><code>grep</code></td>
+                                <td>内容搜索（多种输出模式）</td>
+                                <td>在文件中搜索关键字、提取信息</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+文件系统工具 - Agent 自动使用示例
+"""
+from deepagents import create_deep_agent
+
+# 创建 Agent（文件系统工具自动可用）
+agent = create_deep_agent(
+    model="gpt-4o",
+    system_prompt="""你是数据分析助手。你可以：
+
+1. 使用 write_file 保存大量搜索结果
+2. 使用 read_file 加载已保存的数据进行分析
+3. 使用 ls 查看已保存的文件
+4. 使用 edit_file 更新数据
+5. 使用 glob 查找特定文件
+6. 使用 grep 搜索文件内容
+
+工作流程：
+- 收集数据 → write_file 保存
+- 分析数据 → read_file 读取
+- 更新数据 → edit_file 修改
+"""
+)
+
+# Agent 会自动使用文件工具管理数据
+result = agent.invoke({
+    "messages": [{
+        "role": "user",
+        "content": "收集 2024 年 AI 研究的最新进展，保存到文件，然后分析趋势"
+    }]
+})
+
+# Agent 执行流程：
+# 1. 使用网络搜索收集信息
+# 2. 使用 write_file 保存大量数据（避免上下文溢出）
+# 3. 使用 read_file 逐步读取和分析
+# 4. 生成最终报告</code></pre>
+                    </div>
+                </section>
+
+                <!-- 存储后端 -->
+                <section class="content-section">
+                    <h2 class="section-title">💾 存储后端</h2>
+                    <p>
+                        Harness 提供<strong>4 种可插拔的存储后端</strong>，
+                        支持不同的数据持久化策略：
+                    </p>
+
+                    <h3 class="subsection-title">1. StateBackend（内存存储）</h3>
+                    <p>
+                        <strong>临时内存存储</strong>，数据保存在 Agent 状态中，
+                        随对话一起 checkpoint。
+                    </p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+StateBackend - 内存存储（默认）
+"""
+from deepagents import create_deep_agent
+from deepagents.harness import StateBackend
+
+agent = create_deep_agent(
+    model="gpt-4o",
+    storage_backend=StateBackend()  # 数据保存在内存中
+)
+
+# 特点：
+# - 数据随对话状态一起 checkpoint
+# - 对话结束后数据消失
+# - 适用于临时工作空间</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">2. FilesystemBackend（磁盘存储）</h3>
+                    <p>
+                        <strong>真实磁盘访问</strong>，支持路径验证、大小限制、
+                        symlink 防护等安全特性。
+                    </p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+FilesystemBackend - 磁盘存储
+"""
+from deepagents.harness import FilesystemBackend
+
+agent = create_deep_agent(
+    model="gpt-4o",
+    storage_backend=FilesystemBackend(
+        root_path="/data/agent_workspace",  # 根目录
+        max_file_size=10 * 1024 * 1024,     # 10MB 限制
+        allow_symlinks=False                # 禁止符号链接
+    )
+)
+
+# 特点：
+# - 数据持久化到磁盘
+# - 跨对话数据共享
+# - 路径验证和安全检查
+# - 适用于需要真实文件操作的场景</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">3. StoreBackend（持久化存储）</h3>
+                    <p>
+                        <strong>跨对话持久化</strong>，使用 LangGraph 的 BaseStore，
+                        支持数据库存储。
+                    </p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+StoreBackend - 持久化存储
+"""
+from deepagents.harness import StoreBackend
+from langgraph.store.memory import InMemoryStore
+
+# 创建持久化 store
+store = InMemoryStore()  # 可替换为 PostgresStore 等
+
+agent = create_deep_agent(
+    model="gpt-4o",
+    storage_backend=StoreBackend(store=store)
+)
+
+# 特点：
+# - 跨对话数据持久化
+# - 支持数据库后端
+# - 适用于知识库、长期记忆</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">4. CompositeBackend（混合路由）</h3>
+                    <p>
+                        <strong>最灵活的方案</strong>，根据路径前缀将不同路径路由到
+                        不同的后端。
+                    </p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+CompositeBackend - 混合路由策略
+"""
+from deepagents.harness import (
+    CompositeBackend,
+    StateBackend,
+    StoreBackend,
+    FilesystemBackend
+)
+
+# 创建混合后端
+composite = CompositeBackend(
+    backends={
+        "/tmp": StateBackend(),              # 临时数据 → 内存
+        "/knowledge": StoreBackend(store),   # 知识库 → 持久化
+        "/workspace": FilesystemBackend(root_path="/data")  # 工作区 → 磁盘
+    },
+    default_backend=StateBackend()  # 默认使用内存
+)
+
+agent = create_deep_agent(
+    model="gpt-4o",
+    storage_backend=composite
+)
+
+# 使用示例：
+# - write_file("/tmp/search_results.txt", ...)    → 内存
+# - write_file("/knowledge/faq.txt", ...)         → 持久化
+# - write_file("/workspace/report.pdf", ...)      → 磁盘
+# - write_file("other.txt", ...)                  → 默认内存</code></pre>
+                    </div>
+
+                    <div class="info-box tip">
+                        <div class="info-box-title">✨ 后端选择建议</div>
+                        <table style="margin-top: 0.5rem;">
+                            <thead>
+                                <tr>
+                                    <th>后端</th>
+                                    <th>适用场景</th>
+                                    <th>数据生命周期</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>StateBackend</code></td>
+                                    <td>临时工作空间、单次对话</td>
+                                    <td>对话结束后消失</td>
+                                </tr>
+                                <tr>
+                                    <td><code>FilesystemBackend</code></td>
+                                    <td>真实文件操作、代码工作</td>
+                                    <td>持久化，手动删除</td>
+                                </tr>
+                                <tr>
+                                    <td><code>StoreBackend</code></td>
+                                    <td>知识库、跨对话共享</td>
+                                    <td>永久持久化</td>
+                                </tr>
+                                <tr>
+                                    <td><code>CompositeBackend</code></td>
+                                    <td>混合场景（推荐）</td>
+                                    <td>按路径分类</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- 大结果驱逐 -->
+                <section class="content-section">
+                    <h2 class="section-title">🔄 大结果驱逐</h2>
+                    <p>
+                        当工具输出超过<strong>20,000 Token</strong>时，Harness 会
+                        <strong>自动将结果写入存储</strong>，并用文件引用替换原始输出。
+                    </p>
+
+                    <div class="mermaid-wrapper">
+                        <div class="mermaid">
+graph LR
+    Tool["工具调用<br/>返回大量数据"] --> Check{"结果大小<br/>> 20K Token?"}
+
+    Check -->|否| Direct["直接返回<br/>结果"]
+    Check -->|是| Evict["驱逐到存储<br/>write_file(data)"]
+
+    Evict --> Replace["替换为引用<br/>'结果已保存到 file.txt'"]
+    Replace --> Agent["Agent 继续执行<br/>需要时 read_file()"]
+
+    Direct --> Agent
+
+    style Tool fill:#3b82f6,color:#fff
+    style Check fill:#f59e0b,color:#fff
+    style Evict fill:#ef4444,color:#fff
+    style Replace fill:#10b981,color:#fff
+                        </div>
+                    </div>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+大结果驱逐 - 自动管理
+"""
+from deepagents import create_deep_agent
+
+# 场景：搜索工具返回大量结果
+def massive_search(query: str) -> str:
+    """搜索工具，可能返回超大结果"""
+    # 假设返回 50,000 Token 的结果
+    results = search_api(query, max_results=1000)
+    return "\n".join([f"{i}. {r}" for i, r in enumerate(results)])
+
+agent = create_deep_agent(
+    model="gpt-4o",
+    tools=[massive_search]
+)
+
+result = agent.invoke({
+    "messages": [{
+        "role": "user",
+        "content": "搜索所有关于 LangChain 的文档"
+    }]
+})
+
+# 执行过程：
+# 1. Agent 调用 massive_search 工具
+# 2. 工具返回 50,000 Token 的结果
+# 3. Harness 检测到超过 20,000 Token 阈值
+# 4. 自动执行 write_file("search_results.txt", data)
+# 5. 将工具消息替换为："搜索结果已保存到 search_results.txt"
+# 6. Agent 看到文件引用，可以后续使用 read_file 读取
+
+# 优势：
+# - 避免上下文窗口溢出
+# - Agent 可以选择性地读取部分数据
+# - 自动化，无需手动管理</code></pre>
+                    </div>
+                </section>
+
+                <!-- 子代理委派 -->
+                <section class="content-section">
+                    <h2 class="section-title">👥 子代理委派</h2>
+                    <p>
+                        主 Agent 可以使用内置的<strong>task 工具</strong>创建
+                        <strong>独立的子代理</strong>来执行专门化任务。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+子代理委派 - task 工具使用
+"""
+from deepagents import create_deep_agent
+
+# 主 Agent 的系统提示词
+main_prompt = """你是项目经理 Agent。你可以：
+
+1. 使用 task 工具委派专门化任务给子 Agent
+2. 子 Agent 会独立执行，返回压缩的结果
+3. 你可以并行创建多个子 Agent
+
+示例：
+- task("研究 LangChain 架构", agent_type="researcher")
+- task("编写代码示例", agent_type="coder")
+- task("生成测试用例", agent_type="tester")
+
+每个子 Agent 都有独立的上下文，不会污染主 Agent 的对话历史。
+"""
+
+agent = create_deep_agent(
+    model="gpt-4o",
+    system_prompt=main_prompt
+)
+
+# 使用 Agent
+result = agent.invoke({
+    "messages": [{
+        "role": "user",
+        "content": """创建一个完整的 LangChain RAG 项目：
+        1. 研究 RAG 最佳实践
+        2. 编写代码实现
+        3. 生成测试用例
+        """
+    }]
+})
+
+# Agent 执行流程：
+# 1. 主 Agent 分析任务
+# 2. 调用 task("研究 RAG 最佳实践", agent_type="researcher")
+#    → 子 Agent 1 独立执行研究任务
+#    → 返回压缩的研究报告
+# 3. 调用 task("编写 RAG 代码", agent_type="coder", context="研究结果...")
+#    → 子 Agent 2 独立编写代码
+#    → 返回代码
+# 4. 调用 task("生成测试用例", agent_type="tester", code="...")
+#    → 子 Agent 3 生成测试
+#    → 返回测试用例
+# 5. 主 Agent 整合所有子 Agent 的结果，生成最终输出
+
+# 优势：
+# - 上下文隔离：每个子 Agent 有独立的对话历史
+# - 并行执行：可以同时运行多个子 Agent
+# - 专门化：每个子 Agent 专注于特定任务
+# - Token 效率：子 Agent 返回压缩结果，节省主 Agent 上下文</code></pre>
+                    </div>
+
+                    <div class="info-box tip">
+                        <div class="info-box-title">✨ 子代理使用建议</div>
+                        <ul>
+                            <li><strong>独立任务</strong>：适合可以独立完成的任务（研究、编码、测试）</li>
+                            <li><strong>上下文隔离</strong>：子 Agent 不会污染主 Agent 的对话历史</li>
+                            <li><strong>并行执行</strong>：多个子 Agent 可以同时运行，提升效率</li>
+                            <li><strong>压缩返回</strong>：子 Agent 只返回关键结果，节省 Token</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- 历史摘要 -->
+                <section class="content-section">
+                    <h2 class="section-title">📝 对话历史摘要</h2>
+                    <p>
+                        当对话历史超过<strong>170,000 Token</strong>时，Harness 会
+                        <strong>自动压缩旧消息</strong>，保留最近 6 条消息不变。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+历史摘要 - 自动压缩
+"""
+from deepagents import create_deep_agent
+
+agent = create_deep_agent(
+    model="gpt-4o",
+    system_prompt="你是长期运行的助手"
+)
+
+# 长期运行的对话
+for i in range(100):
+    result = agent.invoke({
+        "messages": [{
+            "role": "user",
+            "content": f"任务 {i}: 执行一些复杂的操作"
+        }]
+    })
+
+# 执行过程：
+# 1. 对话不断积累消息
+# 2. 当达到 170,000 Token 时，Harness 触发摘要
+# 3. 保留最近 6 条消息不变
+# 4. 旧消息被压缩成摘要："前 94 个任务的总结..."
+# 5. 继续执行，上下文保持可控
+
+# 配置（可选）：
+# - 摘要触发阈值：170,000 Token（默认）
+# - 保留最近消息数：6 条（默认）
+# - 摘要由模型生成，确保关键信息不丢失</code></pre>
+                    </div>
+                </section>
+
+                <!-- 工具调用修复 -->
+                <section class="content-section">
+                    <h2 class="section-title">🔧 悬空工具调用修复</h2>
+                    <p>
+                        Harness 会检测<strong>AIMessage 包含 tool_calls 但没有对应的 ToolMessage</strong>
+                        的情况，并自动创建合成响应。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+工具调用修复 - 自动处理
+"""
+# 场景：Agent 中断或错误导致工具调用没有响应
+
+# 错误的对话序列：
+# 1. HumanMessage: "搜索 LangChain"
+# 2. AIMessage: tool_calls=[search("LangChain")]
+# 3. [中断，没有 ToolMessage]
+# 4. HumanMessage: "继续"
+
+# Harness 自动修复：
+# 1. 检测到 AIMessage 有 tool_calls 但没有响应
+# 2. 创建合成 ToolMessage: "工具调用被中断，请重试"
+# 3. 对话序列变为完整：
+#    - HumanMessage: "搜索 LangChain"
+#    - AIMessage: tool_calls=[search("LangChain")]
+#    - ToolMessage: "工具调用被中断，请重试" [合成]
+#    - HumanMessage: "继续"
+# 4. Agent 可以正常继续执行
+
+# 优势：
+# - 保证对话序列的完整性
+# - 避免模型混淆
+# - 自动恢复错误状态</code></pre>
+                    </div>
+                </section>
+
+                <!-- 待办列表 -->
+                <section class="content-section">
+                    <h2 class="section-title">✅ 待办列表追踪</h2>
+                    <p>
+                        Agent 可以使用<strong>write_todos 工具</strong>维护结构化的
+                        任务列表，追踪复杂工作流的进度。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+待办列表 - write_todos 工具
+"""
+from deepagents import create_deep_agent
+
+agent = create_deep_agent(
+    model="gpt-4o",
+    system_prompt="""你是项目管理助手。使用 write_todos 工具追踪任务进度。
+
+任务状态：
+- pending: 待处理
+- in_progress: 进行中
+- completed: 已完成
+
+工作流程：
+1. 收到任务后，使用 write_todos 创建任务列表
+2. 开始任务时，更新状态为 in_progress
+3. 完成任务后，更新状态为 completed
+"""
+)
+
+result = agent.invoke({
+    "messages": [{
+        "role": "user",
+        "content": "创建一个完整的 Web 应用：前端、后端、数据库、部署"
+    }]
+})
+
+# Agent 执行过程：
+# 1. 调用 write_todos：
+#    [
+#        {"task": "设计数据库 schema", "status": "pending"},
+#        {"task": "实现后端 API", "status": "pending"},
+#        {"task": "开发前端界面", "status": "pending"},
+#        {"task": "配置部署", "status": "pending"}
+#    ]
+#
+# 2. 开始第一个任务，更新：
+#    [
+#        {"task": "设计数据库 schema", "status": "in_progress"},
+#        ...
+#    ]
+#
+# 3. 完成第一个任务，更新：
+#    [
+#        {"task": "设计数据库 schema", "status": "completed"},
+#        {"task": "实现后端 API", "status": "in_progress"},
+#        ...
+#    ]
+#
+# 4. 循环执行，直到所有任务完成
+
+# 优势：
+# - 结构化追踪复杂工作流
+# - 用户可见任务进度
+# - Agent 可以根据任务状态决策</code></pre>
+                    </div>
+                </section>
+
+                <!-- 人工介入 -->
+                <section class="content-section">
+                    <h2 class="section-title">👤 人工介入（HITL）</h2>
+                    <p>
+                        配置 Harness 在特定工具调用前<strong>暂停并等待人工审批</strong>，
+                        实现安全门控和成本控制。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+人工介入 - HITL 配置
+"""
+from deepagents import create_deep_agent
+
+# 定义需要审批的工具
+def delete_file(path: str) -> str:
+    """删除文件（危险操作）"""
+    import os
+    os.remove(path)
+    return f"已删除文件：{path}"
+
+def expensive_api_call(query: str) -> str:
+    """调用昂贵的 API"""
+    # 假设这是一个每次调用花费 $10 的 API
+    return external_api.query(query)
+
+agent = create_deep_agent(
+    model="gpt-4o",
+    tools=[delete_file, expensive_api_call],
+    # 配置人工介入
+    interrupt_before=["delete_file", "expensive_api_call"],
+    system_prompt="你是文件管理和数据查询助手"
+)
+
+# 使用 Agent
+result = agent.invoke({
+    "messages": [{
+        "role": "user",
+        "content": "清理临时文件，并查询最新数据"
+    }]
+})
+
+# 执行流程：
+# 1. Agent 决定调用 delete_file("/tmp/cache")
+# 2. Harness 检测到 interrupt_before 配置
+# 3. 暂停执行，返回中断信号
+# 4. 用户审批或拒绝：
+#    - 审批：agent.resume() 继续执行
+#    - 拒绝：agent.cancel() 取消操作
+# 5. 继续执行后续任务
+
+# 审批示例：
+if result.get("interrupt"):
+    print(f"Agent 请求执行：{result['next_tool_call']}")
+    approval = input("是否批准？(y/n): ")
+
+    if approval.lower() == "y":
+        result = agent.resume()
+    else:
+        result = agent.cancel("用户拒绝操作")
+
+# 应用场景：
+# - 危险操作（删除、修改生产数据）
+# - 昂贵的 API 调用
+# - 需要人工判断的决策</code></pre>
+                    </div>
+                </section>
+
+                <!-- 提示词缓存 -->
+                <section class="content-section">
+                    <h2 class="section-title">⚡ 提示词缓存（Anthropic）</h2>
+                    <p>
+                        对于 Anthropic 模型，Harness 会<strong>自动缓存系统提示词</strong>，
+                        实现<strong>10 倍加速和成本降低</strong>。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+提示词缓存 - 自动启用（Anthropic）
+"""
+from deepagents import create_deep_agent
+
+# 使用 Anthropic 模型时自动启用缓存
+agent = create_deep_agent(
+    model="claude-sonnet-4-5-20250929",  # Anthropic 模型
+    system_prompt="""你是专业的代码审查助手...
+
+    [非常长的系统提示词，包含详细的审查标准、代码规范、输出格式等]
+
+    总共 5000+ Token 的系统提示词
+    """
+)
+
+# 第一次调用：系统提示词被缓存
+result1 = agent.invoke({
+    "messages": [{"role": "user", "content": "审查这段代码..."}]
+})
+
+# 第二次调用：直接使用缓存，10 倍加速
+result2 = agent.invoke({
+    "messages": [{"role": "user", "content": "审查另一段代码..."}]
+})
+
+# 效果：
+# - 第一次调用：正常速度和成本
+# - 后续调用：
+#   - 延迟降低 ~90%（10 倍加速）
+#   - 成本降低 ~90%（系统提示词不重复计费）
+
+# 注意：
+# - 仅适用于 Anthropic Claude 模型
+# - 缓存有效期：5 分钟（Anthropic 限制）
+# - 系统提示词必须保持不变才能使用缓存</code></pre>
+                    </div>
+                </section>
+
+                <!-- 最佳实践 -->
+                <section class="content-section">
+                    <h2 class="section-title">✨ Harness 最佳实践</h2>
+
+                    <h3 class="subsection-title">1. 存储策略选择</h3>
+                    <ul>
+                        <li><strong>推荐使用 CompositeBackend</strong>：灵活路由不同类型的数据</li>
+                        <li><strong>临时数据</strong> → StateBackend（内存）</li>
+                        <li><strong>知识库</strong> → StoreBackend（持久化）</li>
+                        <li><strong>真实文件操作</strong> → FilesystemBackend（磁盘）</li>
+                    </ul>
+
+                    <h3 class="subsection-title">2. Token 管理</h3>
+                    <ul>
+                        <li><strong>信任大结果驱逐</strong>：让 Harness 自动管理超大输出</li>
+                        <li><strong>使用子代理</strong>：隔离上下文，避免主 Agent 污染</li>
+                        <li><strong>历史摘要</strong>：对长期运行的 Agent 自动生效</li>
+                    </ul>
+
+                    <h3 class="subsection-title">3. 安全和成本控制</h3>
+                    <ul>
+                        <li><strong>配置 interrupt_before</strong>：为危险/昂贵操作添加人工审批</li>
+                        <li><strong>FilesystemBackend 安全</strong>：设置 max_file_size、禁用 symlinks</li>
+                        <li><strong>监控 Token 使用</strong>：配合 LangSmith 追踪</li>
+                    </ul>
+
+                    <h3 class="subsection-title">4. 性能优化</h3>
+                    <ul>
+                        <li><strong>Anthropic 模型</strong>：启用提示词缓存，10 倍加速</li>
+                        <li><strong>并行子代理</strong>：使用 task 工具并行执行独立任务</li>
+                        <li><strong>适时使用文件工具</strong>：避免重复传输大量数据</li>
+                    </ul>
+                </section>
+
+                <!-- 常见问题 -->
+                <section class="content-section">
+                    <h2 class="section-title">❓ 常见问题</h2>
+
+                    <h3 class="subsection-subtitle">Q1: Harness 和普通 Agent 有什么区别？</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>特性</th>
+                                <th>普通 Agent</th>
+                                <th>Harness（DeepAgent）</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>文件操作</strong></td>
+                                <td>需要手动定义工具</td>
+                                <td>6 个内置工具</td>
+                            </tr>
+                            <tr>
+                                <td><strong>大结果处理</strong></td>
+                                <td>上下文溢出风险</td>
+                                <td>自动驱逐到存储</td>
+                            </tr>
+                            <tr>
+                                <td><strong>子代理</strong></td>
+                                <td>不支持</td>
+                                <td>内置 task 工具</td>
+                            </tr>
+                            <tr>
+                                <td><strong>历史管理</strong></td>
+                                <td>手动处理</td>
+                                <td>自动摘要压缩</td>
+                            </tr>
+                            <tr>
+                                <td><strong>错误恢复</strong></td>
+                                <td>需要手动处理</td>
+                                <td>自动修复悬空调用</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 class="subsection-subtitle">Q2: 如何选择存储后端？</h3>
+                    <p>
+                        <strong>推荐使用 CompositeBackend</strong>，根据数据类型路由：
+                    </p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 推荐配置
+composite = CompositeBackend({
+    "/tmp": StateBackend(),          # 临时数据
+    "/knowledge": StoreBackend(),    # 永久知识库
+    "/workspace": FilesystemBackend()  # 真实文件
+})</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">Q3: 大结果驱逐的阈值可以调整吗？</h3>
+                    <p>
+                        <strong>当前为固定值 20,000 Token</strong>。如需调整，
+                        需要自定义 Harness 配置（高级用法）。
+                    </p>
+
+                    <h3 class="subsection-subtitle">Q4: 子代理会消耗更多成本吗？</h3>
+                    <p>
+                        <strong>会</strong>，每个子代理都是独立的模型调用。但由于：
+                    </p>
+                    <ul>
+                        <li>子代理上下文隔离，避免主 Agent 上下文膨胀</li>
+                        <li>子代理返回压缩结果，节省 Token</li>
+                        <li>可以并行执行，提升效率</li>
+                    </ul>
+                    <p>总体上<strong>成本效益更高</strong>。</p>
+
+                    <h3 class="subsection-subtitle">Q5: 人工介入会阻塞 Agent 执行吗？</h3>
+                    <p>
+                        <strong>是的</strong>。配置 <code>interrupt_before</code> 的工具调用会暂停执行，
+                        需要调用 <code>agent.resume()</code> 或 <code>agent.cancel()</code> 才能继续。
+                        这是设计行为，用于安全门控。
+                    </p>
+                </section>
+
+                <!-- 参考资源 -->
+                <section class="content-section">
+                    <h2 class="section-title">📖 参考资源</h2>
+                    <ul>
+                        <li>
+                            <a href="https://docs.langchain.com/oss/python/deepagents/harness" target="_blank">
+                                DeepAgents Harness 官方文档
+                            </a>
+                        </li>
+                        <li>
+                            <a href="22-deepagents-quickstart.html">
+                                DeepAgents 快速开始
+                            </a>
+                        </li>
+                        <li>
+                            <a href="23-deepagents-customization.html">
+                                DeepAgents 定制化
+                            </a>
+                        </li>
+                        <li>
+                            <a href="25-deepagents-backends.html">
+                                DeepAgents 后端配置
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- 页面导航 -->
+                <nav class="page-navigation">
+                    <a href="23-deepagents-customization.html" class="nav-button prev">
+                        ← 上一页：DeepAgents 定制化
+                    </a>
+                    <a href="25-deepagents-backends.html" class="nav-button next">
+                        下一页：后端配置 →
+                    </a>
+                </nav>
+            </div>
+        </main>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" aria-label="返回顶部">↑</button>
+
+    <!-- JavaScript -->
+    <script src="assets/js/mermaid-init.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</body>
+</html>

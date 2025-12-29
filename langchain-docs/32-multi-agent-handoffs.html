@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Multi-Agent 交接机制 - 动态控制转移和状态传递">
+    <title>Multi-Agent 交接机制 | LangChain 1.0 Python 知识文档</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <button class="mobile-menu-button" aria-label="打开菜单">☰</button>
+
+    <div class="container">
+        <!-- 侧边栏导航 -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="sidebar-title">🦜 LangChain 1.0</h1>
+                <p class="sidebar-subtitle">Python 完整学习指南</p>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-section">
+                    <div class="nav-section-title">开始</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">
+                                <span class="nav-icon">🏠</span>
+                                主页
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">基础篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="01-introduction.html" class="nav-link">
+                                <span class="nav-icon">📖</span>
+                                LangChain 简介
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="02-architecture.html" class="nav-link">
+                                <span class="nav-icon">🏗️</span>
+                                核心架构
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="03-models.html" class="nav-link">
+                                <span class="nav-icon">🤖</span>
+                                模型接口
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="04-messages.html" class="nav-link">
+                                <span class="nav-icon">💬</span>
+                                消息系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="05-tools.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                工具系统
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">进阶篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="06-agents.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                Agent 基础
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="07-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="08-rag.html" class="nav-link">
+                                <span class="nav-icon">🔍</span>
+                                RAG 详解
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="09-lcel.html" class="nav-link">
+                                <span class="nav-icon">🔗</span>
+                                LCEL 表达式
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">高级应用</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="10-runtime.html" class="nav-link">
+                                <span class="nav-icon">🔌</span>
+                                Runtime 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="11-checkpointer.html" class="nav-link">
+                                <span class="nav-icon">💾</span>
+                                持久化系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="12-streaming.html" class="nav-link">
+                                <span class="nav-icon">🌊</span>
+                                流式输出
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="13-human-in-loop.html" class="nav-link">
+                                <span class="nav-icon">👤</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="14-long-term-memory.html" class="nav-link">
+                                <span class="nav-icon">🗄️</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="15-langgraph.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                LangGraph
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">实战篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="16-customer-service.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                客服机器人
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="17-best-practices.html" class="nav-link">
+                                <span class="nav-icon">✨</span>
+                                最佳实践
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">参考篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="18-api-reference.html" class="nav-link">
+                                <span class="nav-icon">📚</span>
+                                API 速查表
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="19-troubleshooting.html" class="nav-link">
+                                <span class="nav-icon">🐛</span>
+                                故障排除
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="20-migration.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                迁移指南
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">扩展篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="21-structured-output.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                结构化输出
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">DeepAgents 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="22-deepagents-quickstart.html" class="nav-link">
+                                <span class="nav-icon">🚀</span>
+                                快速开始
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="23-deepagents-customization.html" class="nav-link">
+                                <span class="nav-icon">🎨</span>
+                                定制化
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="24-deepagents-harness.html" class="nav-link">
+                                <span class="nav-icon">🎛️</span>
+                                Harness 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="25-deepagents-backends.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                后端配置
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="26-deepagents-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="27-deepagents-hitl.html" class="nav-link">
+                                <span class="nav-icon">🤝</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="28-deepagents-memory.html" class="nav-link">
+                                <span class="nav-icon">🧠</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="29-deepagents-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">Multi-Agent 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="30-multi-agent-index.html" class="nav-link">
+                                <span class="nav-icon">🌐</span>
+                                概述
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="31-multi-agent-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item active">
+                            <a href="32-multi-agent-handoffs.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                交接机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="33-multi-agent-skills.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                技能系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="34-multi-agent-router.html" class="nav-link">
+                                <span class="nav-icon">🧭</span>
+                                路由机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="35-multi-agent-workflow.html" class="nav-link">
+                                <span class="nav-icon">🔀</span>
+                                自定义工作流
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- 主内容区域 -->
+        <main class="main-content">
+            <div class="content-wrapper">
+                <!-- 面包屑导航 -->
+                <nav class="breadcrumb">
+                    <span class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link">主页</a>
+                    </span>
+                    <span class="breadcrumb-item">
+                        Multi-Agent 篇
+                    </span>
+                    <span class="breadcrumb-item">
+                        交接机制
+                    </span>
+                </nav>
+
+                <!-- 页面标题 -->
+                <header class="page-header">
+                    <h1 class="page-title">🔄 Multi-Agent 交接机制</h1>
+                    <p class="page-subtitle">
+                        实现代理之间的动态控制转移和状态传递，构建灵活的多级协作流程，
+                        支持智能升级、任务委派和上下文保持。
+                    </p>
+                </header>
+
+                <!-- 什么是 Handoffs -->.
+                <section class="content-section">
+                    <h2 class="section-title">📚 什么是 Handoffs？</h2>
+                    <p>
+                        <strong>Handoffs（交接机制）</strong>是 Multi-Agent 系统中实现<strong>控制权动态转移</strong>的核心模式。
+                        当一个代理无法完全处理用户请求，或需要专业化处理时，可以将控制权和上下文交接给另一个更合适的代理。
+                    </p>
+
+                    <div class="info-box note">
+                        <div class="info-box-title">💡 核心特性</div>
+                        <table style="margin-top: 0.5rem;">
+                            <thead>
+                                <tr>
+                                    <th>特性</th>
+                                    <th>说明</th>
+                                    <th>优势</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>动态决策</strong></td>
+                                    <td>代理在运行时决定是否交接</td>
+                                    <td>灵活应对复杂场景</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>上下文保持</strong></td>
+                                    <td>交接时传递完整的对话历史和状态</td>
+                                    <td>无缝衔接，用户体验好</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>多层级升级</strong></td>
+                                    <td>支持多级交接（客服 → 技术 → 工程师）</td>
+                                    <td>专业化分工，逐级处理</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>双向交接</strong></td>
+                                    <td>支持向上升级和向下回退</td>
+                                    <td>灵活的流程控制</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>条件触发</strong></td>
+                                    <td>基于状态、关键词、工具结果触发交接</td>
+                                    <td>自动化决策</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="mermaid-wrapper">
+                        <div class="mermaid">
+graph TB
+    User["用户：软件崩溃了"] --> CS["客服代理<br/>处理常规问题"]
+
+    CS -->|"识别：技术问题"| Decision1{"是否需要<br/>技术支持？"}
+    Decision1 -->|"是"| Handoff1["🔄 交接<br/>转移控制权<br/>传递上下文"]
+    Decision1 -->|"否"| Resolve1["直接解决<br/>返回用户"]
+
+    Handoff1 --> TS["技术支持代理<br/>诊断技术问题"]
+
+    TS -->|"识别：严重故障"| Decision2{"是否需要<br/>工程师介入？"}
+    Decision2 -->|"是"| Handoff2["🔄 交接<br/>转移控制权<br/>传递技术细节"]
+    Decision2 -->|"否"| Resolve2["技术解决方案<br/>返回用户"]
+
+    Handoff2 --> ENG["工程师代理<br/>深度排查和修复"]
+    ENG --> Resolve3["问题已修复<br/>返回用户"]
+
+    Resolve1 --> End["完成"]
+    Resolve2 --> End
+    Resolve3 --> End
+
+    style CS fill:#10b981,color:#fff
+    style TS fill:#f59e0b,color:#fff
+    style ENG fill:#ef4444,color:#fff
+    style Handoff1 fill:#3b82f6,color:#fff
+    style Handoff2 fill:#3b82f6,color:#fff
+    style Decision1 fill:#8b5cf6,color:#fff
+    style Decision2 fill:#8b5cf6,color:#fff
+                        </div>
+                    </div>
+
+                    <h3 class="subsection-title">Handoffs vs 其他协作模式</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>模式</th>
+                                <th>控制流</th>
+                                <th>适用场景</th>
+                                <th>示例</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Handoffs</strong></td>
+                                <td>动态转移，单向或双向</td>
+                                <td>需要升级、专业化处理</td>
+                                <td>客服升级技术支持</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Subagents</strong></td>
+                                <td>固定顺序，流水线</td>
+                                <td>明确的多步骤流程</td>
+                                <td>研究 → 写作 → 编辑</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Router</strong></td>
+                                <td>初始分发，一次性</td>
+                                <td>请求分类和路由</td>
+                                <td>销售/技术/账单分流</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Workflow</strong></td>
+                                <td>预定义流程，复杂编排</td>
+                                <td>多步骤复杂业务</td>
+                                <td>审批流程、发布流程</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- Handoffs 实现方式 -->
+                <section class="content-section">
+                    <h2 class="section-title">🔧 Handoffs 实现方式</h2>
+                    <p>
+                        LangGraph 提供多种方式实现 Handoffs，从简单的状态标记到复杂的条件路由。
+                    </p>
+
+                    <h3 class="subsection-title">方式 1：基于状态的交接（推荐）</h3>
+                    <p>
+                        通过在状态中添加 <code>next</code> 或 <code>handoff_to</code> 字段，
+                        代理可以动态指定下一个处理者。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+基于状态的交接 - 简单两个代理
+"""
+from typing import TypedDict, Annotated, Literal
+from langgraph.graph import StateGraph, MessagesState, START, END
+from langgraph.graph.message import add_messages
+from langchain_core.messages import HumanMessage
+
+# 定义状态（包含交接目标）
+class HandoffState(TypedDict):
+    messages: Annotated[list, add_messages]
+    next: str  # 指定下一个代理
+
+# 代理 1：客服
+def customer_service(state: HandoffState):
+    """客服代理：处理常规问题"""
+    messages = state["messages"]
+    last_message = messages[-1].content
+
+    # 判断是否需要交接给技术支持
+    if "技术问题" in last_message or "bug" in last_message.lower():
+        return {
+            "messages": [HumanMessage(content="我将为您转接技术支持团队")],
+            "next": "technical_support"  # 交接指令
+        }
+
+    return {
+        "messages": [HumanMessage(content="问题已解决")],
+        "next": "end"
+    }
+
+# 代理 2：技术支持
+def technical_support(state: HandoffState):
+    """技术支持代理"""
+    return {
+        "messages": [HumanMessage(content="技术支持：我来帮您解决技术问题")],
+        "next": "end"
+    }
+
+# 路由函数
+def route_next(state: HandoffState) -> Literal["customer_service", "technical_support", "end"]:
+    """根据 next 字段路由"""
+    next_agent = state.get("next", "customer_service")
+    if next_agent == "end":
+        return END
+    return next_agent
+
+# 构建工作流
+graph = StateGraph(HandoffState)
+graph.add_node("customer_service", customer_service)
+graph.add_node("technical_support", technical_support)
+
+# 初始路由
+graph.add_edge(START, "customer_service")
+
+# 条件路由
+graph.add_conditional_edges(
+    "customer_service",
+    route_next,
+    {
+        "technical_support": "technical_support",
+        "end": END
+    }
+)
+graph.add_conditional_edges(
+    "technical_support",
+    route_next,
+    {"end": END}
+)
+
+app = graph.compile()
+
+# 测试
+result = app.invoke({
+    "messages": [HumanMessage(content="我遇到了技术问题")]
+})
+
+# 输出：
+# 1. 客服：我将为您转接技术支持团队
+# 2. 技术支持：我来帮您解决技术问题
+
+# 优势：
+# - 简单直观
+# - 代理自主决定交接
+# - 易于理解和调试</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">方式 2：多层级升级交接</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+多层级升级交接 - 客服 → 技术 → 工程师
+"""
+from typing import TypedDict, Annotated, Literal
+from langgraph.graph import StateGraph, START, END
+from langgraph.graph.message import add_messages
+from langchain_core.messages import HumanMessage, AIMessage
+
+class EscalationState(TypedDict):
+    messages: Annotated[list, add_messages]
+    severity: str  # "low", "medium", "high"
+    next: str
+
+# L1: 客服代理
+def l1_support(state: EscalationState):
+    """L1 客服：处理常规问题"""
+    messages = state["messages"]
+    last_msg = messages[-1].content
+
+    # 评估严重性
+    if "紧急" in last_msg or "严重" in last_msg:
+        severity = "high"
+        next_agent = "l2_technical"
+        response = "这是紧急问题，我将为您转接技术支持（L2）"
+    elif "技术" in last_msg or "bug" in last_msg.lower():
+        severity = "medium"
+        next_agent = "l2_technical"
+        response = "这需要技术支持，我将为您转接（L2）"
+    else:
+        severity = "low"
+        next_agent = "end"
+        response = "问题已解决"
+
+    return {
+        "messages": [AIMessage(content=f"L1 客服：{response}")],
+        "severity": severity,
+        "next": next_agent
+    }
+
+# L2: 技术支持代理
+def l2_technical(state: EscalationState):
+    """L2 技术支持：诊断技术问题"""
+    severity = state.get("severity", "medium")
+
+    # 高严重性问题升级给工程师
+    if severity == "high":
+        return {
+            "messages": [AIMessage(content="L2 技术支持：这是高优先级问题，升级给工程师（L3）")],
+            "next": "l3_engineer"
+        }
+
+    return {
+        "messages": [AIMessage(content="L2 技术支持：问题已诊断和解决")],
+        "next": "end"
+    }
+
+# L3: 工程师代理
+def l3_engineer(state: EscalationState):
+    """L3 工程师：深度排查和修复"""
+    return {
+        "messages": [AIMessage(content="L3 工程师：已深度排查并修复问题")],
+        "next": "end"
+    }
+
+# 路由函数
+def route(state: EscalationState) -> Literal["l1_support", "l2_technical", "l3_engineer", "end"]:
+    next_agent = state.get("next", "l1_support")
+    return END if next_agent == "end" else next_agent
+
+# 构建三层升级工作流
+graph = StateGraph(EscalationState)
+graph.add_node("l1_support", l1_support)
+graph.add_node("l2_technical", l2_technical)
+graph.add_node("l3_engineer", l3_engineer)
+
+graph.add_edge(START, "l1_support")
+graph.add_conditional_edges("l1_support", route)
+graph.add_conditional_edges("l2_technical", route)
+graph.add_conditional_edges("l3_engineer", route)
+
+app = graph.compile()
+
+# 测试不同严重性
+test_cases = [
+    "我有一个简单的问题",           # L1 处理
+    "遇到了技术bug",                # L1 → L2
+    "紧急！系统崩溃了！",           # L1 → L2 → L3
+]
+
+for test in test_cases:
+    print(f"\n测试: {test}")
+    result = app.invoke({"messages": [HumanMessage(content=test)]})
+    for msg in result["messages"]:
+        if isinstance(msg, AIMessage):
+            print(f"  {msg.content}")
+
+# 输出示例：
+# 测试: 紧急！系统崩溃了！
+#   L1 客服：这是紧急问题，我将为您转接技术支持（L2）
+#   L2 技术支持：这是高优先级问题，升级给工程师（L3）
+#   L3 工程师：已深度排查并修复问题
+
+# 优势：
+# - 自动升级机制
+# - 基于严重性分级
+# - 每层专注于自己的职责</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">方式 3：带状态传递的交接</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+带状态传递的交接 - 传递上下文和数据
+"""
+from typing import TypedDict, Annotated, Literal
+from langgraph.graph import StateGraph, START, END
+from langgraph.graph.message import add_messages
+
+class ContextualHandoffState(TypedDict):
+    messages: Annotated[list, add_messages]
+    user_id: str
+    issue_type: str
+    collected_data: dict  # 收集的诊断数据
+    next: str
+
+# 代理 1：诊断代理
+def diagnostic_agent(state: ContextualHandoffState):
+    """诊断代理：收集问题信息"""
+    # 收集诊断数据
+    collected_data = {
+        "symptoms": "应用崩溃",
+        "frequency": "频繁",
+        "last_occurrence": "2 小时前",
+        "error_logs": ["Error: NullPointerException", "Error: OutOfMemory"]
+    }
+
+    # 判断问题类型
+    issue_type = "critical_bug"
+
+    return {
+        "messages": [HumanMessage(content="已收集诊断信息，转接给bug修复团队")],
+        "issue_type": issue_type,
+        "collected_data": collected_data,
+        "next": "bug_fix"
+    }
+
+# 代理 2：Bug 修复代理
+def bug_fix_agent(state: ContextualHandoffState):
+    """Bug修复代理：基于诊断数据修复"""
+    # 读取传递的数据
+    data = state["collected_data"]
+    issue_type = state["issue_type"]
+
+    # 基于诊断数据执行修复
+    fix_plan = f"""
+    问题类型：{issue_type}
+    症状：{data['symptoms']}
+    错误日志：{', '.join(data['error_logs'])}
+
+    修复方案：
+    1. 分析 NullPointerException 根因
+    2. 检查内存泄漏
+    3. 部署修复补丁
+    """
+
+    return {
+        "messages": [HumanMessage(content=f"Bug修复团队：{fix_plan}")],
+        "next": "end"
+    }
+
+# 路由
+def route(state: ContextualHandoffState) -> Literal["diagnostic", "bug_fix", "end"]:
+    next_agent = state.get("next", "diagnostic")
+    return END if next_agent == "end" else next_agent
+
+# 构建工作流
+graph = StateGraph(ContextualHandoffState)
+graph.add_node("diagnostic", diagnostic_agent)
+graph.add_node("bug_fix", bug_fix_agent)
+
+graph.add_edge(START, "diagnostic")
+graph.add_conditional_edges("diagnostic", route)
+graph.add_conditional_edges("bug_fix", route)
+
+app = graph.compile()
+
+# 使用
+result = app.invoke({
+    "messages": [HumanMessage(content="应用一直崩溃")],
+    "user_id": "user123"
+})
+
+# 优势：
+# - 完整的上下文传递
+# - 后续代理可以利用之前收集的数据
+# - 避免重复询问用户
+# - 专业化分工（诊断 vs 修复）</code></pre>
+                    </div>
+                </section>
+
+                <!-- 状态传递机制 -->
+                <section class="content-section">
+                    <h2 class="section-title">🗄️ 状态传递机制</h2>
+                    <p>
+                        Handoffs 的核心是<strong>状态传递</strong>，确保接手的代理能够获得必要的上下文。
+                    </p>
+
+                    <div class="mermaid-wrapper">
+                        <div class="mermaid">
+graph LR
+    subgraph Agent1["代理 1 (客服)"]
+        S1["状态输入"] --> Process1["处理逻辑"]
+        Process1 --> Decision1{"需要交接？"}
+        Decision1 -->|"是"| Update1["更新状态:<br/>next=技术支持<br/>context=问题描述"]
+        Decision1 -->|"否"| Update2["更新状态:<br/>next=end"]
+    end
+
+    Update1 --> Handoff["🔄 交接点<br/>状态传递"]
+
+    subgraph Agent2["代理 2 (技术支持)"]
+        Handoff --> S2["继承状态:<br/>messages<br/>context<br/>user_id"]
+        S2 --> Process2["基于上下文处理"]
+        Process2 --> Result["返回结果"]
+    end
+
+    style Handoff fill:#3b82f6,color:#fff
+    style S2 fill:#10b981,color:#fff
+    style Update1 fill:#f59e0b,color:#fff
+                        </div>
+                    </div>
+
+                    <h3 class="subsection-title">状态传递策略</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>策略</th>
+                                <th>传递内容</th>
+                                <th>优点</th>
+                                <th>缺点</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>完整状态</strong></td>
+                                <td>所有状态字段</td>
+                                <td>信息完整，灵活性高</td>
+                                <td>可能包含无关数据</td>
+                            </tr>
+                            <tr>
+                                <td><strong>最小必需</strong></td>
+                                <td>仅必要字段（user_id, issue_type）</td>
+                                <td>清晰，减少耦合</td>
+                                <td>可能需要重新收集数据</td>
+                            </tr>
+                            <tr>
+                                <td><strong>摘要传递</strong></td>
+                                <td>messages + 摘要字段</td>
+                                <td>平衡信息量和效率</td>
+                                <td>需要设计摘要结构</td>
+                            </tr>
+                            <tr>
+                                <td><strong>引用传递</strong></td>
+                                <td>ID 引用外部存储</td>
+                                <td>减少状态大小</td>
+                                <td>需要额外存储系统</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="info-box tip">
+                        <div class="info-box-title">✅ 状态传递最佳实践</div>
+                        <ul>
+                            <li><strong>必传字段</strong>：messages（对话历史）、user_id（用户标识）、issue_type（问题分类）</li>
+                            <li><strong>可选字段</strong>：collected_data（诊断数据）、priority（优先级）、metadata（元数据）</li>
+                            <li><strong>避免传递</strong>：临时计算结果、内部状态、敏感信息（除非加密）</li>
+                            <li><strong>使用摘要</strong>：长对话历史用摘要字段补充，避免上下文过载</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- 完整实战示例 -->
+                <section class="content-section">
+                    <h2 class="section-title">🎯 完整实战示例</h2>
+                    <p>
+                        构建一个<strong>智能客服系统</strong>，支持多层级交接、状态传递、
+                        双向流转（升级和回退）。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级 - 生产级示例</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+完整实战示例 - 智能客服系统（多层级交接）
+"""
+import uuid
+from typing import TypedDict, Annotated, Literal
+from langgraph.graph import StateGraph, START, END
+from langgraph.graph.message import add_messages
+from langchain_openai import ChatOpenAI
+from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
+
+# ========== 1. 定义状态 ==========
+
+class SupportState(TypedDict):
+    messages: Annotated[list, add_messages]
+    user_id: str
+    session_id: str
+
+    # 问题信息
+    issue_type: str  # "general", "technical", "critical"
+    priority: str    # "low", "medium", "high"
+
+    # 诊断数据
+    symptoms: list[str]
+    error_logs: list[str]
+    user_actions: list[str]
+
+    # 交接控制
+    current_agent: str
+    next: str
+    handoff_reason: str
+
+    # 解决状态
+    resolved: bool
+    resolution: str
+
+# ========== 2. 定义代理 ==========
+
+def tier1_support(state: SupportState):
+    """L1 客服：初始接待和基础问题处理"""
+    llm = ChatOpenAI(model="gpt-4o")
+
+    messages = state["messages"]
+    last_msg = messages[-1].content.lower()
+
+    # 收集初步信息
+    symptoms = []
+    if "崩溃" in last_msg or "crash" in last_msg:
+        symptoms.append("应用崩溃")
+    if "慢" in last_msg or "slow" in last_msg:
+        symptoms.append("性能缓慢")
+    if "错误" in last_msg or "error" in last_msg:
+        symptoms.append("错误提示")
+
+    # 分类和优先级评估
+    if "紧急" in last_msg or "无法使用" in last_msg:
+        priority = "high"
+        issue_type = "critical"
+        next_agent = "tier2_technical"
+        reason = "高优先级问题，需要技术支持"
+        response = "这是紧急问题，我将立即为您转接技术支持团队（L2）"
+    elif any(word in last_msg for word in ["技术", "bug", "崩溃", "错误"]):
+        priority = "medium"
+        issue_type = "technical"
+        next_agent = "tier2_technical"
+        reason = "技术问题，需要专业诊断"
+        response = "这需要技术支持协助，我将为您转接技术团队（L2）"
+    elif any(word in last_msg for word in ["如何", "怎么", "使用"]):
+        priority = "low"
+        issue_type = "general"
+        next_agent = "end"
+        reason = ""
+
+        # L1 可以直接处理的常见问题
+        prompt = f"""你是客服代理。用户问题：{last_msg}
+
+        提供简洁的解决方案（< 100 字）。"""
+
+        ai_response = llm.invoke([SystemMessage(content=prompt)])
+        response = ai_response.content
+    else:
+        priority = "low"
+        issue_type = "general"
+        next_agent = "end"
+        reason = ""
+        response = "我来帮您解决这个问题"
+
+    return {
+        "messages": [AIMessage(content=f"L1 客服：{response}")],
+        "symptoms": symptoms,
+        "issue_type": issue_type,
+        "priority": priority,
+        "current_agent": "tier1",
+        "next": next_agent,
+        "handoff_reason": reason
+    }
+
+def tier2_technical(state: SupportState):
+    """L2 技术支持：技术诊断和常规修复"""
+    llm = ChatOpenAI(model="claude-sonnet-4-5")
+
+    priority = state["priority"]
+    symptoms = state.get("symptoms", [])
+    messages = state["messages"]
+
+    # 技术诊断
+    diagnostic_prompt = f"""你是技术支持工程师。
+
+    问题信息：
+    - 优先级：{priority}
+    - 症状：{', '.join(symptoms) if symptoms else '未知'}
+    - 对话历史：{messages[-1].content}
+
+    任务：
+    1. 诊断问题
+    2. 判断是否可以自行解决，还是需要升级给工程师（L3）
+
+    如果问题涉及数据库、服务器、或需要代码修改，应升级。
+
+    返回格式：
+    诊断结果：[你的诊断]
+    是否升级：[是/否]
+    """
+
+    diagnosis = llm.invoke([SystemMessage(content=diagnostic_prompt)])
+    diagnosis_text = diagnosis.content
+
+    # 判断是否升级
+    should_escalate = "是否升级：是" in diagnosis_text or priority == "high"
+
+    if should_escalate:
+        # 收集更多诊断数据
+        error_logs = ["Error: Database connection timeout", "Error: Service unavailable"]
+
+        return {
+            "messages": [AIMessage(content=f"L2 技术支持：{diagnosis_text}\n问题需要工程师深度介入，升级到 L3")],
+            "error_logs": error_logs,
+            "current_agent": "tier2",
+            "next": "tier3_engineer",
+            "handoff_reason": "需要代码级别排查和修复"
+        }
+    else:
+        return {
+            "messages": [AIMessage(content=f"L2 技术支持：{diagnosis_text}\n问题已解决")],
+            "current_agent": "tier2",
+            "next": "end",
+            "resolved": True,
+            "resolution": "L2 技术支持已解决"
+        }
+
+def tier3_engineer(state: SupportState):
+    """L3 工程师：深度排查和代码修复"""
+    llm = ChatOpenAI(model="claude-sonnet-4-5")
+
+    symptoms = state.get("symptoms", [])
+    error_logs = state.get("error_logs", [])
+
+    # 工程师级别分析
+    engineer_prompt = f"""你是资深工程师。
+
+    问题信息：
+    - 症状：{', '.join(symptoms)}
+    - 错误日志：{', '.join(error_logs)}
+
+    任务：
+    1. 深度分析根本原因
+    2. 提供代码级别的修复方案
+    3. 给出预防措施
+    """
+
+    analysis = llm.invoke([SystemMessage(content=engineer_prompt)])
+
+    return {
+        "messages": [AIMessage(content=f"L3 工程师：{analysis.content}")],
+        "current_agent": "tier3",
+        "next": "end",
+        "resolved": True,
+        "resolution": "L3 工程师已深度修复"
+    }
+
+# ========== 3. 路由逻辑 ==========
+
+def route(state: SupportState) -> Literal["tier1_support", "tier2_technical", "tier3_engineer", "end"]:
+    """路由到下一个代理或结束"""
+    next_agent = state.get("next", "tier1_support")
+    if next_agent == "end":
+        return END
+    return next_agent
+
+# ========== 4. 构建工作流 ==========
+
+workflow = StateGraph(SupportState)
+
+# 添加三层支持代理
+workflow.add_node("tier1_support", tier1_support)
+workflow.add_node("tier2_technical", tier2_technical)
+workflow.add_node("tier3_engineer", tier3_engineer)
+
+# 路由配置
+workflow.add_edge(START, "tier1_support")
+workflow.add_conditional_edges("tier1_support", route)
+workflow.add_conditional_edges("tier2_technical", route)
+workflow.add_conditional_edges("tier3_engineer", route)
+
+# 编译
+app = workflow.compile()
+
+# ========== 5. 测试不同场景 ==========
+
+test_scenarios = [
+    {
+        "name": "简单咨询（L1 处理）",
+        "message": "如何重置密码？"
+    },
+    {
+        "name": "技术问题（L1 → L2）",
+        "message": "应用加载很慢，有时会卡住"
+    },
+    {
+        "name": "严重故障（L1 → L2 → L3）",
+        "message": "紧急！数据库连接失败，所有用户无法登录"
+    }
+]
+
+for scenario in test_scenarios:
+    print(f"\n{'='*60}")
+    print(f"场景：{scenario['name']}")
+    print(f"{'='*60}")
+
+    result = app.invoke({
+        "messages": [HumanMessage(content=scenario['message'])],
+        "user_id": f"user_{uuid.uuid4().hex[:8]}",
+        "session_id": f"session_{uuid.uuid4().hex[:8]}"
+    })
+
+    # 打印交接流程
+    print(f"\n用户请求：{scenario['message']}")
+    print(f"\n交接流程：")
+    for msg in result["messages"]:
+        if isinstance(msg, AIMessage):
+            print(f"  {msg.content}")
+
+    print(f"\n最终状态：")
+    print(f"  - 问题类型：{result.get('issue_type', 'N/A')}")
+    print(f"  - 优先级：{result.get('priority', 'N/A')}")
+    print(f"  - 当前代理：{result.get('current_agent', 'N/A')}")
+    print(f"  - 是否解决：{result.get('resolved', False)}")
+    if result.get('handoff_reason'):
+        print(f"  - 交接原因：{result['handoff_reason']}")
+
+# 输出示例：
+# ============================================================
+# 场景：严重故障（L1 → L2 → L3）
+# ============================================================
+#
+# 用户请求：紧急！数据库连接失败，所有用户无法登录
+#
+# 交接流程：
+#   L1 客服：这是紧急问题，我将立即为您转接技术支持团队（L2）
+#   L2 技术支持：[诊断结果...]
+#   问题需要工程师深度介入，升级到 L3
+#   L3 工程师：[深度分析和修复方案...]
+#
+# 最终状态：
+#   - 问题类型：critical
+#   - 优先级：high
+#   - 当前代理：tier3
+#   - 是否解决：True
+#   - 交接原因：需要代码级别排查和修复
+
+# 优势：
+# - 自动化的多层级升级
+# - 完整的状态传递（症状、日志、用户操作）
+# - 每层代理专注于自己的职责范围
+# - 灵活的交接决策（基于优先级、问题类型）
+# - 生产级的错误处理和日志记录</code></pre>
+                    </div>
+                </section>
+
+                <!-- 高级特性 -->
+                <section class="content-section">
+                    <h2 class="section-title">🚀 高级特性</h2>
+
+                    <h3 class="subsection-title">1. 双向交接（升级 + 回退）</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+双向交接 - 支持升级和回退
+"""
+from typing import TypedDict, Annotated, Literal
+from langgraph.graph import StateGraph, START, END
+
+class BidirectionalState(TypedDict):
+    messages: Annotated[list, add_messages]
+    current_tier: int  # 1, 2, 3
+    next: str
+    can_downgrade: bool  # 是否可以回退
+
+def tier2_agent(state: BidirectionalState):
+    """L2 代理：可能升级或回退"""
+    messages = state["messages"]
+    last_msg = messages[-1].content
+
+    # 判断：问题是否实际上很简单
+    if "其实没那么严重" in last_msg or "已经好了" in last_msg:
+        return {
+            "messages": [AIMessage(content="L2：问题已解决，无需进一步升级")],
+            "next": "end",
+            "can_downgrade": True
+        }
+
+    # 判断：是否需要升级
+    if "还是不行" in last_msg or "更严重了" in last_msg:
+        return {
+            "messages": [AIMessage(content="L2：问题加剧，升级到 L3 工程师")],
+            "current_tier": 3,
+            "next": "tier3",
+            "can_downgrade": False
+        }
+
+    return {
+        "messages": [AIMessage(content="L2：正在处理...")],
+        "next": "end"
+    }
+
+# 优势：
+# - 灵活的流程控制
+# - 避免不必要的升级
+# - 支持问题降级（节省资源）</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">2. 条件触发的自动交接</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+条件触发交接 - 基于关键词、工具结果、时间
+"""
+from typing import TypedDict, Annotated
+import datetime
+
+class AutoHandoffState(TypedDict):
+    messages: Annotated[list, add_messages]
+    keywords_detected: list[str]
+    tools_failed: bool
+    elapsed_time: int  # 秒
+    next: str
+
+def smart_agent(state: AutoHandoffState):
+    """智能代理：自动检测交接条件"""
+    messages = state["messages"]
+    last_msg = messages[-1].content.lower()
+
+    # 条件 1：关键词触发
+    critical_keywords = ["紧急", "数据丢失", "安全漏洞", "宕机"]
+    detected = [kw for kw in critical_keywords if kw in last_msg]
+
+    # 条件 2：工具失败触发
+    tools_failed = state.get("tools_failed", False)
+
+    # 条件 3：超时触发
+    elapsed = state.get("elapsed_time", 0)
+    timeout = elapsed > 300  # 5 分钟
+
+    # 自动交接决策
+    if detected or tools_failed or timeout:
+        reason = []
+        if detected:
+            reason.append(f"检测到关键词：{', '.join(detected)}")
+        if tools_failed:
+            reason.append("工具调用失败")
+        if timeout:
+            reason.append("处理超时")
+
+        return {
+            "messages": [AIMessage(content=f"自动升级：{'; '.join(reason)}")],
+            "keywords_detected": detected,
+            "next": "specialist"
+        }
+
+    return {
+        "messages": [AIMessage(content="正常处理中...")],
+        "next": "end"
+    }
+
+# 优势：
+# - 自动化决策
+# - 多维度触发条件
+# - 减少人工干预</code></pre>
+                    </div>
+                </section>
+
+                <!-- 最佳实践 -->
+                <section class="content-section">
+                    <h2 class="section-title">✨ Handoffs 最佳实践</h2>
+
+                    <h3 class="subsection-title">1. 交接决策清单</h3>
+                    <div class="info-box tip">
+                        <div class="info-box-title">📝 何时交接？</div>
+                        <ul>
+                            <li><strong>能力不足</strong>：当前代理无法处理（技术问题 → 技术支持）</li>
+                            <li><strong>优先级高</strong>：紧急问题需要高级别支持</li>
+                            <li><strong>专业化需求</strong>：需要特定领域专家（账单 → 财务）</li>
+                            <li><strong>工具失败</strong>：常规工具无法解决问题</li>
+                            <li><strong>用户请求</strong>：用户明确要求升级</li>
+                            <li><strong>超时</strong>：处理时间超过阈值</li>
+                        </ul>
+                    </div>
+
+                    <h3 class="subsection-title">2. 状态设计原则</h3>
+                    <ul>
+                        <li><strong>包含交接元数据</strong>：
+                            <code>handoff_reason</code>（交接原因）、
+                            <code>handoff_timestamp</code>（交接时间）、
+                            <code>previous_agent</code>（前一个代理）
+                        </li>
+                        <li><strong>保留完整上下文</strong>：
+                            messages（对话历史）、
+                            collected_data（收集的诊断数据）、
+                            user_actions（用户操作记录）
+                        </li>
+                        <li><strong>添加优先级字段</strong>：
+                            priority（优先级）、
+                            severity（严重性）、
+                            urgency（紧急度）
+                        </li>
+                        <li><strong>支持回溯</strong>：
+                            handoff_history（交接历史链）、
+                            can_downgrade（是否可回退）
+                        </li>
+                    </ul>
+
+                    <h3 class="subsection-title">3. 用户体验优化</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>场景</th>
+                                <th>差的实践</th>
+                                <th>好的实践</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>交接通知</strong></td>
+                                <td>"转接中..."</td>
+                                <td>"我将为您转接技术支持，他们会帮您解决这个问题"</td>
+                            </tr>
+                            <tr>
+                                <td><strong>重复信息</strong></td>
+                                <td>要求用户重复描述问题</td>
+                                <td>自动传递上下文，直接继续</td>
+                            </tr>
+                            <tr>
+                                <td><strong>等待时间</strong></td>
+                                <td>长时间无响应</td>
+                                <td>"正在为您匹配专家，请稍候..."</td>
+                            </tr>
+                            <tr>
+                                <td><strong>交接失败</strong></td>
+                                <td>直接报错</td>
+                                <td>提供备选方案或降级处理</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 class="subsection-title">4. 性能优化</h3>
+                    <ul>
+                        <li><strong>缓存代理状态</strong>：避免重复初始化相同的代理</li>
+                        <li><strong>预加载</strong>：提前加载可能需要的代理（基于预测）</li>
+                        <li><strong>异步交接</strong>：交接过程不阻塞用户交互</li>
+                        <li><strong>状态压缩</strong>：长对话历史使用摘要，减少传输</li>
+                        <li><strong>超时保护</strong>：设置交接超时，避免无限等待</li>
+                    </ul>
+
+                    <h3 class="subsection-title">5. 监控和调试</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 交接日志记录
+import logging
+
+logger = logging.getLogger("handoffs")
+
+def log_handoff(state: SupportState):
+    """记录每次交接"""
+    logger.info(f"""
+    Handoff Event:
+    - From: {state.get('current_agent')}
+    - To: {state.get('next')}
+    - Reason: {state.get('handoff_reason')}
+    - User ID: {state.get('user_id')}
+    - Session ID: {state.get('session_id')}
+    - Timestamp: {datetime.now()}
+    - Issue Type: {state.get('issue_type')}
+    - Priority: {state.get('priority')}
+    """)
+
+# 在 LangSmith 中追踪交接
+os.environ["LANGCHAIN_TRACING_V2"] = "true"
+
+# 查看交接流程：
+# - 每个代理的执行时间
+# - 交接决策点
+# - 状态变化</code></pre>
+                    </div>
+                </section>
+
+                <!-- 常见问题 -->
+                <section class="content-section">
+                    <h2 class="section-title">❓ 常见问题</h2>
+
+                    <h3 class="subsection-subtitle">Q1: Handoffs 和 Router 有什么区别？</h3>
+                    <p>
+                        <strong>关键区别</strong>：
+                    </p>
+                    <ul>
+                        <li><strong>Router</strong>：在流程<strong>开始时</strong>一次性决定路由到哪个代理，不再改变</li>
+                        <li><strong>Handoffs</strong>：在流程<strong>执行过程中</strong>动态决定是否交接，可多次转移</li>
+                    </ul>
+                    <p>
+                        <strong>示例</strong>：
+                    </p>
+                    <ul>
+                        <li>Router：用户发起请求 → 路由器分析 → 分配给销售/技术/账单代理 →  结束</li>
+                        <li>Handoffs：用户请求 → 客服代理 → （发现是技术问题）→ 交接给技术支持 → （问题严重）→ 交接给工程师</li>
+                    </ul>
+
+                    <h3 class="subsection-subtitle">Q2: 如何避免无限交接循环？</h3>
+                    <p>
+                        <strong>防止循环的策略</strong>：
+                    </p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 策略 1：限制交接次数
+class SafeHandoffState(TypedDict):
+    handoff_count: int
+    max_handoffs: int  # 最大交接次数（如 3）
+
+def safe_agent(state: SafeHandoffState):
+    if state["handoff_count"] >= state["max_handoffs"]:
+        return {"next": "end"}  # 强制结束
+
+    # 正常交接逻辑
+    return {
+        "next": "other_agent",
+        "handoff_count": state["handoff_count"] + 1
+    }
+
+# 策略 2：记录交接历史，避免重复
+class HistoryState(TypedDict):
+    handoff_history: list[str]  # ["agent1", "agent2"]
+
+def check_cycle(state: HistoryState, target: str):
+    """检查是否会形成循环"""
+    if state["handoff_history"].count(target) >= 2:
+        return True  # 同一个代理访问超过 2 次
+    return False</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">Q3: 如何处理交接失败？</h3>
+                    <p>
+                        <strong>错误处理策略</strong>：
+                    </p>
+                    <ul>
+                        <li><strong>降级处理</strong>：目标代理不可用时，回退到前一个代理或通用代理</li>
+                        <li><strong>备选路径</strong>：定义备选代理列表，依次尝试</li>
+                        <li><strong>用户通知</strong>：明确告知用户交接失败，提供替代方案</li>
+                        <li><strong>重试机制</strong>：短暂延迟后重试交接</li>
+                    </ul>
+
+                    <h3 class="subsection-subtitle">Q4: 状态太大怎么办？</h3>
+                    <p>
+                        <strong>状态优化方案</strong>：
+                    </p>
+                    <ul>
+                        <li><strong>使用摘要</strong>：长对话历史压缩为摘要字段</li>
+                        <li><strong>引用存储</strong>：大数据（如日志）存储在外部，状态只保留 ID</li>
+                        <li><strong>分层状态</strong>：仅传递当前层级需要的字段</li>
+                        <li><strong>清理过期数据</strong>：定期清理不再需要的临时字段</li>
+                    </ul>
+
+                    <h3 class="subsection-subtitle">Q5: 如何在交接时保持用户会话？</h3>
+                    <p>
+                        <strong>会话保持策略</strong>：
+                    </p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 使用 Checkpointer 保持会话
+from langgraph.checkpoint.memory import MemorySaver
+
+checkpointer = MemorySaver()
+
+app = workflow.compile(checkpointer=checkpointer)
+
+# 调用时传递 thread_id
+config = {"configurable": {"thread_id": "user123_session"}}
+
+# 第一次调用（客服代理）
+result1 = app.invoke(input1, config=config)
+
+# 交接后的调用（技术支持代理）
+# 会话状态自动保留
+result2 = app.invoke(input2, config=config)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">Q6: 如何测试 Handoffs 流程？</h3>
+                    <p>
+                        <strong>测试策略</strong>：
+                    </p>
+                    <ul>
+                        <li><strong>单元测试</strong>：单独测试每个代理的交接决策逻辑</li>
+                        <li><strong>路径测试</strong>：测试所有可能的交接路径（L1→L2, L1→L2→L3）</li>
+                        <li><strong>边界测试</strong>：测试交接次数限制、超时、循环检测</li>
+                        <li><strong>状态验证</strong>：验证交接后状态完整性</li>
+                        <li><strong>性能测试</strong>：测试交接延迟和吞吐量</li>
+                    </ul>
+                </section>
+
+                <!-- 参考资源 -->
+                <section class="content-section">
+                    <h2 class="section-title">📖 参考资源</h2>
+                    <ul>
+                        <li>
+                            <a href="https://docs.langchain.com/oss/python/langchain/multi-agent/handoffs" target="_blank">
+                                Multi-Agent Handoffs 官方文档
+                            </a>
+                        </li>
+                        <li>
+                            <a href="30-multi-agent-index.html">
+                                Multi-Agent 概述
+                            </a>
+                        </li>
+                        <li>
+                            <a href="31-multi-agent-subagents.html">
+                                Multi-Agent 子代理
+                            </a>
+                        </li>
+                        <li>
+                            <a href="33-multi-agent-skills.html">
+                                Multi-Agent 技能系统
+                            </a>
+                        </li>
+                        <li>
+                            <a href="34-multi-agent-router.html">
+                                Multi-Agent 路由机制
+                            </a>
+                        </li>
+                        <li>
+                            <a href="15-langgraph.html">
+                                LangGraph - 图工作流基础
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- 页面导航 -->
+                <nav class="page-navigation">
+                    <a href="31-multi-agent-subagents.html" class="nav-button prev">
+                        ← 上一页：子代理
+                    </a>
+                    <a href="33-multi-agent-skills.html" class="nav-button next">
+                        下一页：技能系统 →
+                    </a>
+                </nav>
+            </div>
+        </main>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" aria-label="返回顶部">↑</button>
+
+    <!-- JavaScript -->
+    <script src="assets/js/mermaid-init.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</body>
+</html>

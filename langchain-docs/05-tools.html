@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LangChain 1.0 工具系统详解 - @tool 装饰器和 ToolRuntime 上下文">
+    <title>工具系统 | LangChain 1.0 Python 知识文档</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <button class="mobile-menu-button" aria-label="打开菜单">☰</button>
+
+    <div class="container">
+        <!-- 侧边栏导航 -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="sidebar-title">🦜 LangChain 1.0</h1>
+                <p class="sidebar-subtitle">Python 完整学习指南</p>
+            </div>
+
+                        <ul class="nav-menu">
+                <li class="nav-section">
+                    <div class="nav-section-title">开始</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">
+                                <span class="nav-icon">🏠</span>
+                                主页
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">基础篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="01-introduction.html" class="nav-link">
+                                <span class="nav-icon">📖</span>
+                                LangChain 简介
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="02-architecture.html" class="nav-link">
+                                <span class="nav-icon">🏗️</span>
+                                核心架构
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="03-models.html" class="nav-link">
+                                <span class="nav-icon">🤖</span>
+                                模型接口
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="04-messages.html" class="nav-link">
+                                <span class="nav-icon">💬</span>
+                                消息系统
+                            </a>
+                        </li>
+                        <li class="nav-item active">\n                            <a href="05-tools.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                工具系统
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">进阶篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="06-agents.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                Agent 基础
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="07-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="08-rag.html" class="nav-link">
+                                <span class="nav-icon">🔍</span>
+                                RAG 详解
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="09-lcel.html" class="nav-link">
+                                <span class="nav-icon">🔗</span>
+                                LCEL 表达式
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">高级应用</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="10-runtime.html" class="nav-link">
+                                <span class="nav-icon">🔌</span>
+                                Runtime 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="11-checkpointer.html" class="nav-link">
+                                <span class="nav-icon">💾</span>
+                                持久化系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="12-streaming.html" class="nav-link">
+                                <span class="nav-icon">🌊</span>
+                                流式输出
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="13-human-in-loop.html" class="nav-link">
+                                <span class="nav-icon">👤</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="14-long-term-memory.html" class="nav-link">
+                                <span class="nav-icon">🗄️</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="15-langgraph.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                LangGraph
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">实战篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="16-customer-service.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                客服机器人
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="17-best-practices.html" class="nav-link">
+                                <span class="nav-icon">✨</span>
+                                最佳实践
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">参考篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="18-api-reference.html" class="nav-link">
+                                <span class="nav-icon">📚</span>
+                                API 速查表
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="19-troubleshooting.html" class="nav-link">
+                                <span class="nav-icon">🐛</span>
+                                故障排除
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="20-migration.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                迁移指南
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">扩展篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="21-structured-output.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                结构化输出
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">DeepAgents 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="22-deepagents-quickstart.html" class="nav-link">
+                                <span class="nav-icon">🚀</span>
+                                快速开始
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="23-deepagents-customization.html" class="nav-link">
+                                <span class="nav-icon">🎨</span>
+                                定制化
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="24-deepagents-harness.html" class="nav-link">
+                                <span class="nav-icon">🎛️</span>
+                                Harness 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="25-deepagents-backends.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                后端配置
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="26-deepagents-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="27-deepagents-hitl.html" class="nav-link">
+                                <span class="nav-icon">🤝</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="28-deepagents-memory.html" class="nav-link">
+                                <span class="nav-icon">🧠</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="29-deepagents-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">Multi-Agent 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="30-multi-agent-index.html" class="nav-link">
+                                <span class="nav-icon">🌐</span>
+                                概述
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="31-multi-agent-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="32-multi-agent-handoffs.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                交接机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="33-multi-agent-skills.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                技能系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="34-multi-agent-router.html" class="nav-link">
+                                <span class="nav-icon">🧭</span>
+                                路由机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="35-multi-agent-workflow.html" class="nav-link">
+                                <span class="nav-icon">🔀</span>
+                                自定义工作流
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- 主内容区域 -->
+        <main class="main-content">
+            <div class="content-wrapper">
+                <!-- 面包屑导航 -->
+                <nav class="breadcrumb">
+                    <span class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link">主页</a>
+                    </span>
+                    <span class="breadcrumb-item">
+                        基础篇
+                    </span>
+                    <span class="breadcrumb-item">
+                        工具系统
+                    </span>
+                </nav>
+
+                <!-- 页面标题 -->
+                <header class="page-header">
+                    <h1 class="page-title">🔧 工具系统详解</h1>
+                    <p class="page-subtitle">
+                        掌握 LangChain 1.0 的 @tool 装饰器和 ToolRuntime 上下文注入，
+                        为 Agent 构建强大的外部交互能力。
+                    </p>
+                </header>
+
+                <!-- 什么是工具系统 -->
+                <section class="content-section">
+                    <h2 class="section-title">📚 什么是工具（Tools）？</h2>
+                    <p>
+                        <strong>工具（Tools）</strong>是 Agent 与外部世界交互的桥梁。
+                        通过工具，Agent 可以：
+                    </p>
+                    <ul>
+                        <li><strong>获取实时数据</strong>：查询数据库、调用 API、搜索网络</li>
+                        <li><strong>执行操作</strong>：发送邮件、更新记录、控制设备</li>
+                        <li><strong>访问上下文</strong>：读取用户信息、访问对话状态</li>
+                        <li><strong>处理复杂逻辑</strong>：执行计算、数据转换、业务规则</li>
+                    </ul>
+
+                    <div class="info-box note">
+                        <div class="info-box-title">💡 核心优势</div>
+                        <p>
+                            使用 <code>@tool</code> 装饰器，你只需编写普通的 Python 函数，
+                            LangChain 会自动：
+                        </p>
+                        <ul>
+                            <li>从类型注解生成工具 Schema</li>
+                            <li>从文档字符串提取工具描述</li>
+                            <li>处理参数验证和错误</li>
+                            <li>注入运行时上下文（如用户信息、对话状态）</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- 工具调用流程 -->
+                <section class="content-section">
+                    <h2 class="section-title">🔄 工具调用流程</h2>
+
+                    <div class="mermaid-wrapper">
+                        <div class="mermaid">
+graph LR
+    A[用户提问] --> B[Agent 推理]
+    B --> C{需要工具？}
+
+    C -->|是| D[选择工具]
+    D --> E[生成工具调用]
+    E --> F[执行工具函数]
+    F --> G[获取结果]
+    G --> H[返回 ToolMessage]
+    H --> B
+
+    C -->|否| I[生成最终答案]
+    I --> J[返回给用户]
+
+    style B fill:#3b82f6,color:#fff
+    style D fill:#10b981,color:#fff
+    style F fill:#f59e0b,color:#fff
+    style I fill:#8b5cf6,color:#fff
+    style J fill:#ec4899,color:#fff
+                        </div>
+                    </div>
+                </section>
+
+                <!-- @tool 装饰器基础 -->
+                <section class="content-section">
+                    <h2 class="section-title">🎯 @tool 装饰器基础</h2>
+                    <p>
+                        <code>@tool</code> 是创建工具的最简单方式。
+                    </p>
+
+                    <h3 class="subsection-title">基础用法</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+@tool 装饰器基础示例
+功能：创建一个简单的数据库搜索工具
+"""
+from langchain.tools import tool
+
+@tool
+def search_database(query: str, limit: int = 10) -> str:
+    """在客户数据库中搜索匹配查询的记录。
+
+    Args:
+        query: 要查找的搜索词
+        limit: 返回的最大结果数量
+
+    Returns:
+        搜索结果的描述
+    """
+    # 模拟数据库搜索
+    results = [
+        f"客户 {i+1}: 匹配 '{query}'"
+        for i in range(min(limit, 5))
+    ]
+    return f"找到 {len(results)} 条结果：\n" + "\n".join(results)
+
+# 查看工具属性
+print(f"工具名称: {search_database.name}")
+print(f"工具描述: {search_database.description}")
+print(f"工具参数: {search_database.args}")</code></pre>
+                    </div>
+
+                    <div class="info-box tip">
+                        <div class="info-box-title">✅ 关键要求</div>
+                        <ul>
+                            <li><strong>类型注解是必需的</strong>：定义工具的输入 Schema</li>
+                            <li><strong>文档字符串很重要</strong>：帮助模型理解何时使用工具</li>
+                            <li><strong>函数名即工具名</strong>：除非显式指定</li>
+                        </ul>
+                    </div>
+
+                    <h3 class="subsection-title">自定义工具名称</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+自定义工具名称和描述
+"""
+from langchain.tools import tool
+
+# 自定义工具名称
+@tool("web_search")
+def search(query: str) -> str:
+    """在网络上搜索信息。"""
+    return f"'{query}' 的搜索结果..."
+
+print(search.name)  # 输出: web_search
+
+
+# 自定义名称和描述
+@tool(
+    "calculator",
+    description="执行算术计算。用于任何数学问题。"
+)
+def calc(expression: str) -> str:
+    """计算数学表达式。"""
+    try:
+        result = eval(expression)  # 仅用于演示
+        return f"结果: {result}"
+    except Exception as e:
+        return f"计算错误: {str(e)}"
+
+print(calc.name)         # 输出: calculator
+print(calc.description)  # 输出: 执行算术计算。用于任何数学问题。</code></pre>
+                    </div>
+                </section>
+
+                <!-- 高级 Schema 定义 -->
+                <section class="content-section">
+                    <h2 class="section-title">📋 高级 Schema 定义</h2>
+                    <p>
+                        使用 Pydantic 模型可以定义更复杂的输入 Schema，
+                        包括枚举类型、嵌套结构、字段描述等。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+使用 Pydantic 定义复杂工具 Schema
+功能：创建一个功能完善的天气查询工具
+"""
+from pydantic import BaseModel, Field
+from typing import Literal
+from langchain.tools import tool
+
+class WeatherInput(BaseModel):
+    """天气查询的输入参数。"""
+    location: str = Field(
+        description="城市名称或坐标"
+    )
+    units: Literal["celsius", "fahrenheit"] = Field(
+        default="celsius",
+        description="温度单位偏好"
+    )
+    include_forecast: bool = Field(
+        default=False,
+        description="是否包含 5 天预报"
+    )
+
+@tool(args_schema=WeatherInput)
+def get_weather(
+    location: str,
+    units: str = "celsius",
+    include_forecast: bool = False
+) -> str:
+    """获取当前天气和可选的天气预报。
+
+    Args:
+        location: 城市名称
+        units: 温度单位
+        include_forecast: 是否包含预报
+
+    Returns:
+        天气信息描述
+    """
+    # 模拟天气数据
+    temp = 22 if units == "celsius" else 72
+    result = f"{location} 的当前天气：{temp}° {units[0].upper()}"
+
+    if include_forecast:
+        result += "\n未来 5 天：晴朗"
+
+    return result
+
+# 测试工具
+print(get_weather.invoke({
+    "location": "北京",
+    "units": "celsius",
+    "include_forecast": True
+}))</code></pre>
+                    </div>
+
+                    <div class="info-box note">
+                        <div class="info-box-title">💡 Pydantic Schema 的优势</div>
+                        <ul>
+                            <li><strong>类型约束</strong>：使用 Literal 限制可选值</li>
+                            <li><strong>详细描述</strong>：每个字段都可以有独立的描述</li>
+                            <li><strong>验证逻辑</strong>：自动验证输入参数</li>
+                            <li><strong>默认值</strong>：支持可选参数和默认值</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- ToolRuntime 上下文注入 -->
+                <section class="content-section">
+                    <h2 class="section-title">🔌 ToolRuntime 上下文注入</h2>
+                    <p>
+                        <code>ToolRuntime</code> 参数允许工具访问运行时信息，
+                        如对话状态、用户上下文、存储等。
+                    </p>
+
+                    <div class="info-box warning">
+                        <div class="info-box-title">⚠️ 重要特性</div>
+                        <p>
+                            <code>runtime</code> 参数对模型不可见。
+                            模型只能看到其他参数，而 runtime 由 LangChain 自动注入。
+                        </p>
+                    </div>
+
+                    <h3 class="subsection-title">访问对话状态</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+访问对话状态示例
+功能：工具可以读取对话历史
+"""
+from langchain.tools import tool, ToolRuntime
+
+@tool
+def summarize_conversation(runtime: ToolRuntime) -> str:
+    """总结到目前为止的对话。
+
+    Returns:
+        对话统计摘要
+    """
+    # 访问对话状态中的消息列表
+    messages = runtime.state["messages"]
+
+    # 统计不同类型的消息
+    human_msgs = sum(
+        1 for m in messages
+        if m.__class__.__name__ == "HumanMessage"
+    )
+    ai_msgs = sum(
+        1 for m in messages
+        if m.__class__.__name__ == "AIMessage"
+    )
+    tool_msgs = sum(
+        1 for m in messages
+        if m.__class__.__name__ == "ToolMessage"
+    )
+
+    return (
+        f"对话包含 {human_msgs} 条用户消息、"
+        f"{ai_msgs} 条 AI 响应和 "
+        f"{tool_msgs} 条工具结果"
+    )
+
+@tool
+def get_user_preference(pref_name: str, runtime: ToolRuntime) -> str:
+    """获取用户偏好设置的值。
+
+    Args:
+        pref_name: 偏好设置名称
+
+    Returns:
+        偏好设置的值
+    """
+    # 从状态中读取用户偏好
+    preferences = runtime.state.get("user_preferences", {})
+    return preferences.get(pref_name, "未设置")</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">访问自定义上下文</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+自定义上下文访问示例
+功能：工具可以访问用户特定的上下文信息
+"""
+from dataclasses import dataclass
+from langchain.tools import tool, ToolRuntime
+from langchain.chat_models import init_chat_model
+from langchain.agents import create_agent
+
+# 模拟用户数据库
+USER_DATABASE = {
+    "user123": {
+        "name": "张三",
+        "account_type": "VIP",
+        "balance": 5000,
+        "email": "[email protected]"
+    },
+    "user456": {
+        "name": "李四",
+        "account_type": "普通",
+        "balance": 1200,
+        "email": "[email protected]"
+    }
+}
+
+# 定义用户上下文结构
+@dataclass
+class UserContext:
+    """用户上下文信息"""
+    user_id: str
+
+# 创建使用上下文的工具
+@tool
+def get_account_info(runtime: ToolRuntime[UserContext]) -> str:
+    """获取当前用户的账户信息。
+
+    Returns:
+        用户账户详情
+    """
+    # 从上下文获取用户 ID
+    user_id = runtime.context.user_id
+
+    # 查询用户数据
+    if user_id in USER_DATABASE:
+        user = USER_DATABASE[user_id]
+        return (
+            f"账户持有人：{user['name']}\n"
+            f"账户类型：{user['account_type']}\n"
+            f"余额：¥{user['balance']}"
+        )
+    return "用户未找到"
+
+@tool
+def check_vip_status(runtime: ToolRuntime[UserContext]) -> str:
+    """检查当前用户的 VIP 状态。
+
+    Returns:
+        VIP 状态信息
+    """
+    user_id = runtime.context.user_id
+
+    if user_id in USER_DATABASE:
+        user = USER_DATABASE[user_id]
+        is_vip = user["account_type"] == "VIP"
+        return f"VIP 状态：{'是' if is_vip else '否'}"
+    return "用户未找到"
+
+# 创建 Agent
+model = init_chat_model("gpt-4o")
+agent = create_agent(
+    model,
+    tools=[get_account_info, check_vip_status],
+    context_schema=UserContext,
+    system_prompt="你是一个金融助手。"
+)
+
+# 调用 Agent（传入用户上下文）
+result = agent.invoke(
+    {"messages": [{"role": "user", "content": "我的当前余额是多少？"}]},
+    context=UserContext(user_id="user123")  # 注入用户上下文
+)
+
+print(result["messages"][-1].content)</code></pre>
+                    </div>
+                </section>
+
+                <!-- 更新状态 -->
+                <section class="content-section">
+                    <h2 class="section-title">🔄 更新 Agent 状态</h2>
+                    <p>
+                        工具可以使用 <code>Command</code> 对象修改 Agent 的状态，
+                        如清除对话历史、更新用户信息等。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+状态更新示例
+功能：工具可以修改 Agent 的运行时状态
+"""
+from langchain.tools import tool, ToolRuntime
+from langgraph.types import Command
+from langchain.messages import RemoveMessage
+from langgraph.graph.message import REMOVE_ALL_MESSAGES
+
+@tool
+def clear_conversation() -> Command:
+    """清除对话历史。
+
+    Returns:
+        状态更新命令
+    """
+    return Command(
+        update={
+            "messages": [RemoveMessage(id=REMOVE_ALL_MESSAGES)],
+        }
+    )
+
+@tool
+def update_user_name(new_name: str, runtime: ToolRuntime) -> Command:
+    """更新用户姓名。
+
+    Args:
+        new_name: 新的用户姓名
+
+    Returns:
+        状态更新命令
+    """
+    return Command(
+        update={"user_name": new_name}
+    )
+
+@tool
+def set_language_preference(language: str) -> Command:
+    """设置语言偏好。
+
+    Args:
+        language: 语言代码（如 'zh', 'en'）
+
+    Returns:
+        状态更新命令
+    """
+    return Command(
+        update={"language": language}
+    )</code></pre>
+                    </div>
+                </section>
+
+                <!-- Memory/Store 访问 -->
+                <section class="content-section">
+                    <h2 class="section-title">💾 Memory/Store 访问</h2>
+                    <p>
+                        工具可以访问持久化存储，实现跨会话的数据保存和检索。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+Memory/Store 访问示例
+功能：持久化用户数据
+"""
+from typing import Any
+from langchain.tools import tool, ToolRuntime
+from langgraph.store.memory import InMemoryStore
+from langchain.agents import create_agent
+from langchain.chat_models import init_chat_model
+
+@tool
+def get_user_info(user_id: str, runtime: ToolRuntime) -> str:
+    """查找用户信息。
+
+    Args:
+        user_id: 用户 ID
+
+    Returns:
+        用户信息
+    """
+    store = runtime.store
+    user_info = store.get(("users",), user_id)
+    return str(user_info.value) if user_info else "未知用户"
+
+@tool
+def save_user_info(
+    user_id: str,
+    user_info: dict[str, Any],
+    runtime: ToolRuntime
+) -> str:
+    """保存用户信息。
+
+    Args:
+        user_id: 用户 ID
+        user_info: 用户信息字典
+
+    Returns:
+        成功消息
+    """
+    store = runtime.store
+    store.put(("users",), user_id, user_info)
+    return "成功保存用户信息。"
+
+# 创建存储
+store = InMemoryStore()
+
+# 创建 Agent
+model = init_chat_model("gpt-4o")
+agent = create_agent(
+    model,
+    tools=[get_user_info, save_user_info],
+    store=store
+)
+
+# 第一次会话：保存用户信息
+agent.invoke({
+    "messages": [{
+        "role": "user",
+        "content": "保存以下用户：userid: abc123, name: 王五, age: 25, email: [email protected]"
+    }]
+})
+
+# 第二次会话：检索持久化数据
+result = agent.invoke({
+    "messages": [{
+        "role": "user",
+        "content": "获取用户 ID 为 'abc123' 的用户信息"
+    }]
+})
+
+print(result["messages"][-1].content)</code></pre>
+                    </div>
+                </section>
+
+                <!-- Stream Writer -->
+                <section class="content-section">
+                    <h2 class="section-title">📡 Stream Writer 实时反馈</h2>
+                    <p>
+                        使用 <code>runtime.stream_writer</code> 可以在工具执行期间
+                        向用户发送实时进度更新。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+Stream Writer 实时反馈示例
+功能：在工具执行过程中发送进度更新
+"""
+from langchain.tools import tool, ToolRuntime
+import time
+
+@tool
+def get_weather(city: str, runtime: ToolRuntime) -> str:
+    """获取指定城市的天气。
+
+    Args:
+        city: 城市名称
+
+    Returns:
+        天气信息
+    """
+    writer = runtime.stream_writer
+
+    # 发送进度更新
+    writer(f"正在查找 {city} 的数据...")
+    time.sleep(1)  # 模拟 API 调用
+
+    writer(f"已获取 {city} 的数据")
+    time.sleep(0.5)
+
+    writer(f"正在解析天气信息...")
+    time.sleep(0.5)
+
+    # 返回最终结果
+    return f"{city} 今天总是晴朗的！"
+
+@tool
+def search_documents(query: str, runtime: ToolRuntime) -> str:
+    """搜索文档库。
+
+    Args:
+        query: 搜索查询
+
+    Returns:
+        搜索结果
+    """
+    writer = runtime.stream_writer
+
+    writer(f"开始搜索：'{query}'")
+    time.sleep(0.5)
+
+    writer(f"正在索引中查找...")
+    time.sleep(1)
+
+    writer(f"找到 3 个相关文档")
+    time.sleep(0.5)
+
+    writer(f"正在提取内容...")
+
+    return f"关于 '{query}' 的搜索结果：[文档摘要]"</code></pre>
+                    </div>
+
+                    <div class="info-box warning">
+                        <div class="info-box-title">⚠️ 重要提示</div>
+                        <p>
+                            如果使用 <code>runtime.stream_writer</code>，
+                            工具必须在 LangGraph 执行上下文中调用。
+                            在独立调用工具时不可用。
+                        </p>
+                    </div>
+                </section>
+
+                <!-- 保留参数名 -->
+                <section class="content-section">
+                    <h2 class="section-title">🚫 保留参数名</h2>
+                    <p>
+                        以下参数名不能用作工具参数，它们由 LangChain 保留：
+                    </p>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>用途</th>
+                                <th>说明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>config</code></td>
+                                <td>配置对象</td>
+                                <td>保留给 RunnableConfig</td>
+                            </tr>
+                            <tr>
+                                <td><code>runtime</code></td>
+                                <td>运行时上下文</td>
+                                <td>保留给 ToolRuntime 参数</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># ❌ 错误：不能使用保留参数名
+@tool
+def bad_tool(query: str, config: dict) -> str:
+    """这会导致错误！"""
+    return "..."
+
+# ✅ 正确：使用 runtime 访问配置
+@tool
+def good_tool(query: str, runtime: ToolRuntime) -> str:
+    """使用 runtime 访问所需信息"""
+    # 可以通过 runtime 访问配置和状态
+    return "..."</code></pre>
+                    </div>
+                </section>
+
+                <!-- 最佳实践 -->
+                <section class="content-section">
+                    <h2 class="section-title">✨ 最佳实践</h2>
+
+                    <h3 class="subsection-title">1. 编写清晰的文档字符串</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># ❌ 不好：文档字符串不清晰
+@tool
+def search(q: str) -> str:
+    """搜索"""
+    return "..."
+
+# ✅ 好：清晰的文档字符串
+@tool
+def search_database(query: str, limit: int = 10) -> str:
+    """在客户数据库中搜索记录。
+
+    使用此工具查找客户信息、订单历史或产品详情。
+    支持模糊匹配和多关键词搜索。
+
+    Args:
+        query: 搜索关键词（客户名称、订单号、产品名称等）
+        limit: 返回的最大结果数量（默认 10）
+
+    Returns:
+        搜索结果的格式化字符串
+    """
+    return "..."</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">2. 返回有意义的错误消息</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># ❌ 不好：抛出异常
+@tool
+def divide(a: float, b: float) -> float:
+    """除法运算"""
+    return a / b  # 如果 b=0 会抛出异常
+
+# ✅ 好：返回清晰的错误消息
+@tool
+def divide(a: float, b: float) -> str:
+    """执行除法运算。
+
+    Args:
+        a: 被除数
+        b: 除数
+
+    Returns:
+        计算结果或错误消息
+    """
+    if b == 0:
+        return "错误：除数不能为零。请提供非零的除数。"
+
+    try:
+        result = a / b
+        return f"计算结果：{a} ÷ {b} = {result}"
+    except Exception as e:
+        return f"计算失败：{str(e)}"</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">3. 使用类型注解和验证</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from pydantic import BaseModel, Field, validator
+from typing import Literal
+
+class EmailInput(BaseModel):
+    """发送邮件的输入参数。"""
+    to: str = Field(description="收件人邮箱地址")
+    subject: str = Field(description="邮件主题")
+    body: str = Field(description="邮件正文")
+    priority: Literal["low", "normal", "high"] = Field(
+        default="normal",
+        description="邮件优先级"
+    )
+
+    @validator("to")
+    def validate_email(cls, v):
+        """验证邮箱格式"""
+        if "@" not in v:
+            raise ValueError("无效的邮箱地址")
+        return v
+
+@tool(args_schema=EmailInput)
+def send_email(to: str, subject: str, body: str, priority: str = "normal") -> str:
+    """发送邮件。"""
+    return f"已发送邮件到 {to}"</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">4. 工具命名规范</h3>
+                    <ul>
+                        <li><strong>使用动词开头</strong>：get_weather、search_database、send_email</li>
+                        <li><strong>描述性命名</strong>：避免过于简短或模糊的名称</li>
+                        <li><strong>一致性</strong>：使用统一的命名风格（snake_case）</li>
+                    </ul>
+
+                    <h3 class="subsection-title">5. 安全性考虑</h3>
+                    <div class="info-box warning">
+                        <div class="info-box-title">⚠️ 安全提示</div>
+                        <ul>
+                            <li><strong>输入验证</strong>：始终验证和清理用户输入</li>
+                            <li><strong>权限检查</strong>：使用 runtime.context 验证用户权限</li>
+                            <li><strong>避免危险操作</strong>：不要使用 eval()、exec() 等</li>
+                            <li><strong>敏感数据</strong>：不要在工具描述中暴露敏感信息</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- 完整示例 -->
+                <section class="content-section">
+                    <h2 class="section-title">🎯 完整示例：订单管理工具集</h2>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+订单管理工具集完整示例
+功能：一组完整的订单管理工具
+"""
+from dataclasses import dataclass
+from typing import Literal
+from pydantic import BaseModel, Field
+from langchain.tools import tool, ToolRuntime
+from langchain.agents import create_agent
+from langchain.chat_models import init_chat_model
+
+# 模拟订单数据库
+ORDERS = {
+    "ORD001": {"product": "笔记本电脑", "status": "已发货", "amount": 5999},
+    "ORD002": {"product": "鼠标", "status": "处理中", "amount": 99},
+}
+
+# 用户上下文
+@dataclass
+class UserContext:
+    user_id: str
+    role: str  # 'customer' 或 'admin'
+
+# 查询订单工具
+@tool
+def query_order(order_id: str) -> str:
+    """查询订单状态。
+
+    Args:
+        order_id: 订单编号
+
+    Returns:
+        订单详情或错误消息
+    """
+    if order_id in ORDERS:
+        order = ORDERS[order_id]
+        return (
+            f"订单 {order_id}：\n"
+            f"  产品：{order['product']}\n"
+            f"  状态：{order['status']}\n"
+            f"  金额：¥{order['amount']}"
+        )
+    return f"未找到订单 {order_id}"
+
+# 取消订单工具（需要权限检查）
+@tool
+def cancel_order(order_id: str, runtime: ToolRuntime[UserContext]) -> str:
+    """取消订单。
+
+    Args:
+        order_id: 要取消的订单编号
+
+    Returns:
+        操作结果
+    """
+    # 权限检查
+    user_role = runtime.context.role
+    if user_role not in ["customer", "admin"]:
+        return "权限不足：无法取消订单"
+
+    if order_id not in ORDERS:
+        return f"未找到订单 {order_id}"
+
+    order = ORDERS[order_id]
+    if order["status"] == "已发货":
+        return f"订单 {order_id} 已发货，无法取消。请联系客服处理退货。"
+
+    # 取消订单
+    order["status"] = "已取消"
+    return f"订单 {order_id} 已成功取消。"
+
+# 更新订单状态工具（仅管理员）
+class OrderStatusInput(BaseModel):
+    """更新订单状态的输入参数。"""
+    order_id: str = Field(description="订单编号")
+    new_status: Literal["处理中", "已发货", "已完成", "已取消"] = Field(
+        description="新的订单状态"
+    )
+
+@tool(args_schema=OrderStatusInput)
+def update_order_status(
+    order_id: str,
+    new_status: str,
+    runtime: ToolRuntime[UserContext]
+) -> str:
+    """更新订单状态（仅管理员）。
+
+    Args:
+        order_id: 订单编号
+        new_status: 新状态
+
+    Returns:
+        操作结果
+    """
+    # 仅管理员可用
+    if runtime.context.role != "admin":
+        return "权限不足：此操作仅限管理员"
+
+    if order_id not in ORDERS:
+        return f"未找到订单 {order_id}"
+
+    ORDERS[order_id]["status"] = new_status
+    return f"订单 {order_id} 状态已更新为：{new_status}"
+
+# 创建 Agent
+model = init_chat_model("gpt-4o")
+
+customer_agent = create_agent(
+    model,
+    tools=[query_order, cancel_order],
+    context_schema=UserContext,
+    system_prompt="你是客服助手，帮助用户管理订单。"
+)
+
+admin_agent = create_agent(
+    model,
+    tools=[query_order, cancel_order, update_order_status],
+    context_schema=UserContext,
+    system_prompt="你是管理员助手，可以管理所有订单。"
+)
+
+# 客户场景
+print("=== 客户场景 ===")
+result1 = customer_agent.invoke(
+    {"messages": [{"role": "user", "content": "查询订单 ORD001 的状态"}]},
+    context=UserContext(user_id="customer1", role="customer")
+)
+print(result1["messages"][-1].content)
+
+# 管理员场景
+print("\n=== 管理员场景 ===")
+result2 = admin_agent.invoke(
+    {"messages": [{"role": "user", "content": "将订单 ORD002 状态更新为已发货"}]},
+    context=UserContext(user_id="admin1", role="admin")
+)
+print(result2["messages"][-1].content)</code></pre>
+                    </div>
+                </section>
+
+                <!-- 常见问题 -->
+                <section class="content-section">
+                    <h2 class="section-title">❓ 常见问题</h2>
+
+                    <h3 class="subsection-subtitle">Q1: 工具必须返回字符串吗？</h3>
+                    <p>
+                        不是必须的，但<strong>强烈推荐</strong>。返回字符串能确保：
+                    </p>
+                    <ul>
+                        <li>模型能正确理解工具结果</li>
+                        <li>便于调试和日志记录</li>
+                        <li>跨模型提供商的兼容性</li>
+                    </ul>
+                    <p>
+                        如果需要返回结构化数据供应用使用，可以使用 <code>response_format="content_and_artifact"</code>。
+                    </p>
+
+                    <h3 class="subsection-subtitle">Q2: 如何测试工具？</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 直接调用工具测试
+result = search_database.invoke({"query": "测试", "limit": 5})
+print(result)
+
+# 使用 pytest 编写单元测试
+def test_search_database():
+    result = search_database.invoke({"query": "客户", "limit": 3})
+    assert "找到" in result
+    assert "客户" in result</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">Q3: runtime 参数何时可用？</h3>
+                    <p>
+                        <code>runtime</code> 参数仅在以下情况可用：
+                    </p>
+                    <ul>
+                        <li>工具在 <code>create_agent()</code> 创建的 Agent 中使用</li>
+                        <li>工具在 LangGraph 执行上下文中调用</li>
+                    </ul>
+                    <p>
+                        如果单独测试工具，runtime 参数会是 None 或不可用。
+                    </p>
+
+                    <h3 class="subsection-subtitle">Q4: 如何处理工具执行超时？</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">import asyncio
+from langchain.tools import tool
+
+@tool
+async def slow_operation(query: str) -> str:
+    """执行耗时操作"""
+    try:
+        # 设置超时
+        result = await asyncio.wait_for(
+            some_async_function(query),
+            timeout=10.0  # 10 秒超时
+        )
+        return result
+    except asyncio.TimeoutError:
+        return "操作超时，请稍后重试"</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">Q5: 工具可以调用其他工具吗？</h3>
+                    <p>
+                        工具不应该直接调用其他工具。如果需要组合多个操作，应该：
+                    </p>
+                    <ul>
+                        <li>让 Agent 决定调用顺序</li>
+                        <li>创建一个新的复合工具</li>
+                        <li>使用中间件处理工具链</li>
+                    </ul>
+                </section>
+
+                <!-- 参考资源 -->
+                <section class="content-section">
+                    <h2 class="section-title">🔗 参考资源</h2>
+                    <ul>
+                        <li>
+                            <a href="https://docs.langchain.com/oss/python/langchain/tools" target="_blank">
+                                LangChain 官方 Tools 文档
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://python.langchain.com/docs/how_to/#tools" target="_blank">
+                                Tools 使用指南
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://reference.langchain.com/python/langchain/tools.html" target="_blank">
+                                Tools API 参考
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://python.langchain.com/docs/integrations/tools/" target="_blank">
+                                预构建工具集成
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- 页面导航 -->
+                <nav class="page-navigation">
+                    <a href="04-messages.html" class="nav-button prev">
+                        ← 上一页：消息系统
+                    </a>
+                    <a href="06-agents.html" class="nav-button next">
+                        下一页：Agent 基础 →
+                    </a>
+                </nav>
+            </div>
+        </main>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" aria-label="返回顶部">↑</button>
+
+    <!-- JavaScript -->
+    <script src="assets/js/mermaid-init.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</body>
+</html>

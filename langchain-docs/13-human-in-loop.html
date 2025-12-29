@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LangChain 1.0 核心架构 - 深入理解 LangChain 的设计哲学和模块组织">
+    <title>核心架构 | LangChain 1.0 Python 知识文档</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <button class="mobile-menu-button" aria-label="打开菜单">☰</button>
+
+    <div class="container">
+        <!-- 侧边栏导航 -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="sidebar-title">🦜 LangChain 1.0</h1>
+                <p class="sidebar-subtitle">Python 完整学习指南</p>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-section">
+                    <div class="nav-section-title">开始</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">
+                                <span class="nav-icon">🏠</span>
+                                主页
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">基础篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="01-introduction.html" class="nav-link">
+                                <span class="nav-icon">📖</span>
+                                LangChain 简介
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="02-architecture.html" class="nav-link">
+                                <span class="nav-icon">🏗️</span>
+                                核心架构
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="03-models.html" class="nav-link">
+                                <span class="nav-icon">🤖</span>
+                                模型接口
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="04-messages.html" class="nav-link">
+                                <span class="nav-icon">💬</span>
+                                消息系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="05-tools.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                工具系统
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">进阶篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="06-agents.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                Agent 基础
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="07-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="08-rag.html" class="nav-link">
+                                <span class="nav-icon">🔍</span>
+                                RAG 详解
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="09-lcel.html" class="nav-link">
+                                <span class="nav-icon">🔗</span>
+                                LCEL 表达式
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">高级应用</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="10-runtime.html" class="nav-link">
+                                <span class="nav-icon">🔌</span>
+                                Runtime 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="11-checkpointer.html" class="nav-link">
+                                <span class="nav-icon">💾</span>
+                                持久化系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="12-streaming.html" class="nav-link">
+                                <span class="nav-icon">🌊</span>
+                                流式输出
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="13-human-in-loop.html" class="nav-link">
+                                <span class="nav-icon">👤</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="14-long-term-memory.html" class="nav-link">
+                                <span class="nav-icon">🗄️</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="15-langgraph.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                LangGraph
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">实战篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="16-customer-service.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                客服机器人
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="17-best-practices.html" class="nav-link">
+                                <span class="nav-icon">✨</span>
+                                最佳实践
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">参考篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="18-api-reference.html" class="nav-link">
+                                <span class="nav-icon">📚</span>
+                                API 速查表
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="19-troubleshooting.html" class="nav-link">
+                                <span class="nav-icon">🐛</span>
+                                故障排除
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="20-migration.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                迁移指南
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">扩展篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="21-structured-output.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                结构化输出
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">DeepAgents 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="22-deepagents-quickstart.html" class="nav-link">
+                                <span class="nav-icon">🚀</span>
+                                快速开始
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="23-deepagents-customization.html" class="nav-link">
+                                <span class="nav-icon">🎨</span>
+                                定制化
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="24-deepagents-harness.html" class="nav-link">
+                                <span class="nav-icon">🎛️</span>
+                                Harness 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="25-deepagents-backends.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                后端配置
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="26-deepagents-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="27-deepagents-hitl.html" class="nav-link">
+                                <span class="nav-icon">🤝</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="28-deepagents-memory.html" class="nav-link">
+                                <span class="nav-icon">🧠</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="29-deepagents-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">Multi-Agent 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="30-multi-agent-index.html" class="nav-link">
+                                <span class="nav-icon">🌐</span>
+                                概述
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="31-multi-agent-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="32-multi-agent-handoffs.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                交接机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="33-multi-agent-skills.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                技能系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="34-multi-agent-router.html" class="nav-link">
+                                <span class="nav-icon">🧭</span>
+                                路由机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="35-multi-agent-workflow.html" class="nav-link">
+                                <span class="nav-icon">🔀</span>
+                                自定义工作流
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- 主内容区域 -->
+        <!-- 主内容区域 -->
+        <main class="main-content">
+            <div class="content-wrapper">
+                <!-- 面包屑导航 -->
+                <nav class="breadcrumb">
+                    <span class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link">主页</a>
+                    </span>
+                    <span class="breadcrumb-item">
+                        高级应用
+                    </span>
+                    <span class="breadcrumb-item">
+                        人工介入
+                    </span>
+                </nav>
+
+                <!-- 页面标题 -->
+                <header class="page-header">
+                    <h1 class="page-title">👤 Human-in-the-Loop（人工介入）</h1>
+                    <p class="page-subtitle">
+                        掌握 LangChain 1.0 的 Human-in-the-Loop 机制，实现敏感操作的人工审核，
+                        构建安全可控的 AI Agent 系统。
+                    </p>
+                </header>
+
+                <!-- HITL 简介 -->
+                <section class="content-section">
+                    <h2 class="section-title">📚 什么是 Human-in-the-Loop？</h2>
+                    <p>
+                        <strong>Human-in-the-Loop (HITL)</strong> 是一种让 AI Agent 在执行关键操作前
+                        <strong>暂停并等待人工决策</strong>的机制。这确保了敏感操作（如删除数据、发送邮件、执行支付）
+                        必须经过人工审核才能执行。
+                    </p>
+
+                    <div class="info-box note">
+                        <div class="info-box-title">💡 核心价值</div>
+                        <ul>
+                            <li><strong>安全性</strong>：防止 AI 执行不可逆的危险操作</li>
+                            <li><strong>可控性</strong>：人类保留最终决策权</li>
+                            <li><strong>合规性</strong>：满足某些业务需要人工审批的要求</li>
+                            <li><strong>灵活性</strong>：可以修改 AI 提议的参数再执行</li>
+                        </ul>
+                    </div>
+
+                    <h3 class="subsection-title">典型应用场景</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>场景</th>
+                                <th>需要审核的操作</th>
+                                <th>风险</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>数据管理</td>
+                                <td>删除文件、清空数据库</td>
+                                <td>数据丢失不可恢复</td>
+                            </tr>
+                            <tr>
+                                <td>财务系统</td>
+                                <td>发起支付、转账</td>
+                                <td>资金损失</td>
+                            </tr>
+                            <tr>
+                                <td>通信系统</td>
+                                <td>发送邮件、短信、公告</td>
+                                <td>错误信息传播</td>
+                            </tr>
+                            <tr>
+                                <td>基础设施</td>
+                                <td>重启服务器、修改配置</td>
+                                <td>服务中断</td>
+                            </tr>
+                            <tr>
+                                <td>代码仓库</td>
+                                <td>合并代码、发布版本</td>
+                                <td>生产环境故障</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- HITL 架构 -->
+                <section class="content-section">
+                    <h2 class="section-title">🏗️ Human-in-the-Loop 架构</h2>
+
+                    <div class="mermaid-wrapper">
+                        <div class="mermaid">
+graph TB
+    A[用户请求] --> B[Agent 推理]
+    B --> C[生成工具调用]
+    C --> D{需要人工审核？}
+
+    D -->|否| E[直接执行工具]
+    E --> F[返回结果]
+
+    D -->|是| G[暂停执行]
+    G --> H[创建 interrupt]
+    H --> I[等待人工决策]
+
+    I --> J{决策类型？}
+
+    J -->|✅ Approve| K[执行原始工具调用]
+    J -->|✏️ Edit| L[修改参数后执行]
+    J -->|❌ Reject| M[生成拒绝消息]
+
+    K --> N[继续 Agent 执行]
+    L --> N
+    M --> N
+
+    N --> F
+
+    style D fill:#f59e0b,color:#fff
+    style G fill:#ef4444,color:#fff
+    style I fill:#3b82f6,color:#fff
+    style K fill:#10b981,color:#fff
+    style L fill:#8b5cf6,color:#fff
+    style M fill:#ef4444,color:#fff
+                        </div>
+                    </div>
+
+                    <h3 class="subsection-title">三种决策类型</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>决策类型</th>
+                                <th>符号</th>
+                                <th>说明</th>
+                                <th>使用场景</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Approve</strong></td>
+                                <td>✅</td>
+                                <td>批准执行，不修改参数</td>
+                                <td>操作正确，直接执行</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Edit</strong></td>
+                                <td>✏️</td>
+                                <td>修改参数后执行</td>
+                                <td>操作方向正确，但参数需调整</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Reject</strong></td>
+                                <td>❌</td>
+                                <td>拒绝执行，并提供反馈</td>
+                                <td>操作不安全或不合理</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- 基础配置 -->
+                <section class="content-section">
+                    <h2 class="section-title">⚙️ HumanInTheLoopMiddleware 配置</h2>
+                    <p>
+                        使用 <code>HumanInTheLoopMiddleware</code> 为 Agent 添加人工审核能力。
+                    </p>
+
+                    <div class="info-box warning">
+                        <div class="info-box-title">⚠️ 必需条件</div>
+                        <p>
+                            <strong>必须配置 Checkpointer</strong>！Human-in-the-Loop 依赖持久化状态，
+                            才能在暂停后恢复执行。生产环境推荐使用 <code>PostgresSaver</code>。
+                        </p>
+                    </div>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+HumanInTheLoopMiddleware 基础配置
+功能：为敏感工具添加人工审核
+"""
+from langchain.agents import create_agent
+from langchain.agents.middleware import HumanInTheLoopMiddleware
+from langgraph.checkpoint.memory import InMemorySaver
+from langchain.tools import tool
+
+@tool
+def write_file(filename: str, content: str) -> str:
+    """写入文件（敏感操作）"""
+    with open(filename, "w") as f:
+        f.write(content)
+    return f"文件 {filename} 写入成功"
+
+@tool
+def read_file(filename: str) -> str:
+    """读取文件（安全操作）"""
+    with open(filename, "r") as f:
+        return f.read()
+
+@tool
+def delete_file(filename: str) -> str:
+    """删除文件（危险操作）"""
+    import os
+    os.remove(filename)
+    return f"文件 {filename} 已删除"
+
+# 创建带 HITL 的 Agent
+agent = create_agent(
+    model="gpt-4o",
+    tools=[write_file, read_file, delete_file],
+    middleware=[
+        HumanInTheLoopMiddleware(
+            interrupt_on={
+                "write_file": True,      # 写文件需要审核
+                "delete_file": True,     # 删除文件需要审核
+                "read_file": False,      # 读文件无需审核
+            },
+            description_prefix="工具执行等待审批"
+        )
+    ],
+    checkpointer=InMemorySaver(),  # 必需！
+)
+
+# 配置 thread_id（用于持久化）
+config = {"configurable": {"thread_id": "user_001"}}</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">配置参数详解</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>参数</th>
+                                <th>类型</th>
+                                <th>说明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>interrupt_on</code></td>
+                                <td>dict</td>
+                                <td>指定哪些工具需要审核（True/False/配置对象）</td>
+                            </tr>
+                            <tr>
+                                <td><code>allowed_decisions</code></td>
+                                <td>list</td>
+                                <td>允许的决策类型（默认全部允许）</td>
+                            </tr>
+                            <tr>
+                                <td><code>description</code></td>
+                                <td>str/callable</td>
+                                <td>审批请求的描述文本</td>
+                            </tr>
+                            <tr>
+                                <td><code>description_prefix</code></td>
+                                <td>str</td>
+                                <td>描述文本的默认前缀</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- 执行工作流 -->
+                <section class="content-section">
+                    <h2 class="section-title">🔄 完整执行工作流</h2>
+
+                    <h3 class="subsection-title">步骤 1：运行直到中断</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+步骤 1：运行 Agent 直到遇到需要审核的操作
+"""
+from langgraph.types import Command
+
+config = {"configurable": {"thread_id": "user_001"}}
+
+# 调用 Agent
+result = agent.invoke(
+    {
+        "messages": [
+            {"role": "user", "content": "删除 old_data.txt 文件"}
+        ]
+    },
+    config=config
+)
+
+# 检查是否有中断
+if "__interrupt__" in result:
+    print("⏸️ Agent 已暂停，等待人工决策")
+    interrupt_info = result["__interrupt__"]
+
+    # 查看中断详情
+    action_requests = interrupt_info[0]["value"]["action_requests"]
+    for req in action_requests:
+        print(f"\n工具: {req['name']}")
+        print(f"参数: {req['args']}")
+        print(f"描述: {req.get('description', '无')}")
+else:
+    # 无需审核，直接执行完成
+    print("✅ 执行完成（无需审核）")
+    print(result["messages"][-1].content)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">步骤 2：做出决策并恢复</h3>
+
+                    <h4 class="subsection-subtitle">决策 1：批准执行</h4>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+批准执行：同意 Agent 的提议
+"""
+from langgraph.types import Command
+
+# 恢复执行并批准
+result = agent.invoke(
+    Command(
+        resume={
+            "decisions": [
+                {"type": "approve"}  # ✅ 批准执行
+            ]
+        }
+    ),
+    config=config  # 使用相同的 thread_id
+)
+
+print("✅ 操作已执行")
+print(result["messages"][-1].content)</code></pre>
+                    </div>
+
+                    <h4 class="subsection-subtitle">决策 2：修改参数后执行</h4>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+编辑执行：修改参数后再执行
+"""
+from langgraph.types import Command
+
+# 假设 Agent 想删除 important_file.txt
+# 我们修改为删除 backup_file.txt
+
+result = agent.invoke(
+    Command(
+        resume={
+            "decisions": [
+                {
+                    "type": "edit",  # ✏️ 编辑模式
+                    "edited_action": {
+                        "name": "delete_file",  # 工具名称（可选修改）
+                        "args": {
+                            "filename": "backup_file.txt"  # 修改参数
+                        }
+                    }
+                }
+            ]
+        }
+    ),
+    config=config
+)
+
+print("✏️ 操作已修改并执行")
+print(result["messages"][-1].content)</code></pre>
+                    </div>
+
+                    <div class="info-box warning">
+                        <div class="info-box-title">⚠️ Edit 决策注意事项</div>
+                        <p>
+                            修改参数时应<strong>保守</strong>。大幅修改可能导致模型重新评估策略，
+                            可能多次执行工具或产生意外行为。建议：
+                        </p>
+                        <ul>
+                            <li>只修改必要的参数值</li>
+                            <li>不要更改工具的核心逻辑</li>
+                            <li>修改后的参数应符合原始意图</li>
+                        </ul>
+                    </div>
+
+                    <h4 class="subsection-subtitle">决策 3：拒绝并提供反馈</h4>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+拒绝执行：不同意操作并提供反馈
+"""
+from langgraph.types import Command
+
+result = agent.invoke(
+    Command(
+        resume={
+            "decisions": [
+                {
+                    "type": "reject",  # ❌ 拒绝
+                    "message": "不能删除该文件，因为它包含重要数据。请先备份后再操作。"
+                }
+            ]
+        }
+    ),
+    config=config
+)
+
+# 拒绝消息会被加入对话历史
+# Agent 会根据反馈重新思考
+print("❌ 操作已拒绝")
+print(result["messages"][-1].content)</code></pre>
+                    </div>
+                </section>
+
+                <!-- 多个工具审批 -->
+                <section class="content-section">
+                    <h2 class="section-title">🔢 处理多个工具审批</h2>
+                    <p>
+                        当 Agent 同时调用多个需要审核的工具时，需要为每个工具提供决策。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+多工具审批示例
+功能：同时处理多个工具调用的审批
+"""
+from langchain.agents import create_agent
+from langchain.agents.middleware import HumanInTheLoopMiddleware
+from langgraph.checkpoint.memory import InMemorySaver
+from langchain.tools import tool
+from langgraph.types import Command
+
+@tool
+def send_email(to: str, subject: str, body: str) -> str:
+    """发送邮件"""
+    return f"邮件已发送到 {to}"
+
+@tool
+def delete_records(table: str, condition: str) -> str:
+    """删除数据库记录"""
+    return f"已从 {table} 删除符合 {condition} 的记录"
+
+@tool
+def create_backup(source: str) -> str:
+    """创建备份"""
+    return f"已备份 {source}"
+
+agent = create_agent(
+    model="gpt-4o",
+    tools=[send_email, delete_records, create_backup],
+    middleware=[
+        HumanInTheLoopMiddleware(
+            interrupt_on={
+                "send_email": True,
+                "delete_records": True,
+                "create_backup": True,
+            }
+        )
+    ],
+    checkpointer=InMemorySaver(),
+)
+
+config = {"configurable": {"thread_id": "multi_approval"}}
+
+# Agent 可能同时调用多个工具
+result = agent.invoke(
+    {
+        "messages": [
+            {"role": "user", "content": "备份数据库，删除旧记录，并发邮件通知管理员"}
+        ]
+    },
+    config=config
+)
+
+if "__interrupt__" in result:
+    action_requests = result["__interrupt__"][0]["value"]["action_requests"]
+
+    print(f"需要审批 {len(action_requests)} 个操作：\n")
+    for i, req in enumerate(action_requests):
+        print(f"{i+1}. {req['name']}: {req['args']}")
+
+    # 为每个工具提供决策（顺序必须匹配）
+    result = agent.invoke(
+        Command(
+            resume={
+                "decisions": [
+                    {"type": "approve"},  # 批准第1个工具
+                    {
+                        "type": "edit",    # 修改第2个工具
+                        "edited_action": {
+                            "name": "delete_records",
+                            "args": {
+                                "table": "logs",
+                                "condition": "created_at < '2024-01-01'"  # 修改条件
+                            }
+                        }
+                    },
+                    {
+                        "type": "reject",  # 拒绝第3个工具
+                        "message": "请先确认备份成功后再发送邮件"
+                    }
+                ]
+            }
+        ),
+        config=config
+    )
+
+print("\n决策已提交，Agent 继续执行")</code></pre>
+                    </div>
+
+                    <div class="info-box tip">
+                        <div class="info-box-title">✅ 多工具决策顺序</div>
+                        <p>
+                            决策列表的顺序必须与 <code>action_requests</code> 的顺序一致。
+                            第 1 个决策对应第 1 个工具调用，第 2 个决策对应第 2 个工具调用，以此类推。
+                        </p>
+                    </div>
+                </section>
+
+                <!-- 流式输出与 HITL -->
+                <section class="content-section">
+                    <h2 class="section-title">🌊 流式输出与 Human-in-the-Loop</h2>
+                    <p>
+                        结合流式输出，可以实时监控 Agent 执行过程，并在中断时获得通知。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+流式输出 + HITL 示例
+功能：实时显示执行过程，遇到中断时暂停
+"""
+from langchain.agents import create_agent
+from langchain.agents.middleware import HumanInTheLoopMiddleware
+from langgraph.checkpoint.memory import InMemorySaver
+from langchain.tools import tool
+from langgraph.types import Command
+
+@tool
+def execute_sql(query: str) -> str:
+    """执行 SQL 查询"""
+    return f"SQL 执行成功：{query}"
+
+agent = create_agent(
+    model="gpt-4o",
+    tools=[execute_sql],
+    middleware=[
+        HumanInTheLoopMiddleware(
+            interrupt_on={"execute_sql": True}
+        )
+    ],
+    checkpointer=InMemorySaver(),
+)
+
+config = {"configurable": {"thread_id": "streaming_hitl"}}
+
+print("开始执行...\n")
+
+# 使用流式模式
+interrupted = False
+
+for mode, chunk in agent.stream(
+    {
+        "messages": [
+            {"role": "user", "content": "删除 users 表中所有未激活的用户"}
+        ]
+    },
+    config=config,
+    stream_mode=["updates", "messages"]
+):
+    if mode == "messages":
+        # 显示 Token 流
+        token, metadata = chunk
+        if token:
+            print(token, end="", flush=True)
+
+    elif mode == "updates":
+        # 检查是否有中断
+        for step, data in chunk.items():
+            if "__interrupt__" in data:
+                interrupted = True
+                print("\n\n⏸️ 检测到需要审批的操作！")
+
+                action_requests = data["__interrupt__"][0]["value"]["action_requests"]
+                for req in action_requests:
+                    print(f"\n工具: {req['name']}")
+                    print(f"SQL: {req['args']['query']}")
+
+                # 模拟人工决策
+                print("\n等待人工审批...")
+                break
+
+if interrupted:
+    # 继续执行（这里简化为自动批准）
+    print("✅ 批准执行\n")
+
+    for mode, chunk in agent.stream(
+        Command(resume={"decisions": [{"type": "approve"}]}),
+        config=config,
+        stream_mode=["messages"]
+    ):
+        token, metadata = chunk
+        if token:
+            print(token, end="", flush=True)
+
+print("\n\n执行完成")</code></pre>
+                    </div>
+                </section>
+
+                <!-- 高级配置 -->
+                <section class="content-section">
+                    <h2 class="section-title">⚙️ 高级配置选项</h2>
+
+                    <h3 class="subsection-title">限制允许的决策类型</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+限制决策类型示例
+功能：某些工具只允许批准或拒绝，不允许编辑
+"""
+from langchain.agents.middleware import HumanInTheLoopMiddleware
+
+middleware = HumanInTheLoopMiddleware(
+    interrupt_on={
+        # 写文件：允许所有决策类型
+        "write_file": True,
+
+        # 删除文件：只允许批准或拒绝，不允许编辑
+        "delete_file": {
+            "allowed_decisions": ["approve", "reject"]
+        },
+
+        # 发送邮件：只允许批准（必须执行或手动取消）
+        "send_email": {
+            "allowed_decisions": ["approve"]
+        },
+    }
+)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">自定义描述文本</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+自定义描述文本示例
+功能：为审批请求提供更详细的说明
+"""
+from langchain.agents.middleware import HumanInTheLoopMiddleware
+
+def custom_description(action_request):
+    """动态生成描述文本"""
+    tool_name = action_request["name"]
+    args = action_request["args"]
+
+    if tool_name == "delete_file":
+        filename = args.get("filename", "未知文件")
+        return f"⚠️ 危险操作：即将删除文件 '{filename}'，此操作不可撤销！"
+
+    elif tool_name == "send_email":
+        to = args.get("to", "未知收件人")
+        subject = args.get("subject", "无主题")
+        return f"📧 邮件审批：发送给 {to}，主题：{subject}"
+
+    else:
+        return f"操作审批：{tool_name}"
+
+middleware = HumanInTheLoopMiddleware(
+    interrupt_on={
+        "delete_file": True,
+        "send_email": True,
+    },
+    description=custom_description  # 使用自定义函数
+)</code></pre>
+                    </div>
+                </section>
+
+                <!-- 完整示例 -->
+                <section class="content-section">
+                    <h2 class="section-title">🎯 完整示例：敏感操作审批系统</h2>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级 - 完整项目</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+敏感操作审批系统完整示例
+功能：模拟真实的审批工作流
+"""
+from langchain.agents import create_agent
+from langchain.agents.middleware import HumanInTheLoopMiddleware
+from langgraph.checkpoint.memory import InMemorySaver
+from langchain.tools import tool
+from langgraph.types import Command
+import json
+
+# ==================== 工具定义 ====================
+
+@tool
+def query_database(sql: str) -> str:
+    """查询数据库（安全操作）"""
+    return f"查询结果：[{'user1', 'user2', 'user3'}]"
+
+@tool
+def update_database(sql: str) -> str:
+    """更新数据库（需审批）"""
+    return f"数据库更新成功：{sql}"
+
+@tool
+def delete_from_database(sql: str) -> str:
+    """删除数据库记录（危险操作）"""
+    return f"删除成功：{sql}"
+
+@tool
+def send_notification(recipients: list[str], message: str) -> str:
+    """发送通知（需审批）"""
+    return f"通知已发送给 {len(recipients)} 人"
+
+# ==================== 自定义描述 ====================
+
+def approval_description(action_request):
+    """生成审批描述"""
+    tool_name = action_request["name"]
+    args = action_request["args"]
+
+    descriptions = {
+        "update_database": f"🔸 数据库更新\nSQL: {args.get('sql', 'N/A')}",
+        "delete_from_database": f"⚠️ 数据库删除（危险）\nSQL: {args.get('sql', 'N/A')}",
+        "send_notification": f"📧 批量通知\n收件人: {len(args.get('recipients', []))} 人\n内容: {args.get('message', 'N/A')[:50]}...",
+    }
+
+    return descriptions.get(tool_name, f"操作: {tool_name}")
+
+# ==================== 创建 Agent ====================
+
+approval_agent = create_agent(
+    model="gpt-4o",
+    tools=[
+        query_database,
+        update_database,
+        delete_from_database,
+        send_notification
+    ],
+    middleware=[
+        HumanInTheLoopMiddleware(
+            interrupt_on={
+                "query_database": False,           # 查询不需要审批
+                "update_database": True,           # 更新需要审批
+                "delete_from_database": {          # 删除只允许批准/拒绝
+                    "allowed_decisions": ["approve", "reject"]
+                },
+                "send_notification": True,         # 发送通知需要审批
+            },
+            description=approval_description
+        )
+    ],
+    checkpointer=InMemorySaver(),
+    system_prompt="""你是数据库管理助手。
+
+职责：
+1. 查询数据库
+2. 更新或删除记录（需要人工审批）
+3. 发送通知
+
+注意：
+- 删除操作特别危险，需谨慎
+- 发送通知前确认收件人和内容"""
+)
+
+# ==================== 审批工作流 ====================
+
+def execute_with_approval(user_request: str, thread_id: str):
+    """执行带审批的请求"""
+    config = {"configurable": {"thread_id": thread_id}}
+
+    print("\n" + "="*60)
+    print(f"用户请求: {user_request}")
+    print("="*60 + "\n")
+
+    # 第一次调用：运行直到中断
+    result = approval_agent.invoke(
+        {"messages": [{"role": "user", "content": user_request}]},
+        config=config
+    )
+
+    # 检查是否需要审批
+    if "__interrupt__" not in result:
+        print("✅ 执行完成（无需审批）")
+        print(result["messages"][-1].content)
+        return
+
+    # 显示审批请求
+    print("⏸️ 需要人工审批\n")
+    action_requests = result["__interrupt__"][0]["value"]["action_requests"]
+
+    decisions = []
+    for i, req in enumerate(action_requests):
+        print(f"审批请求 #{i+1}:")
+        print(f"  工具: {req['name']}")
+        print(f"  参数: {json.dumps(req['args'], ensure_ascii=False, indent=4)}")
+        print(f"  说明: {req.get('description', '无')}")
+
+        # 模拟人工决策（实际应用中这里是交互式输入）
+        if req['name'] == "delete_from_database":
+            # 删除操作：拒绝
+            decision = {
+                "type": "reject",
+                "message": "删除操作过于危险，请先备份数据"
+            }
+            print("  决策: ❌ 拒绝\n")
+        elif req['name'] == "send_notification":
+            # 发送通知：批准
+            decision = {"type": "approve"}
+            print("  决策: ✅ 批准\n")
+        else:
+            # 其他操作：批准
+            decision = {"type": "approve"}
+            print("  决策: ✅ 批准\n")
+
+        decisions.append(decision)
+
+    # 提交决策并继续执行
+    print("提交审批决策...\n")
+    result = approval_agent.invoke(
+        Command(resume={"decisions": decisions}),
+        config=config
+    )
+
+    print("✅ 执行完成")
+    print(result["messages"][-1].content)
+
+# ==================== 测试场景 ====================
+
+if __name__ == "__main__":
+    # 场景 1：查询操作（无需审批）
+    execute_with_approval(
+        "查询所有活跃用户",
+        thread_id="scenario_1"
+    )
+
+    # 场景 2：更新操作（需要审批）
+    execute_with_approval(
+        "更新所有未激活用户的状态为已激活",
+        thread_id="scenario_2"
+    )
+
+    # 场景 3：删除操作（会被拒绝）
+    execute_with_approval(
+        "删除所有测试数据，并发送通知给管理员",
+        thread_id="scenario_3"
+    )</code></pre>
+                    </div>
+                </section>
+
+                <!-- 常见问题 -->
+                <section class="content-section">
+                    <h2 class="section-title">❓ 常见问题</h2>
+
+                    <h3 class="subsection-subtitle">Q1: 忘记配置 Checkpointer 会怎样？</h3>
+                    <p>
+                        会抛出错误。Human-in-the-Loop 依赖持久化状态，必须配置 Checkpointer。
+                    </p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># ❌ 错误：缺少 checkpointer
+agent = create_agent(
+    model="gpt-4o",
+    tools=[...],
+    middleware=[HumanInTheLoopMiddleware(...)]
+    # 缺少 checkpointer！
+)
+
+# ✅ 正确
+agent = create_agent(
+    model="gpt-4o",
+    tools=[...],
+    middleware=[HumanInTheLoopMiddleware(...)],
+    checkpointer=InMemorySaver()  # 必需
+)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">Q2: thread_id 必须一致吗？</h3>
+                    <p>
+                        <strong>是的</strong>。暂停和恢复必须使用相同的 <code>thread_id</code>，
+                        否则无法恢复到正确的状态。
+                    </p>
+
+                    <h3 class="subsection-subtitle">Q3: 可以超时自动批准/拒绝吗？</h3>
+                    <p>
+                        LangChain 本身不提供超时机制，但可以自己实现：
+                    </p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">import time
+from threading import Thread
+
+def wait_for_approval_with_timeout(agent, config, timeout=300):
+    """等待审批，超时自动拒绝"""
+    decision = {"type": None}
+
+    def wait_input():
+        # 实际应用中这里是获取用户输入
+        user_input = input("批准(y)/拒绝(n): ")
+        decision["type"] = "approve" if user_input == "y" else "reject"
+
+    thread = Thread(target=wait_input)
+    thread.start()
+    thread.join(timeout=timeout)
+
+    if decision["type"] is None:
+        print("⏰ 审批超时，自动拒绝")
+        decision["type"] = "reject"
+        decision["message"] = "审批超时"
+
+    return decision</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">Q4: 如何记录审批历史？</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 记录审批日志
+import logging
+from datetime import datetime
+
+logger = logging.getLogger("approval_system")
+
+def log_approval_decision(action_request, decision, user_id):
+    """记录审批决策"""
+    log_entry = {
+        "timestamp": datetime.now().isoformat(),
+        "user_id": user_id,
+        "tool": action_request["name"],
+        "args": action_request["args"],
+        "decision": decision["type"],
+        "message": decision.get("message", ""),
+    }
+
+    logger.info(f"Approval: {log_entry}")
+
+    # 存储到数据库
+    # db.save_approval_log(log_entry)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">Q5: 可以有多级审批吗？</h3>
+                    <p>
+                        可以通过自定义中间件实现多级审批。例如：
+                    </p>
+                    <ul>
+                        <li>第一级：操作者审批</li>
+                        <li>第二级：管理员审批</li>
+                        <li>第三级：高级管理员审批</li>
+                    </ul>
+                    <p>
+                        需要在状态中记录当前审批级别，并根据级别触发不同的审批流程。
+                    </p>
+                </section>
+
+                <!-- 最佳实践 -->
+                <section class="content-section">
+                    <h2 class="section-title">✨ 最佳实践</h2>
+
+                    <h3 class="subsection-title">1. 明确审批范围</h3>
+                    <ul>
+                        <li><strong>只对真正危险的操作要求审批</strong>：过度审批会降低效率</li>
+                        <li><strong>区分操作风险等级</strong>：高风险操作只允许 approve/reject</li>
+                        <li><strong>文档化审批策略</strong>：让团队清楚哪些操作需要审批</li>
+                    </ul>
+
+                    <h3 class="subsection-title">2. 提供清晰的上下文</h3>
+                    <ul>
+                        <li>使用 <code>description</code> 参数提供详细说明</li>
+                        <li>显示操作的影响范围（如受影响的记录数）</li>
+                        <li>包含必要的警告信息</li>
+                    </ul>
+
+                    <h3 class="subsection-title">3. 审批决策指导</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>情况</th>
+                                <th>建议决策</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>操作完全正确</td>
+                                <td>Approve</td>
+                            </tr>
+                            <tr>
+                                <td>方向对但参数需微调</td>
+                                <td>Edit（保守修改）</td>
+                            </tr>
+                            <tr>
+                                <td>操作不安全或不合理</td>
+                                <td>Reject + 详细反馈</td>
+                            </tr>
+                            <tr>
+                                <td>需要更多信息才能决策</td>
+                                <td>Reject + 要求补充信息</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 class="subsection-title">4. 生产环境配置</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 生产环境推荐配置
+from langgraph.checkpoint.postgres import PostgresSaver
+
+DB_URI = "postgresql://user:pass@localhost:5432/langchain"
+
+with PostgresSaver.from_conn_string(DB_URI) as checkpointer:
+    checkpointer.setup()
+
+    agent = create_agent(
+        model="gpt-4o",
+        tools=[...],
+        middleware=[
+            HumanInTheLoopMiddleware(
+                interrupt_on={...},
+                description=custom_description_function,
+            ),
+        ],
+        checkpointer=checkpointer,  # 生产级持久化
+    )</code></pre>
+                    </div>
+                </section>
+
+                <!-- 参考资源 -->
+                <section class="content-section">
+                    <h2 class="section-title">📖 参考资源</h2>
+                    <ul>
+                        <li>
+                            <a href="https://docs.langchain.com/oss/python/langchain/human-in-the-loop" target="_blank">
+                                LangChain 官方 Human-in-the-Loop 文档
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://langchain-ai.github.io/langgraph/how-tos/human_in_the_loop/" target="_blank">
+                                LangGraph HITL 教程
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://docs.langchain.com/oss/python/langchain/middleware/built-in#humanintheloopmi" target="_blank">
+                                HumanInTheLoopMiddleware API 参考
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- 页面导航 -->
+                <nav class="page-navigation">
+                    <a href="12-streaming.html" class="nav-button prev">
+                        ← 上一页：流式输出
+                    </a>
+                    <a href="14-long-term-memory.html" class="nav-button next">
+                        下一页：长期记忆 →
+                    </a>
+                </nav>
+            </div>
+        </main>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" aria-label="返回顶部">↑</button>
+
+    <!-- JavaScript -->
+    <script src="assets/js/mermaid-init.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</body>
+</html>

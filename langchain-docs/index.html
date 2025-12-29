@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LangChain 1.0 Python 完整学习指南 - 从基础到实战，重点讲解 RAG 和客服机器人应用">
+    <meta name="keywords" content="LangChain, Python, RAG, Agent, 客服机器人, AI, LLM">
+    <title>LangChain 1.0 Python 知识文档 | 完整学习指南</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <button class="mobile-menu-button" aria-label="打开菜单">☰</button>
+
+    <div class="container">
+        <!-- 侧边栏导航 -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="sidebar-title">🦜 LangChain 1.0</h1>
+                <p class="sidebar-subtitle">Python 完整学习指南</p>
+            </div>
+
+                        <ul class="nav-menu">
+                <li class="nav-section">
+                    <div class="nav-section-title">开始</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">
+                                <span class="nav-icon">🏠</span>
+                                主页
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">基础篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="01-introduction.html" class="nav-link">
+                                <span class="nav-icon">📖</span>
+                                LangChain 简介
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="02-architecture.html" class="nav-link">
+                                <span class="nav-icon">🏗️</span>
+                                核心架构
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="03-models.html" class="nav-link">
+                                <span class="nav-icon">🤖</span>
+                                模型接口
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="04-messages.html" class="nav-link">
+                                <span class="nav-icon">💬</span>
+                                消息系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="05-tools.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                工具系统
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">进阶篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="06-agents.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                Agent 基础
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="07-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="08-rag.html" class="nav-link">
+                                <span class="nav-icon">🔍</span>
+                                RAG 详解
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="09-lcel.html" class="nav-link">
+                                <span class="nav-icon">🔗</span>
+                                LCEL 表达式
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">高级应用</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="10-runtime.html" class="nav-link">
+                                <span class="nav-icon">🔌</span>
+                                Runtime 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="11-checkpointer.html" class="nav-link">
+                                <span class="nav-icon">💾</span>
+                                持久化系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="12-streaming.html" class="nav-link">
+                                <span class="nav-icon">🌊</span>
+                                流式输出
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="13-human-in-loop.html" class="nav-link">
+                                <span class="nav-icon">👤</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="14-long-term-memory.html" class="nav-link">
+                                <span class="nav-icon">🗄️</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="15-langgraph.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                LangGraph
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">实战篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="16-customer-service.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                客服机器人
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="17-best-practices.html" class="nav-link">
+                                <span class="nav-icon">✨</span>
+                                最佳实践
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">参考篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="18-api-reference.html" class="nav-link">
+                                <span class="nav-icon">📚</span>
+                                API 速查表
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="19-troubleshooting.html" class="nav-link">
+                                <span class="nav-icon">🐛</span>
+                                故障排除
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="20-migration.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                迁移指南
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">扩展篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="21-structured-output.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                结构化输出
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">DeepAgents 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="22-deepagents-quickstart.html" class="nav-link">
+                                <span class="nav-icon">🚀</span>
+                                快速开始
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="23-deepagents-customization.html" class="nav-link">
+                                <span class="nav-icon">🎨</span>
+                                定制化
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="24-deepagents-harness.html" class="nav-link">
+                                <span class="nav-icon">🎛️</span>
+                                Harness 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="25-deepagents-backends.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                后端配置
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="26-deepagents-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="27-deepagents-hitl.html" class="nav-link">
+                                <span class="nav-icon">🤝</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="28-deepagents-memory.html" class="nav-link">
+                                <span class="nav-icon">🧠</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="29-deepagents-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">Multi-Agent 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="30-multi-agent-index.html" class="nav-link">
+                                <span class="nav-icon">🌐</span>
+                                概述
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="31-multi-agent-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="32-multi-agent-handoffs.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                交接机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="33-multi-agent-skills.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                技能系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="34-multi-agent-router.html" class="nav-link">
+                                <span class="nav-icon">🧭</span>
+                                路由机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="35-multi-agent-workflow.html" class="nav-link">
+                                <span class="nav-icon">🔀</span>
+                                自定义工作流
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- 主内容区域 -->
+        <main class="main-content">
+            <div class="content-wrapper">
+                <!-- 页面标题 -->
+                <header class="page-header">
+                    <h1 class="page-title">🦜 LangChain 1.0 Python 知识文档</h1>
+                    <p class="page-subtitle">
+                        从基础到实战，全面掌握 LangChain 1.0，重点学习 RAG 和客服机器人应用开发。
+                        适合初学者到高级开发者的完整学习指南。
+                    </p>
+                </header>
+
+                <!-- 快速开始 -->
+                <section class="content-section">
+                    <h2 class="section-title">🚀 快速开始</h2>
+                    <p>
+                        LangChain 1.0 是一个强大的开源框架，用于构建基于大语言模型（LLM）的应用程序。
+                        本文档将帮助你快速掌握 LangChain 1.0 的核心概念和实战技能。
+                    </p>
+
+                    <div class="info-box note">
+                        <div class="info-box-title">💡 本文档特点</div>
+                        <ul>
+                            <li><strong>循序渐进</strong>：从基础概念到高级应用，适合所有水平的开发者</li>
+                            <li><strong>代码示例</strong>：270+ 个完整代码示例，全部基于 LangChain 1.0 最新 API</li>
+                            <li><strong>实战项目</strong>：包含 RAG 系统和客服机器人两个完整项目</li>
+                            <li><strong>流程图解</strong>：10+ 个 Mermaid 流程图，直观理解架构和流程</li>
+                            <li><strong>难度标记</strong>：每个示例都标注难度等级（🟢基础 / 🟡中级 / 🔴高级）</li>
+                            <li><strong>扩展篇章</strong>：结构化输出、DeepAgents 框架、Multi-Agent 系统完整覆盖</li>
+                            <li><strong>DeepAgents 专题</strong>：8 个章节深入讲解 Anthropic 高级 Agent 框架</li>
+                            <li><strong>Multi-Agent 系统</strong>：6 个章节涵盖多代理协作、路由、工作流编排</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- 学习路径 -->
+                <section class="content-section">
+                    <h2 class="section-title">📚 学习路径推荐</h2>
+                    <p>根据你的经验水平，选择合适的学习路径：</p>
+
+                    <div class="learning-paths">
+                        <!-- 初学者路径 -->
+                        <div class="path-card">
+                            <h3 class="path-card-title">🟢 初学者路径</h3>
+                            <p class="path-card-description">
+                                适合从零开始学习 LangChain 的开发者，重点掌握基础概念和简单应用。
+                            </p>
+                            <div class="path-card-steps">
+                                01 → 03 → 05 → 06 → 08 → 16 → 22
+                            </div>
+                            <ul style="margin-top: 1rem; font-size: 0.875rem; color: #6b7280;">
+                                <li>LangChain 简介</li>
+                                <li>模型接口使用</li>
+                                <li>工具系统</li>
+                                <li>Agent 基础</li>
+                                <li>RAG 应用</li>
+                                <li>客服机器人实战</li>
+                                <li>DeepAgents 快速开始</li>
+                            </ul>
+                        </div>
+
+                        <!-- 中级开发者路径 -->
+                        <div class="path-card">
+                            <h3 class="path-card-title">🟡 中级开发者路径</h3>
+                            <p class="path-card-description">
+                                适合有 Python 和 LLM 基础的开发者，重点学习实战应用和最佳实践。
+                            </p>
+                            <div class="path-card-steps">
+                                02 → 04 → 07 → 09 → 15 → 21 → 30
+                            </div>
+                            <ul style="margin-top: 1rem; font-size: 0.875rem; color: #6b7280;">
+                                <li>核心架构</li>
+                                <li>消息系统</li>
+                                <li>中间件开发</li>
+                                <li>LCEL 表达式</li>
+                                <li>LangGraph 集成</li>
+                                <li>结构化输出</li>
+                                <li>Multi-Agent 概述</li>
+                            </ul>
+                        </div>
+
+                        <!-- 高级开发者路径 -->
+                        <div class="path-card">
+                            <h3 class="path-card-title">🔴 高级开发者路径</h3>
+                            <p class="path-card-description">
+                                适合熟悉框架的开发者，重点关注架构设计、性能优化和生产部署。
+                            </p>
+                            <div class="path-card-steps">
+                                10 → 12 → 13 → 14 → 24 → 28 → 35
+                            </div>
+                            <ul style="margin-top: 1rem; font-size: 0.875rem; color: #6b7280;">
+                                <li>Runtime 系统</li>
+                                <li>流式输出</li>
+                                <li>人工介入</li>
+                                <li>长期记忆</li>
+                                <li>DeepAgents Harness</li>
+                                <li>DeepAgents 长期记忆</li>
+                                <li>Multi-Agent 自定义工作流</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 核心亮点 -->
+                <section class="content-section">
+                    <h2 class="section-title">⭐ 核心亮点</h2>
+
+                    <h3 class="subsection-title">🔍 RAG（检索增强生成）</h3>
+                    <p>
+                        深入讲解 RAG 技术的原理和实现，包括文档加载、文本分割、向量存储、检索策略等，
+                        提供完整的 150+ 行可运行代码示例。
+                    </p>
+                    <a href="08-rag.html" class="nav-button">查看 RAG 详解 →</a>
+
+                    <h3 class="subsection-title" style="margin-top: 2rem;">👥 客服机器人实战</h3>
+                    <p>
+                        构建企业级智能客服系统，集成 FAQ 问答、订单查询、多轮对话记忆等功能，
+                        提供完整的 300+ 行项目代码，包含测试用例和部署指南。
+                    </p>
+                    <a href="16-customer-service.html" class="nav-button">查看客服机器人实战 →</a>
+
+                    <h3 class="subsection-title" style="margin-top: 2rem;">🤖 DeepAgents 框架</h3>
+                    <p>
+                        探索 Anthropic 的高级 Agent 框架，学习如何构建生产级智能代理系统，
+                        包括定制化配置、Harness 系统、子代理协作、人工介入和长期记忆管理。
+                    </p>
+                    <a href="22-deepagents-quickstart.html" class="nav-button">查看 DeepAgents 快速开始 →</a>
+
+                    <h3 class="subsection-title" style="margin-top: 2rem;">🌐 Multi-Agent 系统</h3>
+                    <p>
+                        深入学习多代理协作系统的设计与实现，掌握子代理管理、交接机制、技能系统、
+                        智能路由和自定义工作流编排，构建复杂的企业级 AI 应用。
+                    </p>
+                    <a href="30-multi-agent-index.html" class="nav-button">查看 Multi-Agent 概述 →</a>
+                </section>
+
+                <!-- LangChain 1.0 新特性 -->
+                <section class="content-section">
+                    <h2 class="section-title">🎉 LangChain 1.0 新特性</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>特性</th>
+                                <th>说明</th>
+                                <th>优势</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>create_agent()</code></td>
+                                <td>全新的 Agent 创建函数</td>
+                                <td>更简单、更强大的定制能力</td>
+                            </tr>
+                            <tr>
+                                <td>Middleware 中间件</td>
+                                <td>可组合的执行钩子</td>
+                                <td>灵活控制 Agent 执行流程</td>
+                            </tr>
+                            <tr>
+                                <td>Content Blocks</td>
+                                <td>统一的内容块接口</td>
+                                <td>跨提供商的标准化访问</td>
+                            </tr>
+                            <tr>
+                                <td>LangGraph 集成</td>
+                                <td>持久化和流式输出</td>
+                                <td>生产级应用支持</td>
+                            </tr>
+                            <tr>
+                                <td>精简的包结构</td>
+                                <td>langchain vs langchain-classic</td>
+                                <td>更清晰的 API 设计</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- 技术栈要求 -->
+                <section class="content-section">
+                    <h2 class="section-title">🛠️ 技术栈要求</h2>
+
+                    <div class="info-box tip">
+                        <div class="info-box-title">✅ 环境要求</div>
+                        <ul>
+                            <li><strong>Python</strong>: 3.10 或更高版本（LangChain 1.0 强制要求）</li>
+                            <li><strong>包管理</strong>: pip 或 poetry</li>
+                            <li><strong>API Keys</strong>: OpenAI、Anthropic 或其他 LLM 提供商的 API 密钥</li>
+                        </ul>
+                    </div>
+
+                    <h3 class="subsection-title">10 分钟快速安装</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Bash</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-bash"># 创建虚拟环境
+python3.10 -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+
+# 安装 LangChain 1.0
+pip install -U langchain
+
+# 安装集成包（按需选择）
+pip install langchain-openai      # OpenAI 集成
+pip install langchain-anthropic   # Anthropic 集成
+pip install langchain-google      # Google 集成
+
+# 安装向量存储（用于 RAG）
+pip install langchain-chroma      # Chroma 向量数据库
+pip install langchain-community   # 社区集成
+
+# 验证安装
+python -c "import langchain; print(langchain.__version__)"</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">Hello World 示例</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">import os
+from langchain.chat_models import init_chat_model
+
+# 设置 API Key
+os.environ["OPENAI_API_KEY"] = "your-api-key-here"
+
+# 初始化模型
+model = init_chat_model("gpt-4")
+
+# 发送消息
+response = model.invoke("你好，请介绍一下 LangChain 1.0")
+
+# 输出结果
+print(response.content)</code></pre>
+                    </div>
+                </section>
+
+                <!-- 完整项目代码 -->
+                <section class="content-section">
+                    <h2 class="section-title">📦 完整项目代码</h2>
+                    <p>本文档包含两个完整的可运行项目：</p>
+
+                    <h3 class="subsection-subtitle">1. RAG 系统示例</h3>
+                    <p>
+                        一个完整的检索增强生成系统，包含文档加载、向量化、检索和生成的完整流程。
+                    </p>
+                    <ul>
+                        <li>📁 位置：<code>projects/rag-example/</code></li>
+                        <li>📊 代码行数：150+ 行</li>
+                        <li>🎯 难度：🟡 中级</li>
+                        <li>📖 详细文档：<a href="08-rag.html">RAG 详解页面</a></li>
+                    </ul>
+
+                    <h3 class="subsection-subtitle">2. 客服机器人项目</h3>
+                    <p>
+                        企业级智能客服系统，集成 FAQ 问答、订单管理、多轮对话等功能。
+                    </p>
+                    <ul>
+                        <li>📁 位置：<code>projects/customer-service-bot/</code></li>
+                        <li>📊 代码行数：300+ 行</li>
+                        <li>🎯 难度：🔴 高级</li>
+                        <li>📖 详细文档：<a href="11-customer-service.html">客服机器人页面</a></li>
+                    </ul>
+                </section>
+
+                <!-- 外部资源 -->
+                <section class="content-section">
+                    <h2 class="section-title">🔗 外部资源</h2>
+                    <ul>
+                        <li>
+                            <strong>官方文档</strong>:
+                            <a href="https://docs.langchain.com/oss/python/langchain/overview" target="_blank">
+                                https://docs.langchain.com/oss/python/langchain/overview
+                            </a>
+                        </li>
+                        <li>
+                            <strong>API 参考</strong>:
+                            <a href="https://reference.langchain.com/python/langchain/" target="_blank">
+                                https://reference.langchain.com/python/langchain/
+                            </a>
+                        </li>
+                        <li>
+                            <strong>GitHub 仓库</strong>:
+                            <a href="https://github.com/langchain-ai/langchain" target="_blank">
+                                https://github.com/langchain-ai/langchain
+                            </a>
+                        </li>
+                        <li>
+                            <strong>LangChain 博客</strong>:
+                            <a href="https://blog.langchain.com/" target="_blank">
+                                https://blog.langchain.com/
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- 开始学习 -->
+                <section class="content-section">
+                    <div class="info-box important">
+                        <div class="info-box-title">🎯 准备好了吗？</div>
+                        <p>
+                            选择适合你的学习路径，开始你的 LangChain 1.0 学习之旅！
+                            建议初学者从 <a href="01-introduction.html">LangChain 简介</a> 开始。
+                        </p>
+                    </div>
+                </section>
+
+                <!-- 页面导航 -->
+                <nav class="page-navigation">
+                    <a href="01-introduction.html" class="nav-button next">
+                        下一页：LangChain 简介 →
+                    </a>
+                </nav>
+            </div>
+        </main>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" aria-label="返回顶部">↑</button>
+
+    <!-- JavaScript -->
+    <script src="assets/js/mermaid-init.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</body>
+</html>

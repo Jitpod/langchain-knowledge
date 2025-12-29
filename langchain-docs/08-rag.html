@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LangChain 1.0 核心架构 - 深入理解 LangChain 的设计哲学和模块组织">
+    <title>核心架构 | LangChain 1.0 Python 知识文档</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <button class="mobile-menu-button" aria-label="打开菜单">☰</button>
+
+    <div class="container">
+        <!-- 侧边栏导航 -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="sidebar-title">🦜 LangChain 1.0</h1>
+                <p class="sidebar-subtitle">Python 完整学习指南</p>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-section">
+                    <div class="nav-section-title">开始</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">
+                                <span class="nav-icon">🏠</span>
+                                主页
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">基础篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="01-introduction.html" class="nav-link">
+                                <span class="nav-icon">📖</span>
+                                LangChain 简介
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="02-architecture.html" class="nav-link">
+                                <span class="nav-icon">🏗️</span>
+                                核心架构
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="03-models.html" class="nav-link">
+                                <span class="nav-icon">🤖</span>
+                                模型接口
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="04-messages.html" class="nav-link">
+                                <span class="nav-icon">💬</span>
+                                消息系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="05-tools.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                工具系统
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">进阶篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="06-agents.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                Agent 基础
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="07-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="08-rag.html" class="nav-link">
+                                <span class="nav-icon">🔍</span>
+                                RAG 详解
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="09-lcel.html" class="nav-link">
+                                <span class="nav-icon">🔗</span>
+                                LCEL 表达式
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">高级应用</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="10-runtime.html" class="nav-link">
+                                <span class="nav-icon">🔌</span>
+                                Runtime 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="11-checkpointer.html" class="nav-link">
+                                <span class="nav-icon">💾</span>
+                                持久化系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="12-streaming.html" class="nav-link">
+                                <span class="nav-icon">🌊</span>
+                                流式输出
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="13-human-in-loop.html" class="nav-link">
+                                <span class="nav-icon">👤</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="14-long-term-memory.html" class="nav-link">
+                                <span class="nav-icon">🗄️</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="15-langgraph.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                LangGraph
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">实战篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="16-customer-service.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                客服机器人
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="17-best-practices.html" class="nav-link">
+                                <span class="nav-icon">✨</span>
+                                最佳实践
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">参考篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="18-api-reference.html" class="nav-link">
+                                <span class="nav-icon">📚</span>
+                                API 速查表
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="19-troubleshooting.html" class="nav-link">
+                                <span class="nav-icon">🐛</span>
+                                故障排除
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="20-migration.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                迁移指南
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">扩展篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="21-structured-output.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                结构化输出
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">DeepAgents 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="22-deepagents-quickstart.html" class="nav-link">
+                                <span class="nav-icon">🚀</span>
+                                快速开始
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="23-deepagents-customization.html" class="nav-link">
+                                <span class="nav-icon">🎨</span>
+                                定制化
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="24-deepagents-harness.html" class="nav-link">
+                                <span class="nav-icon">🎛️</span>
+                                Harness 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="25-deepagents-backends.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                后端配置
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="26-deepagents-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="27-deepagents-hitl.html" class="nav-link">
+                                <span class="nav-icon">🤝</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="28-deepagents-memory.html" class="nav-link">
+                                <span class="nav-icon">🧠</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="29-deepagents-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">Multi-Agent 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="30-multi-agent-index.html" class="nav-link">
+                                <span class="nav-icon">🌐</span>
+                                概述
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="31-multi-agent-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="32-multi-agent-handoffs.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                交接机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="33-multi-agent-skills.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                技能系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="34-multi-agent-router.html" class="nav-link">
+                                <span class="nav-icon">🧭</span>
+                                路由机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="35-multi-agent-workflow.html" class="nav-link">
+                                <span class="nav-icon">🔀</span>
+                                自定义工作流
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- 主内容区域 -->
+        <!-- 主内容区域 -->
+        <main class="main-content">
+            <div class="content-wrapper">
+                <!-- 面包屑导航 -->
+                <nav class="breadcrumb">
+                    <span class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link">主页</a>
+                    </span>
+                    <span class="breadcrumb-item">
+                        进阶篇
+                    </span>
+                    <span class="breadcrumb-item">
+                        RAG 详解
+                    </span>
+                </nav>
+
+                <!-- 页面标题 -->
+                <header class="page-header">
+                    <h1 class="page-title">🔍 RAG（检索增强生成）详解</h1>
+                    <p class="page-subtitle">
+                        深入理解 RAG 技术原理，掌握文档加载、文本分割、向量存储和检索策略，
+                        构建高质量的问答系统。
+                    </p>
+                </header>
+
+                <!-- RAG 简介 -->
+                <section class="content-section">
+                    <h2 class="section-title">📚 什么是 RAG？</h2>
+                    <p>
+                        RAG（Retrieval Augmented Generation，检索增强生成）是一种将<strong>信息检索</strong>
+                        与<strong>大语言模型生成</strong>相结合的技术，用于构建能够回答特定领域问题的 AI 应用。
+                    </p>
+
+                    <div class="info-box note">
+                        <div class="info-box-title">💡 核心思想</div>
+                        <p>
+                            RAG 通过在生成答案之前先从知识库中检索相关信息，让 LLM 能够基于最新、最准确的数据生成回答，
+                            而不仅仅依赖训练时的知识。这解决了 LLM 的两大问题：
+                        </p>
+                        <ul>
+                            <li><strong>知识过时</strong>：LLM 的知识截止于训练时间</li>
+                            <li><strong>幻觉问题</strong>：LLM 可能生成不准确的信息</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- RAG 架构图 -->
+                <section class="content-section">
+                    <h2 class="section-title">🏗️ RAG 系统架构</h2>
+
+                    <div class="mermaid-wrapper">
+                        <div class="mermaid">
+graph TB
+    subgraph "离线阶段（索引）"
+        A[原始文档] --> B[Document Loader]
+        B --> C[Text Splitter]
+        C --> D[文档块 Chunks]
+        D --> E[Embeddings 模型]
+        E --> F[Vector Store]
+    end
+
+    subgraph "在线阶段（查询）"
+        G[用户问题] --> H[Embeddings 模型]
+        H --> I[查询向量]
+        I --> F
+        F --> J[检索相关文档]
+        J --> K[LLM + Prompt]
+        G --> K
+        K --> L[生成答案]
+    end
+
+    style A fill:#e1f5ff
+    style G fill:#e1f5ff
+    style L fill:#c8e6c9
+    style F fill:#fff9c4
+                        </div>
+                    </div>
+
+                    <p>RAG 系统分为两个主要阶段：</p>
+                    <ul>
+                        <li><strong>离线阶段（索引）</strong>：准备知识库，将文档向量化并存储</li>
+                        <li><strong>在线阶段（查询）</strong>：接收用户问题，检索相关信息，生成答案</li>
+                    </ul>
+                </section>
+
+                <!-- 两种实现方式对比 -->
+                <section class="content-section">
+                    <h2 class="section-title">⚖️ 两种实现方式对比</h2>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>特性</th>
+                                <th>Agentic RAG（推荐）</th>
+                                <th>Two-Step Chain</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>工作方式</strong></td>
+                                <td>Agent 自主决定何时检索</td>
+                                <td>固定先检索后生成</td>
+                            </tr>
+                            <tr>
+                                <td><strong>灵活性</strong></td>
+                                <td>✅ 高 - 可多次检索</td>
+                                <td>❌ 低 - 仅检索一次</td>
+                            </tr>
+                            <tr>
+                                <td><strong>查询优化</strong></td>
+                                <td>✅ 可根据上下文优化查询</td>
+                                <td>❌ 直接使用用户问题</td>
+                            </tr>
+                            <tr>
+                                <td><strong>成本</strong></td>
+                                <td>⚠️ 较高（每次检索2个LLM调用）</td>
+                                <td>✅ 较低（1个LLM调用）</td>
+                            </tr>
+                            <tr>
+                                <td><strong>延迟</strong></td>
+                                <td>⚠️ 较高</td>
+                                <td>✅ 较低</td>
+                            </tr>
+                            <tr>
+                                <td><strong>适用场景</strong></td>
+                                <td>复杂问题、多轮对话</td>
+                                <td>简单问答、快速响应</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="info-box tip">
+                        <div class="info-box-title">✅ 推荐选择</div>
+                        <p>
+                            对于大多数企业应用，推荐使用 <strong>Agentic RAG</strong>，因为：
+                        </p>
+                        <ul>
+                            <li>能够处理复杂的多步问题</li>
+                            <li>可以根据需要多次检索信息</li>
+                            <li>更智能地理解用户意图</li>
+                            <li>支持多轮对话和上下文理解</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- 完整实现步骤 -->
+                <section class="content-section">
+                    <h2 class="section-title">🚀 完整实现步骤</h2>
+
+                    <h3 class="subsection-title">第一步：环境准备</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Bash</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-bash"># 安装必要的包
+pip install -U langchain langchain-openai langchain-chroma
+pip install langchain-community langchain-text-splitters
+pip install bs4  # 用于网页加载</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">第二步：文档加载（Load）</h3>
+                    <p>使用 Document Loaders 加载各种格式的文档：</p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">import bs4
+from langchain_community.document_loaders import WebBaseLoader, PyPDFLoader, TextLoader
+
+# 方式1：加载网页
+web_loader = WebBaseLoader(
+    web_paths=("https://lilianweng.github.io/posts/2023-06-23-agent/",),
+    bs_kwargs=dict(
+        parse_only=bs4.SoupStrainer(
+            class_=("post-content", "post-title", "post-header")
+        )
+    ),
+)
+web_docs = web_loader.load()
+
+# 方式2：加载 PDF
+pdf_loader = PyPDFLoader("document.pdf")
+pdf_docs = pdf_loader.load()
+
+# 方式3：加载文本文件
+text_loader = TextLoader("document.txt", encoding="utf-8")
+text_docs = text_loader.load()
+
+print(f"加载了 {len(web_docs)} 个文档")
+print(f"第一个文档内容长度: {len(web_docs[0].page_content)} 字符")</code></pre>
+                    </div>
+
+                    <div class="info-box note">
+                        <div class="info-box-title">📝 常用 Document Loaders</div>
+                        <table style="margin-top: 0.5rem;">
+                            <thead>
+                                <tr>
+                                    <th>加载器</th>
+                                    <th>用途</th>
+                                    <th>导入路径</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>WebBaseLoader</code></td>
+                                    <td>网页内容</td>
+                                    <td><code>langchain_community.document_loaders</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>PyPDFLoader</code></td>
+                                    <td>PDF 文件</td>
+                                    <td><code>langchain_community.document_loaders</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>CSVLoader</code></td>
+                                    <td>CSV 文件</td>
+                                    <td><code>langchain_community.document_loaders</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>UnstructuredMarkdownLoader</code></td>
+                                    <td>Markdown 文件</td>
+                                    <td><code>langchain_community.document_loaders</code></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3 class="subsection-title">第三步：文本分割（Split）</h3>
+                    <p>将长文档切分成适合向量化的小块：</p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from langchain_text_splitters import RecursiveCharacterTextSplitter
+
+# 创建文本分割器
+text_splitter = RecursiveCharacterTextSplitter(
+    chunk_size=1000,        # 每个块的字符数
+    chunk_overlap=200,      # 块之间的重叠字符数
+    length_function=len,    # 计算长度的函数
+    is_separator_regex=False,
+)
+
+# 分割文档
+all_splits = text_splitter.split_documents(web_docs)
+
+print(f"文档被分割成 {len(all_splits)} 个块")
+print(f"第一个块长度: {len(all_splits[0].page_content)} 字符")
+print(f"第一个块内容预览: {all_splits[0].page_content[:200]}...")</code></pre>
+                    </div>
+
+                    <div class="info-box tip">
+                        <div class="info-box-title">💡 分割策略选择</div>
+                        <ul>
+                            <li><strong>RecursiveCharacterTextSplitter</strong>（推荐）：递归地尝试多种分隔符</li>
+                            <li><strong>CharacterTextSplitter</strong>：基于固定字符数分割</li>
+                            <li><strong>TokenTextSplitter</strong>：基于 Token 数量分割</li>
+                            <li><strong>MarkdownHeaderTextSplitter</strong>：基于 Markdown 标题分割</li>
+                        </ul>
+                        <p style="margin-top: 0.5rem;">
+                            <strong>chunk_size 建议值</strong>：500-1500 字符<br>
+                            <strong>chunk_overlap 建议值</strong>：chunk_size 的 10-20%
+                        </p>
+                    </div>
+
+                    <h3 class="subsection-title">第四步：向量化和存储（Store）</h3>
+                    <p>将文本块转换为向量并存储到向量数据库：</p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">import os
+from langchain_openai import OpenAIEmbeddings
+from langchain_chroma import Chroma
+
+# 设置 API Key
+os.environ["OPENAI_API_KEY"] = "your-api-key-here"
+
+# 初始化 Embeddings 模型
+embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
+
+# 创建向量存储并添加文档
+vector_store = Chroma.from_documents(
+    documents=all_splits,
+    embedding=embeddings,
+    persist_directory="./chroma_db"  # 持久化存储路径
+)
+
+print(f"向量存储创建完成，包含 {len(all_splits)} 个文档块")</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">Vector Stores 对比</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Vector Store</th>
+                                <th>特点</th>
+                                <th>适用场景</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Chroma</strong></td>
+                                <td>轻量级、易用、支持持久化</td>
+                                <td>本地开发、原型验证、中小型应用</td>
+                            </tr>
+                            <tr>
+                                <td><strong>FAISS</strong></td>
+                                <td>高性能、内存存储、GPU 加速</td>
+                                <td>大规模数据、需要极致性能</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Pinecone</strong></td>
+                                <td>云托管、高可用、易扩展</td>
+                                <td>生产环境、需要云服务</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Qdrant</strong></td>
+                                <td>开源、功能强大、可自托管</td>
+                                <td>企业级应用、需要自主控制</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 class="subsection-title">第五步：创建检索工具</h3>
+                    <p>使用 <code>@tool</code> 装饰器创建检索工具，供 Agent 使用：</p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from langchain.tools import tool
+
+@tool(response_format="content_and_artifact")
+def retrieve_context(query: str):
+    """从知识库检索相关信息来回答用户问题。
+
+    Args:
+        query: 用户的查询问题
+
+    Returns:
+        检索到的相关文档内容和原始文档对象
+    """
+    # 使用相似度搜索检索相关文档（返回最相关的 k=2 个文档）
+    retrieved_docs = vector_store.similarity_search(query, k=2)
+
+    # 格式化检索结果
+    serialized = "\n\n".join(
+        f"来源: {doc.metadata}\n内容: {doc.page_content}"
+        for doc in retrieved_docs
+    )
+
+    return serialized, retrieved_docs
+
+# 测试检索工具
+test_query = "什么是 Agent？"
+result, docs = retrieve_context.invoke({"query": test_query})
+print(f"检索结果:\n{result}")</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">第六步：构建 RAG Agent</h3>
+                    <p>使用 LangChain 1.0 的 <code>create_agent()</code> 函数创建 Agentic RAG：</p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from langchain.agents import create_agent
+from langchain.chat_models import init_chat_model
+
+# 初始化模型
+model = init_chat_model("gpt-4", model_provider="openai")
+
+# 定义系统提示词
+system_prompt = """你是一个智能问答助手，可以访问知识库来回答问题。
+
+使用检索工具 retrieve_context 来查找相关信息。当用户提问时：
+1. 先使用检索工具查找相关信息
+2. 基于检索到的信息生成准确的答案
+3. 如果检索不到相关信息，诚实地告知用户
+4. 在回答中引用信息来源
+
+始终保持专业、准确和有帮助。"""
+
+# 创建 Agent
+agent = create_agent(
+    model=model,
+    tools=[retrieve_context],
+    system_prompt=system_prompt
+)
+
+# 使用 Agent 回答问题
+response = agent.invoke({
+    "messages": [{"role": "user", "content": "请介绍一下 LangChain 中的 Agent"}]
+})
+
+print(response["messages"][-1].content)</code></pre>
+                    </div>
+                </section>
+
+                <!-- 完整可运行示例 -->
+                <section class="content-section">
+                    <h2 class="section-title">💻 完整可运行示例</h2>
+                    <p>将以上步骤整合成一个完整的 RAG 系统：</p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级 - 完整项目</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+完整的 RAG 系统实现示例
+适用于 LangChain 1.0
+"""
+import os
+import bs4
+from langchain_community.document_loaders import WebBaseLoader
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_openai import OpenAIEmbeddings
+from langchain_chroma import Chroma
+from langchain.tools import tool
+from langchain.agents import create_agent
+from langchain.chat_models import init_chat_model
+
+# ==================== 配置 ====================
+os.environ["OPENAI_API_KEY"] = "your-api-key-here"
+
+# ==================== 第1步：加载文档 ====================
+print("正在加载文档...")
+loader = WebBaseLoader(
+    web_paths=("https://python.langchain.com/docs/tutorials/agents/",),
+    bs_kwargs=dict(parse_only=bs4.SoupStrainer(class_=("main",)))
+)
+docs = loader.load()
+print(f"✓ 加载了 {len(docs)} 个文档")
+
+# ==================== 第2步：分割文本 ====================
+print("正在分割文本...")
+text_splitter = RecursiveCharacterTextSplitter(
+    chunk_size=1000,
+    chunk_overlap=200
+)
+all_splits = text_splitter.split_documents(docs)
+print(f"✓ 分割成 {len(all_splits)} 个文本块")
+
+# ==================== 第3步：创建向量存储 ====================
+print("正在创建向量存储...")
+embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
+vector_store = Chroma.from_documents(
+    documents=all_splits,
+    embedding=embeddings,
+    persist_directory="./chroma_langchain_docs"
+)
+print(f"✓ 向量存储创建完成")
+
+# ==================== 第4步：创建检索工具 ====================
+@tool(response_format="content_and_artifact")
+def retrieve_context(query: str):
+    """从 LangChain 文档中检索相关信息。"""
+    retrieved_docs = vector_store.similarity_search(query, k=3)
+    serialized = "\n\n".join(
+        f"【文档 {i+1}】\n{doc.page_content}"
+        for i, doc in enumerate(retrieved_docs)
+    )
+    return serialized, retrieved_docs
+
+# ==================== 第5步：创建 RAG Agent ====================
+print("正在创建 RAG Agent...")
+model = init_chat_model("gpt-4o-mini", model_provider="openai")
+
+system_prompt = """你是 LangChain 文档助手。使用 retrieve_context 工具查找相关信息。
+
+回答要求：
+- 先检索相关信息再回答
+- 基于检索内容生成准确答案
+- 如果信息不足，说明需要更多上下文
+- 用中文回答，保持专业和友好"""
+
+agent = create_agent(
+    model=model,
+    tools=[retrieve_context],
+    system_prompt=system_prompt
+)
+print("✓ RAG Agent 创建完成\n")
+
+# ==================== 第6步：交互式问答 ====================
+def ask_question(question: str):
+    """向 RAG Agent 提问"""
+    print(f"\n{'='*60}")
+    print(f"问题: {question}")
+    print('='*60)
+
+    response = agent.invoke({
+        "messages": [{"role": "user", "content": question}]
+    })
+
+    answer = response["messages"][-1].content
+    print(f"\n回答:\n{answer}\n")
+    return answer
+
+# 示例问答
+if __name__ == "__main__":
+    questions = [
+        "什么是 LangChain Agent？",
+        "如何创建一个 Agent？",
+        "LangChain 支持哪些模型提供商？"
+    ]
+
+    for q in questions:
+        ask_question(q)</code></pre>
+                    </div>
+
+                    <div class="info-box tip">
+                        <div class="info-box-title">💾 项目文件位置</div>
+                        <p>
+                            完整的 RAG 示例项目代码位于：
+                            <code>projects/rag-example/main.py</code>
+                        </p>
+                        <p>
+                            包含 requirements.txt 和详细的 README 说明。
+                        </p>
+                    </div>
+                </section>
+
+                <!-- 性能优化技巧 -->
+                <section class="content-section">
+                    <h2 class="section-title">⚡ 性能优化技巧</h2>
+
+                    <h3 class="subsection-title">1. Chunk Size 优化</h3>
+                    <p>根据应用场景选择合适的分块大小：</p>
+                    <ul>
+                        <li><strong>小块（300-500）</strong>：精确匹配，适合问答</li>
+                        <li><strong>中块（800-1200）</strong>：平衡性能，通用场景（推荐）</li>
+                        <li><strong>大块（1500-2000）</strong>：保留上下文，适合摘要</li>
+                    </ul>
+
+                    <h3 class="subsection-title">2. 检索优化</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 使用 MMR（最大边际相关性）检索，避免结果重复
+retrieved_docs = vector_store.max_marginal_relevance_search(
+    query="用户问题",
+    k=4,              # 返回4个结果
+    fetch_k=20,       # 先获取20个候选
+    lambda_mult=0.5   # 平衡相关性和多样性
+)
+
+# 使用相似度阈值过滤低质量结果
+retrieved_docs = vector_store.similarity_search_with_score(
+    query="用户问题",
+    k=5
+)
+filtered_docs = [doc for doc, score in retrieved_docs if score > 0.7]</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">3. Embeddings 模型选择</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>模型</th>
+                                <th>维度</th>
+                                <th>性能</th>
+                                <th>成本</th>
+                                <th>推荐场景</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>text-embedding-3-small</td>
+                                <td>1536</td>
+                                <td>快速</td>
+                                <td>低</td>
+                                <td>通用应用（推荐）</td>
+                            </tr>
+                            <tr>
+                                <td>text-embedding-3-large</td>
+                                <td>3072</td>
+                                <td>最佳</td>
+                                <td>高</td>
+                                <td>高精度要求</td>
+                            </tr>
+                            <tr>
+                                <td>HuggingFace 模型</td>
+                                <td>768+</td>
+                                <td>中等</td>
+                                <td>免费</td>
+                                <td>预算有限</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 class="subsection-title">4. 缓存策略</h3>
+                    <p>对于频繁访问的文档，使用缓存减少重复计算：</p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from functools import lru_cache
+
+@lru_cache(maxsize=100)
+def cached_retrieve(query: str, k: int = 3):
+    """缓存检索结果"""
+    return vector_store.similarity_search(query, k=k)
+
+# 使用缓存的检索
+results = cached_retrieve("什么是 Agent？")</code></pre>
+                    </div>
+                </section>
+
+                <!-- 常见问题 -->
+                <section class="content-section">
+                    <h2 class="section-title">❓ 常见问题与解决方案</h2>
+
+                    <h3 class="subsection-subtitle">Q1: 检索结果不准确怎么办？</h3>
+                    <ul>
+                        <li>优化 chunk_size 和 chunk_overlap</li>
+                        <li>使用更好的 embeddings 模型</li>
+                        <li>增加 k 值（检索更多文档）</li>
+                        <li>改进查询重写（让 Agent 优化用户问题）</li>
+                    </ul>
+
+                    <h3 class="subsection-subtitle">Q2: 如何处理多语言文档？</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 使用支持多语言的 embeddings 模型
+from langchain_openai import OpenAIEmbeddings
+
+embeddings = OpenAIEmbeddings(
+    model="text-embedding-3-large"  # 支持多语言
+)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">Q3: 向量数据库太大怎么办？</h3>
+                    <ul>
+                        <li>定期清理过时文档</li>
+                        <li>使用更小的 chunk_size</li>
+                        <li>考虑使用分布式向量数据库（如 Pinecone, Qdrant）</li>
+                        <li>实施文档过期策略</li>
+                    </ul>
+
+                    <h3 class="subsection-subtitle">Q4: 如何评估 RAG 系统质量？</h3>
+                    <p>关键指标：</p>
+                    <ul>
+                        <li><strong>检索准确率</strong>：检索到的文档是否相关</li>
+                        <li><strong>答案质量</strong>：生成的答案是否准确</li>
+                        <li><strong>响应时间</strong>：端到端延迟</li>
+                        <li><strong>成本</strong>：API 调用费用</li>
+                    </ul>
+                </section>
+
+                <!-- 进阶话题 -->
+                <section class="content-section">
+                    <h2 class="section-title">🎓 进阶话题</h2>
+
+                    <h3 class="subsection-title">混合检索（Hybrid Search）</h3>
+                    <p>结合关键词搜索和语义搜索，提高检索质量：</p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from langchain.retrievers import EnsembleRetriever
+from langchain.retrievers import BM25Retriever
+
+# 创建多个检索器
+vector_retriever = vector_store.as_retriever(search_kwargs={"k": 3})
+bm25_retriever = BM25Retriever.from_documents(all_splits)
+bm25_retriever.k = 3
+
+# 组合检索器
+ensemble_retriever = EnsembleRetriever(
+    retrievers=[vector_retriever, bm25_retriever],
+    weights=[0.6, 0.4]  # 语义搜索60%，关键词搜索40%
+)
+
+# 使用混合检索
+results = ensemble_retriever.get_relevant_documents("用户问题")</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">Re-ranking（重排序）</h3>
+                    <p>使用专门的模型对检索结果重新排序：</p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from langchain.retrievers import ContextualCompressionRetriever
+from langchain.retrievers.document_compressors import CohereRerank
+
+# 使用 Cohere 重排序模型
+compressor = CohereRerank(model="rerank-english-v2.0")
+
+compression_retriever = ContextualCompressionRetriever(
+    base_compressor=compressor,
+    base_retriever=vector_retriever
+)
+
+# 获取重排序后的结果
+compressed_docs = compression_retriever.get_relevant_documents("用户问题")</code></pre>
+                    </div>
+                </section>
+
+                <!-- 参考资源 -->
+                <section class="content-section">
+                    <h2 class="section-title">📖 参考资源</h2>
+                    <ul>
+                        <li>
+                            <a href="https://docs.langchain.com/oss/python/langchain/rag" target="_blank">
+                                LangChain 官方 RAG 教程
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://python.langchain.com/docs/integrations/vectorstores/" target="_blank">
+                                Vector Stores 集成文档
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://python.langchain.com/docs/modules/data_connection/document_loaders/" target="_blank">
+                                Document Loaders 完整列表
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://python.langchain.com/docs/modules/data_connection/document_transformers/" target="_blank">
+                                Text Splitters 文档
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- 页面导航 -->
+                <nav class="page-navigation">
+                    <a href="07-middleware.html" class="nav-button prev">
+                        ← 上一页：中间件系统
+                    </a>
+                    <a href="09-lcel.html" class="nav-button next">
+                        下一页：LCEL 表达式 →
+                    </a>
+                </nav>
+            </div>
+        </main>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" aria-label="返回顶部">↑</button>
+
+    <!-- JavaScript -->
+    <script src="assets/js/mermaid-init.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DeepAgents 长期记忆 - 跨对话持久化存储系统">
+    <title>DeepAgents 长期记忆 | LangChain 1.0 Python 知识文档</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <button class="mobile-menu-button" aria-label="打开菜单">☰</button>
+
+    <div class="container">
+        <!-- 侧边栏导航 -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="sidebar-title">🦜 LangChain 1.0</h1>
+                <p class="sidebar-subtitle">Python 完整学习指南</p>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-section">
+                    <div class="nav-section-title">开始</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">
+                                <span class="nav-icon">🏠</span>
+                                主页
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">基础篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="01-introduction.html" class="nav-link">
+                                <span class="nav-icon">📖</span>
+                                LangChain 简介
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="02-architecture.html" class="nav-link">
+                                <span class="nav-icon">🏗️</span>
+                                核心架构
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="03-models.html" class="nav-link">
+                                <span class="nav-icon">🤖</span>
+                                模型接口
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="04-messages.html" class="nav-link">
+                                <span class="nav-icon">💬</span>
+                                消息系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="05-tools.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                工具系统
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">进阶篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="06-agents.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                Agent 基础
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="07-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="08-rag.html" class="nav-link">
+                                <span class="nav-icon">🔍</span>
+                                RAG 详解
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="09-lcel.html" class="nav-link">
+                                <span class="nav-icon">🔗</span>
+                                LCEL 表达式
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">高级应用</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="10-runtime.html" class="nav-link">
+                                <span class="nav-icon">🔌</span>
+                                Runtime 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="11-checkpointer.html" class="nav-link">
+                                <span class="nav-icon">💾</span>
+                                持久化系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="12-streaming.html" class="nav-link">
+                                <span class="nav-icon">🌊</span>
+                                流式输出
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="13-human-in-loop.html" class="nav-link">
+                                <span class="nav-icon">👤</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="14-long-term-memory.html" class="nav-link">
+                                <span class="nav-icon">🗄️</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="15-langgraph.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                LangGraph
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">实战篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="16-customer-service.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                客服机器人
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="17-best-practices.html" class="nav-link">
+                                <span class="nav-icon">✨</span>
+                                最佳实践
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">参考篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="18-api-reference.html" class="nav-link">
+                                <span class="nav-icon">📚</span>
+                                API 速查表
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="19-troubleshooting.html" class="nav-link">
+                                <span class="nav-icon">🐛</span>
+                                故障排除
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="20-migration.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                迁移指南
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">扩展篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="21-structured-output.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                结构化输出
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">DeepAgents 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="22-deepagents-quickstart.html" class="nav-link">
+                                <span class="nav-icon">🚀</span>
+                                快速开始
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="23-deepagents-customization.html" class="nav-link">
+                                <span class="nav-icon">🎨</span>
+                                定制化
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="24-deepagents-harness.html" class="nav-link">
+                                <span class="nav-icon">🎛️</span>
+                                Harness 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="25-deepagents-backends.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                后端配置
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="26-deepagents-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="27-deepagents-hitl.html" class="nav-link">
+                                <span class="nav-icon">🤝</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item active">
+                            <a href="28-deepagents-memory.html" class="nav-link">
+                                <span class="nav-icon">🧠</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="29-deepagents-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">Multi-Agent 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="30-multi-agent-index.html" class="nav-link">
+                                <span class="nav-icon">🌐</span>
+                                概述
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="31-multi-agent-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="32-multi-agent-handoffs.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                交接机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="33-multi-agent-skills.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                技能系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="34-multi-agent-router.html" class="nav-link">
+                                <span class="nav-icon">🧭</span>
+                                路由机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="35-multi-agent-workflow.html" class="nav-link">
+                                <span class="nav-icon">🔀</span>
+                                自定义工作流
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- 主内容区域 -->
+        <main class="main-content">
+            <div class="content-wrapper">
+                <!-- 面包屑导航 -->
+                <nav class="breadcrumb">
+                    <span class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link">主页</a>
+                    </span>
+                    <span class="breadcrumb-item">
+                        DeepAgents 篇
+                    </span>
+                    <span class="breadcrumb-item">
+                        长期记忆
+                    </span>
+                </nav>
+
+                <!-- 页面标题 -->
+                <header class="page-header">
+                    <h1 class="page-title">🧠 DeepAgents 长期记忆</h1>
+                    <p class="page-subtitle">
+                        通过 LangGraph Store 实现跨对话和跨线程的持久化存储，
+                        让 Agent 能够记住用户偏好、积累知识、维护长期项目记录。
+                    </p>
+                </header>
+
+                <!-- 什么是长期记忆 -->
+                <section class="content-section">
+                    <h2 class="section-title">📚 什么是长期记忆？</h2>
+                    <p>
+                        <strong>长期记忆（Long-term Memory）</strong>是 DeepAgents 的<strong>持久化存储机制</strong>，
+                        与仅在单个线程内存在的短期记忆（Checkpointer）不同，
+                        长期记忆能够<strong>跨对话、跨线程、跨 Agent 实例</strong>访问和共享数据。
+                    </p>
+
+                    <div class="info-box note">
+                        <div class="info-box-title">💡 核心特性</div>
+                        <table style="margin-top: 0.5rem;">
+                            <thead>
+                                <tr>
+                                    <th>特性</th>
+                                    <th>短期记忆（Checkpointer）</th>
+                                    <th>长期记忆（Store）</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>存储位置</strong></td>
+                                    <td>Agent 状态</td>
+                                    <td>LangGraph Store</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>生命周期</strong></td>
+                                    <td>单个线程</td>
+                                    <td>跨所有线程</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>持久化</strong></td>
+                                    <td>否（除非使用持久化 Checkpointer）</td>
+                                    <td>是</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>访问范围</strong></td>
+                                    <td>当前对话</td>
+                                    <td>全局（所有对话）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>典型用途</strong></td>
+                                    <td>对话历史、中间状态</td>
+                                    <td>用户偏好、知识库、项目记录</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="mermaid-wrapper">
+                        <div class="mermaid">
+graph TB
+    User["用户请求"] --> Agent["DeepAgent"]
+
+    Agent --> Short["短期记忆<br/>Checkpointer"]
+    Agent --> Long["长期记忆<br/>Store"]
+
+    Short --> Thread1["线程 1<br/>对话状态"]
+    Short --> Thread2["线程 2<br/>对话状态"]
+
+    Long --> Global["全局数据<br/>跨线程共享"]
+
+    Thread1 -.->|"无法访问"| Thread2
+    Thread1 -->|"可访问"| Global
+    Thread2 -->|"可访问"| Global
+
+    Global --> Prefs["用户偏好<br/>/memories/user_preferences.txt"]
+    Global --> KB["知识库<br/>/memories/research/"]
+    Global --> Projects["项目记录<br/>/memories/projects/"]
+
+    style Agent fill:#3b82f6,color:#fff
+    style Short fill:#f59e0b,color:#fff
+    style Long fill:#10b981,color:#fff
+    style Global fill:#8b5cf6,color:#fff
+                        </div>
+                    </div>
+
+                    <h3 class="subsection-title">长期记忆的实现原理</h3>
+                    <p>
+                        DeepAgents 通过<strong>CompositeBackend</strong>将特定路径路由到持久化存储：
+                    </p>
+                    <ul>
+                        <li><strong>路径路由</strong>：以 <code>/memories/</code> 开头的文件存储在 Store 中</li>
+                        <li><strong>混合架构</strong>：临时数据用 StateBackend，长期数据用 StoreBackend</li>
+                        <li><strong>透明访问</strong>：Agent 使用相同的文件工具（read_file, write_file）</li>
+                        <li><strong>持久化后端</strong>：支持 InMemoryStore、PostgresStore、RedisStore</li>
+                    </ul>
+                </section>
+
+                <!-- 长期记忆配置 -->
+                <section class="content-section">
+                    <h2 class="section-title">⚙️ 长期记忆配置</h2>
+                    <p>
+                        配置长期记忆需要<strong>3 个步骤</strong>：
+                        创建 Store、配置 CompositeBackend、传递给 Agent。
+                    </p>
+
+                    <h3 class="subsection-title">基础配置（开发环境）</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+长期记忆配置 - InMemoryStore（开发环境）
+"""
+from deepagents import create_deep_agent
+from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
+from langgraph.store.memory import InMemoryStore
+
+# 步骤 1: 创建 Store
+store = InMemoryStore()
+
+# 步骤 2: 配置后端路由
+def make_backend(runtime):
+    return CompositeBackend(
+        default=StateBackend(runtime),  # 默认：临时存储
+        routes={
+            "/memories/": StoreBackend(runtime)  # /memories/ 路径：持久化
+        }
+    )
+
+# 步骤 3: 创建 Agent
+agent = create_deep_agent(
+    model="gpt-4o",
+    store=store,
+    backend=make_backend,
+    system_prompt="""你是助手。当用户告诉你偏好时，
+    保存到 /memories/user_preferences.txt 以便未来参考。"""
+)
+
+# 使用 Agent
+result = agent.invoke({
+    "messages": [{
+        "role": "user",
+        "content": "我喜欢简洁的回答，记住这一点"
+    }]
+})
+
+# Agent 会自动将偏好写入 /memories/user_preferences.txt
+# 下次对话可以读取这个文件</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">生产配置（PostgreSQL 持久化）</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+长期记忆配置 - PostgresStore（生产环境）
+"""
+import os
+from deepagents import create_deep_agent
+from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
+from langgraph.store.postgres import PostgresStore
+
+# 步骤 1: 连接 PostgreSQL Store
+store = PostgresStore(
+    connection_string=os.environ["DATABASE_URL"]
+)
+
+# 步骤 2: 配置后端路由（同上）
+def make_backend(runtime):
+    return CompositeBackend(
+        default=StateBackend(runtime),
+        routes={
+            "/memories/": StoreBackend(runtime)
+        }
+    )
+
+# 步骤 3: 创建 Agent
+agent = create_deep_agent(
+    model="claude-sonnet-4-5-20250929",
+    store=store,
+    backend=make_backend,
+    system_prompt="""你是智能助手。
+
+## 长期记忆管理
+
+你可以将重要信息保存到 /memories/ 路径下：
+
+1. 用户偏好：/memories/user_preferences.txt
+2. 研究笔记：/memories/research/topic_name/notes.txt
+3. 项目记录：/memories/projects/project_name/status.md
+
+这些文件会永久保存，跨所有对话访问。"""
+)
+
+# 优势：
+# - 真正的持久化（数据库级别）
+# - 跨实例共享（多个 Agent 实例访问同一数据）
+# - 支持大规模数据
+# - 生产环境推荐</code></pre>
+                    </div>
+                </section>
+
+                <!-- 跨线程访问 -->
+                <section class="content-section">
+                    <h2 class="section-title">🔄 跨线程访问长期记忆</h2>
+                    <p>
+                        长期记忆的<strong>核心优势</strong>是跨线程和对话访问。
+                        不同的线程可以读取和更新相同的持久化数据。
+                    </p>
+
+                    <div class="mermaid-wrapper">
+                        <div class="mermaid">
+sequenceDiagram
+    participant T1 as 线程 1
+    participant Agent as DeepAgent
+    participant Store as LangGraph Store
+    participant T2 as 线程 2
+
+    T1->>Agent: 保存用户偏好
+    Agent->>Agent: 写入 /memories/<br/>user_preferences.txt
+    Agent->>Store: put(namespace, data)
+    Store-->>Agent: 持久化成功
+    Agent-->>T1: 完成
+
+    Note over Store: 数据已持久化<br/>可跨线程访问
+
+    T2->>Agent: 询问用户偏好
+    Agent->>Agent: 读取 /memories/<br/>user_preferences.txt
+    Agent->>Store: get(namespace)
+    Store-->>Agent: 返回数据
+    Agent-->>T2: 根据偏好回答
+
+    style Store fill:#10b981,color:#fff
+    style Agent fill:#3b82f6,color:#fff
+                        </div>
+                    </div>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+跨线程访问长期记忆
+"""
+import uuid
+from deepagents import create_deep_agent
+from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
+from langgraph.store.memory import InMemoryStore
+
+# 创建共享的 Store
+store = InMemoryStore()
+
+# 创建 Agent
+agent = create_deep_agent(
+    model="gpt-4o",
+    store=store,
+    backend=lambda rt: CompositeBackend(
+        default=StateBackend(rt),
+        routes={"/memories/": StoreBackend(rt)}
+    ),
+    system_prompt="""你可以保存和读取用户偏好。
+
+使用 /memories/user_preferences.txt 存储用户偏好。"""
+)
+
+# ===== 线程 1：保存偏好 =====
+print("=== 线程 1：保存偏好 ===")
+config1 = {"configurable": {"thread_id": str(uuid.uuid4())}}
+
+result1 = agent.invoke({
+    "messages": [{
+        "role": "user",
+        "content": "我喜欢技术细节和代码示例，请记住"
+    }]
+}, config=config1)
+
+print(result1["messages"][-1].content)
+
+# ===== 线程 2：读取偏好（不同的线程 ID）=====
+print("\n=== 线程 2：读取偏好 ===")
+config2 = {"configurable": {"thread_id": str(uuid.uuid4())}}  # 不同的 thread_id
+
+result2 = agent.invoke({
+    "messages": [{
+        "role": "user",
+        "content": "我之前告诉过你什么偏好？"
+    }]
+}, config=config2)
+
+print(result2["messages"][-1].content)
+
+# 输出示例：
+# === 线程 1：保存偏好 ===
+# 我已经记住了你的偏好：喜欢技术细节和代码示例。
+# 这已保存到长期记忆中，未来对话我会参考这一点。
+#
+# === 线程 2：读取偏好 ===
+# 根据记录，你喜欢技术细节和代码示例。
+# 我会在回答中提供更多的技术深度和实际代码。
+
+# 关键点：
+# - 两个线程使用不同的 thread_id
+# - 线程 2 能够访问线程 1 保存的数据
+# - 这是因为数据存储在共享的 Store 中，而非线程状态</code></pre>
+                    </div>
+                </section>
+
+                <!-- 命名空间组织 -->
+                <section class="content-section">
+                    <h2 class="section-title">📁 命名空间组织</h2>
+                    <p>
+                        使用<strong>分层路径结构</strong>组织长期记忆，便于管理和检索。
+                    </p>
+
+                    <h3 class="subsection-title">推荐的命名空间结构</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">文件结构</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-plaintext">/memories/
+├── user_preferences.txt              # 用户偏好
+├── research/                         # 研究笔记
+│   ├── ai_agents/
+│   │   ├── sources.txt
+│   │   └── summary.md
+│   └── langchain/
+│       ├── rag_notes.txt
+│       └── best_practices.md
+├── projects/                         # 项目记录
+│   ├── customer_service_bot/
+│   │   ├── requirements.md
+│   │   ├── progress.txt
+│   │   └── issues.txt
+│   └── data_pipeline/
+│       ├── design.md
+│       └── status.txt
+└── knowledge_base/                   # 知识库
+    ├── faq.json
+    └── product_docs.md</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">命名空间最佳实践</h3>
+                    <div class="info-box tip">
+                        <div class="info-box-title">✨ 组织原则</div>
+                        <ul>
+                            <li><strong>描述性路径</strong>：使用清晰的命名约定，便于理解和维护</li>
+                            <li><strong>分类管理</strong>：按功能或主题分组（用户数据、研究、项目、知识库）</li>
+                            <li><strong>文档结构</strong>：在系统提示中记录记忆的组织方式</li>
+                            <li><strong>避免冗余</strong>：不要重复存储相同的信息</li>
+                            <li><strong>定期清理</strong>：清除过期数据以管理存储空间</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- 实战示例 -->
+                <section class="content-section">
+                    <h2 class="section-title">🎯 完整实战示例</h2>
+                    <p>
+                        构建一个<strong>知识助手</strong>，支持用户偏好记忆、研究笔记管理、
+                        知识库积累，跨对话持久化。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级 - 生产级示例</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+完整实战示例 - 知识助手（支持长期记忆）
+"""
+import os
+import uuid
+from typing import Literal
+from tavily import TavilyClient
+from deepagents import create_deep_agent
+from deepagents.backends import CompositeBackend, StateBackend, StoreBackend
+from langgraph.store.postgres import PostgresStore
+from langgraph.checkpoint.memory import MemorySaver
+
+# ========== 1. 初始化工具 ==========
+
+tavily_client = TavilyClient(api_key=os.environ["TAVILY_API_KEY"])
+
+def internet_search(query: str, max_results: int = 5) -> dict:
+    """搜索网络信息"""
+    return tavily_client.search(query, max_results=max_results)
+
+# ========== 2. 配置持久化 ==========
+
+# Store：长期记忆（跨对话）
+store = PostgresStore(
+    connection_string=os.environ["DATABASE_URL"]
+)
+
+# Checkpointer：短期记忆（对话状态）
+checkpointer = MemorySaver()
+
+# Backend：混合路由
+def make_backend(runtime):
+    return CompositeBackend(
+        default=StateBackend(runtime),  # 临时数据
+        routes={
+            "/memories/": StoreBackend(runtime),  # 长期记忆
+        }
+    )
+
+# ========== 3. 创建知识助手 ==========
+
+knowledge_assistant_prompt = """你是一位专业的知识助手。你的任务是帮助用户进行研究、管理笔记和积累知识。
+
+## 长期记忆管理
+
+你可以将信息保存到以下路径（所有路径下的文件永久保存，跨对话访问）：
+
+### 1. 用户偏好
+- 路径：/memories/user_preferences.txt
+- 内容：用户的个人偏好、习惯、专业领域
+
+### 2. 研究笔记
+- 路径：/memories/research/[主题]/
+- 子文件：
+  - sources.txt：信息来源和链接
+  - summary.md：研究摘要
+  - notes.txt：详细笔记
+
+### 3. 知识库
+- 路径：/memories/knowledge_base/
+- 子文件：
+  - [主题].md：特定主题的知识总结
+  - faq.json：常见问题解答
+
+## 工作流程
+
+### 研究任务流程
+1. 接收用户的研究主题
+2. 使用 internet_search 搜索相关信息
+3. 整理和分析搜索结果
+4. 将信息保存到 /memories/research/[主题]/ 下
+5. 生成研究报告
+
+### 偏好管理流程
+1. 当用户首次交互时，读取 /memories/user_preferences.txt
+2. 如不存在，创建新文件
+3. 根据用户反馈更新偏好
+4. 在后续对话中应用偏好
+
+### 知识积累流程
+1. 在研究过程中发现有价值的通用知识
+2. 提取关键信息
+3. 保存到 /memories/knowledge_base/ 下相应主题文件
+4. 在未来研究中参考已有知识
+
+## 注意事项
+
+- 每次对话开始时，检查是否有相关的长期记忆
+- 研究笔记应结构化、易于检索
+- 定期整理和更新知识库
+- 引用来源时提供完整的 URL
+"""
+
+agent = create_deep_agent(
+    model="claude-sonnet-4-5-20250929",
+    tools=[internet_search],
+    store=store,
+    checkpointer=checkpointer,
+    backend=make_backend,
+    system_prompt=knowledge_assistant_prompt
+)
+
+# ========== 4. 使用知识助手 ==========
+
+# 场景 1：首次对话，设置偏好
+print("=== 场景 1：首次对话 ===")
+config1 = {"configurable": {"thread_id": str(uuid.uuid4())}}
+
+result1 = agent.invoke({
+    "messages": [{
+        "role": "user",
+        "content": "我是一名 Python 开发者，对 AI Agent 和 LangChain 很感兴趣。请记住这一点。"
+    }]
+}, config=config1)
+
+print(result1["messages"][-1].content)
+
+# 场景 2：研究任务
+print("\n=== 场景 2：研究 RAG 技术 ===")
+config2 = {"configurable": {"thread_id": str(uuid.uuid4())}}
+
+result2 = agent.invoke({
+    "messages": [{
+        "role": "user",
+        "content": "帮我研究 RAG（检索增强生成）的最佳实践，并保存研究笔记。"
+    }]
+}, config=config2)
+
+print(result2["messages"][-1].content)
+
+# 场景 3：后续对话，引用偏好和研究
+print("\n=== 场景 3：后续对话 ===")
+config3 = {"configurable": {"thread_id": str(uuid.uuid4())}}  # 新线程
+
+result3 = agent.invoke({
+    "messages": [{
+        "role": "user",
+        "content": "根据我之前的研究，总结 RAG 在 Python 项目中的应用。"
+    }]
+}, config=config3)
+
+print(result3["messages"][-1].content)
+
+# Agent 会：
+# 1. 读取 /memories/user_preferences.txt（Python 开发者）
+# 2. 读取 /memories/research/rag/summary.md（之前的研究）
+# 3. 结合这些信息生成针对性的回答
+
+# ========== 5. 查看长期记忆内容 ==========
+
+print("\n=== 长期记忆文件列表 ===")
+# Agent 可以使用 ls 工具列出文件
+result4 = agent.invoke({
+    "messages": [{
+        "role": "user",
+        "content": "列出我的所有长期记忆文件"
+    }]
+}, config=config3)
+
+print(result4["messages"][-1].content)
+
+# 输出示例：
+# === 场景 1：首次对话 ===
+# 我已经记住了你的背景：Python 开发者，对 AI Agent 和 LangChain 感兴趣。
+# 这些信息已保存到长期记忆中，未来对话我会参考这些偏好。
+#
+# === 场景 2：研究 RAG 技术 ===
+# 我已完成 RAG 最佳实践的研究，并保存了以下文件：
+# - /memories/research/rag/sources.txt：权威资源链接
+# - /memories/research/rag/summary.md：核心概念和最佳实践摘要
+# - /memories/research/rag/notes.txt：详细技术笔记
+#
+# === 场景 3：后续对话 ===
+# 根据你的背景（Python 开发者）和之前的 RAG 研究，
+# 以下是 RAG 在 Python 项目中的应用要点：...
+# [结合偏好和研究笔记生成的回答]
+#
+# === 长期记忆文件列表 ===
+# /memories/user_preferences.txt
+# /memories/research/rag/sources.txt
+# /memories/research/rag/summary.md
+# /memories/research/rag/notes.txt</code></pre>
+                    </div>
+                </section>
+
+                <!-- 高级路由配置 -->
+                <section class="content-section">
+                    <h2 class="section-title">🔀 高级路由配置</h2>
+                    <p>
+                        使用 CompositeBackend 的多路由功能，
+                        实现<strong>更精细的存储策略</strong>。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+高级路由配置 - 多存储后端
+"""
+from deepagents.backends import (
+    CompositeBackend,
+    StateBackend,
+    StoreBackend,
+    FilesystemBackend
+)
+from langgraph.store.postgres import PostgresStore
+
+# 创建不同的 Store 实例
+user_store = PostgresStore(connection_string=os.environ["USER_DB_URL"])
+knowledge_store = PostgresStore(connection_string=os.environ["KNOWLEDGE_DB_URL"])
+
+def make_advanced_backend(runtime):
+    return CompositeBackend(
+        default=StateBackend(runtime),  # 默认：临时内存
+        routes={
+            # 用户数据：专用数据库
+            "/memories/users/": StoreBackend(runtime, store=user_store),
+
+            # 知识库：共享数据库
+            "/memories/knowledge/": StoreBackend(runtime, store=knowledge_store),
+
+            # 项目文件：磁盘存储
+            "/memories/projects/": FilesystemBackend(
+                root_dir="/data/projects",
+                virtual_mode=True
+            ),
+
+            # 临时工作区：内存
+            "/tmp/": StateBackend(runtime),
+        }
+    )
+
+agent = create_deep_agent(
+    model="gpt-4o",
+    backend=make_advanced_backend
+)
+
+# 使用场景：
+# 1. /memories/users/user123.json → PostgreSQL (user_store)
+# 2. /memories/knowledge/faq.md → PostgreSQL (knowledge_store)
+# 3. /memories/projects/code.py → 磁盘文件
+# 4. /tmp/scratch.txt → 内存（不持久化）
+# 5. /data.txt（其他路径）→ 内存（默认）
+
+# 优势：
+# - 数据隔离：用户数据和知识库分离
+# - 混合存储：数据库 + 文件系统 + 内存
+# - 灵活路由：根据路径自动选择存储方式
+# - 性能优化：临时数据用内存，重要数据用数据库</code></pre>
+                    </div>
+                </section>
+
+                <!-- 最佳实践 -->
+                <section class="content-section">
+                    <h2 class="section-title">✨ 长期记忆最佳实践</h2>
+
+                    <h3 class="subsection-title">1. 选择合适的存储后端</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>场景</th>
+                                <th>推荐后端</th>
+                                <th>原因</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>本地开发</td>
+                                <td>InMemoryStore</td>
+                                <td>快速迭代，无需配置</td>
+                            </tr>
+                            <tr>
+                                <td>生产环境</td>
+                                <td>PostgresStore</td>
+                                <td>可靠持久化，易于管理</td>
+                            </tr>
+                            <tr>
+                                <td>高并发</td>
+                                <td>RedisStore</td>
+                                <td>高性能，分布式支持</td>
+                            </tr>
+                            <tr>
+                                <td>多租户</td>
+                                <td>PostgresStore + 命名空间</td>
+                                <td>数据隔离，易于管理</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 class="subsection-title">2. 命名空间设计原则</h3>
+                    <ul>
+                        <li><strong>分层结构</strong>：使用 <code>/memories/category/subcategory/</code> 格式</li>
+                        <li><strong>一致命名</strong>：遵循统一的命名约定（小写、下划线分隔）</li>
+                        <li><strong>文档化</strong>：在系统提示中明确记录命名空间结构</li>
+                        <li><strong>避免冲突</strong>：不同类型的数据使用不同的顶级命名空间</li>
+                    </ul>
+
+                    <h3 class="subsection-title">3. 系统提示中的记忆管理指南</h3>
+                    <div class="info-box tip">
+                        <div class="info-box-title">📝 提示词模板</div>
+                        <p>在系统提示中包含以下内容：</p>
+                        <ul>
+                            <li><strong>可用路径</strong>：列出所有长期记忆路径</li>
+                            <li><strong>使用场景</strong>：说明何时读取、何时写入</li>
+                            <li><strong>文件格式</strong>：指定不同类型数据的格式（JSON、Markdown、TXT）</li>
+                            <li><strong>更新策略</strong>：说明何时更新既有记忆</li>
+                        </ul>
+                    </div>
+
+                    <h3 class="subsection-title">4. 数据清理策略</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 定期清理过期数据
+system_prompt = """...
+
+## 数据清理规则
+
+1. 临时研究笔记：30 天后自动清理
+2. 用户偏好：永久保留
+3. 项目记录：项目完成后 90 天清理
+4. 每月第一天执行数据清理任务
+"""</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">5. 安全性和隐私</h3>
+                    <ul>
+                        <li><strong>敏感数据加密</strong>：不要明文存储密码、密钥等敏感信息</li>
+                        <li><strong>访问控制</strong>：使用命名空间隔离不同用户的数据</li>
+                        <li><strong>审计日志</strong>：记录长期记忆的读写操作</li>
+                        <li><strong>数据备份</strong>：定期备份 PostgresStore 数据库</li>
+                    </ul>
+                </section>
+
+                <!-- 常见问题 -->
+                <section class="content-section">
+                    <h2 class="section-title">❓ 常见问题</h2>
+
+                    <h3 class="subsection-subtitle">Q1: 长期记忆和短期记忆如何选择？</h3>
+                    <p>
+                        <strong>选择标准</strong>：
+                    </p>
+                    <ul>
+                        <li><strong>短期记忆（Checkpointer）</strong>：对话历史、中间状态、临时数据</li>
+                        <li><strong>长期记忆（Store）</strong>：用户偏好、知识库、项目记录、跨对话数据</li>
+                    </ul>
+
+                    <h3 class="subsection-subtitle">Q2: /memories/ 路径的文件会自动创建吗？</h3>
+                    <p>
+                        <strong>是的</strong>。StoreBackend 会自动处理路径创建。
+                        当 Agent 写入 <code>/memories/new_file.txt</code> 时，
+                        即使路径不存在也会自动创建。
+                    </p>
+
+                    <h3 class="subsection-subtitle">Q3: 能否混合使用多个 Store 后端？</h3>
+                    <p>
+                        <strong>可以</strong>，通过 CompositeBackend 的多 routes 配置：
+                    </p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">routes={
+    "/memories/users/": StoreBackend(runtime, store=user_store),
+    "/memories/shared/": StoreBackend(runtime, store=shared_store),
+}</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">Q4: PostgresStore 需要额外配置吗？</h3>
+                    <p>
+                        <strong>仅需数据库连接字符串</strong>：
+                    </p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 设置环境变量
+export DATABASE_URL="postgresql://user:pass@localhost:5432/deepagents"
+
+# Python 代码
+store = PostgresStore(connection_string=os.environ["DATABASE_URL"])</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">Q5: 长期记忆有大小限制吗？</h3>
+                    <p>
+                        <strong>受限于底层存储</strong>：
+                    </p>
+                    <ul>
+                        <li><strong>InMemoryStore</strong>：受内存大小限制</li>
+                        <li><strong>PostgresStore</strong>：受数据库容量和表大小限制（通常几 GB 到几 TB）</li>
+                        <li><strong>RedisStore</strong>：受 Redis 内存配置限制</li>
+                    </ul>
+                    <p>
+                        <strong>建议</strong>：避免存储过大的文件（如大型数据集、图像），
+                        考虑存储文件路径或 URL 而非完整内容。
+                    </p>
+
+                    <h3 class="subsection-subtitle">Q6: 如何实现多租户数据隔离？</h3>
+                    <p>
+                        <strong>使用基于租户的命名空间</strong>：
+                    </p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 动态创建租户隔离的路径
+def make_tenant_backend(tenant_id: str):
+    def backend_factory(runtime):
+        return CompositeBackend(
+            default=StateBackend(runtime),
+            routes={
+                f"/memories/{tenant_id}/": StoreBackend(runtime)
+            }
+        )
+    return backend_factory
+
+# 为不同租户创建 Agent
+agent_tenant1 = create_deep_agent(
+    backend=make_tenant_backend("tenant_123")
+)
+
+agent_tenant2 = create_deep_agent(
+    backend=make_tenant_backend("tenant_456")
+)
+
+# 数据完全隔离：
+# tenant_123 的数据：/memories/tenant_123/
+# tenant_456 的数据：/memories/tenant_456/</code></pre>
+                    </div>
+                </section>
+
+                <!-- 参考资源 -->
+                <section class="content-section">
+                    <h2 class="section-title">📖 参考资源</h2>
+                    <ul>
+                        <li>
+                            <a href="https://docs.langchain.com/oss/python/deepagents/long-term-memory" target="_blank">
+                                DeepAgents Long-term Memory 官方文档
+                            </a>
+                        </li>
+                        <li>
+                            <a href="25-deepagents-backends.html">
+                                后端配置 - Backends 详解
+                            </a>
+                        </li>
+                        <li>
+                            <a href="11-checkpointer.html">
+                                持久化系统 - Checkpointer vs Store
+                            </a>
+                        </li>
+                        <li>
+                            <a href="14-long-term-memory.html">
+                                长期记忆 - LangGraph Store 基础
+                            </a>
+                        </li>
+                        <li>
+                            <a href="22-deepagents-quickstart.html">
+                                DeepAgents 快速开始
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- 页面导航 -->
+                <nav class="page-navigation">
+                    <a href="27-deepagents-hitl.html" class="nav-button prev">
+                        ← 上一页：人工介入
+                    </a>
+                    <a href="29-deepagents-middleware.html" class="nav-button next">
+                        下一页：中间件 →
+                    </a>
+                </nav>
+            </div>
+        </main>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" aria-label="返回顶部">↑</button>
+
+    <!-- JavaScript -->
+    <script src="assets/js/mermaid-init.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</body>
+</html>

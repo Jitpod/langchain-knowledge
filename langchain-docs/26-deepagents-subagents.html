@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DeepAgents 子代理 - 上下文隔离和任务委派">
+    <title>DeepAgents 子代理 | LangChain 1.0 Python 知识文档</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <button class="mobile-menu-button" aria-label="打开菜单">☰</button>
+
+    <div class="container">
+        <!-- 侧边栏导航 -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="sidebar-title">🦜 LangChain 1.0</h1>
+                <p class="sidebar-subtitle">Python 完整学习指南</p>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-section">
+                    <div class="nav-section-title">开始</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">
+                                <span class="nav-icon">🏠</span>
+                                主页
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">基础篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="01-introduction.html" class="nav-link">
+                                <span class="nav-icon">📖</span>
+                                LangChain 简介
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="02-architecture.html" class="nav-link">
+                                <span class="nav-icon">🏗️</span>
+                                核心架构
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="03-models.html" class="nav-link">
+                                <span class="nav-icon">🤖</span>
+                                模型接口
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="04-messages.html" class="nav-link">
+                                <span class="nav-icon">💬</span>
+                                消息系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="05-tools.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                工具系统
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">进阶篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="06-agents.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                Agent 基础
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="07-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="08-rag.html" class="nav-link">
+                                <span class="nav-icon">🔍</span>
+                                RAG 详解
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="09-lcel.html" class="nav-link">
+                                <span class="nav-icon">🔗</span>
+                                LCEL 表达式
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">高级应用</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="10-runtime.html" class="nav-link">
+                                <span class="nav-icon">🔌</span>
+                                Runtime 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="11-checkpointer.html" class="nav-link">
+                                <span class="nav-icon">💾</span>
+                                持久化系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="12-streaming.html" class="nav-link">
+                                <span class="nav-icon">🌊</span>
+                                流式输出
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="13-human-in-loop.html" class="nav-link">
+                                <span class="nav-icon">👤</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="14-long-term-memory.html" class="nav-link">
+                                <span class="nav-icon">🗄️</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="15-langgraph.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                LangGraph
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">实战篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="16-customer-service.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                客服机器人
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="17-best-practices.html" class="nav-link">
+                                <span class="nav-icon">✨</span>
+                                最佳实践
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">参考篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="18-api-reference.html" class="nav-link">
+                                <span class="nav-icon">📚</span>
+                                API 速查表
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="19-troubleshooting.html" class="nav-link">
+                                <span class="nav-icon">🐛</span>
+                                故障排除
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="20-migration.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                迁移指南
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">扩展篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="21-structured-output.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                结构化输出
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">DeepAgents 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="22-deepagents-quickstart.html" class="nav-link">
+                                <span class="nav-icon">🚀</span>
+                                快速开始
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="23-deepagents-customization.html" class="nav-link">
+                                <span class="nav-icon">🎨</span>
+                                定制化
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="24-deepagents-harness.html" class="nav-link">
+                                <span class="nav-icon">🎛️</span>
+                                Harness 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="25-deepagents-backends.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                后端配置
+                            </a>
+                        </li>
+                        <li class="nav-item active">
+                            <a href="26-deepagents-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="27-deepagents-hitl.html" class="nav-link">
+                                <span class="nav-icon">🤝</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="28-deepagents-memory.html" class="nav-link">
+                                <span class="nav-icon">🧠</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="29-deepagents-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">Multi-Agent 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="30-multi-agent-index.html" class="nav-link">
+                                <span class="nav-icon">🌐</span>
+                                概述
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="31-multi-agent-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="32-multi-agent-handoffs.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                交接机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="33-multi-agent-skills.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                技能系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="34-multi-agent-router.html" class="nav-link">
+                                <span class="nav-icon">🧭</span>
+                                路由机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="35-multi-agent-workflow.html" class="nav-link">
+                                <span class="nav-icon">🔀</span>
+                                自定义工作流
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- 主内容区域 -->
+        <main class="main-content">
+            <div class="content-wrapper">
+                <!-- 面包屑导航 -->
+                <nav class="breadcrumb">
+                    <span class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link">主页</a>
+                    </span>
+                    <span class="breadcrumb-item">
+                        DeepAgents 篇
+                    </span>
+                    <span class="breadcrumb-item">
+                        子代理
+                    </span>
+                </nav>
+
+                <!-- 页面标题 -->
+                <header class="page-header">
+                    <h1 class="page-title">👥 DeepAgents 子代理</h1>
+                    <p class="page-subtitle">
+                        通过上下文隔离和任务委派，让主 Agent 专注于高层协调，
+                        将复杂的多步骤任务交给专门化的子代理独立完成。
+                    </p>
+                </header>
+
+                <!-- 什么是子代理 -->
+                <section class="content-section">
+                    <h2 class="section-title">📚 什么是子代理？</h2>
+                    <p>
+                        <strong>子代理（Subagents）</strong>是 DeepAgents 中用于<strong>解决上下文膨胀问题</strong>的机制。
+                        当主代理使用返回大量数据的工具时（如网页搜索、文件读取、数据库查询），
+                        中间结果会迅速填满上下文窗口。子代理将详细工作隔离在独立的代理中，
+                        <strong>主代理只接收最终的简洁结果</strong>。
+                    </p>
+
+                    <div class="info-box note">
+                        <div class="info-box-title">💡 子代理的核心价值</div>
+                        <table style="margin-top: 0.5rem;">
+                            <thead>
+                                <tr>
+                                    <th>问题</th>
+                                    <th>传统方案</th>
+                                    <th>子代理方案</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>上下文污染</strong></td>
+                                    <td>大量中间结果填充主 Agent</td>
+                                    <td>隔离到子 Agent，主 Agent 仅获取摘要</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>专门化任务</strong></td>
+                                    <td>主 Agent 必须处理所有类型任务</td>
+                                    <td>不同子 Agent 专注不同领域</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>模型选择</strong></td>
+                                    <td>主 Agent 必须使用一个模型</td>
+                                    <td>不同子 Agent 可使用最适合的模型</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>协调复杂度</strong></td>
+                                    <td>主 Agent 处理所有细节</td>
+                                    <td>主 Agent 专注高层协调</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="mermaid-wrapper">
+                        <div class="mermaid">
+graph TB
+    User["用户请求<br/>复杂研究任务"] --> Main["主 Agent<br/>高层协调"]
+
+    Main -->|委派| Sub1["子 Agent 1<br/>数据收集"]
+    Main -->|委派| Sub2["子 Agent 2<br/>数据分析"]
+    Main -->|委派| Sub3["子 Agent 3<br/>报告生成"]
+
+    Sub1 -->|"简洁摘要<br/>(< 500字)"| Main
+    Sub2 -->|"分析结果<br/>(< 500字)"| Main
+    Sub3 -->|"最终报告<br/>(< 500字)"| Main
+
+    Main --> Result["整合结果<br/>返回用户"]
+
+    Sub1 -.->|大量中间数据<br/>不传递给主 Agent| Data1[("隔离上下文 1")]
+    Sub2 -.->|大量中间数据<br/>不传递给主 Agent| Data2[("隔离上下文 2")]
+    Sub3 -.->|大量中间数据<br/>不传递给主 Agent| Data3[("隔离上下文 3")]
+
+    style Main fill:#3b82f6,color:#fff
+    style Sub1 fill:#10b981,color:#fff
+    style Sub2 fill:#f59e0b,color:#fff
+    style Sub3 fill:#8b5cf6,color:#fff
+    style Result fill:#10b981,color:#fff
+                        </div>
+                    </div>
+
+                    <h3 class="subsection-title">何时使用子代理？</h3>
+                    <div class="info-box tip">
+                        <div class="info-box-title">✅ 适合使用子代理</div>
+                        <ul>
+                            <li><strong>多步骤任务</strong>：任务会让主 Agent 的上下文变得混乱</li>
+                            <li><strong>专门化领域</strong>：需要专门的指令或工具</li>
+                            <li><strong>不同模型能力</strong>：某些子任务需要不同模型的能力</li>
+                            <li><strong>高层协调</strong>：需要保持主 Agent 专注于协调工作</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-box warning">
+                        <div class="info-box-title">❌ 不适合使用子代理</div>
+                        <ul>
+                            <li><strong>简单单步任务</strong>：创建子 Agent 的开销超过收益</li>
+                            <li><strong>需要维护中间上下文</strong>：所有步骤必须共享详细上下文</li>
+                            <li><strong>开销大于收益</strong>：任务足够简单，不需要上下文隔离</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- 子代理的两种形式 -->
+                <section class="content-section">
+                    <h2 class="section-title">🔧 子代理的两种形式</h2>
+                    <p>
+                        DeepAgents 支持两种方式定义子代理：
+                    </p>
+
+                    <h3 class="subsection-title">方式 1: 字典形式（推荐）</h3>
+                    <p>
+                        <strong>字典形式</strong>是最常用且简单的方式，适用于大多数场景：
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+字典形式定义子代理
+"""
+from deepagents import create_deep_agent
+
+# 定义子代理
+research_subagent = {
+    # 必需字段
+    "name": "research-agent",  # 唯一标识符，主 Agent 通过此名调用
+    "description": "用于深入研究问题，收集和综合信息",  # 清晰的行动导向说明
+    "system_prompt": """你是一名优秀的研究者。你的任务是：
+
+1. 将研究问题分解为可搜索的查询
+2. 使用 internet_search 查找相关信息
+3. 综合发现成简明总结
+4. 引用来源
+
+输出格式：
+- 摘要（2-3 段）
+- 关键发现（要点）
+- 来源（带 URL）
+
+⚠️ 重要：保持回复在 500 字以内以维持清洁上下文。""",
+    "tools": [internet_search],  # 子代理可用的工具列表
+
+    # 可选字段
+    "model": "openai:gpt-4o",  # 覆盖主 Agent 的模型
+}
+
+# 创建主 Agent，传入子代理
+agent = create_deep_agent(
+    model="claude-sonnet-4-5-20250929",
+    subagents=[research_subagent]
+)
+
+# 主 Agent 可以调用子代理
+result = agent.invoke({
+    "messages": [{
+        "role": "user",
+        "content": "研究量子计算的最新进展"
+    }]
+})
+
+# 主 Agent 会自动决定何时调用子代理
+# 子代理完成任务后，主 Agent 只接收简洁的摘要</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">字典形式的字段说明</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>字段</th>
+                                <th>必需/可选</th>
+                                <th>说明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>name</code></td>
+                                <td>✅ 必需</td>
+                                <td>唯一标识符，主 Agent 通过此名调用子代理</td>
+                            </tr>
+                            <tr>
+                                <td><code>description</code></td>
+                                <td>✅ 必需</td>
+                                <td>清晰、专一且以行动为导向的说明，帮助主 Agent 决策</td>
+                            </tr>
+                            <tr>
+                                <td><code>system_prompt</code></td>
+                                <td>✅ 必需</td>
+                                <td>子代理的详细指令、工作流程、输出格式要求</td>
+                            </tr>
+                            <tr>
+                                <td><code>tools</code></td>
+                                <td>✅ 必需</td>
+                                <td>子代理可用的工具列表（保持最小化）</td>
+                            </tr>
+                            <tr>
+                                <td><code>model</code></td>
+                                <td>⬜ 可选</td>
+                                <td>覆盖主 Agent 模型，使用特定模型处理子任务</td>
+                            </tr>
+                            <tr>
+                                <td><code>middleware</code></td>
+                                <td>⬜ 可选</td>
+                                <td>自定义行为、日志记录、速率限制等</td>
+                            </tr>
+                            <tr>
+                                <td><code>interrupt_on</code></td>
+                                <td>⬜ 可选</td>
+                                <td>为特定工具配置人工介入（HITL）</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 class="subsection-title">方式 2: CompiledSubAgent（高级）</h3>
+                    <p>
+                        <strong>CompiledSubAgent</strong> 用于复杂工作流程，
+                        基于预构建的 LangGraph 图：
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+CompiledSubAgent - 基于 LangGraph 的复杂子代理
+"""
+from deepagents import create_deep_agent, CompiledSubAgent
+from langgraph.graph import StateGraph
+
+# 定义复杂的工作流图
+class AnalysisState(TypedDict):
+    raw_data: str
+    processed_data: dict
+    insights: list
+
+def load_data(state: AnalysisState) -> AnalysisState:
+    # 加载数据的逻辑
+    state["raw_data"] = "..."
+    return state
+
+def process_data(state: AnalysisState) -> AnalysisState:
+    # 处理数据的逻辑
+    state["processed_data"] = {...}
+    return state
+
+def generate_insights(state: AnalysisState) -> AnalysisState:
+    # 生成洞察的逻辑
+    state["insights"] = [...]
+    return state
+
+# 构建 LangGraph 工作流
+workflow = StateGraph(AnalysisState)
+workflow.add_node("load", load_data)
+workflow.add_node("process", process_data)
+workflow.add_node("insights", generate_insights)
+
+workflow.set_entry_point("load")
+workflow.add_edge("load", "process")
+workflow.add_edge("process", "insights")
+workflow.add_edge("insights", END)
+
+custom_graph = workflow.compile()
+
+# 创建 CompiledSubAgent
+custom_subagent = CompiledSubAgent(
+    name="data-analyzer",
+    description="复杂数据分析任务的专属代理，包含多步骤工作流",
+    runnable=custom_graph
+)
+
+# 使用 CompiledSubAgent
+agent = create_deep_agent(
+    model="claude-sonnet-4-5-20250929",
+    subagents=[custom_subagent]
+)
+
+# 主 Agent 可以调用此复杂子代理
+result = agent.invoke({
+    "messages": [{
+        "role": "user",
+        "content": "分析用户行为数据并生成洞察报告"
+    }]
+})</code></pre>
+                    </div>
+                </section>
+
+                <!-- 通用目的子代理 -->
+                <section class="content-section">
+                    <h2 class="section-title">🌐 通用目的子代理</h2>
+                    <p>
+                        每个 DeepAgent 都<strong>自动拥有</strong>一个名为 <code>"general-purpose"</code> 的内置子代理，
+                        它具有以下特点：
+                    </p>
+
+                    <ul>
+                        <li><strong>共享主 Agent 的系统提示</strong>：行为与主 Agent 一致</li>
+                        <li><strong>访问相同工具</strong>：无需额外配置</li>
+                        <li><strong>使用相同模型</strong>：除非显式覆盖</li>
+                    </ul>
+
+                    <div class="info-box tip">
+                        <div class="info-box-title">✨ 通用目的子代理的用途</div>
+                        <p>
+                            <strong>用途</strong>：在无需专门行为的情况下进行<strong>上下文隔离</strong>。
+                            主 Agent 将复杂的多步骤任务委托给它，保持自己的上下文清洁。
+                        </p>
+                    </div>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+使用通用目的子代理
+"""
+from deepagents import create_deep_agent
+
+# 创建 Agent（无需显式定义 general-purpose 子代理）
+agent = create_deep_agent(
+    model="gpt-4o",
+    tools=[internet_search],
+    system_prompt="你是研究助手，可以搜索和分析信息。"
+)
+
+# 主 Agent 会自动使用 general-purpose 子代理
+result = agent.invoke({
+    "messages": [{
+        "role": "user",
+        "content": "研究 AI 安全的最新进展，并生成详细报告"
+    }]
+})
+
+# 执行过程：
+# 1. 主 Agent 识别到这是复杂的多步骤任务
+# 2. 自动调用 general-purpose 子代理
+# 3. 子代理执行搜索、分析、报告生成
+# 4. 子代理返回简洁的最终报告给主 Agent
+# 5. 主 Agent 将结果返回给用户
+
+# 优势：
+# - 无需定义专门的子代理
+# - 主 Agent 上下文保持清洁
+# - 子代理的中间步骤被隔离</code></pre>
+                    </div>
+                </section>
+
+                <!-- 多个专业化子代理 -->
+                <section class="content-section">
+                    <h2 class="section-title">🎯 多个专业化子代理</h2>
+                    <p>
+                        在复杂场景中，你可以定义<strong>多个专业化子代理</strong>，
+                        每个子代理专注于特定的任务类型：
+                    </p>
+
+                    <div class="mermaid-wrapper">
+                        <div class="mermaid">
+graph TB
+    User["用户请求<br/>复杂项目分析"] --> Main["主 Agent<br/>项目经理"]
+
+    Main -->|"需要收集数据"| Collector["数据收集器<br/>子代理"]
+    Main -->|"需要分析数据"| Analyzer["数据分析器<br/>子代理"]
+    Main -->|"需要生成报告"| Reporter["报告生成器<br/>子代理"]
+
+    Collector -->|工具| Web["网络搜索"]
+    Collector -->|工具| API["API 调用"]
+    Collector -->|工具| DB["数据库查询"]
+
+    Analyzer -->|工具| Stats["统计分析"]
+    Analyzer -->|工具| ML["机器学习"]
+
+    Reporter -->|工具| Format["格式化文档"]
+    Reporter -->|工具| Charts["图表生成"]
+
+    Collector -->|"原始数据摘要"| Main
+    Analyzer -->|"分析结果"| Main
+    Reporter -->|"最终报告"| Main
+
+    Main --> Result["整合输出<br/>返回用户"]
+
+    style Main fill:#3b82f6,color:#fff
+    style Collector fill:#10b981,color:#fff
+    style Analyzer fill:#f59e0b,color:#fff
+    style Reporter fill:#8b5cf6,color:#fff
+    style Result fill:#10b981,color:#fff
+                        </div>
+                    </div>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级 - 完整示例</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+多个专业化子代理 - 完整协作示例
+"""
+import os
+from typing import Literal
+from tavily import TavilyClient
+from deepagents import create_deep_agent
+
+# 初始化工具
+tavily_client = TavilyClient(api_key=os.environ["TAVILY_API_KEY"])
+
+def internet_search(query: str, max_results: int = 5):
+    """网络搜索工具"""
+    return tavily_client.search(query, max_results=max_results)
+
+def database_query(sql: str):
+    """数据库查询工具（模拟）"""
+    # 实际会连接真实数据库
+    return {"status": "success", "data": [...]}
+
+def statistical_analysis(data: dict):
+    """统计分析工具（模拟）"""
+    # 实际会执行统计分析
+    return {"mean": 42.5, "median": 40.0, "insights": [...]}
+
+def format_document(content: str, format: Literal["pdf", "markdown", "html"]):
+    """文档格式化工具（模拟）"""
+    # 实际会生成格式化文档
+    return f"formatted_{format}_document.pdf"
+
+# 定义多个专业化子代理
+subagents = [
+    {
+        "name": "data-collector",
+        "description": "从各种来源收集原始数据：网络搜索、API 调用、数据库查询",
+        "system_prompt": """你是数据收集专家。你的任务是：
+
+1. 使用 internet_search 搜索网络信息
+2. 使用 database_query 查询数据库
+3. 整理和清理收集到的数据
+
+输出格式：
+- 数据来源列表
+- 数据质量评估
+- 关键数据点摘要（< 300 字）
+
+保持输出简洁，主 Agent 不需要看到所有原始数据。""",
+        "tools": [internet_search, database_query],
+        "model": "openai:gpt-4o",  # 使用快速模型
+    },
+    {
+        "name": "data-analyzer",
+        "description": "分析数据并生成统计洞察和业务建议",
+        "system_prompt": """你是数据分析专家。你的任务是：
+
+1. 使用 statistical_analysis 执行统计分析
+2. 识别趋势和异常值
+3. 生成可操作的业务洞察
+
+输出格式：
+- 关键发现（3-5 个要点）
+- 业务建议（具体可行）
+- 数据质量说明
+
+保持输出在 400 字以内。""",
+        "tools": [statistical_analysis],
+        "model": "claude-sonnet-4-5-20250929",  # 使用推理能力强的模型
+    },
+    {
+        "name": "report-writer",
+        "description": "从分析结果生成精美的专业报告",
+        "system_prompt": """你是报告撰写专家。你的任务是：
+
+1. 整合分析结果
+2. 使用 format_document 生成格式化报告
+3. 确保报告清晰、专业、易读
+
+输出格式：
+- 执行摘要
+- 详细分析章节
+- 结论和建议
+
+使用清晰的标题和要点列表。""",
+        "tools": [format_document],
+        "model": "claude-sonnet-4-5-20250929",
+    },
+]
+
+# 创建主 Agent
+agent = create_deep_agent(
+    model="claude-sonnet-4-5-20250929",
+    subagents=subagents,
+    system_prompt="""你是项目经理 Agent。你负责协调专业化的子代理团队。
+
+可用的子代理：
+1. data-collector: 收集数据
+2. data-analyzer: 分析数据
+3. report-writer: 生成报告
+
+工作流程：
+1. 接收用户请求
+2. 分解任务
+3. 按顺序委派给相应的子代理
+4. 整合子代理的结果
+5. 返回最终输出给用户
+
+你只需要协调，不需要直接执行数据收集、分析或报告生成。"""
+)
+
+# 使用主 Agent
+result = agent.invoke({
+    "messages": [{
+        "role": "user",
+        "content": """请分析我们公司 2024 年的销售数据：
+        1. 从数据库和网络收集相关数据
+        2. 执行统计分析
+        3. 生成专业的 PDF 报告
+        """
+    }]
+})
+
+print(result["messages"][-1].content)
+
+# 执行流程：
+# 1. 主 Agent 分解任务为 3 个子任务
+# 2. 调用 data-collector 子代理收集数据
+#    → 返回简洁的数据摘要（< 300 字）
+# 3. 调用 data-analyzer 子代理分析数据
+#    → 返回关键发现和建议（< 400 字）
+# 4. 调用 report-writer 子代理生成报告
+#    → 返回报告文件路径和摘要
+# 5. 主 Agent 整合所有结果，返回给用户
+
+# 优势：
+# - 每个子代理专注于特定任务
+# - 主 Agent 的上下文始终清洁
+# - 可以使用最适合每个任务的模型
+# - 易于维护和扩展</code></pre>
+                    </div>
+                </section>
+
+                <!-- 最佳实践 -->
+                <section class="content-section">
+                    <h2 class="section-title">✨ 子代理最佳实践</h2>
+
+                    <h3 class="subsection-title">1. 编写清晰的 Description</h3>
+                    <p>
+                        <strong>description</strong> 字段是主 Agent 决定何时调用子代理的关键：
+                    </p>
+
+                    <div class="info-box tip">
+                        <div class="info-box-title">✅ 好的 Description</div>
+                        <ul>
+                            <li><strong>具体</strong>："分析财务数据并生成投资见解与置信度评分"</li>
+                            <li><strong>行动导向</strong>："从多个来源收集数据、验证准确性并摘要"</li>
+                            <li><strong>明确范围</strong>："执行 SQL 查询，处理结果，返回结构化数据"</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-box warning">
+                        <div class="info-box-title">❌ 差的 Description</div>
+                        <ul>
+                            <li><strong>模糊</strong>："处理财务事项"</li>
+                            <li><strong>过于宽泛</strong>："做任何与数据相关的事情"</li>
+                            <li><strong>非行动性</strong>："财务分析助手"</li>
+                        </ul>
+                    </div>
+
+                    <h3 class="subsection-title">2. 编写详细的 System Prompt</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+详细的子代理系统提示词示例
+"""
+research_subagent = {
+    "name": "research-agent",
+    "description": "深入研究技术主题，综合多个来源的信息",
+    "system_prompt": """你是一名彻底的研究者。你的工作是：
+
+## 职责
+1. 将研究问题分解为可搜索的查询
+2. 使用 internet_search 查找相关信息
+3. 综合发现成简明总结
+4. 引用来源
+
+## 工作流程
+1. 分析研究问题的核心要点
+2. 设计 3-5 个有针对性的搜索查询
+3. 执行搜索并评估结果质量
+4. 交叉验证重要信息
+5. 综合成结构化摘要
+
+## 输出格式
+### 摘要
+[2-3 段总结核心发现]
+
+### 关键发现
+- 发现 1
+- 发现 2
+- 发现 3
+
+### 来源
+- [标题](URL)
+- [标题](URL)
+
+## 注意事项
+- 优先使用权威来源（.edu, .gov, 知名媒体）
+- 标注信息的时效性
+- 如有矛盾，说明不同观点
+- ⚠️ **重要**：保持回复在 500 字以内以维持清洁上下文
+""",
+    "tools": [internet_search],
+}</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">3. 最小化工具集</h3>
+                    <p>
+                        <strong>只给予子代理完成任务所必需的工具</strong>：
+                    </p>
+
+                    <ul>
+                        <li>✅ <strong>专一性更强</strong>：子代理不会被无关工具分散注意力</li>
+                        <li>✅ <strong>安全性更高</strong>：减少潜在的滥用风险</li>
+                        <li>✅ <strong>性能更好</strong>：模型选择工具的效率更高</li>
+                    </ul>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># ❌ 不好：给子代理过多工具
+subagent = {
+    "name": "data-collector",
+    "tools": [search, database, api_call, file_read, email_send, slack_notify, ...]  # 太多了！
+}
+
+# ✅ 好：只给必需工具
+subagent = {
+    "name": "data-collector",
+    "tools": [search, database]  # 仅收集数据所需
+}</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">4. 按任务选择模型</h3>
+                    <p>
+                        不同模型在不同任务中表现优异，利用 <code>model</code> 字段覆盖：
+                    </p>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>任务类型</th>
+                                <th>推荐模型</th>
+                                <th>原因</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>数据收集</td>
+                                <td><code>openai:gpt-4o</code></td>
+                                <td>速度快，成本低</td>
+                            </tr>
+                            <tr>
+                                <td>复杂分析</td>
+                                <td><code>claude-opus-4-5</code></td>
+                                <td>推理能力强</td>
+                            </tr>
+                            <tr>
+                                <td>代码生成</td>
+                                <td><code>openai:gpt-4o</code></td>
+                                <td>代码能力优秀</td>
+                            </tr>
+                            <tr>
+                                <td>法律审查</td>
+                                <td><code>claude-sonnet-4-5</code></td>
+                                <td>理解力和准确性</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 class="subsection-title">5. 保持返回结果简洁</h3>
+                    <p>
+                        <strong>关键原则</strong>：子代理应返回<strong>摘要而非原始数据</strong>。
+                    </p>
+
+                    <div class="info-box warning">
+                        <div class="info-box-title">⚠️ 简洁输出的重要性</div>
+                        <p>
+                            在系统提示中<strong>明确指示</strong>子代理：
+                        </p>
+                        <ul>
+                            <li>保持输出在 <strong>500 字以内</strong></li>
+                            <li>返回<strong>摘要和关键发现</strong>，而非完整数据</li>
+                            <li>使用<strong>要点列表</strong>而非长段落</li>
+                            <li>如有大量数据，使用<strong>文件系统工具</strong>保存，返回文件路径</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- 常见问题 -->
+                <section class="content-section">
+                    <h2 class="section-title">❓ 常见问题</h2>
+
+                    <h3 class="subsection-subtitle">Q1: 如何调用子代理？</h3>
+                    <p>
+                        <strong>自动调用</strong>。你无需手动调用，主 Agent 会根据任务需求和子代理的 description 自动决定何时调用哪个子代理。
+                    </p>
+
+                    <h3 class="subsection-subtitle">Q2: 子代理未被调用，如何解决？</h3>
+                    <p>
+                        常见原因和解决方案：
+                    </p>
+                    <ul>
+                        <li><strong>description 不够清晰</strong>：使其更具体、行动导向</li>
+                        <li><strong>主 Agent 系统提示缺乏指导</strong>：在主 Agent 的 system_prompt 中明确说明可以委派任务给子代理</li>
+                        <li><strong>任务过于简单</strong>：主 Agent 判断无需委派</li>
+                    </ul>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 在主 Agent 的系统提示中指导委派
+agent = create_deep_agent(
+    model="gpt-4o",
+    subagents=[research_subagent],
+    system_prompt="""你是协调助手。你可以将任务委派给专门的子代理：
+
+- research-agent: 用于深入研究问题
+
+当遇到需要深入研究的任务时，应该委派给 research-agent。"""
+)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">Q3: 子代理的上下文仍然膨胀，怎么办？</h3>
+                    <p>
+                        <strong>解决方案</strong>：
+                    </p>
+                    <ul>
+                        <li>在子代理的 system_prompt 中<strong>明确要求简洁输出</strong>（< 500 字）</li>
+                        <li>指示子代理使用<strong>文件系统工具</strong>保存大量数据，只返回摘要</li>
+                        <li>确保子代理返回<strong>结构化要点</strong>而非长段落</li>
+                    </ul>
+
+                    <h3 class="subsection-subtitle">Q4: 如何选择多个子代理中的正确一个？</h3>
+                    <p>
+                        主 Agent 根据<strong>description</strong>字段决策。确保：
+                    </p>
+                    <ul>
+                        <li>每个子代理的 description <strong>清晰区分用例</strong></li>
+                        <li>避免描述重叠或模糊</li>
+                        <li>使用<strong>行动导向</strong>的语言</li>
+                    </ul>
+
+                    <h3 class="subsection-subtitle">Q5: 子代理可以调用其他子代理吗？</h3>
+                    <p>
+                        <strong>不能直接调用</strong>。子代理只能执行自己的任务并返回结果给主 Agent。
+                        如需多层委派，应该：
+                    </p>
+                    <ul>
+                        <li>由<strong>主 Agent 协调</strong>多个子代理的顺序调用</li>
+                        <li>或使用 <code>CompiledSubAgent</code> 构建包含多步骤的复杂工作流</li>
+                    </ul>
+
+                    <h3 class="subsection-subtitle">Q6: 子代理会消耗更多成本吗？</h3>
+                    <p>
+                        <strong>是的</strong>，每个子代理调用都是独立的模型调用。但从整体看：
+                    </p>
+                    <ul>
+                        <li><strong>成本效益可能更高</strong>：通过上下文隔离，主 Agent 可以保持小型高效的上下文</li>
+                        <li><strong>可以使用不同成本的模型</strong>：简单任务用便宜模型，复杂任务用贵模型</li>
+                        <li><strong>总 Token 数可能更少</strong>：避免重复传递大量中间数据</li>
+                    </ul>
+                </section>
+
+                <!-- 参考资源 -->
+                <section class="content-section">
+                    <h2 class="section-title">📖 参考资源</h2>
+                    <ul>
+                        <li>
+                            <a href="https://docs.langchain.com/oss/python/deepagents/subagents" target="_blank">
+                                DeepAgents Subagents 官方文档
+                            </a>
+                        </li>
+                        <li>
+                            <a href="22-deepagents-quickstart.html">
+                                DeepAgents 快速开始
+                            </a>
+                        </li>
+                        <li>
+                            <a href="23-deepagents-customization.html">
+                                DeepAgents 定制化
+                            </a>
+                        </li>
+                        <li>
+                            <a href="24-deepagents-harness.html">
+                                Harness 系统 - task 工具详解
+                            </a>
+                        </li>
+                        <li>
+                            <a href="15-langgraph.html">
+                                LangGraph - 构建复杂工作流
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- 页面导航 -->
+                <nav class="page-navigation">
+                    <a href="25-deepagents-backends.html" class="nav-button prev">
+                        ← 上一页：后端配置
+                    </a>
+                    <a href="27-deepagents-hitl.html" class="nav-button next">
+                        下一页：人工介入 →
+                    </a>
+                </nav>
+            </div>
+        </main>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" aria-label="返回顶部">↑</button>
+
+    <!-- JavaScript -->
+    <script src="assets/js/mermaid-init.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</body>
+</html>

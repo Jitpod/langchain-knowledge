@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LangChain 1.0 迁移指南 - 从 0.x 升级到 1.0 的完整指南">
+    <title>迁移指南 | LangChain 1.0 Python 知识文档</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <button class="mobile-menu-button" aria-label="打开菜单">☰</button>
+
+    <div class="container">
+        <!-- 侧边栏导航 -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="sidebar-title">🦜 LangChain 1.0</h1>
+                <p class="sidebar-subtitle">Python 完整学习指南</p>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-section">
+                    <div class="nav-section-title">开始</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">
+                                <span class="nav-icon">🏠</span>
+                                主页
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">基础篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="01-introduction.html" class="nav-link">
+                                <span class="nav-icon">📖</span>
+                                LangChain 简介
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="02-architecture.html" class="nav-link">
+                                <span class="nav-icon">🏗️</span>
+                                核心架构
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="03-models.html" class="nav-link">
+                                <span class="nav-icon">🤖</span>
+                                模型接口
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="04-messages.html" class="nav-link">
+                                <span class="nav-icon">💬</span>
+                                消息系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="05-tools.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                工具系统
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">进阶篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="06-agents.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                Agent 基础
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="07-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="08-rag.html" class="nav-link">
+                                <span class="nav-icon">🔍</span>
+                                RAG 详解
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="09-lcel.html" class="nav-link">
+                                <span class="nav-icon">🔗</span>
+                                LCEL 表达式
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">高级应用</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="10-runtime.html" class="nav-link">
+                                <span class="nav-icon">🔌</span>
+                                Runtime 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="11-checkpointer.html" class="nav-link">
+                                <span class="nav-icon">💾</span>
+                                持久化系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="12-streaming.html" class="nav-link">
+                                <span class="nav-icon">🌊</span>
+                                流式输出
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="13-human-in-loop.html" class="nav-link">
+                                <span class="nav-icon">👤</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="14-long-term-memory.html" class="nav-link">
+                                <span class="nav-icon">🗄️</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="15-langgraph.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                LangGraph
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">实战篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="16-customer-service.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                客服机器人
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="17-best-practices.html" class="nav-link">
+                                <span class="nav-icon">✨</span>
+                                最佳实践
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">参考篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="18-api-reference.html" class="nav-link">
+                                <span class="nav-icon">📚</span>
+                                API 速查表
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="19-troubleshooting.html" class="nav-link">
+                                <span class="nav-icon">🐛</span>
+                                故障排除
+                            </a>
+                        </li>
+                        <li class="nav-item active">\n                            <a href="20-migration.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                迁移指南
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">扩展篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="21-structured-output.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                结构化输出
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">DeepAgents 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="22-deepagents-quickstart.html" class="nav-link">
+                                <span class="nav-icon">🚀</span>
+                                快速开始
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="23-deepagents-customization.html" class="nav-link">
+                                <span class="nav-icon">🎨</span>
+                                定制化
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="24-deepagents-harness.html" class="nav-link">
+                                <span class="nav-icon">🎛️</span>
+                                Harness 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="25-deepagents-backends.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                后端配置
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="26-deepagents-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="27-deepagents-hitl.html" class="nav-link">
+                                <span class="nav-icon">🤝</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="28-deepagents-memory.html" class="nav-link">
+                                <span class="nav-icon">🧠</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="29-deepagents-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">Multi-Agent 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="30-multi-agent-index.html" class="nav-link">
+                                <span class="nav-icon">🌐</span>
+                                概述
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="31-multi-agent-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="32-multi-agent-handoffs.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                交接机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="33-multi-agent-skills.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                技能系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="34-multi-agent-router.html" class="nav-link">
+                                <span class="nav-icon">🧭</span>
+                                路由机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="35-multi-agent-workflow.html" class="nav-link">
+                                <span class="nav-icon">🔀</span>
+                                自定义工作流
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- 主内容区域 -->
+        <main class="main-content">
+            <div class="content-wrapper">
+                <!-- 面包屑导航 -->
+                <nav class="breadcrumb">
+                    <span class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link">主页</a>
+                    </span>
+                    <span class="breadcrumb-item">
+                        参考篇
+                    </span>
+                    <span class="breadcrumb-item">
+                        迁移指南
+                    </span>
+                </nav>
+
+                <!-- 页面标题 -->
+                <header class="page-header">
+                    <h1 class="page-title">🔄 LangChain 1.0 迁移指南</h1>
+                    <p class="page-subtitle">
+                        从 LangChain 0.x 平滑升级到 1.0，掌握 API 变化、最佳实践和迁移策略。
+                    </p>
+                </header>
+
+                <!-- 迁移概述 -->
+                <section class="content-section">
+                    <h2 class="section-title">📚 为什么要迁移到 1.0？</h2>
+                    <p>
+                        LangChain 1.0 是一个重大更新，带来了：
+                    </p>
+                    <div class="info-box note">
+                        <div class="info-box-title">💡 1.0 的主要优势</div>
+                        <table style="margin-top: 0.5rem;">
+                            <thead>
+                                <tr>
+                                    <th>特性</th>
+                                    <th>0.x 版本</th>
+                                    <th>1.0 版本</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>API 稳定性</strong></td>
+                                    <td>频繁变化</td>
+                                    <td>稳定的公共 API</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Agent 创建</strong></td>
+                                    <td>复杂的手动配置</td>
+                                    <td>简单的 create_agent()</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>中间件系统</strong></td>
+                                    <td>不支持</td>
+                                    <td>完整的中间件架构</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Runtime 上下文</strong></td>
+                                    <td>有限支持</td>
+                                    <td>类型安全的依赖注入</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>持久化</strong></td>
+                                    <td>基础功能</td>
+                                    <td>Checkpointer + Store 双系统</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>模型抽象</strong></td>
+                                    <td>特定于提供商</td>
+                                    <td>统一的 init_chat_model()</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="info-box warning">
+                        <div class="info-box-title">⚠️ 重要提醒</div>
+                        <p>
+                            <strong>LangChain 1.0 不向后兼容 0.x 的部分 API</strong>。
+                            如果需要继续使用 0.x 的 API，可以安装 <code>langchain-classic</code> 包。
+                        </p>
+                    </div>
+                </section>
+
+                <!-- 迁移流程图 -->
+                <section class="content-section">
+                    <h2 class="section-title">🗺️ 迁移流程</h2>
+                    <div class="mermaid-wrapper">
+                        <div class="mermaid">
+graph TB
+    Start[开始迁移] --> Backup[备份现有代码]
+    Backup --> Install[安装 LangChain 1.0]
+
+    Install --> Evaluate{评估迁移策略}
+
+    Evaluate -->|完全迁移| NewAPI[使用 1.0 新 API]
+    Evaluate -->|渐进迁移| Classic[使用 langchain-classic]
+
+    NewAPI --> Update1[更新导入语句]
+    Update1 --> Update2[替换 API 调用]
+    Update2 --> Update3[重构 Agent 创建]
+    Update3 --> Test1[运行测试]
+
+    Classic --> Install2[安装 langchain-classic]
+    Install2 --> Update4[部分使用新 API]
+    Update4 --> Test2[运行测试]
+
+    Test1 --> Fix{有错误？}
+    Test2 --> Fix
+
+    Fix -->|是| Debug[调试和修复]
+    Fix -->|否| Verify[验证功能]
+
+    Debug --> Test1
+
+    Verify --> Deploy[部署到生产]
+    Deploy --> End[迁移完成]
+
+    style Start fill:#3b82f6,color:#fff
+    style End fill:#10b981,color:#fff
+    style Evaluate fill:#f59e0b,color:#fff
+    style Fix fill:#f59e0b,color:#fff
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 主要 API 变化 -->
+                <section class="content-section">
+                    <h2 class="section-title">🔄 主要 API 变化对照表</h2>
+
+                    <h3 class="subsection-title">1. 模型初始化</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>0.x 版本</th>
+                                <th>1.0 版本</th>
+                                <th>说明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>ChatOpenAI(...)</code></td>
+                                <td><code>init_chat_model("gpt-4o", ...)</code></td>
+                                <td>推荐使用统一初始化函数</td>
+                            </tr>
+                            <tr>
+                                <td><code>OpenAIEmbeddings(...)</code></td>
+                                <td><code>init_embeddings("text-embedding-3-small", ...)</code></td>
+                                <td>统一的嵌入模型初始化</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># ❌ 0.x 版本
+from langchain.chat_models import ChatOpenAI
+model = ChatOpenAI(model_name="gpt-4", temperature=0.7)
+
+# ✅ 1.0 版本（推荐）
+from langchain import init_chat_model
+model = init_chat_model("gpt-4o", model_provider="openai", temperature=0.7)
+
+# ✅ 1.0 版本（仍然支持）
+from langchain_openai import ChatOpenAI
+model = ChatOpenAI(model="gpt-4o", temperature=0.7)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">2. Agent 创建</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>0.x 版本</th>
+                                <th>1.0 版本</th>
+                                <th>说明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>initialize_agent(...)</code></td>
+                                <td><code>create_agent(...)</code></td>
+                                <td>全新的 Agent 创建 API</td>
+                            </tr>
+                            <tr>
+                                <td><code>AgentExecutor.from_agent_and_tools(...)</code></td>
+                                <td><code>create_agent(...)</code></td>
+                                <td>统一的创建方式</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># ❌ 0.x 版本
+from langchain.agents import initialize_agent, AgentType
+
+agent = initialize_agent(
+    tools=tools,
+    llm=llm,
+    agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
+    verbose=True
+)
+
+# ✅ 1.0 版本
+from langchain.agents import create_agent
+
+agent = create_agent(
+    model="gpt-4o",
+    tools=tools,
+    system_prompt="你是专业的 AI 助手"
+)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">3. 链（Chains）</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>0.x 版本</th>
+                                <th>1.0 版本</th>
+                                <th>说明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>LLMChain</code></td>
+                                <td>LCEL 管道或 Agent</td>
+                                <td>使用 LCEL 替代</td>
+                            </tr>
+                            <tr>
+                                <td><code>SimpleSequentialChain</code></td>
+                                <td>LCEL <code>|</code> 操作符</td>
+                                <td>使用管道操作符</td>
+                            </tr>
+                            <tr>
+                                <td><code>RetrievalQA</code></td>
+                                <td>Agent + RAG 工具</td>
+                                <td>使用 Agentic RAG</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># ❌ 0.x 版本
+from langchain.chains import LLMChain
+from langchain.prompts import PromptTemplate
+
+prompt = PromptTemplate.from_template("翻译: {text}")
+chain = LLMChain(llm=llm, prompt=prompt)
+result = chain.run(text="Hello")
+
+# ✅ 1.0 版本（LCEL）
+from langchain_core.prompts import ChatPromptTemplate
+
+prompt = ChatPromptTemplate.from_template("翻译: {text}")
+chain = prompt | model
+result = chain.invoke({"text": "Hello"})</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">4. 内存管理</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>0.x 版本</th>
+                                <th>1.0 版本</th>
+                                <th>说明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>ConversationBufferMemory</code></td>
+                                <td>Checkpointer</td>
+                                <td>使用持久化系统</td>
+                            </tr>
+                            <tr>
+                                <td><code>ConversationSummaryMemory</code></td>
+                                <td>SummarizationMiddleware</td>
+                                <td>使用中间件</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># ❌ 0.x 版本
+from langchain.memory import ConversationBufferMemory
+
+memory = ConversationBufferMemory()
+agent = initialize_agent(tools, llm, memory=memory)
+
+# ✅ 1.0 版本
+from langgraph.checkpoint.memory import InMemorySaver
+
+checkpointer = InMemorySaver()
+agent = create_agent(
+    model="gpt-4o",
+    tools=tools,
+    checkpointer=checkpointer
+)
+
+# 使用 thread_id 管理对话
+config = {"configurable": {"thread_id": "user_001"}}
+agent.invoke({"messages": [...]}, config=config)</code></pre>
+                    </div>
+                </section>
+
+                <!-- 废弃功能 -->
+                <section class="content-section">
+                    <h2 class="section-title">🚫 废弃功能和替代方案</h2>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>废弃功能（0.x）</th>
+                                <th>替代方案（1.0）</th>
+                                <th>迁移难度</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>LLMChain</code></td>
+                                <td>LCEL 管道 或 Agent</td>
+                                <td>🟡 中等</td>
+                            </tr>
+                            <tr>
+                                <td><code>initialize_agent()</code></td>
+                                <td><code>create_agent()</code></td>
+                                <td>🟢 简单</td>
+                            </tr>
+                            <tr>
+                                <td><code>ConversationBufferMemory</code></td>
+                                <td>Checkpointer</td>
+                                <td>🟡 中等</td>
+                            </tr>
+                            <tr>
+                                <td><code>RetrievalQA</code></td>
+                                <td>Agent + RAG 工具</td>
+                                <td>🟡 中等</td>
+                            </tr>
+                            <tr>
+                                <td><code>SimpleSequentialChain</code></td>
+                                <td>LCEL <code>|</code> 操作符</td>
+                                <td>🟢 简单</td>
+                            </tr>
+                            <tr>
+                                <td><code>VectorDBQA</code></td>
+                                <td>Agent + 检索工具</td>
+                                <td>🟡 中等</td>
+                            </tr>
+                            <tr>
+                                <td>旧的 Callback 系统</td>
+                                <td>Middleware 系统</td>
+                                <td>🔴 较难</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="info-box tip">
+                        <div class="info-box-title">✅ 迁移建议</div>
+                        <ul>
+                            <li><strong>优先迁移简单的 API</strong>：先从模型初始化和 Agent 创建开始</li>
+                            <li><strong>分模块迁移</strong>：不要一次性迁移所有代码</li>
+                            <li><strong>保留测试</strong>：确保每次迁移后测试通过</li>
+                            <li><strong>使用 langchain-classic</strong>：对于复杂的旧代码，可以暂时使用兼容包</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- langchain-classic -->
+                <section class="content-section">
+                    <h2 class="section-title">📦 使用 langchain-classic</h2>
+                    <p>
+                        如果需要继续使用 0.x 的 API，可以安装 <code>langchain-classic</code> 包。
+                        这允许你在迁移过程中逐步替换旧代码。
+                    </p>
+
+                    <h3 class="subsection-title">安装 langchain-classic</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Bash</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-bash"># 安装 langchain-classic
+pip install langchain-classic
+
+# 同时安装 LangChain 1.0
+pip install langchain>=1.0.0</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">混合使用示例</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 使用 1.0 的新 API
+from langchain import init_chat_model
+from langchain.agents import create_agent
+
+model = init_chat_model("gpt-4o", model_provider="openai")
+
+# 使用 langchain-classic 的旧 API
+from langchain_classic.chains import LLMChain
+from langchain_classic.prompts import PromptTemplate
+
+prompt = PromptTemplate.from_template("翻译: {text}")
+old_chain = LLMChain(llm=model, prompt=prompt)
+
+# 在同一个项目中混合使用
+result = old_chain.run(text="Hello")</code></pre>
+                    </div>
+
+                    <div class="info-box warning">
+                        <div class="info-box-title">⚠️ 注意事项</div>
+                        <p>
+                            <code>langchain-classic</code> 仅用于过渡期，不会获得新功能更新。
+                            建议尽快完成迁移到 1.0 API。
+                        </p>
+                    </div>
+                </section>
+
+                <!-- 迁移步骤 -->
+                <section class="content-section">
+                    <h2 class="section-title">📝 详细迁移步骤</h2>
+
+                    <h3 class="subsection-title">步骤 1: 准备工作</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Bash</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-bash"># 1. 备份现有代码
+git commit -am "Backup before LangChain 1.0 migration"
+
+# 2. 创建新分支
+git checkout -b migration-to-v1
+
+# 3. 升级到 LangChain 1.0
+pip install --upgrade langchain langchain-openai langchain-anthropic
+
+# 4. 查看当前版本
+python -c "import langchain; print(langchain.__version__)"</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">步骤 2: 更新导入语句</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># ❌ 旧的导入（0.x）
+from langchain.chat_models import ChatOpenAI
+from langchain.agents import initialize_agent, AgentType
+from langchain.chains import LLMChain
+from langchain.memory import ConversationBufferMemory
+
+# ✅ 新的导入（1.0）
+from langchain import init_chat_model
+from langchain.agents import create_agent
+from langchain_core.prompts import ChatPromptTemplate
+from langgraph.checkpoint.memory import InMemorySaver</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">步骤 3: 替换 Agent 创建</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># ❌ 0.x 版本
+llm = ChatOpenAI(model_name="gpt-4", temperature=0.7)
+memory = ConversationBufferMemory()
+
+agent = initialize_agent(
+    tools=tools,
+    llm=llm,
+    agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
+    memory=memory,
+    verbose=True
+)
+
+# ✅ 1.0 版本
+checkpointer = InMemorySaver()
+
+agent = create_agent(
+    model="gpt-4o",
+    tools=tools,
+    checkpointer=checkpointer,
+    system_prompt="你是专业的 AI 助手"
+)
+
+# 调用时传入 config
+config = {"configurable": {"thread_id": "user_001"}}
+result = agent.invoke({"messages": [...]}, config=config)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">步骤 4: 替换链（Chains）</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># ❌ 0.x 版本
+from langchain.chains import LLMChain, SimpleSequentialChain
+from langchain.prompts import PromptTemplate
+
+# 链 1：翻译
+translate_prompt = PromptTemplate.from_template("翻译成英文: {text}")
+translate_chain = LLMChain(llm=llm, prompt=translate_prompt)
+
+# 链 2：总结
+summarize_prompt = PromptTemplate.from_template("总结: {text}")
+summarize_chain = LLMChain(llm=llm, prompt=summarize_prompt)
+
+# 组合链
+overall_chain = SimpleSequentialChain(
+    chains=[translate_chain, summarize_chain]
+)
+
+# ✅ 1.0 版本（LCEL）
+from langchain_core.prompts import ChatPromptTemplate
+
+translate_prompt = ChatPromptTemplate.from_template("翻译成英文: {text}")
+summarize_prompt = ChatPromptTemplate.from_template("总结: {text}")
+
+# 使用管道操作符组合
+chain = (
+    translate_prompt
+    | model
+    | (lambda x: {"text": x.content})
+    | summarize_prompt
+    | model
+)
+
+result = chain.invoke({"text": "你好世界"})</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">步骤 5: 测试和验证</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 运行现有测试
+pytest tests/
+
+# 手动测试关键功能
+def test_migration():
+    """测试迁移后的功能"""
+    from langchain.agents import create_agent
+
+    agent = create_agent(
+        model="gpt-4o",
+        tools=[],
+        system_prompt="你是 AI 助手"
+    )
+
+    result = agent.invoke({
+        "messages": [{"role": "user", "content": "你好"}]
+    })
+
+    assert len(result["messages"]) > 0
+    print("✅ 迁移成功！")
+
+if __name__ == "__main__":
+    test_migration()</code></pre>
+                    </div>
+                </section>
+
+                <!-- 迁移检查清单 -->
+                <section class="content-section">
+                    <h2 class="section-title">✅ 迁移检查清单</h2>
+
+                    <div class="info-box tip">
+                        <div class="info-box-title">📋 完整检查清单</div>
+                        <table style="margin-top: 0.5rem;">
+                            <thead>
+                                <tr>
+                                    <th>检查项</th>
+                                    <th>说明</th>
+                                    <th>状态</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>备份代码</strong></td>
+                                    <td>使用 Git 提交当前状态</td>
+                                    <td>☐</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>升级包</strong></td>
+                                    <td>pip install --upgrade langchain</td>
+                                    <td>☐</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>更新导入</strong></td>
+                                    <td>替换所有 import 语句</td>
+                                    <td>☐</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>替换模型初始化</strong></td>
+                                    <td>使用 init_chat_model()</td>
+                                    <td>☐</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>替换 Agent 创建</strong></td>
+                                    <td>使用 create_agent()</td>
+                                    <td>☐</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>替换链</strong></td>
+                                    <td>使用 LCEL 或 Agent</td>
+                                    <td>☐</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>替换内存管理</strong></td>
+                                    <td>使用 Checkpointer</td>
+                                    <td>☐</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>运行测试</strong></td>
+                                    <td>确保所有测试通过</td>
+                                    <td>☐</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>性能测试</strong></td>
+                                    <td>验证性能没有退化</td>
+                                    <td>☐</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>文档更新</strong></td>
+                                    <td>更新内部文档和注释</td>
+                                    <td>☐</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>部署测试</strong></td>
+                                    <td>在测试环境验证</td>
+                                    <td>☐</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>生产部署</strong></td>
+                                    <td>逐步灰度发布</td>
+                                    <td>☐</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- 常见迁移问题 -->
+                <section class="content-section">
+                    <h2 class="section-title">❓ 常见迁移问题</h2>
+
+                    <h3 class="subsection-subtitle">Q1: 必须立即迁移到 1.0 吗？</h3>
+                    <p>
+                        <strong>不是必须</strong>，但强烈推荐。LangChain 0.x 将逐步停止维护。
+                        你可以：
+                    </p>
+                    <ul>
+                        <li>使用 <code>langchain-classic</code> 继续运行旧代码</li>
+                        <li>逐步迁移，而不是一次性全部迁移</li>
+                        <li>优先迁移新功能，旧功能可以暂缓</li>
+                    </ul>
+
+                    <h3 class="subsection-subtitle">Q2: 迁移需要多长时间？</h3>
+                    <p>
+                        取决于代码规模：
+                    </p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>项目规模</th>
+                                <th>预估时间</th>
+                                <th>建议策略</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>小型（< 1000 行）</td>
+                                <td>1-2 天</td>
+                                <td>一次性迁移</td>
+                            </tr>
+                            <tr>
+                                <td>中型（1000-5000 行）</td>
+                                <td>1-2 周</td>
+                                <td>分模块迁移</td>
+                            </tr>
+                            <tr>
+                                <td>大型（> 5000 行）</td>
+                                <td>1-2 月</td>
+                                <td>渐进式迁移 + langchain-classic</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 class="subsection-subtitle">Q3: 性能会有变化吗？</h3>
+                    <p>
+                        一般情况下，1.0 版本性能<strong>更好</strong>：
+                    </p>
+                    <ul>
+                        <li>更高效的状态管理</li>
+                        <li>更好的流式输出支持</li>
+                        <li>中间件带来的灵活性</li>
+                    </ul>
+
+                    <h3 class="subsection-subtitle">Q4: 如何处理大量的 LLMChain？</h3>
+                    <p>
+                        <strong>策略 1</strong>：使用 LCEL 重写（推荐）
+                    </p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># LCEL 更简洁、更强大
+chain = prompt | model</code></pre>
+                    </div>
+
+                    <p>
+                        <strong>策略 2</strong>：使用 langchain-classic 保留旧代码
+                    </p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from langchain_classic.chains import LLMChain
+# 保持原有代码不变</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">Q5: 1.0 有哪些新功能值得使用？</h3>
+                    <ul>
+                        <li><strong>中间件系统</strong>：PII 保护、摘要、日志等</li>
+                        <li><strong>Runtime 上下文</strong>：类型安全的依赖注入</li>
+                        <li><strong>Checkpointer + Store</strong>：更强大的持久化</li>
+                        <li><strong>统一的模型接口</strong>：跨提供商兼容</li>
+                        <li><strong>更好的流式输出</strong>：多种 stream_mode</li>
+                    </ul>
+                </section>
+
+                <!-- 参考资源 -->
+                <section class="content-section">
+                    <h2 class="section-title">📖 参考资源</h2>
+                    <ul>
+                        <li>
+                            <a href="https://docs.langchain.com/oss/python/langchain/migration" target="_blank">
+                                官方迁移指南
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://docs.langchain.com/oss/python/langchain/changelog" target="_blank">
+                                完整更新日志
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/langchain-ai/langchain/releases" target="_blank">
+                                GitHub Release Notes
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://pypi.org/project/langchain-classic/" target="_blank">
+                                langchain-classic PyPI 页面
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- 页面导航 -->
+                <nav class="page-navigation">
+                    <a href="19-troubleshooting.html" class="nav-button prev">
+                        ← 上一页：故障排除
+                    </a>
+                    <a href="index.html" class="nav-button next">
+                        返回主页 →
+                    </a>
+                </nav>
+            </div>
+        </main>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" aria-label="返回顶部">↑</button>
+
+    <!-- JavaScript -->
+    <script src="assets/js/mermaid-init.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</body>
+</html>

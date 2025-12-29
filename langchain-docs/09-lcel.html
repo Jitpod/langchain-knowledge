@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LangChain Expression Language (LCEL) - 声明式组合和链式调用">
+    <title>LCEL 表达式 | LangChain 1.0 Python 知识文档</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <button class="mobile-menu-button" aria-label="打开菜单">☰</button>
+
+    <div class="container">
+        <!-- 侧边栏导航 -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="sidebar-title">🦜 LangChain 1.0</h1>
+                <p class="sidebar-subtitle">Python 完整学习指南</p>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-section">
+                    <div class="nav-section-title">开始</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">
+                                <span class="nav-icon">🏠</span>
+                                主页
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">基础篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="01-introduction.html" class="nav-link">
+                                <span class="nav-icon">📖</span>
+                                LangChain 简介
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="02-architecture.html" class="nav-link">
+                                <span class="nav-icon">🏗️</span>
+                                核心架构
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="03-models.html" class="nav-link">
+                                <span class="nav-icon">🤖</span>
+                                模型接口
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="04-messages.html" class="nav-link">
+                                <span class="nav-icon">💬</span>
+                                消息系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="05-tools.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                工具系统
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">进阶篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="06-agents.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                Agent 基础
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="07-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="08-rag.html" class="nav-link">
+                                <span class="nav-icon">🔍</span>
+                                RAG 详解
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="09-lcel.html" class="nav-link">
+                                <span class="nav-icon">🔗</span>
+                                LCEL 表达式
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">高级应用</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="10-runtime.html" class="nav-link">
+                                <span class="nav-icon">🔌</span>
+                                Runtime 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="11-checkpointer.html" class="nav-link">
+                                <span class="nav-icon">💾</span>
+                                持久化系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="12-streaming.html" class="nav-link">
+                                <span class="nav-icon">🌊</span>
+                                流式输出
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="13-human-in-loop.html" class="nav-link">
+                                <span class="nav-icon">👤</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="14-long-term-memory.html" class="nav-link">
+                                <span class="nav-icon">🗄️</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="15-langgraph.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                LangGraph
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">实战篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="16-customer-service.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                客服机器人
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="17-best-practices.html" class="nav-link">
+                                <span class="nav-icon">✨</span>
+                                最佳实践
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">参考篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="18-api-reference.html" class="nav-link">
+                                <span class="nav-icon">📚</span>
+                                API 速查表
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="19-troubleshooting.html" class="nav-link">
+                                <span class="nav-icon">🐛</span>
+                                故障排除
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="20-migration.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                迁移指南
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">扩展篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="21-structured-output.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                结构化输出
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">DeepAgents 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="22-deepagents-quickstart.html" class="nav-link">
+                                <span class="nav-icon">🚀</span>
+                                快速开始
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="23-deepagents-customization.html" class="nav-link">
+                                <span class="nav-icon">🎨</span>
+                                定制化
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="24-deepagents-harness.html" class="nav-link">
+                                <span class="nav-icon">🎛️</span>
+                                Harness 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="25-deepagents-backends.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                后端配置
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="26-deepagents-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="27-deepagents-hitl.html" class="nav-link">
+                                <span class="nav-icon">🤝</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="28-deepagents-memory.html" class="nav-link">
+                                <span class="nav-icon">🧠</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="29-deepagents-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">Multi-Agent 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="30-multi-agent-index.html" class="nav-link">
+                                <span class="nav-icon">🌐</span>
+                                概述
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="31-multi-agent-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="32-multi-agent-handoffs.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                交接机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="33-multi-agent-skills.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                技能系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="34-multi-agent-router.html" class="nav-link">
+                                <span class="nav-icon">🧭</span>
+                                路由机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="35-multi-agent-workflow.html" class="nav-link">
+                                <span class="nav-icon">🔀</span>
+                                自定义工作流
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- 主内容区域 -->
+        <main class="main-content">
+            <div class="content-wrapper">
+                <!-- 面包屑导航 -->
+                <nav class="breadcrumb">
+                    <span class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link">主页</a>
+                    </span>
+                    <span class="breadcrumb-item">
+                        进阶篇
+                    </span>
+                    <span class="breadcrumb-item">
+                        LCEL 表达式
+                    </span>
+                </nav>
+
+                <!-- 页面标题 -->
+                <header class="page-header">
+                    <h1 class="page-title">🔗 LangChain Expression Language (LCEL)</h1>
+                    <p class="page-subtitle">
+                        声明式组合语言，使用管道操作符构建强大的数据处理链和 AI 工作流。
+                    </p>
+                </header>
+
+                <!-- 什么是 LCEL -->
+                <section class="content-section">
+                    <h2 class="section-title">📚 什么是 LCEL？</h2>
+                    <p>
+                        <strong>LCEL (LangChain Expression Language)</strong> 是 LangChain 的声明式组合语言，
+                        允许你使用<strong>管道操作符 <code>|</code></strong> 轻松组合各种组件。
+                    </p>
+
+                    <div class="info-box note">
+                        <div class="info-box-title">💡 LCEL 的核心优势</div>
+                        <table style="margin-top: 0.5rem;">
+                            <thead>
+                                <tr>
+                                    <th>特性</th>
+                                    <th>说明</th>
+                                    <th>示例</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>简洁语法</strong></td>
+                                    <td>使用 | 操作符链式组合</td>
+                                    <td><code>prompt | model | parser</code></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>流式优先</strong></td>
+                                    <td>自动支持流式输出</td>
+                                    <td>无需额外配置即可流式处理</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>并行执行</strong></td>
+                                    <td>RunnableParallel 并发处理</td>
+                                    <td>同时调用多个模型或工具</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>类型安全</strong></td>
+                                    <td>编译时类型检查</td>
+                                    <td>IDE 自动补全和错误提示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>可追踪性</strong></td>
+                                    <td>LangSmith 自动追踪</td>
+                                    <td>无需手动插桩</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+LCEL 基础示例 - 简单的链式调用
+"""
+from langchain_core.prompts import ChatPromptTemplate
+from langchain import init_chat_model
+
+# 创建提示词模板
+prompt = ChatPromptTemplate.from_template("翻译成英文：{text}")
+
+# 创建模型
+model = init_chat_model("gpt-4o", model_provider="openai")
+
+# 使用管道操作符组合
+chain = prompt | model
+
+# 调用链
+result = chain.invoke({"text": "你好世界"})
+print(result.content)
+# 输出：Hello World</code></pre>
+                    </div>
+                </section>
+
+                <!-- LCEL vs 传统链 -->
+                <section class="content-section">
+                    <h2 class="section-title">🆚 LCEL vs 传统链</h2>
+                    <p>
+                        LCEL 在 LangChain 1.0 中<strong>替代了传统的 LLMChain</strong>，
+                        提供更简洁、更强大的组合方式：
+                    </p>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>对比项</th>
+                                <th>传统链（0.x）</th>
+                                <th>LCEL（1.0）</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>语法</strong></td>
+                                <td>显式类实例化</td>
+                                <td>管道操作符 <code>|</code></td>
+                            </tr>
+                            <tr>
+                                <td><strong>流式输出</strong></td>
+                                <td>需要手动配置</td>
+                                <td>自动支持</td>
+                            </tr>
+                            <tr>
+                                <td><strong>并行执行</strong></td>
+                                <td>不支持</td>
+                                <td>RunnableParallel</td>
+                            </tr>
+                            <tr>
+                                <td><strong>代码量</strong></td>
+                                <td>较多（5-10 行）</td>
+                                <td>极简（1-3 行）</td>
+                            </tr>
+                            <tr>
+                                <td><strong>调试追踪</strong></td>
+                                <td>手动配置回调</td>
+                                <td>自动 LangSmith 集成</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+对比：传统链 vs LCEL
+"""
+from langchain_core.prompts import ChatPromptTemplate
+from langchain import init_chat_model
+
+model = init_chat_model("gpt-4o", model_provider="openai")
+prompt = ChatPromptTemplate.from_template("总结：{text}")
+
+# ❌ 传统方式（0.x，已废弃）
+from langchain_classic.chains import LLMChain
+
+chain = LLMChain(llm=model, prompt=prompt)
+result = chain.run(text="LangChain 是一个...")  # 复杂且不灵活
+
+# ✅ LCEL 方式（1.0，推荐）
+chain = prompt | model
+result = chain.invoke({"text": "LangChain 是一个..."})  # 简洁且强大</code></pre>
+                    </div>
+                </section>
+
+                <!-- 管道操作符详解 -->
+                <section class="content-section">
+                    <h2 class="section-title">🔀 管道操作符 | 详解</h2>
+                    <p>
+                        管道操作符 <code>|</code> 是 LCEL 的核心，它将前一个组件的<strong>输出</strong>
+                        传递给下一个组件的<strong>输入</strong>。
+                    </p>
+
+                    <div class="mermaid-wrapper">
+                        <div class="mermaid">
+graph LR
+    Input["输入<br/>{text: '...'} "] --> Prompt["ChatPromptTemplate<br/>prompt"]
+    Prompt --> Model["ChatModel<br/>model"]
+    Model --> Parser["OutputParser<br/>parser"]
+    Parser --> Output["输出<br/>解析后的结果"]
+
+    Input -.->|invoke()| Prompt
+    Prompt -.->|messages| Model
+    Model -.->|AIMessage| Parser
+    Parser -.->|parsed data| Output
+
+    style Input fill:#e0e0e0,color:#000
+    style Prompt fill:#3b82f6,color:#fff
+    style Model fill:#10b981,color:#fff
+    style Parser fill:#f59e0b,color:#fff
+    style Output fill:#8b5cf6,color:#fff
+                        </div>
+                    </div>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+管道操作符 - 多步骤链
+"""
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
+from langchain import init_chat_model
+
+# 步骤 1：提示词
+prompt = ChatPromptTemplate.from_template(
+    "将以下文本翻译成{language}：\n\n{text}"
+)
+
+# 步骤 2：模型
+model = init_chat_model("gpt-4o", model_provider="openai")
+
+# 步骤 3：输出解析器
+parser = StrOutputParser()
+
+# 组合成链（3 个步骤）
+translation_chain = prompt | model | parser
+
+# 执行链
+result = translation_chain.invoke({
+    "language": "英文",
+    "text": "今天天气不错"
+})
+
+print(result)
+# 输出：The weather is nice today</code></pre>
+                    </div>
+
+                    <div class="info-box tip">
+                        <div class="info-box-title">✨ 管道操作符的魔法</div>
+                        <p>
+                            管道操作符背后的原理是 <strong>Runnable 协议</strong>。
+                            所有实现了 <code>Runnable</code> 接口的组件都可以使用 <code>|</code> 组合。
+                        </p>
+                        <ul>
+                            <li><code>ChatPromptTemplate</code> → Runnable</li>
+                            <li><code>ChatModel</code> → Runnable</li>
+                            <li><code>OutputParser</code> → Runnable</li>
+                            <li><code>RunnableLambda</code> → 自定义 Runnable</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- RunnableLambda 自定义逻辑 -->
+                <section class="content-section">
+                    <h2 class="section-title">🔧 RunnableLambda - 自定义逻辑</h2>
+                    <p>
+                        <code>RunnableLambda</code> 允许你在链中<strong>插入自定义 Python 函数</strong>，
+                        用于数据转换、条件逻辑或副作用操作。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+RunnableLambda - 在链中插入自定义函数
+"""
+from langchain_core.runnables import RunnableLambda
+from langchain_core.prompts import ChatPromptTemplate
+from langchain import init_chat_model
+
+model = init_chat_model("gpt-4o", model_provider="openai")
+
+# 自定义函数：将模型输出转换为大写
+def to_uppercase(ai_message):
+    """将 AIMessage 的 content 转换为大写"""
+    return ai_message.content.upper()
+
+# 自定义函数：添加前缀
+def add_prefix(text):
+    """添加前缀"""
+    return f"📌 处理结果：{text}"
+
+# 构建链
+prompt = ChatPromptTemplate.from_template("用一句话介绍：{topic}")
+
+chain = (
+    prompt
+    | model
+    | RunnableLambda(to_uppercase)     # 转大写
+    | RunnableLambda(add_prefix)       # 添加前缀
+)
+
+result = chain.invoke({"topic": "Python"})
+print(result)
+# 输出：📌 处理结果：PYTHON IS A HIGH-LEVEL PROGRAMMING LANGUAGE...</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">RunnableLambda 常见用途</h3>
+                    <ul>
+                        <li><strong>数据转换</strong>：格式化、清洗、提取字段</li>
+                        <li><strong>日志记录</strong>：打印中间结果用于调试</li>
+                        <li><strong>条件分支</strong>：根据输入选择不同的处理路径</li>
+                        <li><strong>副作用</strong>：保存到数据库、发送通知</li>
+                    </ul>
+                </section>
+
+                <!-- RunnablePassthrough 数据传递 -->
+                <section class="content-section">
+                    <h2 class="section-title">🔄 RunnablePassthrough - 数据传递</h2>
+                    <p>
+                        <code>RunnablePassthrough</code> 用于在链中<strong>透传数据</strong>，
+                        常用于需要保留原始输入或合并多个数据源的场景。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+RunnablePassthrough - 保留原始输入
+"""
+from langchain_core.runnables import RunnablePassthrough
+from langchain_core.prompts import ChatPromptTemplate
+from langchain import init_chat_model
+
+model = init_chat_model("gpt-4o", model_provider="openai")
+
+# 场景：我们想在最终结果中同时包含原始问题和 AI 回答
+prompt = ChatPromptTemplate.from_template("回答问题：{question}")
+
+chain = (
+    # 使用字典保留原始输入
+    {
+        "question": RunnablePassthrough(),  # 透传原始问题
+        "answer": prompt | model            # 生成答案
+    }
+)
+
+result = chain.invoke("什么是量子计算？")
+print(f"问题：{result['question']}")
+print(f"答案：{result['answer'].content}")
+
+# 输出：
+# 问题：什么是量子计算？
+# 答案：量子计算是利用量子力学原理...</code></pre>
+                    </div>
+
+                    <div class="info-box tip">
+                        <div class="info-box-title">💡 RunnablePassthrough 典型用法</div>
+                        <p>
+                            <strong>最常见的用法</strong>是在 RAG 场景中，同时保留用户问题和检索到的文档：
+                        </p>
+                        <pre><code>chain = {
+    "context": retriever,              # 检索文档
+    "question": RunnablePassthrough()  # 保留原始问题
+} | prompt | model</code></pre>
+                    </div>
+                </section>
+
+                <!-- RunnableParallel 并行执行 -->
+                <section class="content-section">
+                    <h2 class="section-title">⚡ RunnableParallel - 并行执行</h2>
+                    <p>
+                        <code>RunnableParallel</code> 允许<strong>并发执行多个 Runnable</strong>，
+                        显著提升性能，特别适用于：
+                    </p>
+                    <ul>
+                        <li>同时调用多个 LLM（对比不同模型的输出）</li>
+                        <li>并行检索多个数据源</li>
+                        <li>同时执行多个独立的数据转换</li>
+                    </ul>
+
+                    <div class="mermaid-wrapper">
+                        <div class="mermaid">
+graph TB
+    Input["输入数据"] --> Parallel["RunnableParallel"]
+
+    Parallel --> Task1["任务 1<br/>翻译"]
+    Parallel --> Task2["任务 2<br/>总结"]
+    Parallel --> Task3["任务 3<br/>关键词提取"]
+
+    Task1 --> Output1["输出 1"]
+    Task2 --> Output2["输出 2"]
+    Task3 --> Output3["输出 3"]
+
+    Output1 --> Merge["合并结果"]
+    Output2 --> Merge
+    Output3 --> Merge
+
+    Merge --> Final["最终输出<br/>{translation: ..., summary: ..., keywords: ...}"]
+
+    style Parallel fill:#f59e0b,color:#fff
+    style Merge fill:#8b5cf6,color:#fff
+                        </div>
+                    </div>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+RunnableParallel - 并发执行多个任务
+"""
+from langchain_core.runnables import RunnableParallel
+from langchain_core.prompts import ChatPromptTemplate
+from langchain import init_chat_model
+
+model = init_chat_model("gpt-4o", model_provider="openai")
+
+# 定义 3 个独立的链
+translate_chain = (
+    ChatPromptTemplate.from_template("翻译成英文：{text}")
+    | model
+)
+
+summarize_chain = (
+    ChatPromptTemplate.from_template("用一句话总结：{text}")
+    | model
+)
+
+keywords_chain = (
+    ChatPromptTemplate.from_template("提取 3 个关键词：{text}")
+    | model
+)
+
+# 使用 RunnableParallel 并行执行
+parallel_chain = RunnableParallel(
+    translation=translate_chain,
+    summary=summarize_chain,
+    keywords=keywords_chain
+)
+
+# 执行（3 个任务并发）
+result = parallel_chain.invoke({
+    "text": "人工智能正在改变世界，从医疗到教育，AI 的应用无处不在。"
+})
+
+print("翻译：", result["translation"].content)
+print("总结：", result["summary"].content)
+print("关键词：", result["keywords"].content)
+
+# 输出示例：
+# 翻译：Artificial intelligence is changing the world...
+# 总结：AI 广泛应用于医疗和教育等领域
+# 关键词：人工智能、医疗、教育</code></pre>
+                    </div>
+
+                    <div class="info-box warning">
+                        <div class="info-box-title">⚠️ 并行执行的注意事项</div>
+                        <ul>
+                            <li><strong>成本增加</strong>：并行调用多个 LLM 会同时消耗 Token</li>
+                            <li><strong>速率限制</strong>：注意 API 的并发限制（每分钟请求数）</li>
+                            <li><strong>错误处理</strong>：任何一个任务失败都会导致整体失败</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- 复杂 LCEL 链示例 -->
+                <section class="content-section">
+                    <h2 class="section-title">🏗️ 复杂 LCEL 链实战</h2>
+                    <p>
+                        将所有技术组合起来，构建一个<strong>完整的 RAG 问答链</strong>：
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级 - 完整示例</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+复杂 LCEL 链 - 完整的 RAG 问答系统
+"""
+from langchain_core.runnables import RunnablePassthrough, RunnableParallel
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
+from langchain import init_chat_model
+from langchain_chroma import Chroma
+from langchain_openai import OpenAIEmbeddings
+
+# 1. 初始化组件
+model = init_chat_model("gpt-4o", model_provider="openai")
+embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
+
+# 2. 创建向量存储（假设已有数据）
+vectorstore = Chroma(
+    collection_name="knowledge_base",
+    embedding_function=embeddings
+)
+retriever = vectorstore.as_retriever(search_kwargs={"k": 3})
+
+# 3. 定义提示词模板
+rag_prompt = ChatPromptTemplate.from_template("""
+基于以下上下文回答问题。如果上下文中没有相关信息，请说"我不知道"。
+
+上下文：
+{context}
+
+问题：{question}
+
+答案：
+""")
+
+# 4. 自定义函数：格式化检索到的文档
+def format_docs(docs):
+    """将 Document 列表格式化为字符串"""
+    return "\n\n".join([doc.page_content for doc in docs])
+
+# 5. 构建完整的 LCEL 链
+rag_chain = (
+    # 步骤 1：并行准备数据
+    RunnableParallel(
+        context=retriever | format_docs,     # 检索并格式化文档
+        question=RunnablePassthrough()       # 透传原始问题
+    )
+    # 步骤 2：生成提示词
+    | rag_prompt
+    # 步骤 3：调用模型
+    | model
+    # 步骤 4：解析输出
+    | StrOutputParser()
+)
+
+# 6. 使用链
+question = "什么是 LangChain？"
+answer = rag_chain.invoke(question)
+
+print(f"问题：{question}")
+print(f"答案：{answer}")
+
+# 7. 流式输出（LCEL 自动支持）
+print("\n流式输出：")
+for chunk in rag_chain.stream(question):
+    print(chunk, end="", flush=True)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">链的执行流程</h3>
+                    <div class="mermaid-wrapper">
+                        <div class="mermaid">
+graph TB
+    Q["问题：什么是 LangChain？"] --> Parallel["RunnableParallel"]
+
+    Parallel --> R1["检索器<br/>retriever"]
+    Parallel --> R2["透传问题<br/>RunnablePassthrough"]
+
+    R1 --> Format["格式化文档<br/>format_docs"]
+    Format --> Context["context"]
+    R2 --> Question["question"]
+
+    Context --> Prompt["RAG Prompt<br/>rag_prompt"]
+    Question --> Prompt
+
+    Prompt --> Model["GPT-4o<br/>model"]
+    Model --> Parser["StrOutputParser<br/>parser"]
+    Parser --> Answer["答案"]
+
+    style Parallel fill:#f59e0b,color:#fff
+    style Model fill:#10b981,color:#fff
+    style Answer fill:#8b5cf6,color:#fff
+                        </div>
+                    </div>
+                </section>
+
+                <!-- LCEL 最佳实践 -->
+                <section class="content-section">
+                    <h2 class="section-title">✨ LCEL 最佳实践</h2>
+
+                    <h3 class="subsection-title">1. 优先使用 LCEL 而非传统链</h3>
+                    <p>
+                        在 LangChain 1.0 中，<strong>始终使用 LCEL</strong> 来组合组件，
+                        避免使用已废弃的 <code>LLMChain</code>。
+                    </p>
+
+                    <h3 class="subsection-title">2. 善用并行执行</h3>
+                    <p>
+                        当多个任务之间<strong>没有依赖关系</strong>时，使用 <code>RunnableParallel</code> 并行执行：
+                    </p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># ✅ 好的做法：并行执行独立任务
+parallel = RunnableParallel(
+    task1=chain1,
+    task2=chain2,
+    task3=chain3
+)
+
+# ❌ 不好的做法：串行执行（浪费时间）
+result1 = chain1.invoke(input)
+result2 = chain2.invoke(input)
+result3 = chain3.invoke(input)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">3. 使用 RunnableLambda 添加调试日志</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">def debug_log(x):
+    """打印中间结果用于调试"""
+    print(f"🔍 Debug: {x}")
+    return x
+
+# 在链中插入调试日志
+chain = (
+    prompt
+    | RunnableLambda(debug_log)  # 查看提示词
+    | model
+    | RunnableLambda(debug_log)  # 查看模型输出
+    | parser
+)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">4. 保持链的可读性</h3>
+                    <p>
+                        对于复杂的链，使用<strong>变量</strong>和<strong>注释</strong>提升可读性：
+                    </p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># ✅ 好的做法：拆分为多个步骤
+retrieval_step = retriever | format_docs
+prompt_step = rag_prompt
+generation_step = model | parser
+
+full_chain = (
+    {"context": retrieval_step, "question": RunnablePassthrough()}
+    | prompt_step
+    | generation_step
+)
+
+# ❌ 不好的做法：一行写完（难以理解和维护）
+chain = ({"context": retriever | (lambda docs: "\n".join([d.page_content for d in docs])), "question": RunnablePassthrough()} | rag_prompt | model | StrOutputParser())</code></pre>
+                    </div>
+                </section>
+
+                <!-- 常见问题 -->
+                <section class="content-section">
+                    <h2 class="section-title">❓ 常见问题</h2>
+
+                    <h3 class="subsection-subtitle">Q1: LCEL 和 Agent 有什么关系？</h3>
+                    <p>
+                        <code>create_agent()</code> 内部使用 <strong>LangGraph</strong>（不是 LCEL）来编排工具调用。
+                        但你可以在 Agent 的工具内部使用 LCEL 链。
+                    </p>
+
+                    <h3 class="subsection-subtitle">Q2: 如何在 LCEL 链中处理错误？</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">def safe_invoke(chain, input_data):
+    """带错误处理的链调用"""
+    try:
+        return chain.invoke(input_data)
+    except Exception as e:
+        print(f"链执行失败：{e}")
+        return None
+
+result = safe_invoke(chain, {"text": "..."})</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">Q3: LCEL 链可以保存和加载吗？</h3>
+                    <p>
+                        <strong>不推荐</strong>。LCEL 链是代码，建议通过<strong>版本控制</strong>（Git）管理，
+                        而不是序列化保存。
+                    </p>
+
+                    <h3 class="subsection-subtitle">Q4: RunnableParallel 会等待所有任务完成吗？</h3>
+                    <p>
+                        <strong>是的</strong>。<code>RunnableParallel</code> 会等待所有子任务完成后才返回结果。
+                        如果任何一个任务失败，整个并行执行会失败。
+                    </p>
+
+                    <h3 class="subsection-subtitle">Q5: 如何在 LCEL 中使用条件分支？</h3>
+                    <p>
+                        使用 <code>RunnableLambda</code> 结合条件逻辑：
+                    </p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">def route_based_on_length(text):
+    """根据文本长度选择不同的处理路径"""
+    if len(text) > 100:
+        return long_text_chain.invoke(text)
+    else:
+        return short_text_chain.invoke(text)
+
+chain = RunnableLambda(route_based_on_length)</code></pre>
+                    </div>
+                </section>
+
+                <!-- 参考资源 -->
+                <section class="content-section">
+                    <h2 class="section-title">📖 参考资源</h2>
+                    <ul>
+                        <li>
+                            <a href="https://docs.langchain.com/oss/python/langchain/overview" target="_blank">
+                                LangChain 官方文档
+                            </a>
+                        </li>
+                        <li>
+                            <a href="20-migration.html">
+                                迁移指南 - LCEL 替代传统链
+                            </a>
+                        </li>
+                        <li>
+                            <a href="08-rag.html">
+                                RAG 详解 - LCEL 在 RAG 中的应用
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://reference.langchain.com/python/langchain/core/runnables.html" target="_blank">
+                                Runnable API 参考
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- 页面导航 -->
+                <nav class="page-navigation">
+                    <a href="08-rag.html" class="nav-button prev">
+                        ← 上一页：RAG 详解
+                    </a>
+                    <a href="10-runtime.html" class="nav-button next">
+                        下一页：Runtime 系统 →
+                    </a>
+                </nav>
+            </div>
+        </main>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" aria-label="返回顶部">↑</button>
+
+    <!-- JavaScript -->
+    <script src="assets/js/mermaid-init.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</body>
+</html>

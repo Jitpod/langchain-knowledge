@@ -1,0 +1,1660 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Multi-Agent 技能系统 - 可共享的能力和工具集">
+    <title>Multi-Agent 技能系统 | LangChain 1.0 Python 知识文档</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <button class="mobile-menu-button" aria-label="打开菜单">☰</button>
+
+    <div class="container">
+        <!-- 侧边栏导航 -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="sidebar-title">🦜 LangChain 1.0</h1>
+                <p class="sidebar-subtitle">Python 完整学习指南</p>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-section">
+                    <div class="nav-section-title">开始</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">
+                                <span class="nav-icon">🏠</span>
+                                主页
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">基础篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="01-introduction.html" class="nav-link">
+                                <span class="nav-icon">📖</span>
+                                LangChain 简介
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="02-architecture.html" class="nav-link">
+                                <span class="nav-icon">🏗️</span>
+                                核心架构
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="03-models.html" class="nav-link">
+                                <span class="nav-icon">🤖</span>
+                                模型接口
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="04-messages.html" class="nav-link">
+                                <span class="nav-icon">💬</span>
+                                消息系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="05-tools.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                工具系统
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">进阶篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="06-agents.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                Agent 基础
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="07-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="08-rag.html" class="nav-link">
+                                <span class="nav-icon">🔍</span>
+                                RAG 详解
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="09-lcel.html" class="nav-link">
+                                <span class="nav-icon">🔗</span>
+                                LCEL 表达式
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">高级应用</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="10-runtime.html" class="nav-link">
+                                <span class="nav-icon">🔌</span>
+                                Runtime 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="11-checkpointer.html" class="nav-link">
+                                <span class="nav-icon">💾</span>
+                                持久化系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="12-streaming.html" class="nav-link">
+                                <span class="nav-icon">🌊</span>
+                                流式输出
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="13-human-in-loop.html" class="nav-link">
+                                <span class="nav-icon">👤</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="14-long-term-memory.html" class="nav-link">
+                                <span class="nav-icon">🗄️</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="15-langgraph.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                LangGraph
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">实战篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="16-customer-service.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                客服机器人
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="17-best-practices.html" class="nav-link">
+                                <span class="nav-icon">✨</span>
+                                最佳实践
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">参考篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="18-api-reference.html" class="nav-link">
+                                <span class="nav-icon">📚</span>
+                                API 速查表
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="19-troubleshooting.html" class="nav-link">
+                                <span class="nav-icon">🐛</span>
+                                故障排除
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="20-migration.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                迁移指南
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">扩展篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="21-structured-output.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                结构化输出
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">DeepAgents 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="22-deepagents-quickstart.html" class="nav-link">
+                                <span class="nav-icon">🚀</span>
+                                快速开始
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="23-deepagents-customization.html" class="nav-link">
+                                <span class="nav-icon">🎨</span>
+                                定制化
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="24-deepagents-harness.html" class="nav-link">
+                                <span class="nav-icon">🎛️</span>
+                                Harness 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="25-deepagents-backends.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                后端配置
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="26-deepagents-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="27-deepagents-hitl.html" class="nav-link">
+                                <span class="nav-icon">🤝</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="28-deepagents-memory.html" class="nav-link">
+                                <span class="nav-icon">🧠</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="29-deepagents-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">Multi-Agent 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="30-multi-agent-index.html" class="nav-link">
+                                <span class="nav-icon">🌐</span>
+                                概述
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="31-multi-agent-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="32-multi-agent-handoffs.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                交接机制
+                            </a>
+                        </li>
+                        <li class="nav-item active">
+                            <a href="33-multi-agent-skills.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                技能系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="34-multi-agent-router.html" class="nav-link">
+                                <span class="nav-icon">🧭</span>
+                                路由机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="35-multi-agent-workflow.html" class="nav-link">
+                                <span class="nav-icon">🔀</span>
+                                自定义工作流
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- 主内容区域 -->
+        <main class="main-content">
+            <div class="content-wrapper">
+                <!-- 面包屑导航 -->
+                <nav class="breadcrumb">
+                    <span class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link">主页</a>
+                    </span>
+                    <span class="breadcrumb-item">
+                        Multi-Agent 篇
+                    </span>
+                    <span class="breadcrumb-item">
+                        技能系统
+                    </span>
+                </nav>
+
+                <!-- 页面标题 -->
+                <header class="page-header">
+                    <h1 class="page-title">🎯 Multi-Agent 技能系统</h1>
+                    <p class="page-subtitle">
+                        定义可在多个代理之间共享的技能和工具集，实现能力复用、
+                        统一管理和灵活组合，构建模块化的 Agent 生态系统。
+                    </p>
+                </header>
+
+                <!-- 什么是 Skills -->
+                <section class="content-section">
+                    <h2 class="section-title">📚 什么是 Skills？</h2>
+                    <p>
+                        <strong>Skills（技能）</strong>是 Multi-Agent 系统中<strong>可共享的能力单元</strong>。
+                        通过将工具定义为独立的技能，多个代理可以复用相同的能力，
+                        确保行为一致性并简化维护。
+                    </p>
+
+                    <div class="info-box note">
+                        <div class="info-box-title">💡 核心特性</div>
+                        <table style="margin-top: 0.5rem;">
+                            <thead>
+                                <tr>
+                                    <th>特性</th>
+                                    <th>说明</th>
+                                    <th>优势</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>可复用性</strong></td>
+                                    <td>一次定义，多处使用</td>
+                                    <td>减少重复代码</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>一致性</strong></td>
+                                    <td>所有代理使用相同的工具实现</td>
+                                    <td>保证行为统一</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>可组合性</strong></td>
+                                    <td>为不同代理配置不同的技能组合</td>
+                                    <td>灵活定制能力</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>易维护性</strong></td>
+                                    <td>集中管理，统一更新</td>
+                                    <td>降低维护成本</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>可扩展性</strong></td>
+                                    <td>轻松添加新技能</td>
+                                    <td>快速扩展能力</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="mermaid-wrapper">
+                        <div class="mermaid">
+graph TB
+    subgraph Skills["技能库 (Skill Registry)"]
+        S1["🔍 搜索技能<br/>search_internet"]
+        S2["📊 数据处理<br/>analyze_data"]
+        S3["📧 通信技能<br/>send_email"]
+        S4["💾 存储技能<br/>save_to_db"]
+        S5["📝 格式化<br/>format_report"]
+    end
+
+    subgraph Agents["多个代理"]
+        A1["研究代理<br/>使用: 搜索+数据处理"]
+        A2["报告代理<br/>使用: 数据处理+格式化"]
+        A3["通知代理<br/>使用: 通信+存储"]
+    end
+
+    S1 -->|"共享"| A1
+    S2 -->|"共享"| A1
+    S2 -->|"共享"| A2
+    S5 -->|"共享"| A2
+    S3 -->|"共享"| A3
+    S4 -->|"共享"| A3
+
+    style Skills fill:#3b82f6,color:#fff
+    style S1 fill:#10b981,color:#fff
+    style S2 fill:#f59e0b,color:#fff
+    style S3 fill:#8b5cf6,color:#fff
+    style S4 fill:#ef4444,color:#fff
+    style S5 fill:#06b6d4,color:#fff
+    style A1 fill:#10b981,color:#fff
+    style A2 fill:#f59e0b,color:#fff
+    style A3 fill:#8b5cf6,color:#fff
+                        </div>
+                    </div>
+
+                    <h3 class="subsection-title">Skills vs 传统工具</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>维度</th>
+                                <th>传统工具</th>
+                                <th>Skills 技能系统</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>定义方式</strong></td>
+                                <td>每个 Agent 独立定义</td>
+                                <td>集中定义，多处引用</td>
+                            </tr>
+                            <tr>
+                                <td><strong>复用性</strong></td>
+                                <td>难以跨 Agent 复用</td>
+                                <td>天然支持共享</td>
+                            </tr>
+                            <tr>
+                                <td><strong>一致性</strong></td>
+                                <td>可能存在不一致</td>
+                                <td>保证行为一致</td>
+                            </tr>
+                            <tr>
+                                <td><strong>维护</strong></td>
+                                <td>需要多处修改</td>
+                                <td>集中维护</td>
+                            </tr>
+                            <tr>
+                                <td><strong>组合</strong></td>
+                                <td>静态配置</td>
+                                <td>灵活组合</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- 技能定义 -->
+                <section class="content-section">
+                    <h2 class="section-title">🔧 技能定义</h2>
+                    <p>
+                        Skills 本质上是 LangChain 的 <code>@tool</code> 装饰器工具，
+                        但通过<strong>集中管理和分类组织</strong>，形成可复用的技能库。
+                    </p>
+
+                    <h3 class="subsection-title">基础技能定义</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+基础技能定义 - 使用 @tool 装饰器
+"""
+from langchain.tools import tool
+from typing import List, Dict
+
+# ========== 搜索类技能 ==========
+
+@tool
+def search_internet(query: str, max_results: int = 5) -> List[Dict]:
+    """搜索互联网信息
+
+    Args:
+        query: 搜索关键词
+        max_results: 最大结果数量
+
+    Returns:
+        搜索结果列表
+    """
+    # 实际会调用 Tavily 或其他搜索 API
+    return [
+        {"title": "结果1", "url": "https://...", "snippet": "摘要..."},
+        {"title": "结果2", "url": "https://...", "snippet": "摘要..."},
+    ]
+
+@tool
+def search_database(query: str, table: str) -> List[Dict]:
+    """搜索数据库
+
+    Args:
+        query: SQL 查询或自然语言查询
+        table: 目标表名
+
+    Returns:
+        查询结果
+    """
+    # 实际会连接数据库执行查询
+    return [{"id": 1, "name": "数据1"}, {"id": 2, "name": "数据2"}]
+
+# ========== 数据处理类技能 ==========
+
+@tool
+def analyze_data(data: str, analysis_type: str = "summary") -> Dict:
+    """分析数据并生成洞察
+
+    Args:
+        data: 待分析的数据
+        analysis_type: 分析类型（summary, trend, anomaly）
+
+    Returns:
+        分析结果
+    """
+    return {
+        "insights": ["洞察1", "洞察2"],
+        "summary": "数据摘要...",
+        "score": 0.85
+    }
+
+@tool
+def transform_data(data: str, format: str) -> str:
+    """转换数据格式
+
+    Args:
+        data: 原始数据
+        format: 目标格式（json, csv, xml）
+
+    Returns:
+        转换后的数据
+    """
+    # 实际会执行格式转换
+    return f"转换为 {format} 格式的数据"
+
+# ========== 通信类技能 ==========
+
+@tool
+def send_email(to: str, subject: str, body: str) -> bool:
+    """发送邮件
+
+    Args:
+        to: 收件人
+        subject: 邮件主题
+        body: 邮件正文
+
+    Returns:
+        是否发送成功
+    """
+    # 实际会调用邮件服务
+    print(f"发送邮件给 {to}: {subject}")
+    return True
+
+@tool
+def send_notification(user_id: str, message: str, priority: str = "normal") -> bool:
+    """发送通知
+
+    Args:
+        user_id: 用户ID
+        message: 通知内容
+        priority: 优先级（low, normal, high）
+
+    Returns:
+        是否发送成功
+    """
+    print(f"通知用户 {user_id} ({priority}): {message}")
+    return True
+
+# ========== 存储类技能 ==========
+
+@tool
+def save_to_database(data: Dict, table: str) -> bool:
+    """保存数据到数据库
+
+    Args:
+        data: 要保存的数据
+        table: 目标表名
+
+    Returns:
+        是否保存成功
+    """
+    print(f"保存到表 {table}: {data}")
+    return True
+
+@tool
+def save_file(content: str, filepath: str) -> bool:
+    """保存文件
+
+    Args:
+        content: 文件内容
+        filepath: 文件路径
+
+    Returns:
+        是否保存成功
+    """
+    with open(filepath, 'w') as f:
+        f.write(content)
+    return True
+
+# ========== 格式化类技能 ==========
+
+@tool
+def format_report(data: Dict, template: str = "markdown") -> str:
+    """格式化报告
+
+    Args:
+        data: 报告数据
+        template: 报告模板（markdown, html, pdf）
+
+    Returns:
+        格式化后的报告
+    """
+    # 实际会使用模板引擎
+    return f"""
+# 报告
+## 数据摘要
+{data.get('summary', 'N/A')}
+
+## 详细内容
+{data.get('details', 'N/A')}
+"""
+
+# 优势：
+# - 清晰的技能分类
+# - 完整的类型注解
+# - 详细的文档字符串
+# - 易于理解和使用</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">技能组织和管理</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+技能组织和管理 - 技能库模式
+"""
+from typing import List
+from langchain.tools import BaseTool
+
+class SkillRegistry:
+    """技能注册表：集中管理所有技能"""
+
+    def __init__(self):
+        self._skills = {}
+        self._categories = {
+            "search": [],
+            "data": [],
+            "communication": [],
+            "storage": [],
+            "formatting": []
+        }
+
+    def register(self, skill: BaseTool, category: str):
+        """注册技能"""
+        self._skills[skill.name] = skill
+        if category in self._categories:
+            self._categories[category].append(skill)
+
+    def get_skill(self, name: str) -> BaseTool:
+        """获取单个技能"""
+        return self._skills.get(name)
+
+    def get_category(self, category: str) -> List[BaseTool]:
+        """获取某类别的所有技能"""
+        return self._categories.get(category, [])
+
+    def get_skills(self, names: List[str]) -> List[BaseTool]:
+        """批量获取技能"""
+        return [self._skills[name] for name in names if name in self._skills]
+
+    def list_all(self) -> List[str]:
+        """列出所有技能名称"""
+        return list(self._skills.keys())
+
+# 创建全局技能注册表
+skill_registry = SkillRegistry()
+
+# 注册技能
+skill_registry.register(search_internet, "search")
+skill_registry.register(search_database, "search")
+skill_registry.register(analyze_data, "data")
+skill_registry.register(transform_data, "data")
+skill_registry.register(send_email, "communication")
+skill_registry.register(send_notification, "communication")
+skill_registry.register(save_to_database, "storage")
+skill_registry.register(save_file, "storage")
+skill_registry.register(format_report, "formatting")
+
+# 使用示例：为代理配置技能
+research_skills = skill_registry.get_category("search") + \
+                  skill_registry.get_category("data")
+
+communication_skills = skill_registry.get_category("communication") + \
+                       skill_registry.get_category("storage")
+
+# 优势：
+# - 集中管理，易于维护
+# - 分类组织，清晰结构
+# - 灵活组合，按需获取
+# - 可扩展，易于添加新技能</code></pre>
+                    </div>
+                </section>
+
+                <!-- 技能共享模式 -->
+                <section class="content-section">
+                    <h2 class="section-title">🤝 技能共享模式</h2>
+                    <p>
+                        在 Multi-Agent 系统中，技能共享是实现<strong>代理协作</strong>的关键机制。
+                    </p>
+
+                    <div class="mermaid-wrapper">
+                        <div class="mermaid">
+graph TB
+    subgraph Registry["技能注册表"]
+        Core["核心技能集<br/>所有代理共享"]
+        Specialized["专用技能集<br/>特定代理使用"]
+    end
+
+    subgraph Pattern1["模式1：完全共享"]
+        P1A["Agent A"] --> P1Skills["共享技能库"]
+        P1B["Agent B"] --> P1Skills
+        P1C["Agent C"] --> P1Skills
+    end
+
+    subgraph Pattern2["模式2：分层共享"]
+        P2Base["基础技能<br/>所有代理"]
+        P2Adv["高级技能<br/>部分代理"]
+        P2A["Agent A"] --> P2Base
+        P2A --> P2Adv
+        P2B["Agent B"] --> P2Base
+    end
+
+    subgraph Pattern3["模式3：技能组合"]
+        P3S1["技能组 1<br/>搜索+分析"]
+        P3S2["技能组 2<br/>通信+存储"]
+        P3A["Agent A"] --> P3S1
+        P3B["Agent B"] --> P3S2
+    end
+
+    Registry --> Pattern1
+    Registry --> Pattern2
+    Registry --> Pattern3
+
+    style Registry fill:#3b82f6,color:#fff
+    style Core fill:#10b981,color:#fff
+    style Specialized fill:#f59e0b,color:#fff
+                        </div>
+                    </div>
+
+                    <h3 class="subsection-title">模式 1：完全共享</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+模式 1：完全共享 - 所有代理使用相同技能
+"""
+from langgraph.graph import StateGraph, MessagesState
+from langchain_openai import ChatOpenAI
+
+# 定义共享技能集
+shared_skills = [
+    search_internet,
+    analyze_data,
+    send_notification,
+    format_report
+]
+
+# 代理 1：研究专员
+def research_agent(state: MessagesState):
+    """研究专员：使用共享技能"""
+    llm = ChatOpenAI(model="gpt-4o")
+    llm_with_tools = llm.bind_tools(shared_skills)  # 使用共享技能
+    response = llm_with_tools.invoke(state["messages"])
+    return {"messages": [response]}
+
+# 代理 2：分析专员
+def analysis_agent(state: MessagesState):
+    """分析专员：使用相同的共享技能"""
+    llm = ChatOpenAI(model="claude-sonnet-4-5")
+    llm_with_tools = llm.bind_tools(shared_skills)  # 使用相同技能
+    response = llm_with_tools.invoke(state["messages"])
+    return {"messages": [response]}
+
+# 代理 3：报告专员
+def report_agent(state: MessagesState):
+    """报告专员：使用相同的共享技能"""
+    llm = ChatOpenAI(model="gpt-4o")
+    llm_with_tools = llm.bind_tools(shared_skills)  # 使用相同技能
+    response = llm_with_tools.invoke(state["messages"])
+    return {"messages": [response]}
+
+# 构建工作流
+graph = StateGraph(MessagesState)
+graph.add_node("research", research_agent)
+graph.add_node("analysis", analysis_agent)
+graph.add_node("report", report_agent)
+
+# 优势：
+# - 所有代理能力一致
+# - 便于协作和交接
+# - 维护简单（更新一处即可）
+# - 适合：能力需求相似的代理团队</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">模式 2：分层共享</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+模式 2：分层共享 - 基础技能 + 专用技能
+"""
+# 基础技能：所有代理都有
+base_skills = [
+    search_internet,
+    send_notification
+]
+
+# 高级技能：仅部分代理使用
+advanced_data_skills = [
+    analyze_data,
+    transform_data,
+    save_to_database
+]
+
+advanced_comm_skills = [
+    send_email,
+    format_report
+]
+
+# L1 代理：仅基础技能
+def l1_agent(state: MessagesState):
+    """L1 代理：基础能力"""
+    llm = ChatOpenAI(model="gpt-4o-mini")
+    llm_with_tools = llm.bind_tools(base_skills)  # 仅基础技能
+    return {"messages": [llm_with_tools.invoke(state["messages"])]}
+
+# L2 代理：基础 + 数据处理
+def l2_data_agent(state: MessagesState):
+    """L2 数据代理：基础 + 高级数据技能"""
+    llm = ChatOpenAI(model="gpt-4o")
+    combined_skills = base_skills + advanced_data_skills
+    llm_with_tools = llm.bind_tools(combined_skills)
+    return {"messages": [llm_with_tools.invoke(state["messages"])]}
+
+# L2 代理：基础 + 通信
+def l2_comm_agent(state: MessagesState):
+    """L2 通信代理：基础 + 高级通信技能"""
+    llm = ChatOpenAI(model="gpt-4o")
+    combined_skills = base_skills + advanced_comm_skills
+    llm_with_tools = llm.bind_tools(combined_skills)
+    return {"messages": [llm_with_tools.invoke(state["messages"])]}
+
+# 优势：
+# - 权限分级（基础 vs 高级）
+# - 专业化分工（数据 vs 通信）
+# - 成本优化（基础代理用便宜模型）
+# - 适合：有明确层级和专业分工的系统</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">模式 3：技能组合</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+模式 3：技能组合 - 预定义技能组
+"""
+# 定义技能组
+skill_groups = {
+    "researcher": [
+        search_internet,
+        search_database,
+        analyze_data
+    ],
+    "writer": [
+        analyze_data,
+        format_report,
+        save_file
+    ],
+    "communicator": [
+        send_email,
+        send_notification,
+        save_to_database
+    ],
+    "analyst": [
+        search_database,
+        analyze_data,
+        transform_data,
+        format_report
+    ]
+}
+
+def create_agent_with_skills(role: str, model: str = "gpt-4o"):
+    """工厂函数：根据角色创建代理"""
+    skills = skill_groups.get(role, [])
+
+    def agent(state: MessagesState):
+        llm = ChatOpenAI(model=model)
+        llm_with_tools = llm.bind_tools(skills)
+        return {"messages": [llm_with_tools.invoke(state["messages"])]}
+
+    return agent
+
+# 创建不同角色的代理
+researcher = create_agent_with_skills("researcher", "gpt-4o")
+writer = create_agent_with_skills("writer", "claude-sonnet-4-5")
+communicator = create_agent_with_skills("communicator", "gpt-4o")
+analyst = create_agent_with_skills("analyst", "claude-sonnet-4-5")
+
+# 优势：
+# - 角色清晰（研究、写作、通信、分析）
+# - 技能精准匹配
+# - 易于扩展（添加新角色）
+# - 适合：明确角色分工的团队</code></pre>
+                    </div>
+                </section>
+
+                <!-- 完整实战示例 -->
+                <section class="content-section">
+                    <h2 class="section-title">🎯 完整实战示例</h2>
+                    <p>
+                        构建一个<strong>内容创作平台</strong>，使用技能系统支持多个专业化代理，
+                        实现从研究到发布的完整流程。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级 - 生产级示例</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+完整实战示例 - 内容创作平台（技能系统）
+"""
+import os
+from typing import TypedDict, Annotated, List
+from langgraph.graph import StateGraph, START, END
+from langgraph.graph.message import add_messages
+from langchain_openai import ChatOpenAI
+from langchain_anthropic import ChatAnthropic
+from langchain.tools import tool
+
+# ========== 1. 定义技能库 ==========
+
+# 研究类技能
+@tool
+def web_research(topic: str, depth: str = "normal") -> dict:
+    """网络研究技能
+
+    Args:
+        topic: 研究主题
+        depth: 深度（quick, normal, deep）
+    """
+    # 实际会调用搜索 API
+    return {
+        "sources": ["来源1", "来源2", "来源3"],
+        "key_points": ["要点1", "要点2", "要点3"],
+        "summary": f"关于 {topic} 的研究摘要..."
+    }
+
+@tool
+def competitor_analysis(topic: str) -> dict:
+    """竞品分析技能"""
+    return {
+        "competitors": ["竞品A", "竞品B"],
+        "gaps": ["差异点1", "差异点2"],
+        "opportunities": ["机会1", "机会2"]
+    }
+
+# 创作类技能
+@tool
+def generate_outline(topic: str, target_length: int) -> dict:
+    """生成大纲技能
+
+    Args:
+        topic: 主题
+        target_length: 目标字数
+    """
+    return {
+        "title": f"{topic} - 完整指南",
+        "sections": [
+            {"title": "引言", "points": ["背景", "目标"]},
+            {"title": "正文", "points": ["要点1", "要点2", "要点3"]},
+            {"title": "结论", "points": ["总结", "展望"]}
+        ]
+    }
+
+@tool
+def check_grammar(text: str) -> dict:
+    """语法检查技能"""
+    return {
+        "errors": [],
+        "suggestions": ["建议1", "建议2"],
+        "score": 95
+    }
+
+# SEO 类技能
+@tool
+def analyze_seo(content: str, keywords: List[str]) -> dict:
+    """SEO 分析技能
+
+    Args:
+        content: 内容
+        keywords: 目标关键词列表
+    """
+    return {
+        "keyword_density": {"关键词1": 2.5, "关键词2": 1.8},
+        "readability_score": 85,
+        "recommendations": ["增加内链", "优化标题"]
+    }
+
+@tool
+def generate_meta_tags(content: str) -> dict:
+    """生成元标签技能"""
+    return {
+        "title": "SEO 优化的标题",
+        "description": "吸引人的描述（< 160字）",
+        "keywords": ["关键词1", "关键词2", "关键词3"]
+    }
+
+# 发布类技能
+@tool
+def publish_to_cms(content: str, metadata: dict) -> bool:
+    """发布到 CMS 技能
+
+    Args:
+        content: 文章内容
+        metadata: 元数据（标题、标签等）
+    """
+    print(f"发布文章：{metadata.get('title')}")
+    return True
+
+@tool
+def schedule_social_media(post: str, platforms: List[str]) -> dict:
+    """社交媒体排期技能
+
+    Args:
+        post: 社交媒体文案
+        platforms: 目标平台列表
+    """
+    return {
+        "scheduled": True,
+        "platforms": platforms,
+        "publish_time": "2024-01-15 10:00"
+    }
+
+# ========== 2. 组织技能库 ==========
+
+class ContentSkillRegistry:
+    """内容创作技能注册表"""
+
+    RESEARCH_SKILLS = [web_research, competitor_analysis]
+    WRITING_SKILLS = [generate_outline, check_grammar]
+    SEO_SKILLS = [analyze_seo, generate_meta_tags]
+    PUBLISHING_SKILLS = [publish_to_cms, schedule_social_media]
+
+    @classmethod
+    def get_researcher_skills(cls):
+        """研究专员技能"""
+        return cls.RESEARCH_SKILLS
+
+    @classmethod
+    def get_writer_skills(cls):
+        """写作专员技能"""
+        return cls.RESEARCH_SKILLS + cls.WRITING_SKILLS
+
+    @classmethod
+    def get_seo_specialist_skills(cls):
+        """SEO 专员技能"""
+        return cls.WRITING_SKILLS + cls.SEO_SKILLS
+
+    @classmethod
+    def get_publisher_skills(cls):
+        """发布专员技能"""
+        return cls.SEO_SKILLS + cls.PUBLISHING_SKILLS
+
+# ========== 3. 定义状态 ==========
+
+class ContentState(TypedDict):
+    messages: Annotated[list, add_messages]
+    topic: str
+    research_data: dict
+    outline: dict
+    draft_content: str
+    seo_optimized: str
+    metadata: dict
+    published: bool
+
+# ========== 4. 创建专业化代理 ==========
+
+def research_agent(state: ContentState):
+    """研究代理：使用研究技能"""
+    llm = ChatOpenAI(model="gpt-4o")
+    skills = ContentSkillRegistry.get_researcher_skills()
+    llm_with_tools = llm.bind_tools(skills)
+
+    prompt = f"研究主题：{state['topic']}\n执行深度研究和竞品分析"
+    response = llm_with_tools.invoke(prompt)
+
+    return {
+        "messages": [response],
+        "research_data": {
+            "sources": ["来源..."],
+            "key_findings": ["发现..."]
+        }
+    }
+
+def writer_agent(state: ContentState):
+    """写作代理：使用写作技能"""
+    llm = ChatAnthropic(model="claude-sonnet-4-5")
+    skills = ContentSkillRegistry.get_writer_skills()
+    llm_with_tools = llm.bind_tools(skills)
+
+    research = state["research_data"]
+    prompt = f"""基于研究数据创作文章：
+    主题：{state['topic']}
+    研究发现：{research}
+
+    步骤：
+    1. 使用 generate_outline 生成大纲
+    2. 撰写完整文章
+    3. 使用 check_grammar 检查语法
+    """
+
+    response = llm_with_tools.invoke(prompt)
+
+    return {
+        "messages": [response],
+        "draft_content": "文章草稿内容..."
+    }
+
+def seo_agent(state: ContentState):
+    """SEO 代理：使用 SEO 技能"""
+    llm = ChatOpenAI(model="gpt-4o")
+    skills = ContentSkillRegistry.get_seo_specialist_skills()
+    llm_with_tools = llm.bind_tools(skills)
+
+    draft = state["draft_content"]
+    prompt = f"""优化 SEO：
+    内容：{draft}
+
+    步骤：
+    1. 使用 analyze_seo 分析当前 SEO
+    2. 优化内容和关键词密度
+    3. 使用 generate_meta_tags 生成元标签
+    """
+
+    response = llm_with_tools.invoke(prompt)
+
+    return {
+        "messages": [response],
+        "seo_optimized": "SEO 优化后的内容...",
+        "metadata": {
+            "title": "优化的标题",
+            "description": "描述",
+            "keywords": ["关键词1", "关键词2"]
+        }
+    }
+
+def publisher_agent(state: ContentState):
+    """发布代理：使用发布技能"""
+    llm = ChatOpenAI(model="gpt-4o")
+    skills = ContentSkillRegistry.get_publisher_skills()
+    llm_with_tools = llm.bind_tools(skills)
+
+    content = state["seo_optimized"]
+    metadata = state["metadata"]
+
+    prompt = f"""发布内容：
+    内容：{content}
+    元数据：{metadata}
+
+    步骤：
+    1. 使用 publish_to_cms 发布到网站
+    2. 使用 schedule_social_media 安排社交媒体推广
+    """
+
+    response = llm_with_tools.invoke(prompt)
+
+    return {
+        "messages": [response],
+        "published": True
+    }
+
+# ========== 5. 构建工作流 ==========
+
+workflow = StateGraph(ContentState)
+
+# 添加节点（每个代理使用不同的技能组合）
+workflow.add_node("research", research_agent)
+workflow.add_node("writer", writer_agent)
+workflow.add_node("seo", seo_agent)
+workflow.add_node("publisher", publisher_agent)
+
+# 定义流程
+workflow.add_edge(START, "research")
+workflow.add_edge("research", "writer")
+workflow.add_edge("writer", "seo")
+workflow.add_edge("seo", "publisher")
+workflow.add_edge("publisher", END)
+
+# 编译
+app = workflow.compile()
+
+# ========== 6. 使用内容创作平台 ==========
+
+result = app.invoke({
+    "messages": [],
+    "topic": "人工智能在内容创作中的应用"
+})
+
+print("内容创作流程完成！")
+print(f"主题：{result['topic']}")
+print(f"是否已发布：{result.get('published', False)}")
+print(f"元数据：{result.get('metadata', {})}")
+
+# 执行流程：
+# 1. 研究代理：使用 web_research + competitor_analysis
+# 2. 写作代理：使用 generate_outline + check_grammar
+# 3. SEO 代理：使用 analyze_seo + generate_meta_tags
+# 4. 发布代理：使用 publish_to_cms + schedule_social_media
+
+# 优势：
+# - 每个代理拥有精准的技能组合
+# - 技能可复用（如 check_grammar 在多个代理间共享）
+# - 易于维护（更新技能定义即可）
+# - 易于扩展（添加新技能或新代理）
+# - 专业化分工（研究、写作、SEO、发布）</code></pre>
+                    </div>
+                </section>
+
+                <!-- 技能版本管理 -->
+                <section class="content-section">
+                    <h2 class="section-title">🔄 技能版本管理</h2>
+                    <p>
+                        在生产环境中，技能可能需要<strong>版本控制和渐进式更新</strong>。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+技能版本管理 - 支持多版本和 A/B 测试
+"""
+from typing import Dict, Callable
+from enum import Enum
+
+class SkillVersion(Enum):
+    V1 = "v1"
+    V2 = "v2"
+    BETA = "beta"
+
+class VersionedSkillRegistry:
+    """支持版本管理的技能注册表"""
+
+    def __init__(self):
+        self._skills: Dict[str, Dict[SkillVersion, Callable]] = {}
+        self._default_versions: Dict[str, SkillVersion] = {}
+
+    def register(self, name: str, skill: Callable, version: SkillVersion):
+        """注册技能的特定版本"""
+        if name not in self._skills:
+            self._skills[name] = {}
+        self._skills[name][version] = skill
+
+    def set_default_version(self, name: str, version: SkillVersion):
+        """设置技能的默认版本"""
+        self._default_versions[name] = version
+
+    def get(self, name: str, version: SkillVersion = None):
+        """获取技能（可指定版本）"""
+        if name not in self._skills:
+            return None
+
+        # 使用指定版本或默认版本
+        target_version = version or self._default_versions.get(name, SkillVersion.V1)
+        return self._skills[name].get(target_version)
+
+# 创建版本化注册表
+versioned_registry = VersionedSkillRegistry()
+
+# 注册不同版本的技能
+@tool
+def search_v1(query: str) -> dict:
+    """搜索技能 V1：基础实现"""
+    return {"results": ["结果1", "结果2"]}
+
+@tool
+def search_v2(query: str, filters: dict = None) -> dict:
+    """搜索技能 V2：增强版，支持过滤"""
+    # 新功能：支持过滤器
+    return {
+        "results": ["精准结果1", "精准结果2"],
+        "filters_applied": filters or {}
+    }
+
+# 注册两个版本
+versioned_registry.register("search", search_v1, SkillVersion.V1)
+versioned_registry.register("search", search_v2, SkillVersion.V2)
+
+# 设置默认版本
+versioned_registry.set_default_version("search", SkillVersion.V1)
+
+# A/B 测试：部分代理使用新版本
+def create_ab_test_agent(agent_id: str, use_beta: bool = False):
+    """创建 A/B 测试代理"""
+    version = SkillVersion.V2 if use_beta else SkillVersion.V1
+    search_skill = versioned_registry.get("search", version)
+
+    def agent(state):
+        llm = ChatOpenAI(model="gpt-4o")
+        llm_with_tools = llm.bind_tools([search_skill])
+        return {"messages": [llm_with_tools.invoke(state["messages"])]}
+
+    return agent
+
+# 使用：50% 流量使用 V2
+agent_a = create_ab_test_agent("agent_a", use_beta=False)  # V1
+agent_b = create_ab_test_agent("agent_b", use_beta=True)   # V2
+
+# 优势：
+# - 渐进式更新（不影响现有代理）
+# - A/B 测试（评估新版本效果）
+# - 回滚能力（问题时切换回旧版本）
+# - 灵活迁移（逐步迁移到新版本）</code></pre>
+                    </div>
+                </section>
+
+                <!-- 最佳实践 -->
+                <section class="content-section">
+                    <h2 class="section-title">✨ Skills 最佳实践</h2>
+
+                    <h3 class="subsection-title">1. 技能设计原则</h3>
+                    <div class="info-box tip">
+                        <div class="info-box-title">✅ 好的技能设计</div>
+                        <ul>
+                            <li><strong>单一职责</strong>：每个技能专注于一个明确的任务</li>
+                            <li><strong>清晰命名</strong>：使用动词开头，描述性强（search_internet, analyze_data）</li>
+                            <li><strong>完整文档</strong>：详细的 docstring，包含参数说明和返回值</li>
+                            <li><strong>类型注解</strong>：完整的类型提示，便于理解和调试</li>
+                            <li><strong>错误处理</strong>：优雅的错误处理和降级策略</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-box warning">
+                        <div class="info-box-title">❌ 差的技能设计</div>
+                        <ul>
+                            <li><strong>职责不清</strong>：一个技能做多件事（search_and_analyze_and_format）</li>
+                            <li><strong>命名模糊</strong>：process_data, do_work（不知道具体做什么）</li>
+                            <li><strong>缺少文档</strong>：没有说明参数和返回值</li>
+                            <li><strong>缺少类型</strong>：参数和返回值没有类型注解</li>
+                            <li><strong>错误暴露</strong>：直接抛出异常，不处理</li>
+                        </ul>
+                    </div>
+
+                    <h3 class="subsection-title">2. 技能分类策略</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>分类维度</th>
+                                <th>类别示例</th>
+                                <th>技能示例</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>功能分类</strong></td>
+                                <td>搜索、数据处理、通信、存储</td>
+                                <td>search_internet, analyze_data</td>
+                            </tr>
+                            <tr>
+                                <td><strong>领域分类</strong></td>
+                                <td>营销、财务、技术、客服</td>
+                                <td>send_email, generate_invoice</td>
+                            </tr>
+                            <tr>
+                                <td><strong>权限分类</strong></td>
+                                <td>基础、高级、管理员</td>
+                                <td>basic_search, admin_delete</td>
+                            </tr>
+                            <tr>
+                                <td><strong>复杂度分类</strong></td>
+                                <td>简单、中等、复杂</td>
+                                <td>send_notification, deep_analysis</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 class="subsection-title">3. 技能配置管理</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 使用配置文件管理技能分配
+skill_config = {
+    "roles": {
+        "researcher": {
+            "skills": ["search_internet", "search_database", "analyze_data"],
+            "model": "gpt-4o"
+        },
+        "writer": {
+            "skills": ["generate_outline", "check_grammar", "format_report"],
+            "model": "claude-sonnet-4-5"
+        },
+        "seo_specialist": {
+            "skills": ["analyze_seo", "generate_meta_tags"],
+            "model": "gpt-4o"
+        }
+    }
+}
+
+def load_agent_skills(role: str):
+    """从配置加载代理技能"""
+    config = skill_config["roles"].get(role, {})
+    skill_names = config.get("skills", [])
+    return skill_registry.get_skills(skill_names)
+
+# 优势：
+# - 集中配置，易于管理
+# - 可外部化（YAML、JSON）
+# - 便于动态调整
+# - 支持环境差异（dev vs prod）</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">4. 监控和度量</h3>
+                    <ul>
+                        <li><strong>使用率</strong>：跟踪每个技能的调用频率</li>
+                        <li><strong>成功率</strong>：记录技能执行成功率</li>
+                        <li><strong>性能</strong>：监控技能执行时间</li>
+                        <li><strong>成本</strong>：计算技能相关的 API 成本</li>
+                        <li><strong>错误追踪</strong>：记录技能失败的原因</li>
+                    </ul>
+
+                    <h3 class="subsection-title">5. 技能测试</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 技能单元测试示例
+import pytest
+
+def test_search_internet():
+    """测试搜索技能"""
+    result = search_internet.invoke({"query": "LangChain"})
+    assert "results" in result
+    assert len(result["results"]) > 0
+
+def test_analyze_data():
+    """测试数据分析技能"""
+    result = analyze_data.invoke({
+        "data": "sample data",
+        "analysis_type": "summary"
+    })
+    assert "insights" in result
+    assert "score" in result
+    assert 0 <= result["score"] <= 1
+
+# 集成测试：测试技能组合
+def test_skill_combination():
+    """测试技能组合"""
+    # 搜索 → 分析 → 格式化
+    search_result = search_internet.invoke({"query": "test"})
+    analysis = analyze_data.invoke({"data": str(search_result)})
+    report = format_report.invoke({"data": analysis})
+    assert report is not None</code></pre>
+                    </div>
+                </section>
+
+                <!-- 常见问题 -->
+                <section class="content-section">
+                    <h2 class="section-title">❓ 常见问题</h2>
+
+                    <h3 class="subsection-subtitle">Q1: Skills 和普通工具有什么区别？</h3>
+                    <p>
+                        <strong>本质相同，组织方式不同</strong>：
+                    </p>
+                    <ul>
+                        <li>Skills 是<strong>组织化、可复用</strong>的工具集合</li>
+                        <li>强调<strong>跨代理共享</strong>和<strong>集中管理</strong></li>
+                        <li>提供<strong>分类、版本管理、权限控制</strong>等企业级特性</li>
+                    </ul>
+
+                    <h3 class="subsection-subtitle">Q2: 如何决定哪些技能应该共享？</h3>
+                    <p>
+                        <strong>共享决策标准</strong>：
+                    </p>
+                    <ul>
+                        <li><strong>通用性</strong>：多个代理都需要的能力（搜索、通知）</li>
+                        <li><strong>一致性要求</strong>：需要保证行为统一的操作（数据格式化）</li>
+                        <li><strong>维护效率</strong>：需要集中维护的复杂逻辑（API 调用）</li>
+                        <li><strong>不共享</strong>：高度专业化、仅单个代理使用的能力</li>
+                    </ul>
+
+                    <h3 class="subsection-subtitle">Q3: 技能太多会影响性能吗？</h3>
+                    <p>
+                        <strong>可能会，但有优化策略</strong>：
+                    </p>
+                    <ul>
+                        <li><strong>按需加载</strong>：仅为代理加载必需的技能子集</li>
+                        <li><strong>分类管理</strong>：使用技能组，避免全量加载</li>
+                        <li><strong>懒加载</strong>：首次使用时才初始化技能</li>
+                        <li><strong>模型选择</strong>：工具多时选择上下文窗口大的模型</li>
+                    </ul>
+
+                    <h3 class="subsection-subtitle">Q4: 如何处理技能冲突？</h3>
+                    <p>
+                        <strong>冲突解决策略</strong>：
+                    </p>
+                    <ul>
+                        <li><strong>命名规范</strong>：使用清晰的命名避免歧义（search_web vs search_db）</li>
+                        <li><strong>命名空间</strong>：使用前缀（research.search, data.search）</li>
+                        <li><strong>版本隔离</strong>：不同版本使用不同名称（search_v1, search_v2）</li>
+                        <li><strong>优先级</strong>：定义技能优先级规则</li>
+                    </ul>
+
+                    <h3 class="subsection-subtitle">Q5: 如何实现技能的权限控制？</h3>
+                    <p>
+                        <strong>权限控制方案</strong>：
+                    </p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 权限装饰器
+from functools import wraps
+
+def require_permission(permission: str):
+    """技能权限装饰器"""
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            # 检查权限
+            agent_permissions = kwargs.get("_permissions", [])
+            if permission not in agent_permissions:
+                raise PermissionError(f"需要权限: {permission}")
+            return func(*args, **kwargs)
+        wrapper.required_permission = permission
+        return wrapper
+    return decorator
+
+@tool
+@require_permission("admin")
+def delete_data(data_id: str) -> bool:
+    """删除数据（需要管理员权限）"""
+    # 执行删除
+    return True
+
+# 为代理分配权限
+researcher_permissions = ["search", "read"]
+admin_permissions = ["search", "read", "write", "admin"]</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">Q6: 如何动态添加技能？</h3>
+                    <p>
+                        <strong>动态技能管理</strong>：
+                    </p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 运行时动态注册技能
+class DynamicSkillRegistry(SkillRegistry):
+    """支持动态添加技能"""
+
+    def add_skill_at_runtime(self, skill: BaseTool, category: str):
+        """运行时添加技能"""
+        self.register(skill, category)
+        print(f"已添加技能: {skill.name} ({category})")
+
+    def remove_skill(self, name: str):
+        """移除技能"""
+        if name in self._skills:
+            del self._skills[name]
+            print(f"已移除技能: {name}")
+
+# 使用
+registry = DynamicSkillRegistry()
+
+# 动态添加新技能
+@tool
+def new_feature(param: str) -> str:
+    """新功能技能"""
+    return f"处理: {param}"
+
+registry.add_skill_at_runtime(new_feature, "experimental")</code></pre>
+                    </div>
+                </section>
+
+                <!-- 参考资源 -->
+                <section class="content-section">
+                    <h2 class="section-title">📖 参考资源</h2>
+                    <ul>
+                        <li>
+                            <a href="https://docs.langchain.com/oss/python/langchain/multi-agent/skills" target="_blank">
+                                Multi-Agent Skills 官方文档
+                            </a>
+                        </li>
+                        <li>
+                            <a href="05-tools.html">
+                                工具系统 - @tool 装饰器详解
+                            </a>
+                        </li>
+                        <li>
+                            <a href="30-multi-agent-index.html">
+                                Multi-Agent 概述
+                            </a>
+                        </li>
+                        <li>
+                            <a href="31-multi-agent-subagents.html">
+                                Multi-Agent 子代理
+                            </a>
+                        </li>
+                        <li>
+                            <a href="32-multi-agent-handoffs.html">
+                                Multi-Agent 交接机制
+                            </a>
+                        </li>
+                        <li>
+                            <a href="34-multi-agent-router.html">
+                                Multi-Agent 路由机制
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- 页面导航 -->
+                <nav class="page-navigation">
+                    <a href="32-multi-agent-handoffs.html" class="nav-button prev">
+                        ← 上一页：交接机制
+                    </a>
+                    <a href="34-multi-agent-router.html" class="nav-button next">
+                        下一页：路由机制 →
+                    </a>
+                </nav>
+            </div>
+        </main>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" aria-label="返回顶部">↑</button>
+
+    <!-- JavaScript -->
+    <script src="assets/js/mermaid-init.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</body>
+</html>

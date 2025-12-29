@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DeepAgents 快速开始 - Anthropic 的高级 AI Agent 框架">
+    <title>DeepAgents 快速开始 | LangChain 1.0 Python 知识文档</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <button class="mobile-menu-button" aria-label="打开菜单">☰</button>
+
+    <div class="container">
+        <!-- 侧边栏导航 -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="sidebar-title">🦜 LangChain 1.0</h1>
+                <p class="sidebar-subtitle">Python 完整学习指南</p>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-section">
+                    <div class="nav-section-title">开始</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">
+                                <span class="nav-icon">🏠</span>
+                                主页
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">基础篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="01-introduction.html" class="nav-link">
+                                <span class="nav-icon">📖</span>
+                                LangChain 简介
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="02-architecture.html" class="nav-link">
+                                <span class="nav-icon">🏗️</span>
+                                核心架构
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="03-models.html" class="nav-link">
+                                <span class="nav-icon">🤖</span>
+                                模型接口
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="04-messages.html" class="nav-link">
+                                <span class="nav-icon">💬</span>
+                                消息系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="05-tools.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                工具系统
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">进阶篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="06-agents.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                Agent 基础
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="07-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="08-rag.html" class="nav-link">
+                                <span class="nav-icon">🔍</span>
+                                RAG 详解
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="09-lcel.html" class="nav-link">
+                                <span class="nav-icon">🔗</span>
+                                LCEL 表达式
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">高级应用</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="10-runtime.html" class="nav-link">
+                                <span class="nav-icon">🔌</span>
+                                Runtime 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="11-checkpointer.html" class="nav-link">
+                                <span class="nav-icon">💾</span>
+                                持久化系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="12-streaming.html" class="nav-link">
+                                <span class="nav-icon">🌊</span>
+                                流式输出
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="13-human-in-loop.html" class="nav-link">
+                                <span class="nav-icon">👤</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="14-long-term-memory.html" class="nav-link">
+                                <span class="nav-icon">🗄️</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="15-langgraph.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                LangGraph
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">实战篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="16-customer-service.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                客服机器人
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="17-best-practices.html" class="nav-link">
+                                <span class="nav-icon">✨</span>
+                                最佳实践
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">参考篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="18-api-reference.html" class="nav-link">
+                                <span class="nav-icon">📚</span>
+                                API 速查表
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="19-troubleshooting.html" class="nav-link">
+                                <span class="nav-icon">🐛</span>
+                                故障排除
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="20-migration.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                迁移指南
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">扩展篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="21-structured-output.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                结构化输出
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">DeepAgents 篇</div>
+                    <ul>
+                        <li class="nav-item active">
+                            <a href="22-deepagents-quickstart.html" class="nav-link">
+                                <span class="nav-icon">🚀</span>
+                                快速开始
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="23-deepagents-customization.html" class="nav-link">
+                                <span class="nav-icon">🎨</span>
+                                定制化
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="24-deepagents-harness.html" class="nav-link">
+                                <span class="nav-icon">🎛️</span>
+                                Harness 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="25-deepagents-backends.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                后端配置
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="26-deepagents-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="27-deepagents-hitl.html" class="nav-link">
+                                <span class="nav-icon">🤝</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="28-deepagents-memory.html" class="nav-link">
+                                <span class="nav-icon">🧠</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="29-deepagents-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">Multi-Agent 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="30-multi-agent-index.html" class="nav-link">
+                                <span class="nav-icon">🌐</span>
+                                概述
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="31-multi-agent-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="32-multi-agent-handoffs.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                交接机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="33-multi-agent-skills.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                技能系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="34-multi-agent-router.html" class="nav-link">
+                                <span class="nav-icon">🧭</span>
+                                路由机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="35-multi-agent-workflow.html" class="nav-link">
+                                <span class="nav-icon">🔀</span>
+                                自定义工作流
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- 主内容区域 -->
+        <main class="main-content">
+            <div class="content-wrapper">
+                <!-- 面包屑导航 -->
+                <nav class="breadcrumb">
+                    <span class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link">主页</a>
+                    </span>
+                    <span class="breadcrumb-item">
+                        DeepAgents 篇
+                    </span>
+                    <span class="breadcrumb-item">
+                        快速开始
+                    </span>
+                </nav>
+
+                <!-- 页面标题 -->
+                <header class="page-header">
+                    <h1 class="page-title">🚀 DeepAgents 快速开始</h1>
+                    <p class="page-subtitle">
+                        Anthropic 的高级 AI Agent 框架，支持规划、工具执行、上下文管理和子代理委派，
+                        轻松构建复杂的智能应用。
+                    </p>
+                </header>
+
+                <!-- 什么是 DeepAgents --><section class="content-section">
+                    <h2 class="section-title">📚 什么是 DeepAgents？</h2>
+                    <p>
+                        <strong>DeepAgents</strong> 是 Anthropic 提供的高级 AI Agent 框架，
+                        专为构建具有<strong>高级推理能力</strong>的智能代理设计。
+                        它在 LangChain 1.0 的基础上，提供了更强大的<strong>规划、执行和委派</strong>能力。
+                    </p>
+
+                    <div class="info-box note">
+                        <div class="info-box-title">💡 DeepAgents 核心特性</div>
+                        <table style="margin-top: 0.5rem;">
+                            <thead>
+                                <tr>
+                                    <th>特性</th>
+                                    <th>说明</th>
+                                    <th>应用场景</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>自动规划</strong></td>
+                                    <td>内置 write_todos 工具分解任务</td>
+                                    <td>研究报告、复杂分析</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>工具集成</strong></td>
+                                    <td>自动访问网络搜索和文件系统</td>
+                                    <td>数据收集、文件管理</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>上下文管理</strong></td>
+                                    <td>文件系统工具卸载大数据</td>
+                                    <td>处理超长内容</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>子代理委派</strong></td>
+                                    <td>动态创建专门化子代理</td>
+                                    <td>多步骤任务分解</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>信息综合</strong></td>
+                                    <td>编译和整合多源信息</td>
+                                    <td>报告生成、总结</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="mermaid-wrapper">
+                        <div class="mermaid">
+graph TB
+    User["用户请求"] --> DeepAgent["DeepAgent<br/>create_deep_agent()"]
+
+    DeepAgent --> Planning["自动规划<br/>write_todos"]
+    DeepAgent --> Tools["工具集成<br/>internet_search"]
+    DeepAgent --> Context["上下文管理<br/>文件系统工具"]
+    DeepAgent --> Subagents["子代理委派<br/>专门化 Agent"]
+
+    Planning --> Execution["执行层"]
+    Tools --> Execution
+    Context --> Execution
+    Subagents --> Execution
+
+    Execution --> Synthesis["信息综合"]
+    Synthesis --> Result["最终输出"]
+
+    style DeepAgent fill:#3b82f6,color:#fff
+    style Planning fill:#10b981,color:#fff
+    style Tools fill:#f59e0b,color:#fff
+    style Context fill:#8b5cf6,color:#fff
+    style Subagents fill:#ec4899,color:#fff
+    style Result fill:#10b981,color:#fff
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 安装和配置 -->
+                <section class="content-section">
+                    <h2 class="section-title">⚙️ 安装和配置</h2>
+
+                    <h3 class="subsection-title">步骤 1: 安装依赖包</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Bash</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-bash"># 安装 DeepAgents 和 Tavily 搜索工具
+pip install deepagents tavily-python
+
+# 如果需要 LangChain 集成
+pip install langchain langchain-anthropic</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">步骤 2: 配置 API 密钥</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Bash</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-bash"># 设置 Anthropic API 密钥（必需）
+export ANTHROPIC_API_KEY="your-anthropic-api-key"
+
+# 设置 Tavily API 密钥（用于网络搜索）
+export TAVILY_API_KEY="your-tavily-api-key"
+
+# 可选：启用 LangSmith 追踪
+export LANGCHAIN_TRACING_V2="true"
+export LANGCHAIN_API_KEY="your-langsmith-api-key"</code></pre>
+                    </div>
+
+                    <div class="info-box tip">
+                        <div class="info-box-title">📌 获取 API 密钥</div>
+                        <ul>
+                            <li><strong>Anthropic API</strong>:
+                                <a href="https://console.anthropic.com/" target="_blank">
+                                    https://console.anthropic.com/
+                                </a>
+                            </li>
+                            <li><strong>Tavily Search</strong>:
+                                <a href="https://tavily.com/" target="_blank">
+                                    https://tavily.com/
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- 第一个 DeepAgent -->
+                <section class="content-section">
+                    <h2 class="section-title">🎯 创建第一个 DeepAgent</h2>
+
+                    <h3 class="subsection-title">步骤 1: 定义搜索工具</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+创建第一个 DeepAgent - 研究助手
+"""
+import os
+from typing import Literal
+from tavily import TavilyClient
+from deepagents import create_deep_agent
+
+# 初始化 Tavily 搜索客户端
+tavily_client = TavilyClient(api_key=os.environ["TAVILY_API_KEY"])
+
+def internet_search(
+    query: str,
+    max_results: int = 5,
+    topic: Literal["general", "news", "finance"] = "general",
+    include_raw_content: bool = False,
+) -> dict:
+    """
+    执行网络搜索
+
+    Args:
+        query: 搜索查询字符串
+        max_results: 返回的最大结果数
+        topic: 搜索主题（general, news, finance）
+        include_raw_content: 是否包含原始内容
+
+    Returns:
+        搜索结果字典
+    """
+    return tavily_client.search(
+        query,
+        max_results=max_results,
+        include_raw_content=include_raw_content,
+        topic=topic,
+    )</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">步骤 2: 创建 DeepAgent</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+初始化 DeepAgent 研究助手
+"""
+# 定义系统提示词
+research_instructions = """你是一位专业的研究专家。你的任务是进行深入研究，然后撰写精炼的报告。
+
+你可以使用网络搜索工具作为主要的信息收集手段。
+
+## 可用工具
+
+### `internet_search`
+使用此工具对给定的查询进行网络搜索。你可以指定：
+- 返回结果的最大数量
+- 搜索主题（general, news, finance）
+- 是否包含原始内容
+
+## 工作流程
+
+1. **理解需求**: 仔细分析用户的研究请求
+2. **制定计划**: 使用内置的 write_todos 工具分解研究任务
+3. **执行搜索**: 进行多次有针对性的搜索
+4. **整合信息**: 将搜索结果综合成连贯的报告
+5. **撰写报告**: 提供清晰、有见地的最终输出
+
+注意：对于大量搜索结果，可以使用文件系统工具（write_file, read_file）来管理数据。
+"""
+
+# 创建 DeepAgent
+agent = create_deep_agent(
+    tools=[internet_search],
+    system_prompt=research_instructions
+)
+
+print("✅ DeepAgent 研究助手已创建！")</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">步骤 3: 执行 Agent</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+使用 DeepAgent 进行研究
+"""
+# 提交研究请求
+result = agent.invoke({
+    "messages": [{
+        "role": "user",
+        "content": "什么是 LangGraph？请提供详细的介绍和主要特性。"
+    }]
+})
+
+# 打印 Agent 的响应
+response = result["messages"][-1].content
+print("=" * 60)
+print("研究报告：")
+print("=" * 60)
+print(response)
+print("=" * 60)
+
+# 示例输出：
+# ============================================================
+# 研究报告：
+# ============================================================
+#
+# # LangGraph 深度解析
+#
+# ## 概述
+# LangGraph 是 LangChain 生态系统的核心组件，用于构建
+# 复杂的、有状态的 AI 应用...
+#
+# ## 主要特性
+# 1. **状态管理**: 使用 StateGraph 管理对话状态
+# 2. **持久化**: 支持 Checkpointer 长期存储
+# 3. **人工介入**: Human-in-the-Loop 工作流
+# ...
+# ============================================================</code></pre>
+                    </div>
+                </section>
+
+                <!-- DeepAgent 自动化能力 -->
+                <section class="content-section">
+                    <h2 class="section-title">🤖 DeepAgent 自动化能力演示</h2>
+                    <p>
+                        DeepAgent 的强大之处在于其<strong>自动规划和执行</strong>能力。
+                        让我们看看它如何自动完成一个复杂的研究任务：
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级 - 完整示例</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+DeepAgent 自动化工作流演示
+"""
+import os
+from typing import Literal
+from tavily import TavilyClient
+from deepagents import create_deep_agent
+
+# 初始化
+tavily_client = TavilyClient(api_key=os.environ["TAVILY_API_KEY"])
+
+def internet_search(
+    query: str,
+    max_results: int = 5,
+    topic: Literal["general", "news", "finance"] = "general",
+    include_raw_content: bool = False,
+):
+    """网络搜索工具"""
+    return tavily_client.search(
+        query,
+        max_results=max_results,
+        include_raw_content=include_raw_content,
+        topic=topic,
+    )
+
+# 创建高级研究 Agent
+research_instructions = """你是顶级研究分析师。你的任务是：
+
+1. **深度研究**: 对给定主题进行全面调查
+2. **多角度分析**: 从技术、商业、应用等多个维度分析
+3. **数据综合**: 整合多个来源的信息
+4. **结构化输出**: 生成清晰、专业的研究报告
+
+## 工作方法
+
+- 使用 `write_todos` 工具制定研究计划
+- 使用 `internet_search` 收集信息
+- 使用 `write_file` 保存大量数据（避免上下文溢出）
+- 使用 `read_file` 读取已保存的数据
+- 如需深入分析特定方面，可以委派子代理
+
+## 输出格式
+
+# [主题]研究报告
+
+## 1. 执行摘要
+...
+
+## 2. 技术分析
+...
+
+## 3. 应用场景
+...
+
+## 4. 优势与挑战
+...
+
+## 5. 未来趋势
+...
+
+## 6. 参考来源
+...
+"""
+
+agent = create_deep_agent(
+    tools=[internet_search],
+    system_prompt=research_instructions
+)
+
+# 执行复杂研究任务
+result = agent.invoke({
+    "messages": [{
+        "role": "user",
+        "content": """请深入研究"LangChain 1.0 的中间件系统"。
+
+我需要了解：
+1. 中间件系统的技术架构
+2. 主要应用场景和最佳实践
+3. 与 LangGraph 的集成方式
+4. 生产环境部署建议
+
+请提供详尽的研究报告。"""
+    }]
+})
+
+# DeepAgent 自动执行的步骤：
+#
+# 1️⃣ **自动规划** (write_todos):
+#    - 任务 1: 搜索 LangChain 1.0 中间件架构
+#    - 任务 2: 查找应用场景和最佳实践
+#    - 任务 3: 研究 LangGraph 集成方式
+#    - 任务 4: 收集部署建议
+#
+# 2️⃣ **执行搜索** (internet_search):
+#    - 搜索 "LangChain 1.0 middleware architecture"
+#    - 搜索 "LangChain middleware use cases"
+#    - 搜索 "LangGraph middleware integration"
+#    - 搜索 "LangChain production deployment"
+#
+# 3️⃣ **上下文管理** (write_file/read_file):
+#    - 将大量搜索结果写入文件
+#    - 逐步读取和分析数据
+#
+# 4️⃣ **信息综合**:
+#    - 整合所有收集到的信息
+#    - 生成结构化报告
+#
+# 5️⃣ **最终输出**:
+#    - 返回完整的研究报告
+
+# 打印最终报告
+print(result["messages"][-1].content)</code></pre>
+                    </div>
+
+                    <div class="info-box note">
+                        <div class="info-box-title">🔍 DeepAgent 自动化流程</div>
+                        <p>在上面的示例中，DeepAgent 会自动：</p>
+                        <ol>
+                            <li><strong>制定计划</strong>：使用内置 write_todos 工具分解研究任务</li>
+                            <li><strong>执行搜索</strong>：对每个子任务进行有针对性的网络搜索</li>
+                            <li><strong>管理数据</strong>：使用文件系统工具保存和读取大量搜索结果</li>
+                            <li><strong>委派子任务</strong>：如需深度分析，创建专门的子代理</li>
+                            <li><strong>综合信息</strong>：将所有信息整合成连贯的报告</li>
+                        </ol>
+                    </div>
+                </section>
+
+                <!-- 核心概念 -->
+                <section class="content-section">
+                    <h2 class="section-title">💡 核心概念</h2>
+
+                    <h3 class="subsection-title">1. Agent Harness（代理框架）</h3>
+                    <p>
+                        DeepAgent 使用 <strong>Harness</strong> 框架来编排代理行为，管理：
+                    </p>
+                    <ul>
+                        <li><strong>工具调用</strong>：自动处理工具的执行和响应</li>
+                        <li><strong>状态管理</strong>：维护对话和任务状态</li>
+                        <li><strong>执行流程</strong>：控制任务的执行顺序和逻辑</li>
+                        <li><strong>错误处理</strong>：处理工具调用失败和重试逻辑</li>
+                    </ul>
+
+                    <h3 class="subsection-title">2. 内置工具</h3>
+                    <p>
+                        DeepAgent 自动提供以下内置工具：
+                    </p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>工具</th>
+                                <th>功能</th>
+                                <th>用途</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>write_todos</code></td>
+                                <td>创建任务列表</td>
+                                <td>自动规划和分解复杂任务</td>
+                            </tr>
+                            <tr>
+                                <td><code>write_file</code></td>
+                                <td>写入文件</td>
+                                <td>保存大量数据，减少上下文压力</td>
+                            </tr>
+                            <tr>
+                                <td><code>read_file</code></td>
+                                <td>读取文件</td>
+                                <td>加载已保存的数据进行分析</td>
+                            </tr>
+                            <tr>
+                                <td><code>list_files</code></td>
+                                <td>列出文件</td>
+                                <td>查看已保存的文件列表</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 class="subsection-title">3. 中间件架构</h3>
+                    <p>
+                        DeepAgent 支持<strong>中间件系统</strong>，允许在请求和响应之间插入自定义逻辑：
+                    </p>
+                    <ul>
+                        <li><strong>日志记录</strong>：追踪所有工具调用和响应</li>
+                        <li><strong>安全检查</strong>：验证工具调用的权限和安全性</li>
+                        <li><strong>性能监控</strong>：测量工具执行时间</li>
+                        <li><strong>内容过滤</strong>：过滤敏感信息</li>
+                    </ul>
+
+                    <h3 class="subsection-title">4. 子代理委派</h3>
+                    <p>
+                        DeepAgent 可以动态创建<strong>专门化子代理</strong>来处理特定任务：
+                    </p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># DeepAgent 自动创建子代理的场景：
+#
+# 主 Agent: 研究 LangChain 1.0
+#   ├─ 子 Agent 1: 专门研究 Agent 架构
+#   ├─ 子 Agent 2: 专门研究 RAG 实现
+#   └─ 子 Agent 3: 专门研究最佳实践
+#
+# 每个子 Agent 独立执行，然后将结果汇总给主 Agent</code></pre>
+                    </div>
+                </section>
+
+                <!-- 常见用例 -->
+                <section class="content-section">
+                    <h2 class="section-title">🎯 常见用例</h2>
+
+                    <h3 class="subsection-title">用例 1: 自动化研究报告</h3>
+                    <p>
+                        DeepAgent 特别适合需要<strong>收集、分析和综合大量信息</strong>的任务：
+                    </p>
+                    <ul>
+                        <li>技术调研报告</li>
+                        <li>市场分析</li>
+                        <li>竞品对比</li>
+                        <li>文献综述</li>
+                    </ul>
+
+                    <h3 class="subsection-title">用例 2: 复杂问题求解</h3>
+                    <p>
+                        通过<strong>自动规划和委派</strong>解决多步骤问题：
+                    </p>
+                    <ul>
+                        <li>软件架构设计</li>
+                        <li>故障排查和诊断</li>
+                        <li>数据分析流程</li>
+                        <li>业务流程优化</li>
+                    </ul>
+
+                    <h3 class="subsection-title">用例 3: 知识库查询</h3>
+                    <p>
+                        结合 RAG 技术，DeepAgent 可以<strong>深度探索</strong>知识库：
+                    </p>
+                    <ul>
+                        <li>多轮深度问答</li>
+                        <li>跨文档信息提取</li>
+                        <li>关联分析</li>
+                        <li>知识图谱构建</li>
+                    </ul>
+                </section>
+
+                <!-- 最佳实践 -->
+                <section class="content-section">
+                    <h2 class="section-title">✨ 最佳实践</h2>
+
+                    <h3 class="subsection-title">1. 编写清晰的系统提示词</h3>
+                    <p>
+                        <strong>好的系统提示词</strong>应该：
+                    </p>
+                    <ul>
+                        <li>明确定义 Agent 的角色和职责</li>
+                        <li>描述可用工具及其使用方法</li>
+                        <li>提供工作流程指导</li>
+                        <li>说明输出格式要求</li>
+                    </ul>
+
+                    <h3 class="subsection-title">2. 合理使用文件系统工具</h3>
+                    <p>
+                        当处理<strong>大量数据</strong>时：
+                    </p>
+                    <ul>
+                        <li>使用 write_file 保存搜索结果，避免上下文溢出</li>
+                        <li>使用 read_file 分批读取和处理数据</li>
+                        <li>使用 list_files 管理已保存的文件</li>
+                    </ul>
+
+                    <h3 class="subsection-title">3. 启用追踪和监控</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">import os
+
+# 启用 LangSmith 追踪
+os.environ["LANGCHAIN_TRACING_V2"] = "true"
+os.environ["LANGCHAIN_API_KEY"] = "your-api-key"
+
+# 所有 DeepAgent 调用会自动追踪</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">4. 优化工具设计</h3>
+                    <p>
+                        设计工具时应：
+                    </p>
+                    <ul>
+                        <li><strong>单一职责</strong>：每个工具只做一件事</li>
+                        <li><strong>清晰文档</strong>：提供详细的 docstring</li>
+                        <li><strong>类型提示</strong>：使用 Python 类型注解</li>
+                        <li><strong>错误处理</strong>：处理异常并返回有意义的错误信息</li>
+                    </ul>
+                </section>
+
+                <!-- 下一步 -->
+                <section class="content-section">
+                    <h2 class="section-title">🚀 下一步</h2>
+                    <p>
+                        掌握了 DeepAgent 的基础后，继续探索：
+                    </p>
+
+                    <div class="info-box tip">
+                        <div class="info-box-title">📖 推荐学习路径</div>
+                        <table style="margin-top: 0.5rem;">
+                            <thead>
+                                <tr>
+                                    <th>主题</th>
+                                    <th>内容</th>
+                                    <th>难度</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><a href="23-deepagents-customization.html">定制化</a></td>
+                                    <td>自定义 Agent 行为和配置</td>
+                                    <td>🟡 中级</td>
+                                </tr>
+                                <tr>
+                                    <td><a href="24-deepagents-harness.html">Harness 系统</a></td>
+                                    <td>深入理解 Agent 框架</td>
+                                    <td>🔴 高级</td>
+                                </tr>
+                                <tr>
+                                    <td><a href="25-deepagents-backends.html">后端配置</a></td>
+                                    <td>多后端支持和切换</td>
+                                    <td>🟡 中级</td>
+                                </tr>
+                                <tr>
+                                    <td><a href="26-deepagents-subagents.html">子代理</a></td>
+                                    <td>创建和管理子代理</td>
+                                    <td>🔴 高级</td>
+                                </tr>
+                                <tr>
+                                    <td><a href="27-deepagents-hitl.html">人工介入</a></td>
+                                    <td>Human-in-the-Loop 工作流</td>
+                                    <td>🟡 中级</td>
+                                </tr>
+                                <tr>
+                                    <td><a href="28-deepagents-memory.html">长期记忆</a></td>
+                                    <td>持久化和记忆管理</td>
+                                    <td>🔴 高级</td>
+                                </tr>
+                                <tr>
+                                    <td><a href="29-deepagents-middleware.html">中间件</a></td>
+                                    <td>中间件集成和生产配置</td>
+                                    <td>🔴 高级</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- 常见问题 -->
+                <section class="content-section">
+                    <h2 class="section-title">❓ 常见问题</h2>
+
+                    <h3 class="subsection-subtitle">Q1: DeepAgent 和普通 Agent 有什么区别？</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>特性</th>
+                                <th>普通 Agent</th>
+                                <th>DeepAgent</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>规划能力</strong></td>
+                                <td>需要手动规划</td>
+                                <td>内置 write_todos 自动规划</td>
+                            </tr>
+                            <tr>
+                                <td><strong>上下文管理</strong></td>
+                                <td>受限于上下文窗口</td>
+                                <td>自动文件系统卸载</td>
+                            </tr>
+                            <tr>
+                                <td><strong>子任务委派</strong></td>
+                                <td>不支持</td>
+                                <td>动态创建子代理</td>
+                            </tr>
+                            <tr>
+                                <td><strong>复杂任务</strong></td>
+                                <td>需要人工干预</td>
+                                <td>自动分解和执行</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 class="subsection-subtitle">Q2: 如何调试 DeepAgent？</h3>
+                    <p>
+                        使用 <strong>LangSmith 追踪</strong>查看详细的执行轨迹：
+                    </p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">import os
+
+# 启用追踪
+os.environ["LANGCHAIN_TRACING_V2"] = "true"
+os.environ["LANGCHAIN_API_KEY"] = "your-api-key"
+
+# 执行 Agent
+result = agent.invoke({...})
+
+# 在 LangSmith UI 中查看：
+# - 所有工具调用
+# - 中间结果
+# - 子代理执行
+# - 错误和重试</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">Q3: DeepAgent 支持哪些模型？</h3>
+                    <p>
+                        DeepAgent 主要支持 <strong>Anthropic Claude</strong> 系列模型：
+                    </p>
+                    <ul>
+                        <li>Claude Opus 4.5（最强大）</li>
+                        <li>Claude Sonnet 4.5（推荐）</li>
+                        <li>Claude Haiku 4.0（最快）</li>
+                    </ul>
+
+                    <h3 class="subsection-subtitle">Q4: 如何限制 Agent 的执行时间？</h3>
+                    <p>
+                        DeepAgent 会自动管理执行，但你可以通过<strong>中间件</strong>添加超时控制：
+                    </p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 在后续的定制化章节会详细介绍
+# 如何通过中间件控制执行时间</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">Q5: 文件系统工具保存在哪里？</h3>
+                    <p>
+                        默认情况下，文件保存在<strong>临时目录</strong>中。
+                        你可以在定制化配置中指定存储位置。
+                    </p>
+                </section>
+
+                <!-- 参考资源 -->
+                <section class="content-section">
+                    <h2 class="section-title">📖 参考资源</h2>
+                    <ul>
+                        <li>
+                            <a href="https://docs.langchain.com/oss/python/deepagents/quickstart" target="_blank">
+                                DeepAgents 官方快速开始
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://docs.langchain.com/oss/python/deepagents/customization" target="_blank">
+                                DeepAgents 定制化文档
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.anthropic.com/claude" target="_blank">
+                                Anthropic Claude 模型文档
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://tavily.com/docs" target="_blank">
+                                Tavily 搜索 API 文档
+                            </a>
+                        </li>
+                        <li>
+                            <a href="06-agents.html">
+                                Agent 基础 - create_agent() 详解
+                            </a>
+                        </li>
+                        <li>
+                            <a href="07-middleware.html">
+                                中间件系统 - 自定义中间件开发
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- 页面导航 -->
+                <nav class="page-navigation">
+                    <a href="21-structured-output.html" class="nav-button prev">
+                        ← 上一页：结构化输出
+                    </a>
+                    <a href="23-deepagents-customization.html" class="nav-button next">
+                        下一页：DeepAgents 定制化 →
+                    </a>
+                </nav>
+            </div>
+        </main>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" aria-label="返回顶部">↑</button>
+
+    <!-- JavaScript -->
+    <script src="assets/js/mermaid-init.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</body>
+</html>

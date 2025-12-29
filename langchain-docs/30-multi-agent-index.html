@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Multi-Agent 系统概述 - 构建协作式智能代理网络">
+    <title>Multi-Agent 系统概述 | LangChain 1.0 Python 知识文档</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <button class="mobile-menu-button" aria-label="打开菜单">☰</button>
+
+    <div class="container">
+        <!-- 侧边栏导航 -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="sidebar-title">🦜 LangChain 1.0</h1>
+                <p class="sidebar-subtitle">Python 完整学习指南</p>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-section">
+                    <div class="nav-section-title">开始</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">
+                                <span class="nav-icon">🏠</span>
+                                主页
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">基础篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="01-introduction.html" class="nav-link">
+                                <span class="nav-icon">📖</span>
+                                LangChain 简介
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="02-architecture.html" class="nav-link">
+                                <span class="nav-icon">🏗️</span>
+                                核心架构
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="03-models.html" class="nav-link">
+                                <span class="nav-icon">🤖</span>
+                                模型接口
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="04-messages.html" class="nav-link">
+                                <span class="nav-icon">💬</span>
+                                消息系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="05-tools.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                工具系统
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">进阶篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="06-agents.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                Agent 基础
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="07-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="08-rag.html" class="nav-link">
+                                <span class="nav-icon">🔍</span>
+                                RAG 详解
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="09-lcel.html" class="nav-link">
+                                <span class="nav-icon">🔗</span>
+                                LCEL 表达式
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">高级应用</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="10-runtime.html" class="nav-link">
+                                <span class="nav-icon">🔌</span>
+                                Runtime 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="11-checkpointer.html" class="nav-link">
+                                <span class="nav-icon">💾</span>
+                                持久化系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="12-streaming.html" class="nav-link">
+                                <span class="nav-icon">🌊</span>
+                                流式输出
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="13-human-in-loop.html" class="nav-link">
+                                <span class="nav-icon">👤</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="14-long-term-memory.html" class="nav-link">
+                                <span class="nav-icon">🗄️</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="15-langgraph.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                LangGraph
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">实战篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="16-customer-service.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                客服机器人
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="17-best-practices.html" class="nav-link">
+                                <span class="nav-icon">✨</span>
+                                最佳实践
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">参考篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="18-api-reference.html" class="nav-link">
+                                <span class="nav-icon">📚</span>
+                                API 速查表
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="19-troubleshooting.html" class="nav-link">
+                                <span class="nav-icon">🐛</span>
+                                故障排除
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="20-migration.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                迁移指南
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">扩展篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="21-structured-output.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                结构化输出
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">DeepAgents 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="22-deepagents-quickstart.html" class="nav-link">
+                                <span class="nav-icon">🚀</span>
+                                快速开始
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="23-deepagents-customization.html" class="nav-link">
+                                <span class="nav-icon">🎨</span>
+                                定制化
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="24-deepagents-harness.html" class="nav-link">
+                                <span class="nav-icon">🎛️</span>
+                                Harness 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="25-deepagents-backends.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                后端配置
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="26-deepagents-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="27-deepagents-hitl.html" class="nav-link">
+                                <span class="nav-icon">🤝</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="28-deepagents-memory.html" class="nav-link">
+                                <span class="nav-icon">🧠</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="29-deepagents-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">Multi-Agent 篇</div>
+                    <ul>
+                        <li class="nav-item active">
+                            <a href="30-multi-agent-index.html" class="nav-link">
+                                <span class="nav-icon">🌐</span>
+                                概述
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="31-multi-agent-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="32-multi-agent-handoffs.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                交接机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="33-multi-agent-skills.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                技能系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="34-multi-agent-router.html" class="nav-link">
+                                <span class="nav-icon">🧭</span>
+                                路由机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="35-multi-agent-workflow.html" class="nav-link">
+                                <span class="nav-icon">🔀</span>
+                                自定义工作流
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- 主内容区域 -->
+        <main class="main-content">
+            <div class="content-wrapper">
+                <!-- 面包屑导航 -->
+                <nav class="breadcrumb">
+                    <span class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link">主页</a>
+                    </span>
+                    <span class="breadcrumb-item">
+                        Multi-Agent 篇
+                    </span>
+                    <span class="breadcrumb-item">
+                        概述
+                    </span>
+                </nav>
+
+                <!-- 页面标题 -->
+                <header class="page-header">
+                    <h1 class="page-title">🌐 Multi-Agent 系统概述</h1>
+                    <p class="page-subtitle">
+                        通过多个协作的智能代理构建复杂应用，实现专业化分工、
+                        智能路由、灵活交接和可扩展的工作流。
+                    </p>
+                </header>
+
+                <!-- 什么是 Multi-Agent 系统 -->
+                <section class="content-section">
+                    <h2 class="section-title">📚 什么是 Multi-Agent 系统？</h2>
+                    <p>
+                        <strong>Multi-Agent 系统</strong>是由<strong>多个协作的智能代理</strong>组成的架构模式，
+                        每个代理专注于特定的任务领域，通过协作、交接和路由机制共同完成复杂的业务流程。
+                    </p>
+
+                    <div class="info-box note">
+                        <div class="info-box-title">💡 核心优势</div>
+                        <table style="margin-top: 0.5rem;">
+                            <thead>
+                                <tr>
+                                    <th>特性</th>
+                                    <th>单 Agent 系统</th>
+                                    <th>Multi-Agent 系统</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>专业化程度</strong></td>
+                                    <td>一个 Agent 处理所有任务</td>
+                                    <td>每个 Agent 专注于特定领域</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>上下文管理</strong></td>
+                                    <td>所有信息堆积在一个上下文</td>
+                                    <td>分布在多个隔离的上下文</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>模型选择</strong></td>
+                                    <td>使用单一模型</td>
+                                    <td>不同代理使用最适合的模型</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>可扩展性</strong></td>
+                                    <td>添加功能需修改主 Agent</td>
+                                    <td>添加新代理即可扩展</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>维护性</strong></td>
+                                    <td>单点维护，易出问题</td>
+                                    <td>模块化，独立维护</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="mermaid-wrapper">
+                        <div class="mermaid">
+graph TB
+    User["用户请求<br/>复杂业务流程"] --> Router["🧭 路由器<br/>智能分发"]
+
+    Router -->|"客服问题"| Agent1["📞 客服 Agent<br/>FAQ + 订单查询"]
+    Router -->|"技术支持"| Agent2["🔧 技术 Agent<br/>问题诊断 + 解决方案"]
+    Router -->|"销售咨询"| Agent3["💼 销售 Agent<br/>产品推荐 + 报价"]
+
+    Agent1 -->|"需要技术支持"| Handoff1["🔄 交接<br/>转给技术 Agent"]
+    Agent2 -->|"需要销售跟进"| Handoff2["🔄 交接<br/>转给销售 Agent"]
+    Agent3 -->|"需要查询订单"| Handoff3["🔄 交接<br/>转给客服 Agent"]
+
+    Handoff1 --> Agent2
+    Handoff2 --> Agent3
+    Handoff3 --> Agent1
+
+    Agent1 --> Skills["🎯 共享技能<br/>搜索、数据库、邮件"]
+    Agent2 --> Skills
+    Agent3 --> Skills
+
+    Agent1 --> Result["协作完成<br/>返回用户"]
+    Agent2 --> Result
+    Agent3 --> Result
+
+    style Router fill:#3b82f6,color:#fff
+    style Agent1 fill:#10b981,color:#fff
+    style Agent2 fill:#f59e0b,color:#fff
+    style Agent3 fill:#8b5cf6,color:#fff
+    style Skills fill:#ef4444,color:#fff
+    style Result fill:#10b981,color:#fff
+                        </div>
+                    </div>
+
+                    <h3 class="subsection-title">Multi-Agent 系统的组成要素</h3>
+                    <ul>
+                        <li><strong>Subagents（子代理）</strong>：专门化的独立代理，各自处理特定任务</li>
+                        <li><strong>Handoffs（交接机制）</strong>：代理之间的控制转移和状态传递</li>
+                        <li><strong>Skills（技能系统）</strong>：可在多个代理之间共享的能力和工具</li>
+                        <li><strong>Router（路由机制）</strong>：智能分发请求到最合适的代理</li>
+                        <li><strong>Custom Workflow（自定义工作流）</strong>：复杂的多步骤协作流程</li>
+                    </ul>
+                </section>
+
+                <!-- Multi-Agent vs DeepAgents -->
+                <section class="content-section">
+                    <h2 class="section-title">🔀 Multi-Agent vs DeepAgents</h2>
+                    <p>
+                        <strong>Multi-Agent</strong> 和 <strong>DeepAgents</strong> 是两个不同但互补的概念：
+                    </p>
+
+                    <div class="mermaid-wrapper">
+                        <div class="mermaid">
+graph LR
+    subgraph DeepAgents["DeepAgents - 增强单个 Agent"]
+        DA[create_deep_agent] --> Middleware["中间件<br/>TodoList, Filesystem, SubAgent"]
+        DA --> Backend["后端<br/>State, Store"]
+        DA --> HITL["人工介入<br/>审批机制"]
+        DA --> Memory["长期记忆<br/>Store 系统"]
+    end
+
+    subgraph MultiAgent["Multi-Agent - 多代理协作"]
+        MA["多个 Agent"] --> Subagents["子代理<br/>专业化分工"]
+        MA --> Handoffs["交接机制<br/>控制转移"]
+        MA --> Router["路由器<br/>智能分发"]
+        MA --> Skills["技能系统<br/>共享能力"]
+        MA --> Workflow["自定义工作流<br/>复杂编排"]
+    end
+
+    DeepAgents -.->|"可用于构建"| MultiAgent
+    MultiAgent -.->|"每个代理可以是"| DeepAgents
+
+    style DeepAgents fill:#10b981,color:#fff
+    style MultiAgent fill:#3b82f6,color:#fff
+                        </div>
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>维度</th>
+                                <th>DeepAgents</th>
+                                <th>Multi-Agent</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>关注点</strong></td>
+                                <td>增强<strong>单个 Agent</strong>的能力</td>
+                                <td><strong>多个 Agent</strong>的协作</td>
+                            </tr>
+                            <tr>
+                                <td><strong>核心机制</strong></td>
+                                <td>中间件、后端、人工介入、长期记忆</td>
+                                <td>子代理、交接、路由、技能、工作流</td>
+                            </tr>
+                            <tr>
+                                <td><strong>使用场景</strong></td>
+                                <td>复杂任务规划、文件管理、持久化</td>
+                                <td>多领域协作、分工协作、动态路由</td>
+                            </tr>
+                            <tr>
+                                <td><strong>架构模式</strong></td>
+                                <td>垂直深化（单个 Agent 功能增强）</td>
+                                <td>水平扩展（多个 Agent 协作）</td>
+                            </tr>
+                            <tr>
+                                <td><strong>典型应用</strong></td>
+                                <td>研究助手、数据分析、长期项目</td>
+                                <td>客服系统、工作流引擎、多角色协作</td>
+                            </tr>
+                            <tr>
+                                <td><strong>组合使用</strong></td>
+                                <td colspan="2">✅ 可以结合：每个 Multi-Agent 节点都可以是一个 DeepAgent</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="info-box tip">
+                        <div class="info-box-title">💡 何时使用哪个？</div>
+                        <ul>
+                            <li><strong>使用 DeepAgents</strong>：需要一个功能强大的单一代理，具备规划、记忆、文件管理等高级能力</li>
+                            <li><strong>使用 Multi-Agent</strong>：需要多个专业化代理协作，每个代理处理不同领域或任务</li>
+                            <li><strong>结合使用</strong>：构建生产级系统，每个 Multi-Agent 节点使用 DeepAgent 增强其能力</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- 五大核心协作模式 -->
+                <section class="content-section">
+                    <h2 class="section-title">🎯 五大核心协作模式</h2>
+                    <p>
+                        Multi-Agent 系统提供了<strong>五种核心协作模式</strong>，可以单独使用或组合构建复杂应用：
+                    </p>
+
+                    <h3 class="subsection-title">1. Subagents（子代理）- 专业化分工</h3>
+                    <p>
+                        创建多个专门化的子代理，每个代理专注于特定的任务领域。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+Subagents 模式 - 专业化分工
+"""
+from langchain_core.messages import HumanMessage
+from langgraph.graph import StateGraph, MessagesState, START
+
+# 定义专门化的子代理节点
+def research_agent(state: MessagesState):
+    """研究专员：负责信息收集和分析"""
+    # 使用搜索工具收集信息
+    return {"messages": ["研究结果：已收集相关数据..."]}
+
+def writer_agent(state: MessagesState):
+    """写作专员：负责内容创作"""
+    # 基于研究结果创作内容
+    return {"messages": ["文章草稿：基于研究数据撰写..."]}
+
+def editor_agent(state: MessagesState):
+    """编辑专员：负责内容审核和优化"""
+    # 审核和优化内容
+    return {"messages": ["最终稿件：已优化并审核完成"]}
+
+# 构建工作流
+graph = StateGraph(MessagesState)
+graph.add_node("researcher", research_agent)
+graph.add_node("writer", writer_agent)
+graph.add_node("editor", editor_agent)
+
+# 定义执行顺序
+graph.add_edge(START, "researcher")
+graph.add_edge("researcher", "writer")
+graph.add_edge("writer", "editor")
+
+app = graph.compile()
+
+# 使用
+result = app.invoke({
+    "messages": [HumanMessage(content="写一篇关于 AI 的文章")]
+})
+
+# 优势：
+# - 每个代理专注于自己的领域
+# - 易于维护和扩展
+# - 可以为不同代理配置不同的模型和工具</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">2. Handoffs（交接机制）- 动态转移控制</h3>
+                    <p>
+                        允许代理之间动态转移控制权，实现灵活的协作流程。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+Handoffs 模式 - 动态交接控制
+"""
+from typing import Literal
+from langgraph.graph import StateGraph, MessagesState
+
+def customer_service_agent(state: MessagesState):
+    """客服代理：处理常规问题"""
+    messages = state["messages"]
+    last_message = messages[-1].content
+
+    # 判断是否需要转给技术支持
+    if "技术问题" in last_message or "bug" in last_message:
+        return {
+            "messages": ["我将为您转接技术支持团队"],
+            "next": "technical_support"  # 交接指令
+        }
+
+    return {
+        "messages": ["问题已解决"],
+        "next": "end"
+    }
+
+def technical_support_agent(state: MessagesState):
+    """技术支持代理：处理技术问题"""
+    messages = state["messages"]
+    last_message = messages[-1].content
+
+    # 判断是否需要升级到工程师
+    if "严重" in last_message or "紧急" in last_message:
+        return {
+            "messages": ["问题已升级，转接工程师"],
+            "next": "engineer"
+        }
+
+    return {
+        "messages": ["技术问题已解决"],
+        "next": "end"
+    }
+
+def engineer_agent(state: MessagesState):
+    """工程师代理：处理复杂技术问题"""
+    return {
+        "messages": ["工程师已介入，正在处理"],
+        "next": "end"
+    }
+
+# 构建带交接的工作流
+def route_next(state: MessagesState) -> Literal["customer_service", "technical_support", "engineer", "end"]:
+    """根据 next 字段路由"""
+    return state.get("next", "customer_service")
+
+graph = StateGraph(MessagesState)
+graph.add_node("customer_service", customer_service_agent)
+graph.add_node("technical_support", technical_support_agent)
+graph.add_node("engineer", engineer_agent)
+
+# 添加条件路由
+graph.add_conditional_edges("customer_service", route_next)
+graph.add_conditional_edges("technical_support", route_next)
+
+app = graph.compile()
+
+# 优势：
+# - 动态决策何时交接
+# - 支持多层级升级
+# - 保持上下文连续性</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">3. Skills（技能系统）- 共享能力</h3>
+                    <p>
+                        定义可在多个代理之间共享的技能和工具集。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+Skills 模式 - 共享技能系统
+"""
+from langchain.tools import tool
+
+# 定义共享技能
+@tool
+def search_database(query: str) -> dict:
+    """搜索数据库的共享技能"""
+    # 所有代理都可以使用此技能
+    return {"results": ["数据 1", "数据 2", "数据 3"]}
+
+@tool
+def send_notification(recipient: str, message: str) -> str:
+    """发送通知的共享技能"""
+    # 所有代理都可以发送通知
+    return f"通知已发送给 {recipient}"
+
+@tool
+def format_report(data: dict, format: str) -> str:
+    """格式化报告的共享技能"""
+    # 所有代理都可以使用统一的格式化
+    return f"报告已格式化为 {format}"
+
+# 为多个代理配置相同的技能
+common_skills = [search_database, send_notification, format_report]
+
+# Agent 1: 数据分析师（使用共享技能）
+from langchain_core.agents import create_agent
+
+analyst_agent = create_agent(
+    model="gpt-4o",
+    tools=common_skills,  # 共享技能
+    system_prompt="你是数据分析师，可以搜索数据、发送通知、格式化报告"
+)
+
+# Agent 2: 报告生成器（使用相同的共享技能）
+reporter_agent = create_agent(
+    model="claude-sonnet-4-5",
+    tools=common_skills,  # 相同的共享技能
+    system_prompt="你是报告生成器，可以搜索数据、发送通知、格式化报告"
+)
+
+# 优势：
+# - 避免重复定义工具
+# - 保证工具行为一致性
+# - 易于统一维护和升级</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">4. Router（路由机制）- 智能分发</h3>
+                    <p>
+                        根据请求内容智能路由到最合适的代理。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+Router 模式 - 智能路由分发
+"""
+from typing import Literal
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_openai import ChatOpenAI
+from langgraph.graph import StateGraph, MessagesState
+
+# 定义路由决策系统
+route_prompt = ChatPromptTemplate.from_messages([
+    ("system", """你是路由助手。根据用户请求，决定分配给哪个专员：
+
+- sales: 销售咨询、产品介绍、报价
+- support: 售后问题、技术支持、故障排除
+- billing: 账单查询、支付问题、发票
+- general: 其他一般性问题
+
+仅返回一个词：sales, support, billing, 或 general"""),
+    ("human", "{input}")
+])
+
+router_llm = ChatOpenAI(model="gpt-4o")
+router_chain = route_prompt | router_llm
+
+def router(state: MessagesState) -> Literal["sales", "support", "billing", "general"]:
+    """智能路由器"""
+    user_input = state["messages"][-1].content
+    result = router_chain.invoke({"input": user_input})
+    return result.content.strip().lower()
+
+# 定义各个专员代理
+def sales_agent(state: MessagesState):
+    """销售专员"""
+    return {"messages": ["销售专员：我来帮您介绍产品和报价"]}
+
+def support_agent(state: MessagesState):
+    """技术支持专员"""
+    return {"messages": ["技术支持：我来帮您解决技术问题"]}
+
+def billing_agent(state: MessagesState):
+    """账单专员"""
+    return {"messages": ["账单专员：我来帮您处理账单问题"]}
+
+def general_agent(state: MessagesState):
+    """通用专员"""
+    return {"messages": ["客服：我来为您服务"]}
+
+# 构建路由工作流
+graph = StateGraph(MessagesState)
+
+# 添加所有代理节点
+graph.add_node("sales", sales_agent)
+graph.add_node("support", support_agent)
+graph.add_node("billing", billing_agent)
+graph.add_node("general", general_agent)
+
+# 添加条件路由（从起点根据内容路由）
+graph.add_conditional_edges(START, router)
+
+app = graph.compile()
+
+# 测试路由
+test_cases = [
+    "我想了解你们的产品价格",      # → sales
+    "我的账单有问题",              # → billing
+    "软件崩溃了",                  # → support
+    "你们的营业时间是什么？"        # → general
+]
+
+for test in test_cases:
+    result = app.invoke({"messages": [HumanMessage(content=test)]})
+    print(f"请求: {test}")
+    print(f"响应: {result['messages'][-1]}\n")
+
+# 优势：
+# - 自动分配到最合适的代理
+# - 减少人工分类工作
+# - 提高响应效率</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">5. Custom Workflow（自定义工作流）- 复杂编排</h3>
+                    <p>
+                        设计复杂的多步骤工作流，灵活组合多个代理和逻辑。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级 - 完整示例</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+Custom Workflow 模式 - 复杂工作流编排
+"""
+from typing import TypedDict, Annotated, Literal
+from langgraph.graph import StateGraph, START, END
+from langgraph.graph.message import add_messages
+
+# 定义工作流状态
+class WorkflowState(TypedDict):
+    messages: Annotated[list, add_messages]
+    research_data: str
+    analysis_result: str
+    report_draft: str
+    approved: bool
+
+# 步骤 1: 研究代理
+def research_phase(state: WorkflowState):
+    """研究阶段：收集数据"""
+    return {
+        "research_data": "已收集的研究数据...",
+        "messages": ["研究阶段完成"]
+    }
+
+# 步骤 2: 分析代理
+def analysis_phase(state: WorkflowState):
+    """分析阶段：数据分析"""
+    return {
+        "analysis_result": "分析结果：关键发现...",
+        "messages": ["分析阶段完成"]
+    }
+
+# 步骤 3: 写作代理
+def writing_phase(state: WorkflowState):
+    """写作阶段：生成报告"""
+    return {
+        "report_draft": "报告草稿：基于分析结果...",
+        "messages": ["报告草稿完成"]
+    }
+
+# 步骤 4: 人工审批（模拟）
+def human_review(state: WorkflowState):
+    """人工审批阶段"""
+    # 实际应用中会暂停等待人工审批
+    # 这里模拟自动批准
+    return {
+        "approved": True,
+        "messages": ["报告已批准"]
+    }
+
+# 步骤 5: 发布代理
+def publish_phase(state: WorkflowState):
+    """发布阶段：格式化和发布"""
+    return {
+        "messages": ["报告已发布"]
+    }
+
+# 决策节点：根据审批结果决定下一步
+def should_publish(state: WorkflowState) -> Literal["publish", "revise"]:
+    """决策：是否发布"""
+    return "publish" if state.get("approved") else "revise"
+
+# 步骤 6: 修订代理
+def revise_phase(state: WorkflowState):
+    """修订阶段：根据反馈修改"""
+    return {
+        "report_draft": "修订后的报告...",
+        "messages": ["报告已修订，重新提交审批"]
+    }
+
+# 构建复杂工作流
+workflow = StateGraph(WorkflowState)
+
+# 添加所有节点
+workflow.add_node("research", research_phase)
+workflow.add_node("analysis", analysis_phase)
+workflow.add_node("writing", writing_phase)
+workflow.add_node("review", human_review)
+workflow.add_node("publish", publish_phase)
+workflow.add_node("revise", revise_phase)
+
+# 定义流程路径
+workflow.add_edge(START, "research")
+workflow.add_edge("research", "analysis")
+workflow.add_edge("analysis", "writing")
+workflow.add_edge("writing", "review")
+
+# 条件分支：根据审批结果
+workflow.add_conditional_edges(
+    "review",
+    should_publish,
+    {
+        "publish": "publish",
+        "revise": "revise"
+    }
+)
+
+# 修订后重新审批
+workflow.add_edge("revise", "review")
+
+# 发布后结束
+workflow.add_edge("publish", END)
+
+# 编译工作流
+app = workflow.compile()
+
+# 使用
+result = app.invoke({
+    "messages": [HumanMessage(content="创建季度销售报告")]
+})
+
+print("工作流执行完成")
+print("最终消息:", result["messages"])
+
+# 工作流执行路径：
+# 研究 → 分析 → 写作 → 审批 → 发布（如批准）
+#                     ↓
+#                   修订 → 重新审批（如未批准）
+
+# 优势：
+# - 灵活定义复杂业务流程
+# - 支持条件分支和循环
+# - 易于可视化和维护
+# - 可集成人工审批节点</code></pre>
+                    </div>
+                </section>
+
+                <!-- 典型应用场景 -->
+                <section class="content-section">
+                    <h2 class="section-title">🎨 典型应用场景</h2>
+                    <p>
+                        Multi-Agent 系统在以下场景中表现出色：
+                    </p>
+
+                    <h3 class="subsection-title">场景 1: 客户服务系统</h3>
+                    <ul>
+                        <li><strong>路由器</strong>：根据问题类型分配给不同专员</li>
+                        <li><strong>客服代理</strong>：处理常规问题</li>
+                        <li><strong>技术代理</strong>：解决技术问题</li>
+                        <li><strong>销售代理</strong>：处理销售咨询</li>
+                        <li><strong>交接机制</strong>：在代理之间流畅转移</li>
+                    </ul>
+
+                    <h3 class="subsection-title">场景 2: 内容创作流水线</h3>
+                    <ul>
+                        <li><strong>研究代理</strong>：收集背景资料</li>
+                        <li><strong>写作代理</strong>：创作内容</li>
+                        <li><strong>编辑代理</strong>：审核和优化</li>
+                        <li><strong>SEO 代理</strong>：优化搜索引擎可见性</li>
+                        <li><strong>工作流</strong>：顺序执行各阶段</li>
+                    </ul>
+
+                    <h3 class="subsection-title">场景 3: 数据分析平台</h3>
+                    <ul>
+                        <li><strong>收集代理</strong>：从多源获取数据</li>
+                        <li><strong>清洗代理</strong>：数据标准化</li>
+                        <li><strong>分析代理</strong>：执行统计分析</li>
+                        <li><strong>可视化代理</strong>：生成图表</li>
+                        <li><strong>报告代理</strong>：生成分析报告</li>
+                    </ul>
+
+                    <h3 class="subsection-title">场景 4: 智能助理生态</h3>
+                    <ul>
+                        <li><strong>日程代理</strong>：管理日历和提醒</li>
+                        <li><strong>邮件代理</strong>：处理邮件</li>
+                        <li><strong>搜索代理</strong>：信息检索</li>
+                        <li><strong>文档代理</strong>：文档管理</li>
+                        <li><strong>协调器</strong>：统筹各代理协作</li>
+                    </ul>
+                </section>
+
+                <!-- 架构设计原则 -->
+                <section class="content-section">
+                    <h2 class="section-title">🏗️ 架构设计原则</h2>
+
+                    <h3 class="subsection-title">1. 单一职责原则</h3>
+                    <ul>
+                        <li>每个代理专注于<strong>一个明确的职责</strong></li>
+                        <li>避免功能重叠和职责不清</li>
+                        <li>便于维护和测试</li>
+                    </ul>
+
+                    <h3 class="subsection-title">2. 最小知识原则</h3>
+                    <ul>
+                        <li>代理只需要知道<strong>完成自己任务所需的信息</strong></li>
+                        <li>通过明确的接口传递数据</li>
+                        <li>减少代理之间的耦合</li>
+                    </ul>
+
+                    <h3 class="subsection-title">3. 可组合性原则</h3>
+                    <ul>
+                        <li>设计<strong>可重用的代理组件</strong></li>
+                        <li>通过组合而非继承扩展功能</li>
+                        <li>支持灵活的工作流编排</li>
+                    </ul>
+
+                    <h3 class="subsection-title">4. 错误隔离原则</h3>
+                    <ul>
+                        <li>一个代理的失败<strong>不应导致整个系统崩溃</strong></li>
+                        <li>实现优雅的降级和错误处理</li>
+                        <li>保持系统的韧性</li>
+                    </ul>
+
+                    <h3 class="subsection-title">5. 可观测性原则</h3>
+                    <ul>
+                        <li>记录代理之间的<strong>交互和状态变化</strong></li>
+                        <li>使用 LangSmith 等工具追踪</li>
+                        <li>便于调试和优化</li>
+                    </ul>
+                </section>
+
+                <!-- 最佳实践 -->
+                <section class="content-section">
+                    <h2 class="section-title">✨ Multi-Agent 最佳实践</h2>
+
+                    <h3 class="subsection-title">1. 代理职责划分</h3>
+                    <div class="info-box tip">
+                        <div class="info-box-title">✅ 好的划分</div>
+                        <ul>
+                            <li><strong>明确边界</strong>："客服代理"处理FAQ，"技术代理"处理故障</li>
+                            <li><strong>领域专注</strong>："销售代理"专注产品推荐和报价</li>
+                            <li><strong>可测试</strong>：每个代理可独立测试</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-box warning">
+                        <div class="info-box-title">❌ 差的划分</div>
+                        <ul>
+                            <li><strong>职责重叠</strong>：多个代理都能处理相同问题</li>
+                            <li><strong>过于宽泛</strong>："通用代理"处理所有事情</li>
+                            <li><strong>边界模糊</strong>：不清楚哪个代理负责什么</li>
+                        </ul>
+                    </div>
+
+                    <h3 class="subsection-title">2. 状态管理策略</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>状态类型</th>
+                                <th>存储位置</th>
+                                <th>生命周期</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>对话上下文</td>
+                                <td>MessagesState</td>
+                                <td>单次对话</td>
+                            </tr>
+                            <tr>
+                                <td>工作流状态</td>
+                                <td>Custom State</td>
+                                <td>工作流执行期间</td>
+                            </tr>
+                            <tr>
+                                <td>用户会话</td>
+                                <td>Checkpointer</td>
+                                <td>单个线程</td>
+                            </tr>
+                            <tr>
+                                <td>长期数据</td>
+                                <td>Store 系统</td>
+                                <td>跨会话持久化</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 class="subsection-title">3. 错误处理和降级</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 错误处理模式
+def robust_agent(state: MessagesState):
+    """带错误处理的代理"""
+    try:
+        # 尝试主要功能
+        result = primary_function(state)
+        return result
+    except SpecificError as e:
+        # 特定错误的降级策略
+        logger.error(f"主功能失败: {e}")
+        return fallback_function(state)
+    except Exception as e:
+        # 通用错误处理
+        logger.error(f"未预期错误: {e}")
+        return {
+            "messages": ["抱歉，遇到问题。请稍后重试。"],
+            "error": str(e)
+        }
+
+# 优雅降级示例
+def search_with_fallback(query: str):
+    """带降级的搜索"""
+    try:
+        # 尝试主搜索引擎
+        return primary_search(query)
+    except:
+        # 降级到备用搜索
+        return fallback_search(query)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">4. 性能优化</h3>
+                    <ul>
+                        <li><strong>并行执行</strong>：独立任务可并行处理</li>
+                        <li><strong>懒加载</strong>：按需加载代理和资源</li>
+                        <li><strong>缓存</strong>：缓存重复请求的结果</li>
+                        <li><strong>流式输出</strong>：大响应使用流式传输</li>
+                        <li><strong>超时控制</strong>：设置合理的超时时间</li>
+                    </ul>
+
+                    <h3 class="subsection-title">5. 监控和调试</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 使用 LangSmith 追踪
+import os
+
+os.environ["LANGCHAIN_TRACING_V2"] = "true"
+os.environ["LANGCHAIN_API_KEY"] = "your-api-key"
+os.environ["LANGCHAIN_PROJECT"] = "multi-agent-system"
+
+# 所有代理交互会被自动记录到 LangSmith
+# 可以查看：
+# - 代理调用序列
+# - 每个代理的输入输出
+# - 执行时间和成本
+# - 错误和异常</code></pre>
+                    </div>
+                </section>
+
+                <!-- 常见问题 -->
+                <section class="content-section">
+                    <h2 class="section-title">❓ 常见问题</h2>
+
+                    <h3 class="subsection-subtitle">Q1: Multi-Agent 会增加成本吗？</h3>
+                    <p>
+                        <strong>可能会，但整体可能更划算</strong>：
+                    </p>
+                    <ul>
+                        <li>每个代理调用都消耗 API token</li>
+                        <li>但可以为不同代理使用不同成本的模型（简单任务用便宜模型）</li>
+                        <li>专业化代理通常更高效，减少重复和错误</li>
+                        <li>通过缓存和并行化可以优化成本</li>
+                    </ul>
+
+                    <h3 class="subsection-subtitle">Q2: 如何决定是否使用 Multi-Agent？</h3>
+                    <p>
+                        <strong>使用 Multi-Agent 的信号</strong>：
+                    </p>
+                    <ul>
+                        <li>任务需要<strong>多个不同领域的专业知识</strong></li>
+                        <li>单个 Agent 的上下文<strong>过于复杂</strong></li>
+                        <li>需要<strong>并行处理</strong>多个子任务</li>
+                        <li>有明确的<strong>工作流阶段</strong>（研究 → 写作 → 编辑）</li>
+                        <li>需要<strong>动态路由</strong>到不同处理逻辑</li>
+                    </ul>
+
+                    <h3 class="subsection-subtitle">Q3: Multi-Agent 和 LangGraph 的关系？</h3>
+                    <p>
+                        <strong>LangGraph 是实现 Multi-Agent 的基础框架</strong>：
+                    </p>
+                    <ul>
+                        <li>LangGraph 提供<strong>状态图、节点、边</strong>等基础概念</li>
+                        <li>Multi-Agent 是在 LangGraph 之上的<strong>架构模式</strong></li>
+                        <li>可以用 LangGraph 构建任何 Multi-Agent 协作模式</li>
+                        <li>LangChain 提供了一些预置的 Multi-Agent 模式</li>
+                    </ul>
+
+                    <h3 class="subsection-subtitle">Q4: 如何处理代理之间的冲突？</h3>
+                    <p>
+                        <strong>冲突解决策略</strong>：
+                    </p>
+                    <ul>
+                        <li><strong>优先级规则</strong>：定义代理的优先级</li>
+                        <li><strong>仲裁代理</strong>：引入专门的仲裁者</li>
+                        <li><strong>人工介入</strong>：复杂冲突交由人工决策</li>
+                        <li><strong>投票机制</strong>：多个代理投票决定</li>
+                    </ul>
+
+                    <h3 class="subsection-subtitle">Q5: 如何测试 Multi-Agent 系统？</h3>
+                    <p>
+                        <strong>测试策略</strong>：
+                    </p>
+                    <ul>
+                        <li><strong>单元测试</strong>：单独测试每个代理</li>
+                        <li><strong>集成测试</strong>：测试代理之间的交互</li>
+                        <li><strong>端到端测试</strong>：测试完整工作流</li>
+                        <li><strong>模拟测试</strong>：模拟各种场景和边界情况</li>
+                        <li><strong>负载测试</strong>：测试并发和性能</li>
+                    </ul>
+
+                    <h3 class="subsection-subtitle">Q6: 何时应该使用 DeepAgents 而非 Multi-Agent？</h3>
+                    <p>
+                        <strong>选择 DeepAgents</strong>：
+                    </p>
+                    <ul>
+                        <li>需要<strong>单个强大的 Agent</strong>处理复杂任务</li>
+                        <li>需要<strong>规划、记忆、文件管理</strong>等高级能力</li>
+                        <li>任务不需要多个专业化角色</li>
+                    </ul>
+
+                    <p>
+                        <strong>选择 Multi-Agent</strong>：
+                    </p>
+                    <ul>
+                        <li>需要<strong>多个专业化代理</strong>协作</li>
+                        <li>有明确的<strong>角色分工和工作流</strong></li>
+                        <li>需要<strong>动态路由和交接</strong></li>
+                    </ul>
+
+                    <p>
+                        <strong>结合使用</strong>：
+                    </p>
+                    <ul>
+                        <li>每个 Multi-Agent 节点可以是一个 DeepAgent</li>
+                        <li>获得两者的优势：专业化分工 + 强大能力</li>
+                    </ul>
+                </section>
+
+                <!-- 参考资源 -->
+                <section class="content-section">
+                    <h2 class="section-title">📖 参考资源</h2>
+                    <ul>
+                        <li>
+                            <a href="https://docs.langchain.com/oss/python/langchain/multi-agent/index" target="_blank">
+                                Multi-Agent 官方文档
+                            </a>
+                        </li>
+                        <li>
+                            <a href="15-langgraph.html">
+                                LangGraph - 图工作流基础
+                            </a>
+                        </li>
+                        <li>
+                            <a href="26-deepagents-subagents.html">
+                                DeepAgents 子代理 - 对比学习
+                            </a>
+                        </li>
+                        <li>
+                            <a href="31-multi-agent-subagents.html">
+                                Multi-Agent 子代理详解
+                            </a>
+                        </li>
+                        <li>
+                            <a href="32-multi-agent-handoffs.html">
+                                Multi-Agent 交接机制
+                            </a>
+                        </li>
+                        <li>
+                            <a href="33-multi-agent-skills.html">
+                                Multi-Agent 技能系统
+                            </a>
+                        </li>
+                        <li>
+                            <a href="34-multi-agent-router.html">
+                                Multi-Agent 路由机制
+                            </a>
+                        </li>
+                        <li>
+                            <a href="35-multi-agent-workflow.html">
+                                Multi-Agent 自定义工作流
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- 页面导航 -->
+                <nav class="page-navigation">
+                    <a href="29-deepagents-middleware.html" class="nav-button prev">
+                        ← 上一页：DeepAgents 中间件
+                    </a>
+                    <a href="31-multi-agent-subagents.html" class="nav-button next">
+                        下一页：Multi-Agent 子代理 →
+                    </a>
+                </nav>
+            </div>
+        </main>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" aria-label="返回顶部">↑</button>
+
+    <!-- JavaScript -->
+    <script src="assets/js/mermaid-init.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</body>
+</html>

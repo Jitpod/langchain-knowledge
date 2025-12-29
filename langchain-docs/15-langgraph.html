@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LangGraph 详解 - 状态图和工作流编排框架">
+    <title>LangGraph | LangChain 1.0 Python 知识文档</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <button class="mobile-menu-button" aria-label="打开菜单">☰</button>
+
+    <div class="container">
+        <!-- 侧边栏导航 -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="sidebar-title">🦜 LangChain 1.0</h1>
+                <p class="sidebar-subtitle">Python 完整学习指南</p>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-section">
+                    <div class="nav-section-title">开始</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">
+                                <span class="nav-icon">🏠</span>
+                                主页
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">基础篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="01-introduction.html" class="nav-link">
+                                <span class="nav-icon">📖</span>
+                                LangChain 简介
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="02-architecture.html" class="nav-link">
+                                <span class="nav-icon">🏗️</span>
+                                核心架构
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="03-models.html" class="nav-link">
+                                <span class="nav-icon">🤖</span>
+                                模型接口
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="04-messages.html" class="nav-link">
+                                <span class="nav-icon">💬</span>
+                                消息系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="05-tools.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                工具系统
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">进阶篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="06-agents.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                Agent 基础
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="07-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="08-rag.html" class="nav-link">
+                                <span class="nav-icon">🔍</span>
+                                RAG 详解
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="09-lcel.html" class="nav-link">
+                                <span class="nav-icon">🔗</span>
+                                LCEL 表达式
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">高级应用</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="10-runtime.html" class="nav-link">
+                                <span class="nav-icon">🔌</span>
+                                Runtime 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="11-checkpointer.html" class="nav-link">
+                                <span class="nav-icon">💾</span>
+                                持久化系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="12-streaming.html" class="nav-link">
+                                <span class="nav-icon">🌊</span>
+                                流式输出
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="13-human-in-loop.html" class="nav-link">
+                                <span class="nav-icon">👤</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="14-long-term-memory.html" class="nav-link">
+                                <span class="nav-icon">🗄️</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item active">\n                            <a href="15-langgraph.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                LangGraph
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">实战篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="16-customer-service.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                客服机器人
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="17-best-practices.html" class="nav-link">
+                                <span class="nav-icon">✨</span>
+                                最佳实践
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">参考篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="18-api-reference.html" class="nav-link">
+                                <span class="nav-icon">📚</span>
+                                API 速查表
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="19-troubleshooting.html" class="nav-link">
+                                <span class="nav-icon">🐛</span>
+                                故障排除
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="20-migration.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                迁移指南
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">扩展篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="21-structured-output.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                结构化输出
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">DeepAgents 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="22-deepagents-quickstart.html" class="nav-link">
+                                <span class="nav-icon">🚀</span>
+                                快速开始
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="23-deepagents-customization.html" class="nav-link">
+                                <span class="nav-icon">🎨</span>
+                                定制化
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="24-deepagents-harness.html" class="nav-link">
+                                <span class="nav-icon">🎛️</span>
+                                Harness 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="25-deepagents-backends.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                后端配置
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="26-deepagents-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="27-deepagents-hitl.html" class="nav-link">
+                                <span class="nav-icon">🤝</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="28-deepagents-memory.html" class="nav-link">
+                                <span class="nav-icon">🧠</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="29-deepagents-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">Multi-Agent 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="30-multi-agent-index.html" class="nav-link">
+                                <span class="nav-icon">🌐</span>
+                                概述
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="31-multi-agent-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="32-multi-agent-handoffs.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                交接机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="33-multi-agent-skills.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                技能系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="34-multi-agent-router.html" class="nav-link">
+                                <span class="nav-icon">🧭</span>
+                                路由机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="35-multi-agent-workflow.html" class="nav-link">
+                                <span class="nav-icon">🔀</span>
+                                自定义工作流
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- 主内容区域 -->
+        <main class="main-content">
+            <div class="content-wrapper">
+                <!-- 面包屑导航 -->
+                <nav class="breadcrumb">
+                    <span class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link">主页</a>
+                    </span>
+                    <span class="breadcrumb-item">
+                        高级应用
+                    </span>
+                    <span class="breadcrumb-item">
+                        LangGraph
+                    </span>
+                </nav>
+
+                <!-- 页面标题 -->
+                <header class="page-header">
+                    <h1 class="page-title">📊 LangGraph 状态图与工作流</h1>
+                    <p class="page-subtitle">
+                        掌握 LangGraph 低级编排框架，构建复杂的有状态 Agent 工作流，
+                        实现持久化执行、人工干预和长期运行的智能系统。
+                    </p>
+                </header>
+
+                <!-- LangGraph 简介 -->
+                <section class="content-section">
+                    <h2 class="section-title">📚 什么是 LangGraph？</h2>
+                    <p>
+                        <strong>LangGraph</strong> 是由 LangChain Inc 开发的<strong>低级编排框架和运行时</strong>，
+                        专门用于构建、管理和部署<strong>长期运行的有状态 Agent</strong>。
+                        它被 Klarna、Replit 和 Elastic 等公司采用于生产环境。
+                    </p>
+
+                    <div class="info-box note">
+                        <div class="info-box-title">💡 LangGraph 核心定位</div>
+                        <p>
+                            LangGraph 专注于<strong>代理编排</strong>而非提示或架构抽象。
+                            它提供了对 Agent 工作流的<strong>精细控制</strong>，适合需要复杂任务处理的应用。
+                        </p>
+                        <ul style="margin-top: 0.5rem;">
+                            <li><strong>vs create_agent()</strong>：create_agent() 是高级抽象，自动生成工作流；LangGraph 需要手动定义每个节点和边</li>
+                            <li><strong>灵活性</strong>：LangGraph 提供更大的灵活性，但需要更多代码</li>
+                            <li><strong>适用场景</strong>：复杂的多步骤工作流、需要精确控制执行流程的应用</li>
+                        </ul>
+                    </div>
+
+                    <h3 class="subsection-title">五大核心优势</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>优势</th>
+                                <th>说明</th>
+                                <th>应用场景</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>持久化执行</strong></td>
+                                <td>Agent 可在故障中恢复，从中断点继续</td>
+                                <td>长时间运行的任务、需要容错的系统</td>
+                            </tr>
+                            <tr>
+                                <td><strong>人工干预</strong></td>
+                                <td>在任何点检查和修改 Agent 状态</td>
+                                <td>需要审批的操作、调试复杂流程</td>
+                            </tr>
+                            <tr>
+                                <td><strong>综合记忆</strong></td>
+                                <td>支持短期工作记忆和跨会话长期记忆</td>
+                                <td>多轮对话、用户偏好管理</td>
+                            </tr>
+                            <tr>
+                                <td><strong>LangSmith 调试</strong></td>
+                                <td>可视化工具追踪执行路径和状态转换</td>
+                                <td>开发调试、性能优化</td>
+                            </tr>
+                            <tr>
+                                <td><strong>生产就绪部署</strong></td>
+                                <td>可扩展基础设施支持有状态工作流</td>
+                                <td>企业级应用、大规模部署</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <!-- 核心架构 -->
+                <section class="content-section">
+                    <h2 class="section-title">🏗️ LangGraph 核心架构</h2>
+
+                    <div class="mermaid-wrapper">
+                        <div class="mermaid">
+graph TB
+    START((START)) --> A[Node A: 处理输入]
+    A --> B{条件判断}
+
+    B -->|条件1| C[Node C: 路径1]
+    B -->|条件2| D[Node D: 路径2]
+    B -->|其他| E[Node E: 默认路径]
+
+    C --> F[Node F: 合并结果]
+    D --> F
+    E --> F
+
+    F --> G{需要继续？}
+    G -->|是| A
+    G -->|否| END((END))
+
+    subgraph "状态（State）"
+        S1[messages: list]
+        S2[step_count: int]
+        S3[result: str]
+    end
+
+    A -.更新.-> S1
+    B -.读取.-> S2
+    F -.更新.-> S3
+
+    style START fill:#10b981,color:#fff
+    style END fill:#ef4444,color:#fff
+    style B fill:#f59e0b,color:#fff
+    style G fill:#f59e0b,color:#fff
+    style S1 fill:#e0e7ff
+    style S2 fill:#e0e7ff
+    style S3 fill:#e0e7ff
+                        </div>
+                    </div>
+
+                    <h3 class="subsection-title">三大核心组件</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>组件</th>
+                                <th>作用</th>
+                                <th>类比</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>State（状态）</strong></td>
+                                <td>共享数据结构，表示应用的当前快照</td>
+                                <td>数据库，存储所有信息</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Nodes（节点）</strong></td>
+                                <td>编码 Agent 逻辑的函数，执行计算并返回更新</td>
+                                <td>工人，完成具体任务</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Edges（边）</strong></td>
+                                <td>确定下一个执行节点的函数</td>
+                                <td>路标，指明下一步方向</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="info-box tip">
+                        <div class="info-box-title">✅ 核心原则</div>
+                        <p style="font-size: 1.1em; margin: 0;">
+                            <strong>"Nodes do the work, edges tell what to do next."</strong>
+                        </p>
+                        <p style="margin-top: 0.5rem;">
+                            节点负责执行具体工作，边负责决策下一步。
+                        </p>
+                    </div>
+                </section>
+
+                <!-- StateGraph 基础 -->
+                <section class="content-section">
+                    <h2 class="section-title">🎯 StateGraph 基础使用</h2>
+                    <p>
+                        <code>StateGraph</code> 是 LangGraph 的主要图实现，
+                        通过用户定义的 State 对象进行参数化。
+                    </p>
+
+                    <h3 class="subsection-title">最简单的示例</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+StateGraph 最简示例
+功能：创建一个简单的状态图
+"""
+from langgraph.graph import StateGraph, MessagesState, START, END
+
+def mock_llm(state: MessagesState):
+    """模拟 LLM 节点"""
+    return {"messages": [{"role": "ai", "content": "hello world"}]}
+
+# 创建状态图
+graph = StateGraph(MessagesState)
+
+# 添加节点
+graph.add_node("mock_llm", mock_llm)
+
+# 添加边
+graph.add_edge(START, "mock_llm")  # 从 START 到 mock_llm
+graph.add_edge("mock_llm", END)    # 从 mock_llm 到 END
+
+# 编译图
+compiled_graph = graph.compile()
+
+# 执行图
+result = compiled_graph.invoke({
+    "messages": [{"role": "user", "content": "hi!"}]
+})
+
+print(result["messages"][-1]["content"])  # 输出：hello world</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">定义自定义状态</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+自定义状态示例
+功能：定义包含多个字段的状态
+"""
+from typing_extensions import TypedDict
+from typing import Annotated
+from operator import add
+
+class CustomState(TypedDict):
+    # 简单字段（覆盖模式）
+    current_step: str
+    result: str
+
+    # 列表字段（追加模式）
+    messages: Annotated[list, add]  # 使用 add reducer 追加元素
+
+    # 计数器（加法模式）
+    step_count: Annotated[int, lambda x, y: x + y]
+
+# 使用自定义状态创建图
+graph = StateGraph(CustomState)</code></pre>
+                    </div>
+
+                    <div class="info-box note">
+                        <div class="info-box-title">💡 状态更新机制</div>
+                        <ul>
+                            <li><strong>默认行为</strong>：覆盖（后面的值替换前面的值）</li>
+                            <li><strong>Reducer 函数</strong>：使用 <code>Annotated[type, reducer]</code> 定义合并逻辑</li>
+                            <li><strong>常用 Reducer</strong>：
+                                <ul>
+                                    <li><code>add</code> - 列表追加</li>
+                                    <li><code>lambda x, y: x + y</code> - 数值相加</li>
+                                    <li>自定义函数 - 任意合并逻辑</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- 节点和边 -->
+                <section class="content-section">
+                    <h2 class="section-title">🔗 节点和边详解</h2>
+
+                    <h3 class="subsection-title">添加节点</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+节点定义示例
+功能：创建多个节点处理不同任务
+"""
+from langgraph.graph import StateGraph, MessagesState
+
+def input_processor(state: MessagesState):
+    """输入处理节点"""
+    user_message = state["messages"][-1]["content"]
+    return {"messages": [{"role": "system", "content": f"处理输入: {user_message}"}]}
+
+def llm_caller(state: MessagesState):
+    """LLM 调用节点"""
+    # 实际应用中这里会调用真实的 LLM
+    return {"messages": [{"role": "ai", "content": "这是 AI 的回答"}]}
+
+def output_formatter(state: MessagesState):
+    """输出格式化节点"""
+    ai_message = state["messages"][-1]["content"]
+    formatted = f"【AI回复】{ai_message}"
+    return {"messages": [{"role": "ai", "content": formatted}]}
+
+# 创建图并添加节点
+graph = StateGraph(MessagesState)
+
+graph.add_node("input_processor", input_processor)
+graph.add_node("llm_caller", llm_caller)
+graph.add_node("output_formatter", output_formatter)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">普通边（Normal Edges）</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+普通边示例
+功能：定义固定的执行顺序
+"""
+from langgraph.graph import START, END
+
+# 定义执行流程
+graph.add_edge(START, "input_processor")      # 开始 -> 输入处理
+graph.add_edge("input_processor", "llm_caller")  # 输入处理 -> LLM调用
+graph.add_edge("llm_caller", "output_formatter") # LLM调用 -> 输出格式化
+graph.add_edge("output_formatter", END)       # 输出格式化 -> 结束
+
+# 编译和执行
+compiled_graph = graph.compile()
+result = compiled_graph.invoke({
+    "messages": [{"role": "user", "content": "你好"}]
+})</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">条件边（Conditional Edges）</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+条件边示例
+功能：根据状态动态选择下一个节点
+"""
+from langgraph.graph import StateGraph, MessagesState, START, END
+from typing import Literal
+
+class CustomState(MessagesState):
+    intent: str  # 用户意图
+
+def classify_intent(state: CustomState):
+    """意图分类节点"""
+    user_message = state["messages"][-1]["content"]
+
+    # 简单的意图识别
+    if "天气" in user_message:
+        intent = "weather"
+    elif "订单" in user_message:
+        intent = "order"
+    else:
+        intent = "general"
+
+    return {"intent": intent}
+
+def handle_weather(state: CustomState):
+    """处理天气查询"""
+    return {"messages": [{"role": "ai", "content": "今天天气晴朗"}]}
+
+def handle_order(state: CustomState):
+    """处理订单查询"""
+    return {"messages": [{"role": "ai", "content": "您的订单正在配送中"}]}
+
+def handle_general(state: CustomState):
+    """处理一般问题"""
+    return {"messages": [{"role": "ai", "content": "我会帮您解答"}]}
+
+# 路由函数：根据意图选择下一个节点
+def route_by_intent(state: CustomState) -> Literal["weather", "order", "general"]:
+    """路由函数"""
+    return state["intent"]
+
+# 创建图
+graph = StateGraph(CustomState)
+
+# 添加节点
+graph.add_node("classifier", classify_intent)
+graph.add_node("weather", handle_weather)
+graph.add_node("order", handle_order)
+graph.add_node("general", handle_general)
+
+# 添加边
+graph.add_edge(START, "classifier")
+
+# 添加条件边
+graph.add_conditional_edges(
+    "classifier",          # 源节点
+    route_by_intent,       # 路由函数
+    {                      # 映射关系
+        "weather": "weather",
+        "order": "order",
+        "general": "general"
+    }
+)
+
+# 所有处理节点都指向 END
+graph.add_edge("weather", END)
+graph.add_edge("order", END)
+graph.add_edge("general", END)
+
+# 编译和测试
+compiled_graph = graph.compile()
+
+# 测试天气查询
+result1 = compiled_graph.invoke({
+    "messages": [{"role": "user", "content": "今天天气怎么样？"}]
+})
+print(result1["messages"][-1]["content"])  # 输出：今天天气晴朗
+
+# 测试订单查询
+result2 = compiled_graph.invoke({
+    "messages": [{"role": "user", "content": "我的订单在哪里？"}]
+})
+print(result2["messages"][-1]["content"])  # 输出：您的订单正在配送中</code></pre>
+                    </div>
+                </section>
+
+                <!-- Command 控制流 -->
+                <section class="content-section">
+                    <h2 class="section-title">🎮 Command 控制流</h2>
+                    <p>
+                        <code>Command</code> 允许节点同时返回状态更新和路由决策，
+                        提供更精细的控制流管理。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+Command 控制流示例
+功能：节点返回更新和路由指令
+"""
+from langgraph.graph import StateGraph, MessagesState, START, END
+from langgraph.types import Command
+from typing import Literal
+
+class TaskState(MessagesState):
+    max_retries: int
+    retry_count: int
+    success: bool
+
+def process_task(state: TaskState) -> Command[Literal["retry", "success", "failed"]]:
+    """任务处理节点"""
+    import random
+
+    # 模拟任务执行（70% 成功率）
+    success = random.random() > 0.3
+
+    if success:
+        # 成功：更新状态并路由到 success 节点
+        return Command(
+            update={"success": True},
+            goto="success"
+        )
+    else:
+        # 失败：检查重试次数
+        retry_count = state.get("retry_count", 0) + 1
+
+        if retry_count < state.get("max_retries", 3):
+            # 可以重试：更新重试计数并路由回当前节点
+            return Command(
+                update={"retry_count": retry_count},
+                goto="retry"
+            )
+        else:
+            # 超过重试次数：标记为失败
+            return Command(
+                update={"success": False},
+                goto="failed"
+            )
+
+def handle_retry(state: TaskState):
+    """重试处理"""
+    return {"messages": [{"role": "system", "content": f"第 {state['retry_count']} 次重试..."}]}
+
+def handle_success(state: TaskState):
+    """成功处理"""
+    return {"messages": [{"role": "ai", "content": "任务成功完成！"}]}
+
+def handle_failed(state: TaskState):
+    """失败处理"""
+    return {"messages": [{"role": "ai", "content": "任务失败，已达最大重试次数"}]}
+
+# 创建图
+graph = StateGraph(TaskState)
+
+graph.add_node("task", process_task)
+graph.add_node("retry", handle_retry)
+graph.add_node("success", handle_success)
+graph.add_node("failed", handle_failed)
+
+graph.add_edge(START, "task")
+graph.add_edge("retry", "task")  # 重试回到任务节点
+graph.add_edge("success", END)
+graph.add_edge("failed", END)
+
+compiled_graph = graph.compile()
+
+# 测试
+result = compiled_graph.invoke({
+    "messages": [],
+    "max_retries": 3,
+    "retry_count": 0,
+    "success": False
+})
+
+print(f"最终结果: {result['messages'][-1]['content']}")
+print(f"重试次数: {result.get('retry_count', 0)}")</code></pre>
+                    </div>
+                </section>
+
+                <!-- MessagesState 预构建状态 -->
+                <section class="content-section">
+                    <h2 class="section-title">📨 MessagesState 预构建状态</h2>
+                    <p>
+                        <code>MessagesState</code> 是 LangGraph 提供的预构建状态，
+                        专门用于处理消息列表，自动使用 <code>add_messages</code> reducer。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+MessagesState 使用示例
+功能：扩展 MessagesState 添加自定义字段
+"""
+from langgraph.graph import MessagesState, StateGraph, START, END
+
+# 扩展 MessagesState
+class ExtendedState(MessagesState):
+    documents: list[str]  # 添加文档列表字段
+    user_id: str         # 添加用户 ID 字段
+
+def retrieve_docs(state: ExtendedState):
+    """检索文档节点"""
+    query = state["messages"][-1]["content"]
+    # 模拟文档检索
+    docs = [f"文档1关于{query}", f"文档2关于{query}"]
+    return {"documents": docs}
+
+def generate_answer(state: ExtendedState):
+    """生成答案节点"""
+    docs = state.get("documents", [])
+    context = "\\n".join(docs)
+    answer = f"基于以下文档：\\n{context}\\n\\n我的回答是..."
+    return {"messages": [{"role": "ai", "content": answer}]}
+
+# 创建图
+graph = StateGraph(ExtendedState)
+graph.add_node("retrieve", retrieve_docs)
+graph.add_node("generate", generate_answer)
+
+graph.add_edge(START, "retrieve")
+graph.add_edge("retrieve", "generate")
+graph.add_edge("generate", END)
+
+compiled_graph = graph.compile()
+
+# 测试
+result = compiled_graph.invoke({
+    "messages": [{"role": "user", "content": "LangChain"}],
+    "user_id": "user_123"
+})
+
+print(result["messages"][-1]["content"])</code></pre>
+                    </div>
+                </section>
+
+                <!-- 完整示例 -->
+                <section class="content-section">
+                    <h2 class="section-title">🎯 完整示例：智能客服路由系统</h2>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级 - 完整项目</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">"""
+智能客服路由系统完整示例
+功能：根据用户问题类型，路由到不同的处理节点
+"""
+from langgraph.graph import StateGraph, MessagesState, START, END
+from typing import Literal
+from typing_extensions import TypedDict
+
+# ==================== 状态定义 ====================
+
+class CustomerServiceState(MessagesState):
+    intent: str           # 用户意图
+    sentiment: str        # 情感分析结果
+    priority: int         # 优先级
+    resolved: bool        # 是否已解决
+
+# ==================== 节点函数 ====================
+
+def analyze_query(state: CustomerServiceState):
+    """分析用户查询"""
+    user_message = state["messages"][-1]["content"]
+
+    # 简单的意图识别
+    if any(word in user_message for word in ["订单", "快递", "物流"]):
+        intent = "order"
+        priority = 2
+    elif any(word in user_message for word in ["退款", "退货", "投诉"]):
+        intent = "refund"
+        priority = 3  # 高优先级
+    elif any(word in user_message for word in ["产品", "使用", "教程"]):
+        intent = "product"
+        priority = 1
+    else:
+        intent = "general"
+        priority = 1
+
+    # 简单的情感分析
+    if any(word in user_message for word in ["生气", "不满", "失望"]):
+        sentiment = "negative"
+        priority = max(priority, 3)  # 负面情绪提升优先级
+    else:
+        sentiment = "neutral"
+
+    return {
+        "intent": intent,
+        "sentiment": sentiment,
+        "priority": priority
+    }
+
+def handle_order_query(state: CustomerServiceState):
+    """处理订单查询"""
+    return {
+        "messages": [{
+            "role": "ai",
+            "content": "您的订单正在处理中。订单号：ORDER-12345，预计3天内送达。"
+        }],
+        "resolved": True
+    }
+
+def handle_refund_request(state: CustomerServiceState):
+    """处理退款请求"""
+    if state.get("priority", 1) >= 3:
+        # 高优先级，转人工
+        return {
+            "messages": [{
+                "role": "ai",
+                "content": "您的退款请求已收到。由于您的情况比较特殊，我已为您转接人工客服，请稍候..."
+            }],
+            "resolved": False  # 需要人工介入
+        }
+    else:
+        return {
+            "messages": [{
+                "role": "ai",
+                "content": "退款已提交，预计3-5个工作日到账。退款单号：REFUND-67890"
+            }],
+            "resolved": True
+        }
+
+def handle_product_inquiry(state: CustomerServiceState):
+    """处理产品咨询"""
+    return {
+        "messages": [{
+            "role": "ai",
+            "content": "关于产品使用，您可以参考我们的在线教程：https://example.com/tutorial"
+        }],
+        "resolved": True
+    }
+
+def handle_general_question(state: CustomerServiceState):
+    """处理一般问题"""
+    return {
+        "messages": [{
+            "role": "ai",
+            "content": "感谢您的咨询。我会尽力帮助您。请问有什么具体问题吗？"
+        }],
+        "resolved": True
+    }
+
+def escalate_to_human(state: CustomerServiceState):
+    """升级到人工客服"""
+    return {
+        "messages": [{
+            "role": "system",
+            "content": f"【系统】优先级 {state['priority']} - 已转接人工客服"
+        }]
+    }
+
+# ==================== 路由函数 ====================
+
+def route_by_intent(
+    state: CustomerServiceState
+) -> Literal["order", "refund", "product", "general"]:
+    """根据意图路由"""
+    return state["intent"]
+
+def check_resolution(
+    state: CustomerServiceState
+) -> Literal["escalate", "complete"]:
+    """检查是否已解决"""
+    if state.get("resolved", False):
+        return "complete"
+    else:
+        return "escalate"
+
+# ==================== 构建状态图 ====================
+
+graph = StateGraph(CustomerServiceState)
+
+# 添加节点
+graph.add_node("analyzer", analyze_query)
+graph.add_node("order", handle_order_query)
+graph.add_node("refund", handle_refund_request)
+graph.add_node("product", handle_product_inquiry)
+graph.add_node("general", handle_general_question)
+graph.add_node("escalate", escalate_to_human)
+
+# 添加边
+graph.add_edge(START, "analyzer")
+
+# 第一层路由：按意图分发
+graph.add_conditional_edges(
+    "analyzer",
+    route_by_intent,
+    {
+        "order": "order",
+        "refund": "refund",
+        "product": "product",
+        "general": "general"
+    }
+)
+
+# 第二层路由：检查是否需要升级
+for node in ["order", "refund", "product", "general"]:
+    graph.add_conditional_edges(
+        node,
+        check_resolution,
+        {
+            "complete": END,
+            "escalate": "escalate"
+        }
+    )
+
+graph.add_edge("escalate", END)
+
+# 编译图
+customer_service_graph = graph.compile()
+
+# ==================== 测试场景 ====================
+
+def test_query(query: str):
+    """测试查询"""
+    print(f"\n{'='*60}")
+    print(f"用户: {query}")
+    print('='*60)
+
+    result = customer_service_graph.invoke({
+        "messages": [{"role": "user", "content": query}]
+    })
+
+    print(f"\n意图: {result.get('intent', 'N/A')}")
+    print(f"情感: {result.get('sentiment', 'N/A')}")
+    print(f"优先级: {result.get('priority', 'N/A')}")
+    print(f"已解决: {result.get('resolved', 'N/A')}")
+
+    for msg in result["messages"][1:]:  # 跳过用户消息
+        print(f"\n{msg['role'].upper()}: {msg['content']}")
+
+    print()
+
+if __name__ == "__main__":
+    # 测试不同类型的查询
+    test_query("我的订单什么时候到？")
+    test_query("我要退款！这个产品太差了，我很生气！")
+    test_query("这个产品怎么使用？")
+    test_query("你们营业时间是什么？")</code></pre>
+                    </div>
+                </section>
+
+                <!-- 常见问题 -->
+                <section class="content-section">
+                    <h2 class="section-title">❓ 常见问题</h2>
+
+                    <h3 class="subsection-subtitle">Q1: LangGraph 和 create_agent() 什么时候用哪个？</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>场景</th>
+                                <th>推荐方案</th>
+                                <th>理由</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>简单 Agent</td>
+                                <td>create_agent()</td>
+                                <td>自动生成工作流，代码简洁</td>
+                            </tr>
+                            <tr>
+                                <td>复杂分支逻辑</td>
+                                <td>LangGraph</td>
+                                <td>精确控制执行路径</td>
+                            </tr>
+                            <tr>
+                                <td>需要可视化</td>
+                                <td>LangGraph</td>
+                                <td>支持 LangSmith 图形化调试</td>
+                            </tr>
+                            <tr>
+                                <td>快速原型</td>
+                                <td>create_agent()</td>
+                                <td>开发速度快</td>
+                            </tr>
+                            <tr>
+                                <td>生产级复杂系统</td>
+                                <td>LangGraph</td>
+                                <td>更好的可维护性和可扩展性</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 class="subsection-subtitle">Q2: 如何调试 LangGraph？</h3>
+                    <p>
+                        使用 <strong>LangSmith</strong> 进行可视化调试：
+                    </p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">import os
+
+# 配置 LangSmith
+os.environ["LANGCHAIN_TRACING_V2"] = "true"
+os.environ["LANGCHAIN_API_KEY"] = "your-api-key"
+
+# 运行图，LangSmith 会自动追踪
+result = graph.invoke({...})</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">Q3: 图可以有循环吗？</h3>
+                    <p>
+                        <strong>可以</strong>。LangGraph 支持循环，但需要设置递归限制防止无限循环：
+                    </p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 编译时设置递归限制
+graph = builder.compile(
+    checkpointer=checkpointer,
+    recursion_limit=25  # 最多执行 25 步
+)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">Q4: 如何处理长时间运行的任务？</h3>
+                    <p>
+                        使用 <strong>Checkpointer</strong> 实现持久化：
+                    </p>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from langgraph.checkpoint.memory import InMemorySaver
+
+# 创建 checkpointer
+checkpointer = InMemorySaver()
+
+# 编译时传入
+graph = builder.compile(checkpointer=checkpointer)
+
+# 使用 thread_id 标识会话
+config = {"configurable": {"thread_id": "thread_001"}}
+
+# 即使中断，也可以从断点恢复
+result = graph.invoke({...}, config=config)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-subtitle">Q5: 节点可以返回什么类型？</h3>
+                    <p>
+                        节点可以返回：
+                    </p>
+                    <ul>
+                        <li><strong>字典</strong>：状态更新 <code>{"key": "value"}</code></li>
+                        <li><strong>Command</strong>：状态更新 + 路由决策</li>
+                        <li><strong>None</strong>：不更新状态（仅执行副作用）</li>
+                    </ul>
+                </section>
+
+                <!-- 最佳实践 -->
+                <section class="content-section">
+                    <h2 class="section-title">✨ 最佳实践</h2>
+
+                    <h3 class="subsection-title">1. 状态设计原则</h3>
+                    <ul>
+                        <li><strong>最小化</strong>：只存储必要的信息</li>
+                        <li><strong>类型安全</strong>：使用 TypedDict 或 Pydantic 模型</li>
+                        <li><strong>合适的 Reducer</strong>：为列表字段使用 <code>add</code> reducer</li>
+                        <li><strong>避免嵌套</strong>：保持状态结构扁平化</li>
+                    </ul>
+
+                    <h3 class="subsection-title">2. 节点设计原则</h3>
+                    <ul>
+                        <li><strong>单一职责</strong>：每个节点只做一件事</li>
+                        <li><strong>无副作用</strong>：除非必要，节点应该是纯函数</li>
+                        <li><strong>错误处理</strong>：在节点内捕获和处理异常</li>
+                        <li><strong>可测试</strong>：节点应该易于单元测试</li>
+                    </ul>
+
+                    <h3 class="subsection-title">3. 边和路由</h3>
+                    <ul>
+                        <li><strong>清晰的路由逻辑</strong>：路由函数应该简单明了</li>
+                        <li><strong>使用 Literal 类型</strong>：为路由返回值添加类型提示</li>
+                        <li><strong>避免过深嵌套</strong>：超过 3 层条件时考虑重构</li>
+                        <li><strong>设置递归限制</strong>：防止无限循环</li>
+                    </ul>
+
+                    <h3 class="subsection-title">4. 生产环境配置</h3>
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># 生产环境推荐配置
+from langgraph.checkpoint.postgres import PostgresSaver
+
+DB_URI = "postgresql://user:pass@localhost:5432/langchain"
+
+with PostgresSaver.from_conn_string(DB_URI) as checkpointer:
+    checkpointer.setup()
+
+    graph = builder.compile(
+        checkpointer=checkpointer,
+        recursion_limit=50,
+        debug=False  # 生产环境关闭调试
+    )</code></pre>
+                    </div>
+                </section>
+
+                <!-- 参考资源 -->
+                <section class="content-section">
+                    <h2 class="section-title">📖 参考资源</h2>
+                    <ul>
+                        <li>
+                            <a href="https://docs.langchain.com/oss/python/langgraph/overview" target="_blank">
+                                LangGraph 官方概述
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://docs.langchain.com/oss/python/langgraph/graph-api" target="_blank">
+                                LangGraph Graph API 文档
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://langchain-ai.github.io/langgraph/" target="_blank">
+                                LangGraph 官方网站
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://docs.smith.langchain.com/" target="_blank">
+                                LangSmith 调试工具
+                            </a>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- 页面导航 -->
+                <nav class="page-navigation">
+                    <a href="14-long-term-memory.html" class="nav-button prev">
+                        ← 上一页：长期记忆
+                    </a>
+                    <a href="16-customer-service.html" class="nav-button next">
+                        下一页：客服机器人实战 →
+                    </a>
+                </nav>
+            </div>
+        </main>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" aria-label="返回顶部">↑</button>
+
+    <!-- JavaScript -->
+    <script src="assets/js/mermaid-init.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+</body>
+</html>
