@@ -2,6 +2,8 @@
 
 完整的 LangChain 1.0 Python 学习文档,涵盖从基础到高级的所有知识点,特别针对客服机器人和 RAG 应用场景。
 
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Jitpod/langchain-knowledge)
+
 ## 项目简介
 
 本项目是一套完整的 LangChain 1.0 学习文档,包含:
@@ -13,9 +15,33 @@
 
 ## 快速开始
 
+### 在线访问
+
+本项目支持一键部署到 Vercel，部署后即可在线访问。
+
+### 本地浏览
+
 直接在浏览器中打开 `langchain-docs/index.html` 即可开始学习。
 
 详细文档请查看 [langchain-docs/README.md](langchain-docs/README.md)
+
+## 部署
+
+### 部署到 Vercel（推荐）
+
+点击下方按钮一键部署到 Vercel:
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Jitpod/langchain-knowledge)
+
+或手动部署：
+
+1. Fork 本仓库到你的 GitHub 账号
+2. 访问 [Vercel Dashboard](https://vercel.com/dashboard)
+3. 点击 "Add New Project" 并导入你的仓库
+4. Vercel 会自动检测配置并部署
+5. 部署完成后获取访问链接
+
+更多部署选项请查看 [DEPLOY.md](DEPLOY.md)
 
 ## 主要内容
 
