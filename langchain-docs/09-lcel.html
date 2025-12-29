@@ -476,12 +476,12 @@ result = chain.invoke({"text": "LangChain 是一个..."})  # 简洁且强大</co
                     <div class="mermaid-wrapper">
                         <div class="mermaid">
 graph LR
-    Input["输入<br/>{text: '...'} "] --> Prompt["ChatPromptTemplate<br/>prompt"]
+    Input["输入<br/>dict: text"] --> Prompt["ChatPromptTemplate<br/>prompt"]
     Prompt --> Model["ChatModel<br/>model"]
     Model --> Parser["OutputParser<br/>parser"]
     Parser --> Output["输出<br/>解析后的结果"]
 
-    Input -.->|invoke()| Prompt
+    Input -.->|invoke| Prompt
     Prompt -.->|messages| Model
     Model -.->|AIMessage| Parser
     Parser -.->|parsed data| Output
@@ -688,7 +688,7 @@ graph TB
     Output2 --> Merge
     Output3 --> Merge
 
-    Merge --> Final["最终输出<br/>{translation: ..., summary: ..., keywords: ...}"]
+    Merge --> Final["最终输出<br/>包含所有结果"]
 
     style Parallel fill:#f59e0b,color:#fff
     style Merge fill:#8b5cf6,color:#fff
@@ -841,7 +841,7 @@ for chunk in rag_chain.stream(question):
                     <div class="mermaid-wrapper">
                         <div class="mermaid">
 graph TB
-    Q["问题：什么是 LangChain？"] --> Parallel["RunnableParallel"]
+    Q["问题：什么是 LangChain"] --> Parallel["RunnableParallel"]
 
     Parallel --> R1["检索器<br/>retriever"]
     Parallel --> R2["透传问题<br/>RunnablePassthrough"]
