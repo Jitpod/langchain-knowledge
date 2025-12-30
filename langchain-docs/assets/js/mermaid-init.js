@@ -360,3 +360,30 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+    // ==================== Tabs 组件功能 ====================
+    // 初始化所有 tabs 容器
+    const tabsContainers = document.querySelectorAll('.tabs-container');
+
+    tabsContainers.forEach(container => {
+        const buttons = container.querySelectorAll('.tab-button');
+        const contents = container.querySelectorAll('.tab-content');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tabId = button.getAttribute('data-tab');
+
+                // 移除所有 active 状态
+                buttons.forEach(btn => btn.classList.remove('active'));
+                contents.forEach(content => content.classList.remove('active'));
+
+                // 添加当前 tab 的 active 状态
+                button.classList.add('active');
+                const activeContent = container.querySelector(`.tab-content[data-tab="${tabId}"]`);
+                if (activeContent) {
+                    activeContent.classList.add('active');
+                }
+            });
+        });
+    });
+});

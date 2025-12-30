@@ -651,3 +651,60 @@ tr:hover {
         padding: 0;
     }
 }
+
+/* ==================== Tabs 组件样式 ==================== */
+.tabs-container {
+    margin: 1.5rem 0;
+    border: 1px solid var(--border-color, #e5e7eb);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--bg-light, #ffffff);
+}
+
+.tabs-header {
+    display: flex;
+    background: var(--bg-sidebar, #f9fafb);
+    border-bottom: 2px solid var(--border-color, #e5e7eb);
+    overflow-x: auto;
+}
+
+.tab-button {
+    padding: 0.75rem 1.5rem;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-secondary, #6b7280);
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.tab-button:hover {
+    background: rgba(37, 99, 235, 0.05);
+    color: var(--primary-color, #2563eb);
+}
+
+.tab-button.active {
+    color: var(--primary-color, #2563eb);
+    border-bottom-color: var(--primary-color, #2563eb);
+    background: rgba(37, 99, 235, 0.05);
+}
+
+.tab-content {
+    display: none;
+    padding: 1.5rem;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.tab-content > *:first-child {
+    margin-top: 0;
+}
+
+.tab-content > *:last-child {
+    margin-bottom: 0;
+}

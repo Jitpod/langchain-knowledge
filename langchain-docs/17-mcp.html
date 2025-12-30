@@ -1,0 +1,1679 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LangChain 1.0 Model Context Protocol (MCP) - 标准化 LLM 工具和上下文提供的开放协议">
+    <title>Model Context Protocol (MCP) | LangChain 1.0 Python 知识文档</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <button class="mobile-menu-button" aria-label="打开菜单">☰</button>
+
+    <div class="container">
+        <!-- 侧边栏导航 -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="sidebar-title">🦜 LangChain 1.0</h1>
+                <p class="sidebar-subtitle">Python 完整学习指南</p>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-section">
+                    <div class="nav-section-title">开始</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">
+                                <span class="nav-icon">🏠</span>
+                                主页
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">基础篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="01-introduction.html" class="nav-link">
+                                <span class="nav-icon">📖</span>
+                                LangChain 简介
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="02-architecture.html" class="nav-link">
+                                <span class="nav-icon">🏗️</span>
+                                核心架构
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="03-models.html" class="nav-link">
+                                <span class="nav-icon">🤖</span>
+                                模型接口
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="04-messages.html" class="nav-link">
+                                <span class="nav-icon">💬</span>
+                                消息系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="05-tools.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                工具系统
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">进阶篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="06-agents.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                Agent 基础
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="07-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="08-rag.html" class="nav-link">
+                                <span class="nav-icon">🔍</span>
+                                RAG 详解
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="09-lcel.html" class="nav-link">
+                                <span class="nav-icon">🔗</span>
+                                LCEL 表达式
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                                <li class="nav-section">
+                    <div class="nav-section-title">高级应用</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="10-runtime.html" class="nav-link">
+                                <span class="nav-icon">🔌</span>
+                                Runtime 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="11-checkpointer.html" class="nav-link">
+                                <span class="nav-icon">💾</span>
+                                持久化系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="12-streaming.html" class="nav-link">
+                                <span class="nav-icon">🌊</span>
+                                流式输出
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="13-human-in-loop.html" class="nav-link">
+                                <span class="nav-icon">👤</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="14-long-term-memory.html" class="nav-link">
+                                <span class="nav-icon">🗄️</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="15-langgraph.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                LangGraph
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="16-context-engineering.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                上下文工程
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item active">
+                            <a href="17-mcp.html" class="nav-link">
+                                <span class="nav-icon">🔌</span>
+                                MCP 协议
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                                <li class="nav-section">
+                    <div class="nav-section-title">实战篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="18-customer-service.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                客服机器人
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="19-best-practices.html" class="nav-link">
+                                <span class="nav-icon">✨</span>
+                                最佳实践
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                                <li class="nav-section">
+                    <div class="nav-section-title">参考篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="20-api-reference.html" class="nav-link">
+                                <span class="nav-icon">📚</span>
+                                API 速查表
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="21-troubleshooting.html" class="nav-link">
+                                <span class="nav-icon">🐛</span>
+                                故障排除
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="22-migration.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                迁移指南
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                                <li class="nav-section">
+                    <div class="nav-section-title">扩展篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="23-structured-output.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                结构化输出
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                                <li class="nav-section">
+                    <div class="nav-section-title">DeepAgents 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="24-deepagents-quickstart.html" class="nav-link">
+                                <span class="nav-icon">🚀</span>
+                                快速开始
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="25-deepagents-customization.html" class="nav-link">
+                                <span class="nav-icon">🎨</span>
+                                定制化
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="26-deepagents-harness.html" class="nav-link">
+                                <span class="nav-icon">🎛️</span>
+                                Harness 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="27-deepagents-backends.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                后端配置
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="28-deepagents-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="29-deepagents-hitl.html" class="nav-link">
+                                <span class="nav-icon">🤝</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="30-deepagents-memory.html" class="nav-link">
+                                <span class="nav-icon">🧠</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="31-deepagents-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                                <li class="nav-section">
+                    <div class="nav-section-title">Multi-Agent 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="32-multi-agent-index.html" class="nav-link">
+                                <span class="nav-icon">🌐</span>
+                                概述
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="33-multi-agent-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="34-multi-agent-handoffs.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                交接机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="35-multi-agent-skills.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                技能系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="36-multi-agent-router.html" class="nav-link">
+                                <span class="nav-icon">🧭</span>
+                                路由机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="37-multi-agent-workflow.html" class="nav-link">
+                                <span class="nav-icon">🔀</span>
+                                自定义工作流
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- 主内容区域 -->
+        <main class="main-content">
+            <div class="content-wrapper">
+                <!-- 面包屑导航 -->
+                <nav class="breadcrumb">
+                    <span class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link">主页</a>
+                    </span>
+                    <span class="breadcrumb-item">
+                        高级应用
+                    </span>
+                    <span class="breadcrumb-item">
+                        MCP
+                    </span>
+                </nav>
+
+                <!-- 页面标题 -->
+                <header class="page-header">
+                    <h1 class="page-title">🔌 Model Context Protocol (MCP)</h1>
+                    <p class="page-subtitle">
+                        标准化 LLM 工具和上下文提供的开放协议
+                    </p>
+                </header>
+
+                <!-- 概述 -->
+                <section class="content-section">
+                    <p>
+                        <a href="https://modelcontextprotocol.io/introduction" target="_blank">Model Context Protocol (MCP)</a>
+                        是一个开放协议，用于标准化应用程序如何向 LLM 提供工具和上下文。
+                        LangChain Agent 可以使用 MCP 服务器上定义的工具，通过
+                        <a href="https://github.com/langchain-ai/langchain-mcp-adapters" target="_blank"><code>langchain-mcp-adapters</code></a>
+                        库来实现。
+                    </p>
+                </section>
+
+                <!-- Quickstart -->
+                <section class="content-section">
+                    <h2 class="section-title">快速开始</h2>
+
+                    <p>安装 <code>langchain-mcp-adapters</code> 库：</p>
+
+                    <div class="tabs-container">
+                        <div class="tabs-header">
+                            <button class="tab-button active" data-tab="install-pip">pip</button>
+                            <button class="tab-button" data-tab="install-uv">uv</button>
+                        </div>
+
+                        <div class="tab-content active" data-tab="install-pip">
+                            <div class="code-block-wrapper">
+                                <div class="code-block-header">
+                                    <span class="code-language">Bash</span>
+                                    <span class="code-difficulty basic">🟢 基础</span>
+                                    <button class="copy-button">复制代码</button>
+                                </div>
+                                <pre><code class="language-bash">pip install langchain-mcp-adapters</code></pre>
+                            </div>
+                        </div>
+
+                        <div class="tab-content" data-tab="install-uv">
+                            <div class="code-block-wrapper">
+                                <div class="code-block-header">
+                                    <span class="code-language">Bash</span>
+                                    <span class="code-difficulty basic">🟢 基础</span>
+                                    <button class="copy-button">复制代码</button>
+                                </div>
+                                <pre><code class="language-bash">uv add langchain-mcp-adapters</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p>
+                        <code>langchain-mcp-adapters</code> 使 Agent 能够使用跨一个或多个 MCP 服务器定义的工具。
+                    </p>
+
+                    <div class="info-box note">
+                        <div class="info-box-title">⚠️ 注意</div>
+                        <p>
+                            <code>MultiServerMCPClient</code> <strong>默认是无状态的</strong>。
+                            每次工具调用都会创建一个新的 MCP <code>ClientSession</code>，
+                            执行工具，然后清理。有关更多详细信息，请参阅<a href="#stateful-sessions">有状态会话</a>部分。
+                        </p>
+                    </div>
+
+                    <h3 class="subsection-title">访问多个 MCP 服务器</h3>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from langchain_mcp_adapters.client import MultiServerMCPClient  # [!code highlight]
+from langchain.agents import create_agent
+
+
+client = MultiServerMCPClient(  # [!code highlight]
+    {
+        "math": {
+            "transport": "stdio",  # Local subprocess communication
+            "command": "python",
+            # Absolute path to your math_server.py file
+            "args": ["/path/to/math_server.py"],
+        },
+        "weather": {
+            "transport": "http",  # HTTP-based remote server
+            # Ensure you start your weather server on port 8000
+            "url": "http://localhost:8000/mcp",
+        }
+    }
+)
+
+tools = await client.get_tools()  # [!code highlight]
+agent = create_agent(
+    "claude-sonnet-4-5-20250929",
+    tools  # [!code highlight]
+)
+math_response = await agent.ainvoke(
+    {"messages": [{"role": "user", "content": "what's (3 + 5) x 12?"}]}
+)
+weather_response = await agent.ainvoke(
+    {"messages": [{"role": "user", "content": "what is the weather in nyc?"}]}
+)</code></pre>
+                    </div>
+                </section>
+
+                <!-- Custom servers -->
+                <section class="content-section">
+                    <h2 class="section-title">自定义服务器</h2>
+
+                    <p>要创建自定义 MCP 服务器，请使用 <a href="https://gofastmcp.com/getting-started/welcome" target="_blank">FastMCP</a> 库：</p>
+
+                    <div class="tabs-container">
+                        <div class="tabs-header">
+                            <button class="tab-button active" data-tab="fastmcp-pip">pip</button>
+                            <button class="tab-button" data-tab="fastmcp-uv">uv</button>
+                        </div>
+
+                        <div class="tab-content active" data-tab="fastmcp-pip">
+                            <div class="code-block-wrapper">
+                                <div class="code-block-header">
+                                    <span class="code-language">Bash</span>
+                                    <span class="code-difficulty basic">🟢 基础</span>
+                                    <button class="copy-button">复制代码</button>
+                                </div>
+                                <pre><code class="language-bash">pip install fastmcp</code></pre>
+                            </div>
+                        </div>
+
+                        <div class="tab-content" data-tab="fastmcp-uv">
+                            <div class="code-block-wrapper">
+                                <div class="code-block-header">
+                                    <span class="code-language">Bash</span>
+                                    <span class="code-difficulty basic">🟢 基础</span>
+                                    <button class="copy-button">复制代码</button>
+                                </div>
+                                <pre><code class="language-bash">uv add fastmcp</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p>要使用 MCP 工具服务器测试您的 Agent，请使用以下示例：</p>
+
+                    <div class="tabs-container">
+                        <div class="tabs-header">
+                            <button class="tab-button active" data-tab="server-math">Math server (stdio)</button>
+                            <button class="tab-button" data-tab="server-weather">Weather server (HTTP)</button>
+                        </div>
+
+                        <div class="tab-content active" data-tab="server-math">
+                            <div class="code-block-wrapper">
+                                <div class="code-block-header">
+                                    <span class="code-language">Python</span>
+                                    <span class="code-difficulty basic">🟢 基础</span>
+                                    <button class="copy-button">复制代码</button>
+                                </div>
+                                <pre><code class="language-python">from fastmcp import FastMCP
+
+mcp = FastMCP("Math")
+
+@mcp.tool()
+def add(a: int, b: int) -> int:
+    """Add two numbers"""
+    return a + b
+
+@mcp.tool()
+def multiply(a: int, b: int) -> int:
+    """Multiply two numbers"""
+    return a * b
+
+if __name__ == "__main__":
+    mcp.run(transport="stdio")</code></pre>
+                            </div>
+                        </div>
+
+                        <div class="tab-content" data-tab="server-weather">
+                            <div class="code-block-wrapper">
+                                <div class="code-block-header">
+                                    <span class="code-language">Python</span>
+                                    <span class="code-difficulty basic">🟢 基础</span>
+                                    <button class="copy-button">复制代码</button>
+                                </div>
+                                <pre><code class="language-python">from fastmcp import FastMCP
+
+mcp = FastMCP("Weather")
+
+@mcp.tool()
+async def get_weather(location: str) -> str:
+    """Get weather for location."""
+    return "It's always sunny in New York"
+
+if __name__ == "__main__":
+    mcp.run(transport="streamable-http")</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Transports -->
+                <section class="content-section">
+                    <h2 class="section-title">传输协议（Transports）</h2>
+
+                    <p>MCP 支持不同的传输机制用于客户端-服务器通信。</p>
+
+                    <h3 class="subsection-title">HTTP</h3>
+
+                    <p>
+                        <code>http</code> 传输（也称为 <code>streamable-http</code>）使用 HTTP 请求进行客户端-服务器通信。
+                        有关更多详细信息，请参阅
+                        <a href="https://modelcontextprotocol.io/specification/2025-03-26/basic/transports#streamable-http" target="_blank">MCP HTTP 传输规范</a>。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">client = MultiServerMCPClient(
+    {
+        "weather": {
+            "transport": "http",
+            "url": "http://localhost:8000/mcp",
+        }
+    }
+)</code></pre>
+                    </div>
+
+                    <h4 class="subsection-subtitle">传递 Headers</h4>
+
+                    <p>
+                        当通过 HTTP 连接到 MCP 服务器时，您可以使用连接配置中的 <code>headers</code> 字段
+                        包含自定义标头（例如，用于身份验证或跟踪）。这支持 <code>sse</code>（MCP 规范已弃用）
+                        和 <code>streamable_http</code> 传输。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from langchain_mcp_adapters.client import MultiServerMCPClient
+from langchain.agents import create_agent
+
+client = MultiServerMCPClient(
+    {
+        "weather": {
+            "transport": "http",
+            "url": "http://localhost:8000/mcp",
+            "headers": {  # [!code highlight]
+                "Authorization": "Bearer YOUR_TOKEN",  # [!code highlight]
+                "X-Custom-Header": "custom-value"  # [!code highlight]
+            },  # [!code highlight]
+        }
+    }
+)
+tools = await client.get_tools()
+agent = create_agent("openai:gpt-4.1", tools)
+response = await agent.ainvoke({"messages": "what is the weather in nyc?"})</code></pre>
+                    </div>
+
+                    <h4 class="subsection-subtitle">身份验证</h4>
+
+                    <p>
+                        <code>langchain-mcp-adapters</code> 库在底层使用官方的
+                        <a href="https://github.com/modelcontextprotocol/python-sdk" target="_blank">MCP SDK</a>，
+                        它允许您通过实现 <code>httpx.Auth</code> 接口来提供自定义身份验证机制。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from langchain_mcp_adapters.client import MultiServerMCPClient
+
+client = MultiServerMCPClient(
+    {
+        "weather": {
+            "transport": "http",
+            "url": "http://localhost:8000/mcp",
+            "auth": auth, # [!code highlight]
+        }
+    }
+)</code></pre>
+                    </div>
+
+                    <ul>
+                        <li><a href="https://github.com/modelcontextprotocol/python-sdk/blob/main/examples/clients/simple-auth-client/mcp_simple_auth_client/main.py" target="_blank">示例自定义身份验证实现</a></li>
+                        <li><a href="https://github.com/modelcontextprotocol/python-sdk/blob/main/src/mcp/client/auth.py#L179" target="_blank">内置 OAuth 流程</a></li>
+                    </ul>
+
+                    <h3 class="subsection-title">stdio</h3>
+
+                    <p>
+                        客户端将服务器作为子进程启动，并通过标准输入/输出进行通信。
+                        最适合本地工具和简单设置。
+                    </p>
+
+                    <div class="info-box note">
+                        <div class="info-box-title">⚠️ 注意</div>
+                        <p>
+                            与 HTTP 传输不同，<code>stdio</code> 连接本质上是<strong>有状态的</strong>——
+                            子进程在客户端连接的生命周期内持续存在。但是，当使用 <code>MultiServerMCPClient</code>
+                            而不进行显式会话管理时，每次工具调用仍会创建一个新会话。
+                            请参阅<a href="#stateful-sessions">有状态会话</a>以管理持久连接。
+                        </p>
+                    </div>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">client = MultiServerMCPClient(
+    {
+        "math": {
+            "transport": "stdio",
+            "command": "python",
+            "args": ["/path/to/math_server.py"],
+        }
+    }
+)</code></pre>
+                    </div>
+                </section>
+
+                <!-- Stateful sessions -->
+                <section class="content-section">
+                    <h2 class="section-title" id="stateful-sessions">有状态会话</h2>
+
+                    <p>
+                        默认情况下，<code>MultiServerMCPClient</code> 是<strong>无状态的</strong>——
+                        每次工具调用都会创建一个新的 MCP 会话，执行工具，然后清理。
+                    </p>
+
+                    <p>
+                        如果您需要控制 MCP 会话的<a href="https://modelcontextprotocol.io/specification/2025-03-26/basic/lifecycle" target="_blank">生命周期</a>
+                        （例如，当使用在工具调用之间维护上下文的有状态服务器时），
+                        您可以使用 <code>client.session()</code> 创建持久的 <code>ClientSession</code>。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from langchain_mcp_adapters.client import MultiServerMCPClient
+from langchain_mcp_adapters.tools import load_mcp_tools
+from langchain.agents import create_agent
+
+client = MultiServerMCPClient({...})
+
+# Create a session explicitly
+async with client.session("server_name") as session:  # [!code highlight]
+    # Pass the session to load tools, resources, or prompts
+    tools = await load_mcp_tools(session)  # [!code highlight]
+    agent = create_agent(
+        "anthropic:claude-3-7-sonnet-latest",
+        tools
+    )</code></pre>
+                    </div>
+                </section>
+
+                <!-- Core features -->
+                <section class="content-section">
+                    <h2 class="section-title">核心功能</h2>
+
+                    <h3 class="subsection-title">工具（Tools）</h3>
+
+                    <p>
+                        <a href="https://modelcontextprotocol.io/docs/concepts/tools" target="_blank">工具</a>
+                        允许 MCP 服务器公开 LLM 可以调用以执行操作的可执行函数——
+                        例如查询数据库、调用 API 或与外部系统交互。
+                        LangChain 将 MCP 工具转换为 LangChain <a href="05-tools.html">工具</a>，
+                        使它们可以直接在任何 LangChain Agent 或工作流中使用。
+                    </p>
+
+                    <h4 class="subsection-subtitle">加载工具</h4>
+
+                    <p>使用 <code>client.get_tools()</code> 从 MCP 服务器检索工具并将它们传递给您的 Agent：</p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from langchain_mcp_adapters.client import MultiServerMCPClient
+from langchain.agents import create_agent
+
+client = MultiServerMCPClient({...})
+tools = await client.get_tools()  # [!code highlight]
+agent = create_agent("claude-sonnet-4-5-20250929", tools)</code></pre>
+                    </div>
+
+                    <h4 class="subsection-subtitle">结构化内容</h4>
+
+                    <p>
+                        MCP 工具可以在人类可读的文本响应之外返回
+                        <a href="https://modelcontextprotocol.io/specification/2025-03-26/server/tools#structured-content" target="_blank">结构化内容</a>。
+                        当工具需要返回机器可解析的数据（如 JSON）以及显示给模型的文本时，这非常有用。
+                    </p>
+
+                    <p>
+                        当 MCP 工具返回 <code>structuredContent</code> 时，适配器将其包装在
+                        <code>MCPToolArtifact</code> 中并将其作为工具的 artifact 返回。
+                        您可以使用 <code>ToolMessage</code> 上的 <code>artifact</code> 字段访问它。
+                        您还可以使用<a href="#tool-interceptors">拦截器</a>自动处理或转换结构化内容。
+                    </p>
+
+                    <p><strong>从 artifact 提取结构化内容</strong></p>
+
+                    <p>调用 Agent 后，您可以从响应中的工具消息访问结构化内容：</p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from langchain_mcp_adapters.client import MultiServerMCPClient
+from langchain.agents import create_agent
+from langchain.messages import ToolMessage
+
+client = MultiServerMCPClient({...})
+tools = await client.get_tools()
+agent = create_agent("claude-sonnet-4-5-20250929", tools)
+
+result = await agent.ainvoke(
+    {"messages": [{"role": "user", "content": "Get data from the server"}]}
+)
+
+# Extract structured content from tool messages
+for message in result["messages"]:
+    if isinstance(message, ToolMessage) and message.artifact:
+        structured_content = message.artifact["structured_content"]</code></pre>
+                    </div>
+
+                    <p><strong>通过拦截器附加结构化内容</strong></p>
+
+                    <p>
+                        如果您希望结构化内容在对话历史中可见（对模型可见），
+                        您可以使用<a href="#tool-interceptors">拦截器</a>自动将结构化内容附加到工具结果：
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">import json
+
+from langchain_mcp_adapters.client import MultiServerMCPClient
+from langchain_mcp_adapters.interceptors import MCPToolCallRequest
+from mcp.types import TextContent
+
+async def append_structured_content(request: MCPToolCallRequest, handler):
+    """Append structured content from artifact to tool message."""
+    result = await handler(request)
+    if result.structuredContent:
+        result.content += [
+            TextContent(type="text", text=json.dumps(result.structuredContent)),
+        ]
+    return result
+
+client = MultiServerMCPClient({...}, tool_interceptors=[append_structured_content])</code></pre>
+                    </div>
+
+                    <h4 class="subsection-subtitle">多模态工具内容</h4>
+
+                    <p>
+                        MCP 工具可以在其响应中返回
+                        <a href="https://modelcontextprotocol.io/specification/2025-03-26/server/tools#tool-result" target="_blank">多模态内容</a>
+                        （图像、文本等）。当 MCP 服务器返回具有多个部分（例如，文本和图像）的内容时，
+                        适配器将它们转换为 LangChain 的<a href="04-messages.html#standard-content-blocks">标准内容块</a>。
+                        您可以通过 <code>ToolMessage</code> 上的 <code>content_blocks</code> 属性访问标准化表示：
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from langchain_mcp_adapters.client import MultiServerMCPClient
+from langchain.agents import create_agent
+
+client = MultiServerMCPClient({...})
+tools = await client.get_tools()
+agent = create_agent("claude-sonnet-4-5-20250929", tools)
+
+result = await agent.ainvoke(
+    {"messages": [{"role": "user", "content": "Take a screenshot of the current page"}]}
+)
+
+# Access multimodal content from tool messages
+for message in result["messages"]:
+    if message.type == "tool":
+        # Raw content in provider-native format
+        print(f"Raw content: {message.content}")
+
+        # Standardized content blocks  # [!code highlight]
+        for block in message.content_blocks:  # [!code highlight]
+            if block["type"] == "text":  # [!code highlight]
+                print(f"Text: {block['text']}")  # [!code highlight]
+            elif block["type"] == "image":  # [!code highlight]
+                print(f"Image URL: {block.get('url')}")  # [!code highlight]
+                print(f"Image base64: {block.get('base64', '')[:50]}...")  # [!code highlight]</code></pre>
+                    </div>
+
+                    <p>
+                        这允许您以与提供者无关的方式处理多模态工具响应，
+                        无论底层 MCP 服务器如何格式化其内容。
+                    </p>
+
+                    <h3 class="subsection-title">资源（Resources）</h3>
+
+                    <p>
+                        <a href="https://modelcontextprotocol.io/docs/concepts/resources" target="_blank">资源</a>
+                        允许 MCP 服务器公开数据——例如文件、数据库记录或 API 响应——
+                        客户端可以读取这些数据。LangChain 将 MCP 资源转换为 Blob 对象，
+                        提供了统一的接口来处理文本和二进制内容。
+                    </p>
+
+                    <h4 class="subsection-subtitle">加载资源</h4>
+
+                    <p>使用 <code>client.get_resources()</code> 从 MCP 服务器加载资源：</p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from langchain_mcp_adapters.client import MultiServerMCPClient
+
+client = MultiServerMCPClient({...})
+
+# Load all resources from a server
+blobs = await client.get_resources("server_name")  # [!code highlight]
+
+# Or load specific resources by URI
+blobs = await client.get_resources("server_name", uris=["file:///path/to/file.txt"])  # [!code highlight]
+
+for blob in blobs:
+    print(f"URI: {blob.metadata['uri']}, MIME type: {blob.mimetype}")
+    print(blob.as_string())  # For text content</code></pre>
+                    </div>
+
+                    <p>
+                        您还可以直接使用会话与 <code>load_mcp_resources</code> 一起使用以获得更多控制：
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from langchain_mcp_adapters.client import MultiServerMCPClient
+from langchain_mcp_adapters.resources import load_mcp_resources
+
+client = MultiServerMCPClient({...})
+
+async with client.session("server_name") as session:
+    # Load all resources
+    blobs = await load_mcp_resources(session)
+
+    # Or load specific resources by URI
+    blobs = await load_mcp_resources(session, uris=["file:///path/to/file.txt"])</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">提示词（Prompts）</h3>
+
+                    <p>
+                        <a href="https://modelcontextprotocol.io/docs/concepts/prompts" target="_blank">提示词</a>
+                        允许 MCP 服务器公开客户端可以检索和使用的可重用提示词模板。
+                        LangChain 将 MCP 提示词转换为<a href="04-messages.html">消息</a>，
+                        使它们易于集成到基于聊天的工作流中。
+                    </p>
+
+                    <h4 class="subsection-subtitle">加载提示词</h4>
+
+                    <p>使用 <code>client.get_prompt()</code> 从 MCP 服务器加载提示词：</p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from langchain_mcp_adapters.client import MultiServerMCPClient
+
+client = MultiServerMCPClient({...})
+
+# Load a prompt by name
+messages = await client.get_prompt("server_name", "summarize")  # [!code highlight]
+
+# Load a prompt with arguments
+messages = await client.get_prompt(  # [!code highlight]
+    "server_name",  # [!code highlight]
+    "code_review",  # [!code highlight]
+    arguments={"language": "python", "focus": "security"}  # [!code highlight]
+)  # [!code highlight]
+
+# Use the messages in your workflow
+for message in messages:
+    print(f"{message.type}: {message.content}")</code></pre>
+                    </div>
+
+                    <p>
+                        您还可以直接使用会话与 <code>load_mcp_prompt</code> 一起使用以获得更多控制：
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from langchain_mcp_adapters.client import MultiServerMCPClient
+from langchain_mcp_adapters.prompts import load_mcp_prompt
+
+client = MultiServerMCPClient({...})
+
+async with client.session("server_name") as session:
+    # Load a prompt by name
+    messages = await load_mcp_prompt(session, "summarize")
+
+    # Load a prompt with arguments
+    messages = await load_mcp_prompt(
+        session,
+        "code_review",
+        arguments={"language": "python", "focus": "security"}
+    )</code></pre>
+                    </div>
+                </section>
+
+                <!-- Advanced features -->
+                <section class="content-section">
+                    <h2 class="section-title">高级功能</h2>
+
+                    <h3 class="subsection-title" id="tool-interceptors">工具拦截器</h3>
+
+                    <p>
+                        MCP 服务器作为独立进程运行——它们无法访问 LangGraph 运行时信息，
+                        如 store、context 或 Agent 状态。
+                        <strong>拦截器弥合了这一差距</strong>，在 MCP 工具执行期间为您提供对此运行时上下文的访问。
+                    </p>
+
+                    <p>
+                        拦截器还为工具调用提供类似中间件的控制：
+                        您可以修改请求、实现重试、动态添加标头或完全短路执行。
+                    </p>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>部分</th>
+                                <th>描述</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="#accessing-runtime-context">访问运行时上下文</a></td>
+                                <td>读取用户 ID、API 密钥、存储数据和 Agent 状态</td>
+                            </tr>
+                            <tr>
+                                <td><a href="#state-updates-and-commands">状态更新和命令</a></td>
+                                <td>使用 <code>Command</code> 更新 Agent 状态或控制图流程</td>
+                            </tr>
+                            <tr>
+                                <td><a href="#custom-interceptors">自定义拦截器</a></td>
+                                <td>修改请求、组合拦截器和错误处理的模式</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4 class="subsection-subtitle" id="accessing-runtime-context">访问运行时上下文</h4>
+
+                    <p>
+                        当 MCP 工具在 LangChain Agent（通过 <code>create_agent</code>）中使用时，
+                        拦截器接收对 <code>ToolRuntime</code> 上下文的访问。
+                        这提供了对工具调用 ID、状态、配置和存储的访问——
+                        实现访问用户数据、持久化信息和控制 Agent 行为的强大模式。
+                    </p>
+
+                    <div class="tabs-container">
+                        <div class="tabs-header">
+                            <button class="tab-button active" data-tab="interceptor-context">Runtime Context</button>
+                            <button class="tab-button" data-tab="interceptor-store">Store</button>
+                            <button class="tab-button" data-tab="interceptor-state">State</button>
+                            <button class="tab-button" data-tab="interceptor-toolid">Tool Call ID</button>
+                        </div>
+
+                        <div class="tab-content active" data-tab="interceptor-context">
+                            <p>访问在调用时传递的用户特定配置，如用户 ID、API 密钥或权限：</p>
+                            <div class="code-block-wrapper">
+                                <div class="code-block-header">
+                                    <span class="code-language">Python</span>
+                                    <span class="code-difficulty advanced">🔴 高级</span>
+                                    <button class="copy-button">复制代码</button>
+                                </div>
+                                <pre><code class="language-python">from dataclasses import dataclass
+from langchain_mcp_adapters.client import MultiServerMCPClient
+from langchain_mcp_adapters.interceptors import MCPToolCallRequest
+from langchain.agents import create_agent
+
+@dataclass
+class Context:
+    user_id: str
+    api_key: str
+
+async def inject_user_context(
+    request: MCPToolCallRequest,
+    handler,
+):
+    """Inject user credentials into MCP tool calls."""
+    runtime = request.runtime
+    user_id = runtime.context.user_id  # [!code highlight]
+    api_key = runtime.context.api_key  # [!code highlight]
+
+    # Add user context to tool arguments
+    modified_request = request.override(
+        args={**request.args, "user_id": user_id}
+    )
+    return await handler(modified_request)
+
+client = MultiServerMCPClient(
+    {...},
+    tool_interceptors=[inject_user_context],
+)
+tools = await client.get_tools()
+agent = create_agent("gpt-4o", tools, context_schema=Context)
+
+# Invoke with user context
+result = await agent.ainvoke(
+    {"messages": [{"role": "user", "content": "Search my orders"}]},
+    context={"user_id": "user_123", "api_key": "sk-..."}
+)</code></pre>
+                            </div>
+                        </div>
+
+                        <div class="tab-content" data-tab="interceptor-store">
+                            <p>访问长期记忆以检索用户偏好或跨对话持久化数据：</p>
+                            <div class="code-block-wrapper">
+                                <div class="code-block-header">
+                                    <span class="code-language">Python</span>
+                                    <span class="code-difficulty advanced">🔴 高级</span>
+                                    <button class="copy-button">复制代码</button>
+                                </div>
+                                <pre><code class="language-python">from dataclasses import dataclass
+from langchain_mcp_adapters.client import MultiServerMCPClient
+from langchain_mcp_adapters.interceptors import MCPToolCallRequest
+from langchain.agents import create_agent
+from langgraph.store.memory import InMemoryStore
+
+@dataclass
+class Context:
+    user_id: str
+
+async def personalize_search(
+    request: MCPToolCallRequest,
+    handler,
+):
+    """Personalize MCP tool calls using stored preferences."""
+    runtime = request.runtime
+    user_id = runtime.context.user_id
+    store = runtime.store  # [!code highlight]
+
+    # Read user preferences from store
+    prefs = store.get(("preferences",), user_id)  # [!code highlight]
+
+    if prefs and request.name == "search":
+        # Apply user's preferred language and result limit
+        modified_args = {
+            **request.args,
+            "language": prefs.value.get("language", "en"),
+            "limit": prefs.value.get("result_limit", 10),
+        }
+        request = request.override(args=modified_args)
+
+    return await handler(request)
+
+client = MultiServerMCPClient(
+    {...},
+    tool_interceptors=[personalize_search],
+)
+tools = await client.get_tools()
+agent = create_agent(
+    "gpt-4o",
+    tools,
+    context_schema=Context,
+    store=InMemoryStore()
+)</code></pre>
+                            </div>
+                        </div>
+
+                        <div class="tab-content" data-tab="interceptor-state">
+                            <p>访问对话状态以根据当前会话做出决策：</p>
+                            <div class="code-block-wrapper">
+                                <div class="code-block-header">
+                                    <span class="code-language">Python</span>
+                                    <span class="code-difficulty advanced">🔴 高级</span>
+                                    <button class="copy-button">复制代码</button>
+                                </div>
+                                <pre><code class="language-python">from langchain_mcp_adapters.client import MultiServerMCPClient
+from langchain_mcp_adapters.interceptors import MCPToolCallRequest
+from langchain.messages import ToolMessage
+
+async def require_authentication(
+    request: MCPToolCallRequest,
+    handler,
+):
+    """Block sensitive MCP tools if user is not authenticated."""
+    runtime = request.runtime
+    state = runtime.state  # [!code highlight]
+    is_authenticated = state.get("authenticated", False)  # [!code highlight]
+
+    sensitive_tools = ["delete_file", "update_settings", "export_data"]
+
+    if request.name in sensitive_tools and not is_authenticated:
+        # Return error instead of calling tool
+        return ToolMessage(
+            content="Authentication required. Please log in first.",
+            tool_call_id=runtime.tool_call_id,
+        )
+
+    return await handler(request)
+
+client = MultiServerMCPClient(
+    {...},
+    tool_interceptors=[require_authentication],
+)</code></pre>
+                            </div>
+                        </div>
+
+                        <div class="tab-content" data-tab="interceptor-toolid">
+                            <p>访问工具调用 ID 以返回正确格式的响应或跟踪工具执行：</p>
+                            <div class="code-block-wrapper">
+                                <div class="code-block-header">
+                                    <span class="code-language">Python</span>
+                                    <span class="code-difficulty intermediate">🟡 中级</span>
+                                    <button class="copy-button">复制代码</button>
+                                </div>
+                                <pre><code class="language-python">from langchain_mcp_adapters.client import MultiServerMCPClient
+from langchain_mcp_adapters.interceptors import MCPToolCallRequest
+from langchain.messages import ToolMessage
+
+async def rate_limit_interceptor(
+    request: MCPToolCallRequest,
+    handler,
+):
+    """Rate limit expensive MCP tool calls."""
+    runtime = request.runtime
+    tool_call_id = runtime.tool_call_id  # [!code highlight]
+
+    # Check rate limit (simplified example)
+    if is_rate_limited(request.name):
+        return ToolMessage(
+            content="Rate limit exceeded. Please try again later.",
+            tool_call_id=tool_call_id,  # [!code highlight]
+        )
+
+    result = await handler(request)
+
+    # Log successful tool call
+    log_tool_execution(tool_call_id, request.name, success=True)
+
+    return result
+
+client = MultiServerMCPClient(
+    {...},
+    tool_interceptors=[rate_limit_interceptor],
+)</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p>
+                        有关更多上下文工程模式，请参阅<a href="38-context-engineering.html">上下文工程</a>和<a href="05-tools.html">工具</a>。
+                    </p>
+
+                    <h4 class="subsection-subtitle" id="state-updates-and-commands">状态更新和命令</h4>
+
+                    <p>
+                        拦截器可以返回 <code>Command</code> 对象来更新 Agent 状态或控制图执行流程。
+                        这对于跟踪任务进度、在 Agent 之间切换或提前结束执行很有用。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from langchain.agents import AgentState, create_agent
+from langchain_mcp_adapters.interceptors import MCPToolCallRequest
+from langchain.messages import ToolMessage
+from langgraph.types import Command
+
+async def handle_task_completion(
+    request: MCPToolCallRequest,
+    handler,
+):
+    """Mark task complete and hand off to summary agent."""
+    result = await handler(request)
+
+    if request.name == "submit_order":
+        return Command(
+            update={
+                "messages": [result] if isinstance(result, ToolMessage) else [],
+                "task_status": "completed",  # [!code highlight]
+            },
+            goto="summary_agent",  # [!code highlight]
+        )
+
+    return result</code></pre>
+                    </div>
+
+                    <p>使用 <code>Command</code> 和 <code>goto="__end__"</code> 提前结束执行：</p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">async def end_on_success(
+    request: MCPToolCallRequest,
+    handler,
+):
+    """End agent run when task is marked complete."""
+    result = await handler(request)
+
+    if request.name == "mark_complete":
+        return Command(
+            update={"messages": [result], "status": "done"},
+            goto="__end__",  # [!code highlight]
+        )
+
+    return result</code></pre>
+                    </div>
+
+                    <h4 class="subsection-subtitle" id="custom-interceptors">自定义拦截器</h4>
+
+                    <p>
+                        拦截器是包装工具执行的异步函数，实现请求/响应修改、重试逻辑和其他横切关注点。
+                        它们遵循"洋葱"模式，其中列表中的第一个拦截器是最外层。
+                    </p>
+
+                    <p><strong>基本模式</strong></p>
+
+                    <p>
+                        拦截器是一个异步函数，接收请求和处理程序。
+                        您可以在调用处理程序之前修改请求，之后修改响应，或完全跳过处理程序。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from langchain_mcp_adapters.client import MultiServerMCPClient
+from langchain_mcp_adapters.interceptors import MCPToolCallRequest
+
+async def logging_interceptor(
+    request: MCPToolCallRequest,
+    handler,
+):
+    """Log tool calls before and after execution."""
+    print(f"Calling tool: {request.name} with args: {request.args}")
+    result = await handler(request)
+    print(f"Tool {request.name} returned: {result}")
+    return result
+
+client = MultiServerMCPClient(
+    {"math": {"transport": "stdio", "command": "python", "args": ["/path/to/server.py"]}},
+    tool_interceptors=[logging_interceptor],  # [!code highlight]
+)</code></pre>
+                    </div>
+
+                    <p><strong>修改请求</strong></p>
+
+                    <p>
+                        使用 <code>request.override()</code> 创建修改后的请求。
+                        这遵循不可变模式，使原始请求保持不变。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">async def double_args_interceptor(
+    request: MCPToolCallRequest,
+    handler,
+):
+    """Double all numeric arguments before execution."""
+    modified_args = {k: v * 2 for k, v in request.args.items()}
+    modified_request = request.override(args=modified_args)  # [!code highlight]
+    return await handler(modified_request)
+
+# Original call: add(a=2, b=3) becomes add(a=4, b=6)</code></pre>
+                    </div>
+
+                    <p><strong>运行时修改标头</strong></p>
+
+                    <p>拦截器可以根据请求上下文动态修改 HTTP 标头：</p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">async def auth_header_interceptor(
+    request: MCPToolCallRequest,
+    handler,
+):
+    """Add authentication headers based on the tool being called."""
+    token = get_token_for_tool(request.name)
+    modified_request = request.override(
+        headers={"Authorization": f"Bearer {token}"}  # [!code highlight]
+    )
+    return await handler(modified_request)</code></pre>
+                    </div>
+
+                    <p><strong>组合拦截器</strong></p>
+
+                    <p>多个拦截器以"洋葱"顺序组合——列表中的第一个拦截器是最外层：</p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">async def outer_interceptor(request, handler):
+    print("outer: before")
+    result = await handler(request)
+    print("outer: after")
+    return result
+
+async def inner_interceptor(request, handler):
+    print("inner: before")
+    result = await handler(request)
+    print("inner: after")
+    return result
+
+client = MultiServerMCPClient(
+    {...},
+    tool_interceptors=[outer_interceptor, inner_interceptor],  # [!code highlight]
+)
+
+# Execution order:
+# outer: before -> inner: before -> tool execution -> inner: after -> outer: after</code></pre>
+                    </div>
+
+                    <p><strong>错误处理</strong></p>
+
+                    <p>使用拦截器捕获工具执行错误并实现重试逻辑：</p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">import asyncio
+
+async def retry_interceptor(
+    request: MCPToolCallRequest,
+    handler,
+    max_retries: int = 3,
+    delay: float = 1.0,
+):
+    """Retry failed tool calls with exponential backoff."""
+    last_error = None
+    for attempt in range(max_retries):
+        try:
+            return await handler(request)
+        except Exception as e:
+            last_error = e
+            if attempt < max_retries - 1:
+                wait_time = delay * (2 ** attempt)  # Exponential backoff
+                print(f"Tool {request.name} failed (attempt {attempt + 1}), retrying in {wait_time}s...")
+                await asyncio.sleep(wait_time)
+    raise last_error
+
+client = MultiServerMCPClient(
+    {...},
+    tool_interceptors=[retry_interceptor],  # [!code highlight]
+)</code></pre>
+                    </div>
+
+                    <p>您还可以捕获特定错误类型并返回回退值：</p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">async def fallback_interceptor(
+    request: MCPToolCallRequest,
+    handler,
+):
+    """Return a fallback value if tool execution fails."""
+    try:
+        return await handler(request)
+    except TimeoutError:
+        return f"Tool {request.name} timed out. Please try again later."
+    except ConnectionError:
+        return f"Could not connect to {request.name} service. Using cached data."</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">进度通知</h3>
+
+                    <p>订阅长时间运行的工具执行的进度更新：</p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from langchain_mcp_adapters.client import MultiServerMCPClient
+from langchain_mcp_adapters.callbacks import Callbacks, CallbackContext
+
+async def on_progress(
+    progress: float,
+    total: float | None,
+    message: str | None,
+    context: CallbackContext,
+):
+    """Handle progress updates from MCP servers."""
+    percent = (progress / total * 100) if total else progress
+    tool_info = f" ({context.tool_name})" if context.tool_name else ""
+    print(f"[{context.server_name}{tool_info}] Progress: {percent:.1f}% - {message}")
+
+client = MultiServerMCPClient(
+    {...},
+    callbacks=Callbacks(on_progress=on_progress),  # [!code highlight]
+)</code></pre>
+                    </div>
+
+                    <p><code>CallbackContext</code> 提供：</p>
+                    <ul>
+                        <li><code>server_name</code>：MCP 服务器的名称</li>
+                        <li><code>tool_name</code>：正在执行的工具名称（在工具调用期间可用）</li>
+                    </ul>
+
+                    <h3 class="subsection-title">日志记录</h3>
+
+                    <p>
+                        MCP 协议支持来自服务器的<a href="https://modelcontextprotocol.io/specification/2025-03-26/server/utilities/logging#log-levels" target="_blank">日志记录</a>通知。
+                        使用 <code>Callbacks</code> 类订阅这些事件。
+                    </p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from langchain_mcp_adapters.client import MultiServerMCPClient
+from langchain_mcp_adapters.callbacks import Callbacks, CallbackContext
+from mcp.types import LoggingMessageNotificationParams
+
+async def on_logging_message(
+    params: LoggingMessageNotificationParams,
+    context: CallbackContext,
+):
+    """Handle log messages from MCP servers."""
+    print(f"[{context.server_name}] {params.level}: {params.data}")
+
+client = MultiServerMCPClient(
+    {...},
+    callbacks=Callbacks(on_logging_message=on_logging_message),  # [!code highlight]
+)</code></pre>
+                    </div>
+
+                    <h3 class="subsection-title">启发（Elicitation）</h3>
+
+                    <p>
+                        <a href="https://modelcontextprotocol.io/specification/2025-11-25/client/elicitation#elicitation" target="_blank">启发</a>
+                        允许 MCP 服务器在工具执行期间向用户请求额外输入。
+                        服务器可以交互式地根据需要询问信息，而不是预先要求所有输入。
+                    </p>
+
+                    <h4 class="subsection-subtitle">服务器设置</h4>
+
+                    <p>定义一个使用 <code>ctx.elicit()</code> 请求用户输入的工具：</p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty intermediate">🟡 中级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from pydantic import BaseModel
+from mcp.server.fastmcp import Context, FastMCP
+
+server = FastMCP("Profile")
+
+class UserDetails(BaseModel):
+    email: str
+    age: int
+
+@server.tool()
+async def create_profile(name: str, ctx: Context) -> str:
+    """Create a user profile, requesting details via elicitation."""
+    result = await ctx.elicit(  # [!code highlight]
+        message=f"Please provide details for {name}'s profile:",  # [!code highlight]
+        schema=UserDetails,  # [!code highlight]
+    )  # [!code highlight]
+    if result.action == "accept" and result.data:
+        return f"Created profile for {name}: email={result.data.email}, age={result.data.age}"
+    if result.action == "decline":
+        return f"User declined. Created minimal profile for {name}."
+    return "Profile creation cancelled."
+
+if __name__ == "__main__":
+    server.run(transport="http")</code></pre>
+                    </div>
+
+                    <h4 class="subsection-subtitle">客户端设置</h4>
+
+                    <p>通过向 <code>MultiServerMCPClient</code> 提供回调来处理启发请求：</p>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty advanced">🔴 高级</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python">from langchain_mcp_adapters.client import MultiServerMCPClient
+from langchain_mcp_adapters.callbacks import Callbacks, CallbackContext
+from mcp.shared.context import RequestContext
+from mcp.types import ElicitRequestParams, ElicitResult
+
+async def on_elicitation(
+    mcp_context: RequestContext,
+    params: ElicitRequestParams,
+    context: CallbackContext,
+) -> ElicitResult:
+    """Handle elicitation requests from MCP servers."""
+    # In a real application, you would prompt the user for input
+    # based on params.message and params.requestedSchema
+    return ElicitResult(  # [!code highlight]
+        action="accept",  # [!code highlight]
+        content={"email": "user@example.com", "age": 25},  # [!code highlight]
+    )  # [!code highlight]
+
+client = MultiServerMCPClient(
+    {
+        "profile": {
+            "url": "http://localhost:8000/mcp",
+            "transport": "http",
+        }
+    },
+    callbacks=Callbacks(on_elicitation=on_elicitation),  # [!code highlight]
+)</code></pre>
+                    </div>
+
+                    <h4 class="subsection-subtitle">响应动作</h4>
+
+                    <p>启发回调可以返回三种动作之一：</p>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>动作</th>
+                                <th>描述</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>accept</code></td>
+                                <td>用户提供了有效输入。在 <code>content</code> 字段中包含数据。</td>
+                            </tr>
+                            <tr>
+                                <td><code>decline</code></td>
+                                <td>用户选择不提供请求的信息。</td>
+                            </tr>
+                            <tr>
+                                <td><code>cancel</code></td>
+                                <td>用户完全取消了操作。</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="code-block-wrapper">
+                        <div class="code-block-header">
+                            <span class="code-language">Python</span>
+                            <span class="code-difficulty basic">🟢 基础</span>
+                            <button class="copy-button">复制代码</button>
+                        </div>
+                        <pre><code class="language-python"># Accept with data
+ElicitResult(action="accept", content={"email": "user@example.com", "age": 25})
+
+# Decline (user doesn't want to provide info)
+ElicitResult(action="decline")
+
+# Cancel (abort the operation)
+ElicitResult(action="cancel")</code></pre>
+                    </div>
+                </section>
+
+                <!-- Additional resources -->
+                <section class="content-section">
+                    <h2 class="section-title">其他资源</h2>
+                    <ul>
+                        <li><a href="https://modelcontextprotocol.io/introduction" target="_blank">MCP 文档</a></li>
+                        <li><a href="https://modelcontextprotocol.io/docs/concepts/transports" target="_blank">MCP 传输文档</a></li>
+                        <li><a href="https://github.com/langchain-ai/langchain-mcp-adapters" target="_blank"><code>langchain-mcp-adapters</code></a></li>
+                    </ul>
+                </section>
+
+                <!-- 页面导航 -->
+                <nav class="page-navigation">
+                    <a href="16-context-engineering.html" class="nav-button prev">
+                        ← 上一页:上下文工程
+                    </a>
+                    <a href="18-customer-service.html" class="nav-button next">
+                        下一页:客服机器人 →
+                    </a>
+                </nav>
+            </div>
+        </main>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" aria-label="返回顶部">↑</button>
+
+    <!-- JavaScript -->
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

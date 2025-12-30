@@ -26,3 +26,8 @@ fix-navigation.py
 .idea/
 *.swp
 *.swo
+.env
+script/
+data/
+ipynb*
+pypkg-*.txt
