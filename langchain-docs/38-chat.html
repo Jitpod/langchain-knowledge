@@ -7,116 +7,153 @@
     <title>在线对话助手 | LangChain 1.0 Python 知识文档</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <style>
-        /* iframe 容器样式 */
-        .chat-container {
-            position: relative;
-            width: 100%;
-            height: calc(100vh - 200px);
-            min-height: 600px;
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        /* 对话启动卡片样式 */
+        .chat-launch-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 16px;
+            padding: 3rem 2rem;
             margin: 2rem 0;
+            text-align: center;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            position: relative;
             overflow: hidden;
         }
 
-        .chat-container iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        /* 加载提示 */
-        .loading-overlay {
+        .chat-launch-card::before {
+            content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(255, 255, 255, 0.95);
-            display: flex;
-            flex-direction: column;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .chat-launch-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .chat-launch-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .chat-launch-description {
+            font-size: 1.125rem;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .chat-launch-button {
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            z-index: 10;
+            gap: 0.75rem;
+            padding: 1rem 2.5rem;
+            background: white;
+            color: #667eea;
+            font-size: 1.125rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
         }
 
-        .loading-overlay.hidden {
-            display: none;
+        .chat-launch-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 25px -5px rgba(0, 0, 0, 0.3);
+            background: #f8fafc;
         }
 
-        .loading-spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid #e5e7eb;
-            border-top-color: #2563eb;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
+        .chat-launch-button .button-icon {
+            font-size: 1.5rem;
         }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        .chat-launch-button .button-arrow {
+            font-size: 1.25rem;
+            transition: transform 0.3s ease;
         }
 
-        /* 错误回退 */
-        .error-fallback {
-            display: none;
-            padding: 2rem;
-            text-align: center;
-            background: #fef2f2;
-            border: 1px solid #fecaca;
-            border-radius: 8px;
-            margin: 2rem 0;
+        .chat-launch-button:hover .button-arrow {
+            transform: translate(3px, -3px);
         }
 
-        .error-fallback.show {
-            display: block;
+        .chat-launch-tips {
+            margin-top: 2.5rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .error-fallback h3 {
-            color: #dc2626;
+        .chat-launch-tips .tip-title {
+            color: white;
+            font-weight: 600;
+            font-size: 1.125rem;
             margin-bottom: 1rem;
         }
 
-        .error-fallback a {
-            display: inline-block;
-            margin-top: 1rem;
-            padding: 0.75rem 1.5rem;
-            background: #2563eb;
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            transition: background 0.3s;
+        .chat-launch-tips ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: left;
         }
 
-        .error-fallback a:hover {
-            background: #1d4ed8;
+        .chat-launch-tips li {
+            color: rgba(255, 255, 255, 0.95);
+            padding: 0.5rem 0;
+            font-size: 0.95rem;
+            line-height: 1.6;
         }
 
-        /* 移动端优化 */
-        .mobile-tip {
-            display: none;
+        .chat-launch-tips li::before {
+            content: '✓';
+            color: #10b981;
+            font-weight: bold;
+            margin-right: 0.75rem;
+            font-size: 1.2rem;
         }
 
+        /* 响应式设计 */
         @media (max-width: 768px) {
-            .chat-container {
-                height: calc(100vh - 150px);
-                min-height: 500px;
+            .chat-launch-card {
+                padding: 2rem 1.5rem;
             }
 
-            .mobile-tip {
-                display: block;
-                background: #fef3c7;
-                border: 1px solid #fbbf24;
-                border-radius: 6px;
-                padding: 1rem;
-                margin-bottom: 1rem;
+            .chat-launch-icon {
+                font-size: 3rem;
             }
 
-            .mobile-tip p {
-                margin: 0;
-                font-size: 0.875rem;
-                color: #92400e;
+            .chat-launch-title {
+                font-size: 1.5rem;
+            }
+
+            .chat-launch-description {
+                font-size: 1rem;
+            }
+
+            .chat-launch-button {
+                padding: 0.875rem 2rem;
+                font-size: 1rem;
             }
         }
     </style>
@@ -480,45 +517,41 @@
                     </div>
                 </section>
 
-                <!-- 移动端提示 -->
-                <div class="mobile-tip">
-                    <p>
-                        📱 <strong>移动端提示</strong>：为获得最佳体验，建议在桌面浏览器中使用对话功能。
-                        如果 iframe 加载失败，请点击下方按钮在新标签页打开。
-                    </p>
-                </div>
+                <!-- 打开对话界面 -->
+                <section class="content-section">
+                    <h2 class="section-title">💬 打开对话界面</h2>
 
-                <!-- 聊天窗口 -->
-                <section class="content-section" style="position: relative;">
-                    <h2 class="section-title">💬 开始对话</h2>
+                    <div class="chat-launch-card">
+                        <div class="chat-launch-icon">🤖</div>
+                        <h3 class="chat-launch-title">LangChain 官方 AI 对话助手</h3>
+                        <p class="chat-launch-description">
+                            点击下方按钮在新标签页中打开对话界面，与 AI 助手实时交流。
+                            您可以同时打开文档和对话窗口，方便随时切换参考。
+                        </p>
 
-                    <div class="chat-container" id="chatContainer">
-                        <div class="loading-overlay" id="loadingOverlay">
-                            <div class="loading-spinner"></div>
-                            <p style="margin-top: 1rem; color: #6b7280;">正在加载对话界面...</p>
+                        <a href="https://chat.langchain.com/" target="_blank" rel="noopener noreferrer" class="chat-launch-button">
+                            <span class="button-icon">💬</span>
+                            打开 LangChain Chat
+                            <span class="button-arrow">↗</span>
+                        </a>
+
+                        <div class="chat-launch-tips">
+                            <p class="tip-title">💡 使用技巧</p>
+                            <ul>
+                                <li><strong>固定标签</strong>：右键对话标签页，选择"固定标签页"，方便快速切换</li>
+                                <li><strong>分屏查看</strong>：使用浏览器的分屏功能，同时查看文档和对话</li>
+                                <li><strong>复制链接</strong>：对话中的代码示例可以直接复制到项目中使用</li>
+                            </ul>
                         </div>
 
-                        <iframe
-                            id="chatIframe"
-                            src="https://chat.langchain.com/"
-                            title="LangChain Chat"
-                            loading="lazy"
-                            sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
-                            allow="clipboard-write"
-                        ></iframe>
-                    </div>
-
-                    <!-- 错误回退 -->
-                    <div class="error-fallback" id="errorFallback">
-                        <h3>⚠️ 无法在此页面嵌入聊天界面</h3>
-                        <p>LangChain 官方聊天页面设置了安全策略（CSP），不允许在其他网站中通过 iframe 嵌入。</p>
-                        <p>这是一个正常的安全限制。请点击下方按钮在新标签页中打开对话界面：</p>
-                        <a href="https://chat.langchain.com/" target="_blank" rel="noopener noreferrer">
-                            在新标签页打开 LangChain Chat ↗
-                        </a>
-                        <p style="margin-top: 1.5rem; font-size: 0.875rem; color: #6b7280;">
-                            💡 提示：您可以将对话页面固定到浏览器标签，方便随时切换查看文档和对话。
-                        </p>
+                        <div class="info-box note" style="margin-top: 2rem;">
+                            <div class="info-box-title">ℹ️ 为什么不能直接嵌入？</div>
+                            <p style="margin: 0.5rem 0 0 0; font-size: 0.875rem;">
+                                LangChain 官方聊天页面设置了内容安全策略（CSP），禁止在其他网站中通过 iframe 嵌入。
+                                这是一个标准的安全限制，可以防止跨站脚本攻击（XSS）等安全风险。
+                                在新标签页打开可以获得完整的功能和最佳体验。
+                            </p>
+                        </div>
                     </div>
                 </section>
 
@@ -540,74 +573,5 @@
 
     <!-- JavaScript -->
     <script src="assets/js/mermaid-init.js"></script>
-    <script>
-        // iframe 加载管理
-        (function() {
-            const iframe = document.getElementById('chatIframe');
-            const loadingOverlay = document.getElementById('loadingOverlay');
-            const errorFallback = document.getElementById('errorFallback');
-            const chatContainer = document.getElementById('chatContainer');
-
-            let loadTimeout;
-            let cspBlocked = false;
-
-            // 监听 CSP 错误（控制台错误）
-            window.addEventListener('securitypolicyviolation', function(e) {
-                if (e.violatedDirective === 'frame-ancestors') {
-                    cspBlocked = true;
-                    showError();
-                }
-            });
-
-            // 显示错误回退
-            function showError() {
-                clearTimeout(loadTimeout);
-                loadingOverlay.classList.add('hidden');
-                chatContainer.style.display = 'none';
-                errorFallback.classList.add('show');
-            }
-
-            // iframe 加载成功
-            iframe.addEventListener('load', function() {
-                // CSP 阻止时，load 事件仍可能触发，但内容为空
-                // 检查 iframe 是否真的加载了内容
-                try {
-                    // 尝试访问 iframe 内容（同源才能访问）
-                    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-                    if (iframeDoc && !cspBlocked) {
-                        clearTimeout(loadTimeout);
-                        loadingOverlay.classList.add('hidden');
-                    }
-                } catch (e) {
-                    // 跨域访问异常是正常的，不算错误
-                    // 只要不是 CSP 阻止，就认为加载成功
-                    if (!cspBlocked) {
-                        clearTimeout(loadTimeout);
-                        loadingOverlay.classList.add('hidden');
-                    }
-                }
-            });
-
-            // iframe 加载超时检测（3秒，CSP 阻止是立即的）
-            loadTimeout = setTimeout(function() {
-                console.warn('iframe 加载超时或被 CSP 阻止');
-                showError();
-            }, 3000);
-
-            // iframe 加载错误
-            iframe.addEventListener('error', function() {
-                showError();
-            });
-
-            // 立即检查是否有 CSP 阻止（检查控制台）
-            // 如果 1 秒后仍未加载成功，很可能是被阻止了
-            setTimeout(function() {
-                if (!loadingOverlay.classList.contains('hidden')) {
-                    // 还在加载中，可能被 CSP 阻止
-                    // 再给 2 秒时间
-                }
-            }, 1000);
-        })();
-    </script>
 </body>
 </html>
