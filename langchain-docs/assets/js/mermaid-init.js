@@ -4,9 +4,8 @@
 const SidebarScrollManager = {
     // localStorage 键名
     STORAGE_KEYS: {
-        VISITED_PAGES: 'langchain_visited_pages',
-        SCROLL_POSITIONS: 'langchain_scroll_positions',
-        LAST_PAGE: 'langchain_last_page'
+        FIRST_VISIT: 'langchain_first_visit',
+        GLOBAL_SCROLL_POSITION: 'langchain_global_scroll_position'
     },
 
     // 初始化管理器
@@ -44,62 +43,45 @@ const SidebarScrollManager = {
         }
     },
 
-    // 获取已访问页面记录
-    getVisitedPages() {
-        if (!this.isLocalStorageAvailable()) return {};
+    // 检查是否首次访问网站
+    isFirstVisit() {
+        if (!this.isLocalStorageAvailable()) return true;
         try {
-            const data = localStorage.getItem(this.STORAGE_KEYS.VISITED_PAGES);
-            return data ? JSON.parse(data) : {};
+            return !localStorage.getItem(this.STORAGE_KEYS.FIRST_VISIT);
         } catch (e) {
-            return {};
+            return true;
         }
     },
 
-    // 保存已访问页面
-    markPageAsVisited(page) {
+    // 标记网站已访问
+    markAsVisited() {
         if (!this.isLocalStorageAvailable()) return;
         try {
-            const visited = this.getVisitedPages();
-            visited[page] = true;
-            localStorage.setItem(this.STORAGE_KEYS.VISITED_PAGES, JSON.stringify(visited));
+            localStorage.setItem(this.STORAGE_KEYS.FIRST_VISIT, 'true');
         } catch (e) {
             console.warn('无法保存访问记录:', e);
         }
     },
 
-    // 检查页面是否已访问
-    isPageVisited(page) {
-        const visited = this.getVisitedPages();
-        return !!visited[page];
-    },
-
-    // 获取所有滚动位置
-    getScrollPositions() {
-        if (!this.isLocalStorageAvailable()) return {};
+    // 获取全局滚动位置
+    getGlobalScrollPosition() {
+        if (!this.isLocalStorageAvailable()) return 0;
         try {
-            const data = localStorage.getItem(this.STORAGE_KEYS.SCROLL_POSITIONS);
-            return data ? JSON.parse(data) : {};
+            const position = localStorage.getItem(this.STORAGE_KEYS.GLOBAL_SCROLL_POSITION);
+            return position ? parseInt(position, 10) : 0;
         } catch (e) {
-            return {};
+            return 0;
         }
     },
 
-    // 保存滚动位置
-    saveScrollPosition(page, position) {
+    // 保存全局滚动位置
+    saveGlobalScrollPosition(position) {
         if (!this.isLocalStorageAvailable()) return;
         try {
-            const positions = this.getScrollPositions();
-            positions[page] = Math.round(position);
-            localStorage.setItem(this.STORAGE_KEYS.SCROLL_POSITIONS, JSON.stringify(positions));
+            localStorage.setItem(this.STORAGE_KEYS.GLOBAL_SCROLL_POSITION, Math.round(position).toString());
         } catch (e) {
             console.warn('无法保存滚动位置:', e);
         }
-    },
-
-    // 获取特定页面的滚动位置
-    getScrollPosition(page) {
-        const positions = this.getScrollPositions();
-        return positions[page] || 0;
     },
 
     // 计算高亮项的中心位置
@@ -122,34 +104,31 @@ const SidebarScrollManager = {
 
     // 处理页面加载时的滚动逻辑
     handlePageLoad() {
-        const isVisited = this.isPageVisited(this.currentPage);
+        const isFirstVisit = this.isFirstVisit();
 
-        if (isVisited) {
-            // 场景 2: 后续访问 - 恢复上次滚动位置（无动画）
-            const savedPosition = this.getScrollPosition(this.currentPage);
-            this.sidebar.scrollTop = savedPosition;
-        } else {
-            // 场景 1: 首次访问 - 滚动到高亮项中间位置（平滑动画）
+        if (isFirstVisit) {
+            // 首次访问网站 - 滚动到当前页面的高亮项中间位置（平滑动画）
             const centerPosition = this.calculateCenterPosition();
             this.sidebar.scrollTo({
                 top: centerPosition,
                 behavior: 'smooth'
             });
 
-            // 标记页面为已访问
-            this.markPageAsVisited(this.currentPage);
+            // 标记网站为已访问
+            this.markAsVisited();
 
             // 保存初始滚动位置
             setTimeout(() => {
-                this.saveScrollPosition(this.currentPage, this.sidebar.scrollTop);
+                this.saveGlobalScrollPosition(this.sidebar.scrollTop);
             }, 500); // 等待平滑滚动完成
+        } else {
+            // 后续访问 - 恢复全局滚动位置（无动画）
+            const savedPosition = this.getGlobalScrollPosition();
+            this.sidebar.scrollTop = savedPosition;
         }
 
         // 设置滚动位置自动保存
         this.setupScrollSaving();
-
-        // 设置菜单点击监听
-        this.setupMenuClickHandlers();
     },
 
     // 设置滚动位置自动保存（防抖）
@@ -162,31 +141,8 @@ const SidebarScrollManager = {
 
             // 150ms 防抖延迟
             saveTimeout = setTimeout(() => {
-                this.saveScrollPosition(this.currentPage, this.sidebar.scrollTop);
+                this.saveGlobalScrollPosition(this.sidebar.scrollTop);
             }, 150);
-        });
-    },
-
-    // 设置菜单点击监听
-    setupMenuClickHandlers() {
-        const navLinks = this.sidebar.querySelectorAll('.nav-link');
-
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                // 场景 3: 点击菜单时保存当前滚动位置
-                const currentScrollTop = this.sidebar.scrollTop;
-                this.saveScrollPosition(this.currentPage, currentScrollTop);
-
-                // 保存最后访问的页面
-                const targetPage = link.getAttribute('href');
-                if (targetPage && this.isLocalStorageAvailable()) {
-                    try {
-                        localStorage.setItem(this.STORAGE_KEYS.LAST_PAGE, targetPage);
-                    } catch (e) {
-                        console.warn('无法保存最后访问页面:', e);
-                    }
-                }
-            });
         });
     }
 };
