@@ -3,10 +3,7 @@
 // ==================== 侧边栏智能滚动管理器 ====================
 const SidebarScrollManager = {
     // localStorage 键名
-    STORAGE_KEYS: {
-        FIRST_VISIT: 'langchain_first_visit',
-        GLOBAL_SCROLL_POSITION: 'langchain_global_scroll_position'
-    },
+    STORAGE_KEY: 'langchain_sidebar_scroll_position',
 
     // 标记是否已初始化（避免重复）
     initialized: false,
@@ -19,36 +16,21 @@ const SidebarScrollManager = {
         if (!sidebar) return;
 
         this.sidebar = sidebar;
-        this.currentPage = this.getCurrentPage();
         this.initialized = true;
 
-        console.log('[SidebarScroll] 初始化，当前页面:', this.currentPage);
+        console.log('[SidebarScroll] 初始化');
 
-        // 立即恢复滚动位置（防止闪动）
-        // 优先恢复保存的位置，如果没有保存的位置才判断是否首次访问
-        const savedPosition = this.getGlobalScrollPosition();
-        const hasScrollPosition = savedPosition > 0;
-
-        if (hasScrollPosition) {
-            // 有保存的滚动位置，立即恢复
-            console.log('[SidebarScroll] 立即恢复位置:', savedPosition);
+        // 立即恢复滚动位置
+        const savedPosition = this.getScrollPosition();
+        if (savedPosition > 0) {
+            console.log('[SidebarScroll] 恢复位置:', savedPosition);
             this.sidebar.scrollTop = savedPosition;
         } else {
-            console.log('[SidebarScroll] 无保存位置，等待 DOMContentLoaded');
+            console.log('[SidebarScroll] 无保存位置，保持默认');
         }
 
-        // 在 DOMContentLoaded 后处理页面加载
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => this.handlePageLoad());
-        } else {
-            this.handlePageLoad();
-        }
-    },
-
-    // 获取当前页面文件名
-    getCurrentPage() {
-        const path = window.location.pathname.split('/').pop();
-        return path || 'index.html';
+        // 设置滚动位置自动保存
+        this.setupScrollSaving();
     },
 
     // 检查 localStorage 是否可用
@@ -59,38 +41,17 @@ const SidebarScrollManager = {
             localStorage.removeItem(test);
             return true;
         } catch (e) {
-            console.warn('localStorage 不可用，智能滚动功能将被禁用');
+            console.warn('localStorage 不可用，滚动位置不会保存');
             return false;
         }
     },
 
-    // 检查是否首次访问网站
-    isFirstVisit() {
-        if (!this.isLocalStorageAvailable()) return true;
-        try {
-            return !localStorage.getItem(this.STORAGE_KEYS.FIRST_VISIT);
-        } catch (e) {
-            return true;
-        }
-    },
-
-    // 标记网站已访问
-    markAsVisited() {
-        if (!this.isLocalStorageAvailable()) return;
-        try {
-            localStorage.setItem(this.STORAGE_KEYS.FIRST_VISIT, 'true');
-        } catch (e) {
-            console.warn('无法保存访问记录:', e);
-        }
-    },
-
-    // 获取全局滚动位置
-    getGlobalScrollPosition() {
+    // 获取滚动位置
+    getScrollPosition() {
         if (!this.isLocalStorageAvailable()) return 0;
         try {
-            const position = localStorage.getItem(this.STORAGE_KEYS.GLOBAL_SCROLL_POSITION);
+            const position = localStorage.getItem(this.STORAGE_KEY);
             const value = position ? parseInt(position, 10) : 0;
-            console.log('[SidebarScroll] 读取滚动位置:', value);
             return value;
         } catch (e) {
             console.error('[SidebarScroll] 读取位置失败:', e);
@@ -98,69 +59,16 @@ const SidebarScrollManager = {
         }
     },
 
-    // 保存全局滚动位置
-    saveGlobalScrollPosition(position) {
+    // 保存滚动位置
+    saveScrollPosition(position) {
         if (!this.isLocalStorageAvailable()) return;
         try {
             const value = Math.round(position);
-            localStorage.setItem(this.STORAGE_KEYS.GLOBAL_SCROLL_POSITION, value.toString());
-            console.log('[SidebarScroll] 保存滚动位置:', value);
+            localStorage.setItem(this.STORAGE_KEY, value.toString());
+            console.log('[SidebarScroll] 保存位置:', value);
         } catch (e) {
             console.error('[SidebarScroll] 保存位置失败:', e);
         }
-    },
-
-    // 计算高亮项的中心位置
-    calculateCenterPosition() {
-        const activeLink = this.sidebar.querySelector('.nav-link.active');
-        if (!activeLink) return 0;
-
-        const activeItem = activeLink.closest('.nav-item');
-        if (!activeItem) return 0;
-
-        const itemTop = activeItem.offsetTop;
-        const itemHeight = activeItem.offsetHeight;
-        const sidebarHeight = this.sidebar.clientHeight;
-
-        // 计算使高亮项位于侧边栏中间的滚动位置
-        const centerPosition = itemTop - (sidebarHeight / 2) + (itemHeight / 2);
-
-        return Math.max(0, centerPosition);
-    },
-
-    // 处理页面加载时的滚动逻辑
-    handlePageLoad() {
-        const savedPosition = this.getGlobalScrollPosition();
-        const hasScrollPosition = savedPosition > 0;
-
-        console.log('[SidebarScroll] handlePageLoad, hasScrollPosition:', hasScrollPosition);
-
-        // 只在真正没有保存位置时才滚动到高亮项（首次访问）
-        if (!hasScrollPosition) {
-            // 首次访问网站 - 滚动到当前页面的高亮项中间位置（平滑动画）
-            const centerPosition = this.calculateCenterPosition();
-            console.log('[SidebarScroll] 首次访问，滚动到中心位置:', centerPosition);
-
-            if (centerPosition > 0) {
-                this.sidebar.scrollTo({
-                    top: centerPosition,
-                    behavior: 'smooth'
-                });
-
-                // 标记网站为已访问
-                this.markAsVisited();
-
-                // 保存初始滚动位置
-                setTimeout(() => {
-                    this.saveGlobalScrollPosition(this.sidebar.scrollTop);
-                }, 500); // 等待平滑滚动完成
-            }
-        } else {
-            console.log('[SidebarScroll] 已有保存位置，跳过滚动');
-        }
-
-        // 设置滚动位置自动保存（只设置一次）
-        this.setupScrollSaving();
     },
 
     // 设置滚动位置自动保存（防抖）
@@ -177,7 +85,7 @@ const SidebarScrollManager = {
 
             // 150ms 防抖延迟
             saveTimeout = setTimeout(() => {
-                this.saveGlobalScrollPosition(this.sidebar.scrollTop);
+                this.saveScrollPosition(this.sidebar.scrollTop);
             }, 150);
         });
     }
