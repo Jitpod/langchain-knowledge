@@ -361,6 +361,8 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
+// ==================== 初始化页面交互功能 ====================
+document.addEventListener('DOMContentLoaded', function() {
     // ==================== Tabs 组件功能 ====================
     // 初始化所有 tabs 容器
     const tabsContainers = document.querySelectorAll('.tabs-container');

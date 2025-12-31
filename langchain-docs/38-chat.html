@@ -510,12 +510,15 @@
 
                     <!-- 错误回退 -->
                     <div class="error-fallback" id="errorFallback">
-                        <h3>⚠️ 无法加载聊天界面</h3>
-                        <p>抱歉，iframe 加载失败。这可能是由于浏览器限制或网络问题导致。</p>
-                        <p>请点击下方按钮在新标签页中打开对话界面：</p>
+                        <h3>⚠️ 无法在此页面嵌入聊天界面</h3>
+                        <p>LangChain 官方聊天页面设置了安全策略（CSP），不允许在其他网站中通过 iframe 嵌入。</p>
+                        <p>这是一个正常的安全限制。请点击下方按钮在新标签页中打开对话界面：</p>
                         <a href="https://chat.langchain.com/" target="_blank" rel="noopener noreferrer">
-                            在新标签页打开对话 ↗
+                            在新标签页打开 LangChain Chat ↗
                         </a>
+                        <p style="margin-top: 1.5rem; font-size: 0.875rem; color: #6b7280;">
+                            💡 提示：您可以将对话页面固定到浏览器标签，方便随时切换查看文档和对话。
+                        </p>
                     </div>
                 </section>
 
@@ -546,28 +549,64 @@
             const chatContainer = document.getElementById('chatContainer');
 
             let loadTimeout;
+            let cspBlocked = false;
+
+            // 监听 CSP 错误（控制台错误）
+            window.addEventListener('securitypolicyviolation', function(e) {
+                if (e.violatedDirective === 'frame-ancestors') {
+                    cspBlocked = true;
+                    showError();
+                }
+            });
+
+            // 显示错误回退
+            function showError() {
+                clearTimeout(loadTimeout);
+                loadingOverlay.classList.add('hidden');
+                chatContainer.style.display = 'none';
+                errorFallback.classList.add('show');
+            }
 
             // iframe 加载成功
             iframe.addEventListener('load', function() {
-                clearTimeout(loadTimeout);
-                loadingOverlay.classList.add('hidden');
+                // CSP 阻止时，load 事件仍可能触发，但内容为空
+                // 检查 iframe 是否真的加载了内容
+                try {
+                    // 尝试访问 iframe 内容（同源才能访问）
+                    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                    if (iframeDoc && !cspBlocked) {
+                        clearTimeout(loadTimeout);
+                        loadingOverlay.classList.add('hidden');
+                    }
+                } catch (e) {
+                    // 跨域访问异常是正常的，不算错误
+                    // 只要不是 CSP 阻止，就认为加载成功
+                    if (!cspBlocked) {
+                        clearTimeout(loadTimeout);
+                        loadingOverlay.classList.add('hidden');
+                    }
+                }
             });
 
-            // iframe 加载超时检测（10秒）
+            // iframe 加载超时检测（3秒，CSP 阻止是立即的）
             loadTimeout = setTimeout(function() {
-                console.warn('iframe 加载超时');
-                loadingOverlay.classList.add('hidden');
-                chatContainer.style.display = 'none';
-                errorFallback.classList.add('show');
-            }, 10000);
+                console.warn('iframe 加载超时或被 CSP 阻止');
+                showError();
+            }, 3000);
 
             // iframe 加载错误
             iframe.addEventListener('error', function() {
-                clearTimeout(loadTimeout);
-                loadingOverlay.classList.add('hidden');
-                chatContainer.style.display = 'none';
-                errorFallback.classList.add('show');
+                showError();
             });
+
+            // 立即检查是否有 CSP 阻止（检查控制台）
+            // 如果 1 秒后仍未加载成功，很可能是被阻止了
+            setTimeout(function() {
+                if (!loadingOverlay.classList.contains('hidden')) {
+                    // 还在加载中，可能被 CSP 阻止
+                    // 再给 2 秒时间
+                }
+            }, 1000);
         })();
     </script>
 </body>
