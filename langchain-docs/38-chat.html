@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LangChain 在线对话助手 - 实时解答您的问题，提供代码示例和最佳实践">
+    <title>在线对话助手 | LangChain 1.0 Python 知识文档</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        /* iframe 容器样式 */
+        .chat-container {
+            position: relative;
+            width: 100%;
+            height: calc(100vh - 200px);
+            min-height: 600px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+
+        .chat-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* 加载提示 */
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.95);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .loading-overlay.hidden {
+            display: none;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #e5e7eb;
+            border-top-color: #2563eb;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* 错误回退 */
+        .error-fallback {
+            display: none;
+            padding: 2rem;
+            text-align: center;
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        .error-fallback.show {
+            display: block;
+        }
+
+        .error-fallback h3 {
+            color: #dc2626;
+            margin-bottom: 1rem;
+        }
+
+        .error-fallback a {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.75rem 1.5rem;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background 0.3s;
+        }
+
+        .error-fallback a:hover {
+            background: #1d4ed8;
+        }
+
+        /* 移动端优化 */
+        .mobile-tip {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .chat-container {
+                height: calc(100vh - 150px);
+                min-height: 500px;
+            }
+
+            .mobile-tip {
+                display: block;
+                background: #fef3c7;
+                border: 1px solid #fbbf24;
+                border-radius: 6px;
+                padding: 1rem;
+                margin-bottom: 1rem;
+            }
+
+            .mobile-tip p {
+                margin: 0;
+                font-size: 0.875rem;
+                color: #92400e;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="mobile-menu-button" aria-label="打开菜单">☰</button>
+
+    <div class="container">
+        <!-- 侧边栏导航 -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="sidebar-title">🦜 LangChain 1.0</h1>
+                <p class="sidebar-subtitle">Python 完整学习指南</p>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="nav-section">
+                    <div class="nav-section-title">开始</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">
+                                <span class="nav-icon">🏠</span>
+                                主页
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">基础篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="01-introduction.html" class="nav-link">
+                                <span class="nav-icon">📖</span>
+                                LangChain 简介
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="02-architecture.html" class="nav-link">
+                                <span class="nav-icon">🏗️</span>
+                                核心架构
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="03-models.html" class="nav-link">
+                                <span class="nav-icon">🤖</span>
+                                模型接口
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="04-messages.html" class="nav-link">
+                                <span class="nav-icon">💬</span>
+                                消息系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="05-tools.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                工具系统
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-section">
+                    <div class="nav-section-title">进阶篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="06-agents.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                Agent 基础
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="07-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="08-rag.html" class="nav-link">
+                                <span class="nav-icon">🔍</span>
+                                RAG 详解
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="09-lcel.html" class="nav-link">
+                                <span class="nav-icon">🔗</span>
+                                LCEL 表达式
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                                <li class="nav-section">
+                    <div class="nav-section-title">高级应用</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="10-runtime.html" class="nav-link">
+                                <span class="nav-icon">🔌</span>
+                                Runtime 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="11-checkpointer.html" class="nav-link">
+                                <span class="nav-icon">💾</span>
+                                持久化系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="12-streaming.html" class="nav-link">
+                                <span class="nav-icon">🌊</span>
+                                流式输出
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="13-human-in-loop.html" class="nav-link">
+                                <span class="nav-icon">👤</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="14-long-term-memory.html" class="nav-link">
+                                <span class="nav-icon">🗄️</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="15-langgraph.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                LangGraph
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="16-context-engineering.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                上下文工程
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="17-mcp.html" class="nav-link">
+                                <span class="nav-icon">🔌</span>
+                                MCP 协议
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                                <li class="nav-section">
+                    <div class="nav-section-title">实战篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="18-customer-service.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                客服机器人
+                                <span class="nav-badge">重点</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="19-best-practices.html" class="nav-link">
+                                <span class="nav-icon">✨</span>
+                                最佳实践
+                            </a>
+                        </li>
+                        <li class="nav-item active">
+                            <a href="38-chat.html" class="nav-link">
+                                <span class="nav-icon">💬</span>
+                                在线对话助手
+                                <span class="nav-badge">NEW</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                                <li class="nav-section">
+                    <div class="nav-section-title">参考篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="20-api-reference.html" class="nav-link">
+                                <span class="nav-icon">📚</span>
+                                API 速查表
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="21-troubleshooting.html" class="nav-link">
+                                <span class="nav-icon">🐛</span>
+                                故障排除
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="22-migration.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                迁移指南
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                                <li class="nav-section">
+                    <div class="nav-section-title">扩展篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="23-structured-output.html" class="nav-link">
+                                <span class="nav-icon">📊</span>
+                                结构化输出
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                                <li class="nav-section">
+                    <div class="nav-section-title">DeepAgents 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="24-deepagents-quickstart.html" class="nav-link">
+                                <span class="nav-icon">🚀</span>
+                                快速开始
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="25-deepagents-customization.html" class="nav-link">
+                                <span class="nav-icon">🎨</span>
+                                定制化
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="26-deepagents-harness.html" class="nav-link">
+                                <span class="nav-icon">🎛️</span>
+                                Harness 系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="27-deepagents-backends.html" class="nav-link">
+                                <span class="nav-icon">🔧</span>
+                                后端配置
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="28-deepagents-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="29-deepagents-hitl.html" class="nav-link">
+                                <span class="nav-icon">🤝</span>
+                                人工介入
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="30-deepagents-memory.html" class="nav-link">
+                                <span class="nav-icon">🧠</span>
+                                长期记忆
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="31-deepagents-middleware.html" class="nav-link">
+                                <span class="nav-icon">⚙️</span>
+                                中间件
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                                <li class="nav-section">
+                    <div class="nav-section-title">Multi-Agent 篇</div>
+                    <ul>
+                        <li class="nav-item">
+                            <a href="32-multi-agent-index.html" class="nav-link">
+                                <span class="nav-icon">🌐</span>
+                                概述
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="33-multi-agent-subagents.html" class="nav-link">
+                                <span class="nav-icon">👥</span>
+                                子代理
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="34-multi-agent-handoffs.html" class="nav-link">
+                                <span class="nav-icon">🔄</span>
+                                交接机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="35-multi-agent-skills.html" class="nav-link">
+                                <span class="nav-icon">🎯</span>
+                                技能系统
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="36-multi-agent-router.html" class="nav-link">
+                                <span class="nav-icon">🧭</span>
+                                路由机制
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="37-multi-agent-workflow.html" class="nav-link">
+                                <span class="nav-icon">🔀</span>
+                                自定义工作流
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- 主内容区域 -->
+        <main class="main-content">
+            <div class="content-wrapper">
+                <!-- 面包屑导航 -->
+                <nav class="breadcrumb">
+                    <span class="breadcrumb-item">
+                        <a href="index.html" class="breadcrumb-link">主页</a>
+                    </span>
+                    <span class="breadcrumb-item">
+                        实战篇
+                    </span>
+                    <span class="breadcrumb-item">
+                        在线对话助手
+                    </span>
+                </nav>
+
+                <!-- 页面标题 -->
+                <header class="page-header">
+                    <h1 class="page-title">💬 LangChain 在线对话助手</h1>
+                    <p class="page-subtitle">
+                        与 LangChain AI 助手实时对话，获取即时帮助、代码示例和最佳实践建议
+                    </p>
+                </header>
+
+                <!-- 功能介绍 -->
+                <section class="content-section">
+                    <h2 class="section-title">🤖 功能介绍</h2>
+                    <p>
+                        LangChain 官方 AI 助手可以帮助您：
+                    </p>
+                    <ul>
+                        <li><strong>解答技术问题</strong>：关于 LangChain 的任何疑问，立即获得解答</li>
+                        <li><strong>提供代码示例</strong>：根据您的需求生成可运行的代码片段</li>
+                        <li><strong>最佳实践建议</strong>：分享经过验证的架构设计和优化方案</li>
+                        <li><strong>故障排查协助</strong>：帮助诊断和解决常见问题</li>
+                    </ul>
+
+                    <div class="info-box tip">
+                        <div class="info-box-title">💡 使用提示</div>
+                        <ul>
+                            <li>尽可能具体地描述您的问题或需求</li>
+                            <li>提供相关的上下文信息（如使用的版本、遇到的错误等）</li>
+                            <li>可以要求提供代码示例或参考文档链接</li>
+                            <li>如果回答不够满意，可以追问或换个方式提问</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- 移动端提示 -->
+                <div class="mobile-tip">
+                    <p>
+                        📱 <strong>移动端提示</strong>：为获得最佳体验，建议在桌面浏览器中使用对话功能。
+                        如果 iframe 加载失败，请点击下方按钮在新标签页打开。
+                    </p>
+                </div>
+
+                <!-- 聊天窗口 -->
+                <section class="content-section" style="position: relative;">
+                    <h2 class="section-title">💬 开始对话</h2>
+
+                    <div class="chat-container" id="chatContainer">
+                        <div class="loading-overlay" id="loadingOverlay">
+                            <div class="loading-spinner"></div>
+                            <p style="margin-top: 1rem; color: #6b7280;">正在加载对话界面...</p>
+                        </div>
+
+                        <iframe
+                            id="chatIframe"
+                            src="https://chat.langchain.com/"
+                            title="LangChain Chat"
+                            loading="lazy"
+                            sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
+                            allow="clipboard-write"
+                        ></iframe>
+                    </div>
+
+                    <!-- 错误回退 -->
+                    <div class="error-fallback" id="errorFallback">
+                        <h3>⚠️ 无法加载聊天界面</h3>
+                        <p>抱歉，iframe 加载失败。这可能是由于浏览器限制或网络问题导致。</p>
+                        <p>请点击下方按钮在新标签页中打开对话界面：</p>
+                        <a href="https://chat.langchain.com/" target="_blank" rel="noopener noreferrer">
+                            在新标签页打开对话 ↗
+                        </a>
+                    </div>
+                </section>
+
+                <!-- 页面导航 -->
+                <nav class="page-navigation">
+                    <a href="19-best-practices.html" class="nav-button prev">
+                        ← 上一页：最佳实践
+                    </a>
+                    <a href="20-api-reference.html" class="nav-button next">
+                        下一页：API 速查表 →
+                    </a>
+                </nav>
+            </div>
+        </main>
+    </div>
+
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" aria-label="返回顶部">↑</button>
+
+    <!-- JavaScript -->
+    <script src="assets/js/mermaid-init.js"></script>
+    <script>
+        // iframe 加载管理
+        (function() {
+            const iframe = document.getElementById('chatIframe');
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            const errorFallback = document.getElementById('errorFallback');
+            const chatContainer = document.getElementById('chatContainer');
+
+            let loadTimeout;
+
+            // iframe 加载成功
+            iframe.addEventListener('load', function() {
+                clearTimeout(loadTimeout);
+                loadingOverlay.classList.add('hidden');
+            });
+
+            // iframe 加载超时检测（10秒）
+            loadTimeout = setTimeout(function() {
+                console.warn('iframe 加载超时');
+                loadingOverlay.classList.add('hidden');
+                chatContainer.style.display = 'none';
+                errorFallback.classList.add('show');
+            }, 10000);
+
+            // iframe 加载错误
+            iframe.addEventListener('error', function() {
+                clearTimeout(loadTimeout);
+                loadingOverlay.classList.add('hidden');
+                chatContainer.style.display = 'none';
+                errorFallback.classList.add('show');
+            });
+        })();
+    </script>
+</body>
+</html>
