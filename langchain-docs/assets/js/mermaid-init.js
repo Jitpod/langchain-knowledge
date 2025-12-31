@@ -16,6 +16,14 @@ const SidebarScrollManager = {
         this.sidebar = sidebar;
         this.currentPage = this.getCurrentPage();
 
+        // 立即恢复滚动位置（防止闪动）
+        const isFirstVisit = this.isFirstVisit();
+        if (!isFirstVisit) {
+            // 非首次访问，立即恢复全局滚动位置（无动画）
+            const savedPosition = this.getGlobalScrollPosition();
+            this.sidebar.scrollTop = savedPosition;
+        }
+
         // 在 DOMContentLoaded 后处理页面加载
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', () => this.handlePageLoad());
@@ -121,11 +129,8 @@ const SidebarScrollManager = {
             setTimeout(() => {
                 this.saveGlobalScrollPosition(this.sidebar.scrollTop);
             }, 500); // 等待平滑滚动完成
-        } else {
-            // 后续访问 - 恢复全局滚动位置（无动画）
-            const savedPosition = this.getGlobalScrollPosition();
-            this.sidebar.scrollTop = savedPosition;
         }
+        // 非首次访问时，滚动位置已经在 init() 中恢复，这里不需要再次设置
 
         // 设置滚动位置自动保存
         this.setupScrollSaving();
