@@ -8,20 +8,33 @@ const SidebarScrollManager = {
         GLOBAL_SCROLL_POSITION: 'langchain_global_scroll_position'
     },
 
+    // 标记是否已初始化（避免重复）
+    initialized: false,
+
     // 初始化管理器
     init() {
+        if (this.initialized) return; // 避免重复初始化
+
         const sidebar = document.querySelector('.sidebar');
         if (!sidebar) return;
 
         this.sidebar = sidebar;
         this.currentPage = this.getCurrentPage();
+        this.initialized = true;
+
+        console.log('[SidebarScroll] 初始化，当前页面:', this.currentPage);
 
         // 立即恢复滚动位置（防止闪动）
-        const isFirstVisit = this.isFirstVisit();
-        if (!isFirstVisit) {
-            // 非首次访问，立即恢复全局滚动位置（无动画）
-            const savedPosition = this.getGlobalScrollPosition();
+        // 优先恢复保存的位置，如果没有保存的位置才判断是否首次访问
+        const savedPosition = this.getGlobalScrollPosition();
+        const hasScrollPosition = savedPosition > 0;
+
+        if (hasScrollPosition) {
+            // 有保存的滚动位置，立即恢复
+            console.log('[SidebarScroll] 立即恢复位置:', savedPosition);
             this.sidebar.scrollTop = savedPosition;
+        } else {
+            console.log('[SidebarScroll] 无保存位置，等待 DOMContentLoaded');
         }
 
         // 在 DOMContentLoaded 后处理页面加载
@@ -76,8 +89,11 @@ const SidebarScrollManager = {
         if (!this.isLocalStorageAvailable()) return 0;
         try {
             const position = localStorage.getItem(this.STORAGE_KEYS.GLOBAL_SCROLL_POSITION);
-            return position ? parseInt(position, 10) : 0;
+            const value = position ? parseInt(position, 10) : 0;
+            console.log('[SidebarScroll] 读取滚动位置:', value);
+            return value;
         } catch (e) {
+            console.error('[SidebarScroll] 读取位置失败:', e);
             return 0;
         }
     },
@@ -86,9 +102,11 @@ const SidebarScrollManager = {
     saveGlobalScrollPosition(position) {
         if (!this.isLocalStorageAvailable()) return;
         try {
-            localStorage.setItem(this.STORAGE_KEYS.GLOBAL_SCROLL_POSITION, Math.round(position).toString());
+            const value = Math.round(position);
+            localStorage.setItem(this.STORAGE_KEYS.GLOBAL_SCROLL_POSITION, value.toString());
+            console.log('[SidebarScroll] 保存滚动位置:', value);
         } catch (e) {
-            console.warn('无法保存滚动位置:', e);
+            console.error('[SidebarScroll] 保存位置失败:', e);
         }
     },
 
@@ -112,32 +130,45 @@ const SidebarScrollManager = {
 
     // 处理页面加载时的滚动逻辑
     handlePageLoad() {
-        const isFirstVisit = this.isFirstVisit();
+        const savedPosition = this.getGlobalScrollPosition();
+        const hasScrollPosition = savedPosition > 0;
 
-        if (isFirstVisit) {
+        console.log('[SidebarScroll] handlePageLoad, hasScrollPosition:', hasScrollPosition);
+
+        // 只在真正没有保存位置时才滚动到高亮项（首次访问）
+        if (!hasScrollPosition) {
             // 首次访问网站 - 滚动到当前页面的高亮项中间位置（平滑动画）
             const centerPosition = this.calculateCenterPosition();
-            this.sidebar.scrollTo({
-                top: centerPosition,
-                behavior: 'smooth'
-            });
+            console.log('[SidebarScroll] 首次访问，滚动到中心位置:', centerPosition);
 
-            // 标记网站为已访问
-            this.markAsVisited();
+            if (centerPosition > 0) {
+                this.sidebar.scrollTo({
+                    top: centerPosition,
+                    behavior: 'smooth'
+                });
 
-            // 保存初始滚动位置
-            setTimeout(() => {
-                this.saveGlobalScrollPosition(this.sidebar.scrollTop);
-            }, 500); // 等待平滑滚动完成
+                // 标记网站为已访问
+                this.markAsVisited();
+
+                // 保存初始滚动位置
+                setTimeout(() => {
+                    this.saveGlobalScrollPosition(this.sidebar.scrollTop);
+                }, 500); // 等待平滑滚动完成
+            }
+        } else {
+            console.log('[SidebarScroll] 已有保存位置，跳过滚动');
         }
-        // 非首次访问时，滚动位置已经在 init() 中恢复，这里不需要再次设置
 
-        // 设置滚动位置自动保存
+        // 设置滚动位置自动保存（只设置一次）
         this.setupScrollSaving();
     },
 
     // 设置滚动位置自动保存（防抖）
     setupScrollSaving() {
+        // 避免重复添加监听器
+        if (this._scrollListenerAdded) return;
+        this._scrollListenerAdded = true;
+
         let saveTimeout;
 
         this.sidebar.addEventListener('scroll', () => {
